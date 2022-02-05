@@ -3,7 +3,6 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 const Login = () => {
-  const url = "https://burger--queen--api.herokuapp.com/";
 
 
   return (
@@ -19,7 +18,6 @@ const Login = () => {
             name="email"
             className="form-control"
             placeholder="name@example.com"
-            
           />
         </div>
         <div className="mb-3 card-body">
@@ -28,7 +26,6 @@ const Login = () => {
           </label>
           <input
             type="password"
-     
             name="password"
             placeholder="***************"
             className="form-control"
