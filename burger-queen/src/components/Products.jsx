@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {getAllProducts, deleteProduct} from '../services/products'
 import CreateProduct from "./CreateProduct";
+import {Link} from 'react-router-dom'
 
 const Products = () => {
   const url = "https://bq-api-2022.herokuapp.com";
@@ -60,10 +61,13 @@ const Products = () => {
                 </th>
                 <td>{product.price}</td>
                 <td>
-                  {product.image}
+                  <img style={{width: 150, height: 150}} src={product.image} alt={product.name}/>
                 </td>
                 <td>
                   {product.type}
+                </td>
+                <td>
+                  <Link to={"/editProduct/" + product._id}>Editar</Link>
                 </td>
                 <td>
                   <button onClick={() => {handleDelete(product._id); getProducts()}}>Eliminar</button>
