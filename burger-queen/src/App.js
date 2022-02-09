@@ -8,6 +8,8 @@ import EditUser from "./components/EditUser.jsx";
 import Products from "./components/Products.jsx";
 import EditProduct from "./components/EditProduct.jsx";
 import Inicio from "./components/Bienvenida.jsx"
+import Orders from "./components/Orders.jsx"
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,7 @@ function App() {
         <Route path={"/edit/:id"} element={<EditUser />}></Route>
         <Route path={"/products"} element={<Products />}></Route>
         <Route path={"/editProduct/:id"} element={<EditProduct />}></Route>
+        <Route path={"/orders"} element={<Orders />}></Route>
       </Routes>
     </BrowserRouter>
   );

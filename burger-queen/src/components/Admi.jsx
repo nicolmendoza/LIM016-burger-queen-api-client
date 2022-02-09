@@ -2,17 +2,29 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
 import {Link} from 'react-router-dom'
+import {Button} from '../style-components/components'   
 
 const Admi = () => {
-
+  const [page, setPage] = useState('next');
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
+  
   const header = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+    headers: { 
+    Authorization: `Bearer ${token}`,
+    Link
+  }
+}
   const initial = {
     users: [],
   };
+  
+  // const initialLink = {
+  //   first:'',
+  //   prev,
+  //   next, 
+  //   last
+  // };
 
   const [state, setSate] = useState(initial);
 
@@ -20,12 +32,19 @@ const Admi = () => {
     getUsers();
   }, []);
 
+  const handlePagination = (e) => {
+    e.preventDefault()
+    setPage(e.target.value)
+
+  }
   const getUsers = () => {
-    axios.get(`${url}/users?limit=20`, header).then((response) =>
+    axios.get(`${url}/users?limit=20`, header).then((response) =>{
+      console.log(response)
       setSate((old) => ({
         ...old,
         users: response.data,
       }))
+    }
     );
   };
 
@@ -59,6 +78,8 @@ const Admi = () => {
       <CreateUser getUsers={getUsers}></CreateUser>
       <div className="container ">
         <h5>Admi</h5>
+        <Button type="submit" className="btn-login" value="prev" onClick={handlePagination}> Prev </Button>
+        <Button type="submit" className="btn-login"  value="next"onClick={handlePagination}> Next </Button>
         <table className="table table-hover">
           <thead>
             <tr>

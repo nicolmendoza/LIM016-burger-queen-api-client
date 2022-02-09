@@ -5,7 +5,7 @@ import CreateProduct from "./CreateProduct";
 import {Link} from 'react-router-dom'
 
 const Products = () => {
-  const url = "https://bq-api-2022.herokuapp.com";
+  // const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
   const options = {
     headers: {
