@@ -21,7 +21,7 @@ const Admi = () => {
   }, []);
 
   const getUsers = () => {
-    axios.get(`${url}/users`, header).then((response) =>
+    axios.get(`${url}/users?limit=20`, header).then((response) =>
       setSate((old) => ({
         ...old,
         users: response.data,
@@ -33,7 +33,8 @@ const Admi = () => {
     axios
       .delete(`${url}/users/${id}`, header)
       .then((response) => console.log(response))
-      .then(() => getUsers());
+      .then(() => getUsers())
+      .catch(e => console.log(e))
   };
 
   const updateUser = async (id) => {
