@@ -7,7 +7,8 @@ import Admi from "./components/Admi.jsx";
 import EditUser from "./components/EditUser.jsx";
 import ProductsOrders from "./components/ProductsOrders.jsx";
 import EditProduct from "./components/EditProduct.jsx";
-import Inicio from "./components/Bienvenida.jsx"
+import Inicio from "./components/Bienvenida.jsx";
+import Orders from "./components/Orders.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path={"/edit/:id"} element={<EditUser />}></Route>
         <Route path={"/products/orders"} element={<ProductsOrders />}></Route>
         <Route path={"/editProduct/:id"} element={<EditProduct />}></Route>
+        <Route path={"/orders"} element={<Orders />}></Route>
       </Routes>
     </BrowserRouter>
   );
