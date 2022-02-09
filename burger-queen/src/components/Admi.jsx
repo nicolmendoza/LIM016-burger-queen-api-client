@@ -5,41 +5,43 @@ import {Link} from 'react-router-dom'
 import {Button} from '../style-components/components'   
 
 const Admi = () => {
-  const [page, setPage] = useState('next');
-  const url = "https://bq-api-2022.herokuapp.com";
+  // const [url, setUrl] = useState('https://bq-api-2022.herokuapp.com/users');
+  const url = 'https://bq-api-2022.herokuapp.com/users';
   const token = localStorage.getItem("token");
   
   const header = {
     headers: { 
     Authorization: `Bearer ${token}`,
-    Link
   }
 }
   const initial = {
     users: [],
   };
   
-  // const initialLink = {
-  //   first:'',
-  //   prev,
-  //   next, 
-  //   last
-  // };
+  const initialLink = {
+    first:'',
+    prev: '',
+    next: '',
+    last:''
+  };
+  const [page, setPage] = useState(initialLink);
 
   const [state, setSate] = useState(initial);
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    getUsers(url)})
 
-  const handlePagination = (e) => {
-    e.preventDefault()
-    setPage(e.target.value)
-
-  }
-  const getUsers = () => {
-    axios.get(`${url}/users?limit=20`, header).then((response) =>{
-      console.log(response)
+  const getUsers = (url) => {
+    axios.get(url, header).then((response) =>{
+      const link = response.headers.link
+      const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
+      setPage((old) => ({
+        ...old,
+        first:arrayLink[0],
+        prev: arrayLink[1],
+        next: arrayLink[2],
+        last: arrayLink[3]
+      }))
       setSate((old) => ({
         ...old,
         users: response.data,
@@ -47,6 +49,27 @@ const Admi = () => {
     }
     );
   };
+
+  const handlePagination = (e) => {
+    console.log(e.target.value)
+    let pageNumber = e.target.value
+    axios.get(pageNumber, header).then((response) =>{
+      const link = response.headers.link
+      const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
+      setPage((old) => ({
+        ...old,
+        first:arrayLink[0],
+        prev: arrayLink[1],
+        next: arrayLink[2],
+        last: arrayLink[3]
+      }))
+      setSate((old) => ({
+        ...old,
+        users: response.data,
+      }))
+    }
+    );
+  }
 
   const deleteUser = (id) => {
     axios
@@ -78,8 +101,8 @@ const Admi = () => {
       <CreateUser getUsers={getUsers}></CreateUser>
       <div className="container ">
         <h5>Admi</h5>
-        <Button type="submit" className="btn-login" value="prev" onClick={handlePagination}> Prev </Button>
-        <Button type="submit" className="btn-login"  value="next"onClick={handlePagination}> Next </Button>
+        <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
+        <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
         <table className="table table-hover">
           <thead>
             <tr>
