@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-const Cart = ({ cart,setCart, addProduct, deleteProduct }) => {
+const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
   const token = localStorage.getItem("token");
   const header = {
     headers: {
@@ -10,7 +10,7 @@ const Cart = ({ cart,setCart, addProduct, deleteProduct }) => {
     },
   };
 
-  const [state, setState] = useState({ name: "" });
+  const [state, setState] = useState({ name: "", number: "" });
   const userId = localStorage.getItem("idUser");
 
   const postNewOrder = () => {
@@ -29,10 +29,9 @@ const Cart = ({ cart,setCart, addProduct, deleteProduct }) => {
     axios
       .post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
       .then((response) => {
-        console.log(response.data)
-        setState({name:""})
-        setCart([])
-        ;
+        console.log(response.data);
+        setState(...state, { name: "" });
+        setCart([]);
       });
   };
 
@@ -40,6 +39,10 @@ const Cart = ({ cart,setCart, addProduct, deleteProduct }) => {
     setState({
       [e.target.name]: e.target.value,
     });
+  };
+
+  const onChangeInputNumber = (e) => {
+    console.log(e.target.value);
   };
 
   return (
@@ -57,6 +60,7 @@ const Cart = ({ cart,setCart, addProduct, deleteProduct }) => {
             <>
               <div>{x.name}</div>
               <div>{x.qty}</div>
+              <input type="number" onChange={onChangeInputNumber}></input>
               <div>
                 {x.qty}x{x.price}
               </div>

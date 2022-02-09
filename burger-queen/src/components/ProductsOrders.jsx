@@ -57,7 +57,7 @@ const Products = () => {
 
   const deleteProduct = (product) => {
     if (product.qty === 1) {
-      setCart(cart.filter((x) => x._id !== product._id));
+      return setCart(cart.filter((x) => x._id !== product._id));
     } else {
       setCart(
         cart.map((x) =>
@@ -114,7 +114,12 @@ const Products = () => {
   return (
     <div>
       {loading ? <Loading /> : <ShowProducts />}
-      <Cart cart={cart} addProduct={addProduct} deleteProduct={deleteProduct} setCart={setCart}/>
+      <Cart
+        cart={cart}
+        addProduct={addProduct}
+        deleteProduct={deleteProduct}
+        setCart={setCart}
+      />
     </div>
   );
 };
