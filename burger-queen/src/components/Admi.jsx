@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
-import {Link} from 'react-router-dom'
-import {Button} from '../style-components/components'   
+import { Link } from "react-router-dom";
+import { Button } from "../style-components/components";
+import {getAllProducts, deleteProduct} from '../services/products'
 
 const Admi = () => {
-  // const [url, setUrl] = useState('https://bq-api-2022.herokuapp.com/users');
   const url = 'https://bq-api-2022.herokuapp.com/users';
   const token = localStorage.getItem("token");
-  
+
   const header = {
     headers: { 
     Authorization: `Bearer ${token}`,
@@ -25,14 +25,21 @@ const Admi = () => {
     last:''
   };
   const [page, setPage] = useState(initialLink);
-
+  const [loading, setLoading] = useState(false)
   const [state, setSate] = useState(initial);
 
-  useEffect(() => {
-    getUsers(url)})
 
-  const getUsers = (url) => {
-    axios.get(url, header).then((response) =>{
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true)
+      getUsers(url);
+    }, 2000);
+  }, []);
+
+
+  const getUsers = (url) => getAllProducts(url)
+    .then((response) =>{
       const link = response.headers.link
       const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
       setPage((old) => ({
@@ -46,60 +53,37 @@ const Admi = () => {
         ...old,
         users: response.data,
       }))
+      setLoading(false)
     }
     );
-  };
+  
 
   const handlePagination = (e) => {
     console.log(e.target.value)
     let pageNumber = e.target.value
-    axios.get(pageNumber, header).then((response) =>{
-      const link = response.headers.link
-      const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
-      setPage((old) => ({
-        ...old,
-        first:arrayLink[0],
-        prev: arrayLink[1],
-        next: arrayLink[2],
-        last: arrayLink[3]
-      }))
-      setSate((old) => ({
-        ...old,
-        users: response.data,
-      }))
-    }
-    );
+    getUsers(pageNumber)
   }
 
-  const deleteUser = (id) => {
-    axios
-      .delete(`${url}/users/${id}`, header)
-      .then((response) => console.log(response))
-      .then(() => getUsers())
-      .catch(e => console.log(e))
-  };
+  const deleteUser = async (id) => {
+    
+    const res = await deleteProduct(id)
+    console.log(res)
+    getUsers()
+  }
 
-  const updateUser = async (id) => {
-      console.log(id);
-    // let options = {
-    //   headers: {
-    //     "Content-Type": "application/json; charset=utf-8",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // };
-    // const res = await axios.put(
-    //   `${url}/users/${id}`,
-    //   {  roles: { admin: true  } },
-    //   options
-    // );
-    // return console.log(res);
-    window.location.href="/edit"
-  };
+  // const deleteUser = (id) => {
+  //   axios
+  //     .delete(`${url}/users/${id}`, header)
+  //     .then((response) => console.log(response))
+  //     .then(() => getUsers())
+  //     .catch((e) => console.log(e));
+  // };
 
   return (
     <div>
       <CreateUser getUsers={getUsers}></CreateUser>
       <div className="container ">
+      {loading ? "Cargando..." : ""}
         <h5>Admi</h5>
         <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
         <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
@@ -125,21 +109,17 @@ const Admi = () => {
                 </th>
                 <td>{user.email}</td>
                 <td>
-                  <Link to={"/edit/" + user._id} >Editar</Link>
-                  
+                  <Link to={"/edit/" + user._id}>Editar</Link>
                 </td>
                 <td>
                   <button onClick={() => deleteUser(user._id)}>Eliminar</button>
-                  
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      
     </div>
-
   );
 };
 
