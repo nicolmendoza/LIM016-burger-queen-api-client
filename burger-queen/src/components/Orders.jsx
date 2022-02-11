@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {getAllOrders, editProduct} from '../services/orders'
 import {Link} from 'react-router-dom'
-import { Button } from "../style-components/components";
+import { Button, ContainerProduts, OrderDiv } from "../style-components/components";
 
 const Orders = () => {
+  const url='https://bq-api-2022.herokuapp.com/orders'
+
   const token = localStorage.getItem("token");
   const options = {
     headers: {
@@ -24,26 +26,28 @@ const Orders = () => {
     }, 2000);
   }, []);
 
-  const getOrders = () => getAllOrders(options)
+  const getOrders = () => getAllOrders(url, options)
         .then((order) => {
             setOrders(order)
             setFilter(order);
             setLoading(false)
   })
 
-  const buttonStatus = (status) => {
-    if(status==="pending") return "cancelar"
-    if(status==="delivering") return "entregar"
-  } 
-
-  const statusOrder = (status) => {
-    if(status==="pending") return "canceled"
-    if(status==="delivering") return "delivered"
-  } 
+  function ButtonStatus(order) {
+  const isLoggedIn = order.isLoggedIn;
+  if (isLoggedIn.status==='pending') {
+    return <Button onClick={()=> handleSubmit('canceled', isLoggedIn._id)}>Cancelar</Button>
+  }
+  if (isLoggedIn.status==='delivering') {
+    return <Button onClick={()=> handleSubmit('delivered', isLoggedIn._id)}>Entregar</Button>
+  }
+  return ''
+}
 
   const handleSubmit = async (value, id) => {
+    console.log(value, id)
     const newState = {status:`${value}`}
-    const res = await editProduct(id, newState, options)
+    const res = await editProduct(url, id, newState, options)
     console.log(res)
     getOrders()
   }
@@ -53,9 +57,7 @@ const Orders = () => {
   };
 
   const filterProductsByType = (type) => {
-    console.log(type)
     setFilter(orders.filter((x) => x.status === type));
-    console.log(filter)
   };
 
   return (
@@ -69,9 +71,9 @@ const Orders = () => {
           </div>
       <h1>Todas las ordenes</h1>
       {loading ? "Cargando..." : ""}
-      <div className="container ">
+      <ContainerProduts>
         {filter.map((order) => (
-          <div key={order._id}>
+          <OrderDiv key={order._id}>
             <p>{order.status}</p>
             <div>
               <p>{order.client}</p>
@@ -83,13 +85,12 @@ const Orders = () => {
                 <p>{product.qty}</p>
               </div>
             ))}
-            <Button onClick={()=> handleSubmit(statusOrder(order.status), order._id)}>{buttonStatus(order.status)}</Button>
-          </div>
+            <ButtonStatus isLoggedIn={order}/>
+          </OrderDiv>
         ))}
+      </ContainerProduts>
       </div>
-      </div>
-)
+  )
 }
-
 
 export default Orders;
