@@ -45,6 +45,10 @@ const Products = () => {
   const [cart, setCart] = useState([]);
 
   const addProduct = (product) => {
+
+
+
+    
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
       return setCart(
