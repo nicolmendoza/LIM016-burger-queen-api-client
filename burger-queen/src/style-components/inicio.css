@@ -3,9 +3,13 @@ body {
   position: absolute;
   background-size: cover;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
+  background: url(../../public/img/background.png);
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 .welcomeContainer{

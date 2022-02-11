@@ -3,116 +3,90 @@ import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
 import { Button } from "../style-components/components";
+import {getAllProducts, deleteProduct} from '../services/products'
 
 const Admi = () => {
-  const [page, setPage] = useState("next");
-  const url = "https://bq-api-2022.herokuapp.com";
+  const url = 'https://bq-api-2022.herokuapp.com/users';
   const token = localStorage.getItem("token");
 
   const header = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Link,
-    },
-  };
+    headers: { 
+    Authorization: `Bearer ${token}`,
+  }
+}
   const initial = {
     users: [],
   };
-  const [links, setLinks] = useState();
+  
+  const initialLink = {
+    first:'',
+    prev: '',
+    next: '',
+    last:''
+  };
+  const [page, setPage] = useState(initialLink);
+  const [loading, setLoading] = useState(false)
   const [state, setSate] = useState(initial);
 
-  const getLink = (type) => {
-    if (type === "next") {
-      const next = links.next;
-      console.log(links.next);
-      axios.get(`${next}`, header).then((response) => {
-        console.log(response.data);
-        setSate({ users: response.data });
-      });
-    } else {
-      const prev = links.prev;
-      console.log(links.prev);
-      axios.get(`${prev}`, header).then((response) => {
-        setSate({ users: response.data });
-      });
-    }
-  };
 
 
   useEffect(() => {
-    axios.get(`${url}/users`, header).then((response) => {
-      console.log(response.headers.link);
-      const array = response.headers.link.split(" ");
-      console.log(array);
-      const links = {
-        first: array[0].slice(1, array[0].length - 2),
-        prev: array[2].slice(1, array[2].length - 2),
-        next: array[4].slice(1, array[4].length - 2),
-        last: array[6].slice(1, array[6].length - 2),
-      };
-      console.log(links);
-      const next = links.next;
-      const prev = links.prev;
-      setLinks({
-        next: next,
-        prev: prev,
-      });
-      console.log(next, prev);
-    });
-    getUsers();
+    setTimeout(() => {
+      setLoading(true)
+      getUsers(url);
+    }, 2000);
   }, []);
 
-  const handlePagination = (e) => {
-    e.preventDefault();
-    setPage(e.target.value);
-  };
 
-  const getUsers = () => {
-    axios.get(`${url}/users?limit=20`, header).then((response) => {
+  const getUsers = (url) => getAllProducts(url)
+    .then((response) =>{
+      const link = response.headers.link
+      const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
+      setPage((old) => ({
+        ...old,
+        first:arrayLink[0],
+        prev: arrayLink[1],
+        next: arrayLink[2],
+        last: arrayLink[3]
+      }))
       setSate((old) => ({
         ...old,
         users: response.data,
-      }));
-    });
-  };
+      }))
+      setLoading(false)
+    }
+    );
+  
 
-  const deleteUser = (id) => {
-    axios
-      .delete(`${url}/users/${id}`, header)
-      .then((response) => console.log(response))
-      .then(() => getUsers())
-      .catch((e) => console.log(e));
-  };
+  const handlePagination = (e) => {
+    console.log(e.target.value)
+    let pageNumber = e.target.value
+    getUsers(pageNumber)
+  }
 
-  const updateUser = async (id) => {
-    console.log(id);
+  const deleteUser = async (id) => {
+    
+    const res = await deleteProduct(id)
+    console.log(res)
+    getUsers()
+  }
 
-    window.location.href = "/edit";
-  };
+  // const deleteUser = (id) => {
+  //   axios
+  //     .delete(`${url}/users/${id}`, header)
+  //     .then((response) => console.log(response))
+  //     .then(() => getUsers())
+  //     .catch((e) => console.log(e));
+  // };
 
   return (
     <div>
       <CreateUser getUsers={getUsers}></CreateUser>
       <div className="container ">
+      {loading ? "Cargando..." : ""}
         <h5>Admi</h5>
-        <Button
-          type="submit"
-          className="btn-login"
-          value="prev"
-          onClick={() => getLink("prev")}
-        >
-          {" "}
-          Prev{" "}
-        </Button>
-        <Button
-          type="submit"
-          className="btn-login"
-          value="next"
-          onClick={() => getLink("next")}
-        >
-          {" "}
-          Next{" "}
-        </Button>
+        <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
+        <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
         <table className="table table-hover">
           <thead>
             <tr>

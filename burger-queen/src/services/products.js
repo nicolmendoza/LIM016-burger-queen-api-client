@@ -3,9 +3,14 @@ import axios from 'axios'
 const url='https://bq-api-2022.herokuapp.com/products'
 const token = localStorage.getItem("token");
 
-export const getAllProducts = (token) => {
-    const request = axios.get(url, token)
-    return request.then(response => response.data)
+const header = {
+    headers: { 
+    Authorization: `Bearer ${token}`,
+}}
+  
+export const getAllProducts = (url) => {
+    const request = axios.get(url, header)
+    return request.then(response => response)
 }
 
 export const createProduct = async (credentials, config) => {

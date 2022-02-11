@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import {editProduct, getOneProduct} from '../services/products'
 
 const EditProduct = () => {
+    console.log( window.location)
     const token = localStorage.getItem("token");
     const id = window.location.pathname.slice(13);
     console.log(id)
