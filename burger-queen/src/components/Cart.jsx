@@ -10,7 +10,7 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
     },
   };
 
-  const [state, setState] = useState({ name: "", number: "" });
+  const [state, setState] = useState({ name: "" });
   const userId = localStorage.getItem("idUser");
 
   const postNewOrder = () => {
@@ -30,7 +30,7 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
       .post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
       .then((response) => {
         console.log(response.data);
-        setState(...state, { name: "" });
+        setState({ name: "" });
         setCart([]);
       });
   };
@@ -39,10 +39,6 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
     setState({
       [e.target.name]: e.target.value,
     });
-  };
-
-  const onChangeInputNumber = (e) => {
-    console.log(e.target.value);
   };
 
   return (
@@ -60,7 +56,7 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
             <>
               <div>{x.name}</div>
               <div>{x.qty}</div>
-              <input type="number" onChange={onChangeInputNumber}></input>
+              <input type="number" value={x.qty}></input>
               <div>
                 {x.qty}x{x.price}
               </div>

@@ -11,6 +11,7 @@ import Inicio from "./components/Bienvenida.jsx";
 import Orders from "./components/Orders.jsx";
 import Products from "./components/Products.jsx";
 // import ProductsPrueba from "./components/ProductsOrders/ProductsPrueba.jsx"
+import GetOrders from "./components/GetOrders.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         {/* <Route exact path={"/prueba"} element={<ProductsPrueba />}></Route> */}
 
         <Route path={"/login"} element={<Login />}></Route>
+        <Route path={"/getOrders"} element={<GetOrders />}></Route>
         <Route path={"/admi"} element={<Admi />}></Route>
         <Route path={"/edit/:id"} element={<EditUser />}></Route>
         <Route path={"/products/orders"} element={<ProductsOrders />}></Route>
