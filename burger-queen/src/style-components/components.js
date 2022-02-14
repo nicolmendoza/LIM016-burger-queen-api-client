@@ -29,3 +29,13 @@ margin: 7%;
 border-radius: 9px;
 padding: 6%;
 `
+
+export const Container = style.div`
+position: relative;
+min-height: 100vh;
+top: 0;
+left: 78px;
+width: calc(100% - 78px);
+transition: all 0.5s ease;
+z-index: 2;
+`
