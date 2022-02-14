@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 import { Button } from "../style-components/components";
 
 const Products = () => {
-  const url='https://bq-api-2022.herokuapp.com/products?limit=6'
+  const firstUrl='https://bq-api-2022.herokuapp.com/products'
   const token = localStorage.getItem("token");
   const options = {
     headers: {
@@ -19,7 +19,7 @@ const Products = () => {
     next: '',
     last:''
   };
-
+  const [url, setUrl] = useState(firstUrl);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(initialLink);
@@ -35,7 +35,6 @@ const Products = () => {
         .then((products) => {
           const link = products.headers.link
           const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
-          console.log(arrayLink)
           setPage((old) => ({
             ...old,
             first:arrayLink[0],
@@ -51,13 +50,14 @@ const Products = () => {
     console.log(e.target.value)
     let pageNumber = e.target.value
     getProducts(pageNumber)
+    setUrl(pageNumber)
   }
   
   const handleDelete = async (id) => {
     
-    const res = await deleteProduct(id, options)
+    const res = await deleteProduct(firstUrl, id, options)
     console.log(res)
-    getProducts()
+    getProducts(url)
 }
 
   return (
@@ -95,7 +95,7 @@ const Products = () => {
                   <Link to={"/editProduct/" + product._id}>Editar</Link>
                 </td>
                 <td>
-                  <button onClick={() => {handleDelete(product._id); getProducts()}}>Eliminar</button>
+                  <button onClick={() => {handleDelete(product._id)}}>Eliminar</button>
                 </td>
               </tr>
             ))}

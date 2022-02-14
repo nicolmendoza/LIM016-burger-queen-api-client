@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cart from "./Cart";
+import {Container} from '../style-components/components.js'
+import Sidebar from "./Navegador"
 
 const Products = () => {
   const url = "https://bq-api-2022.herokuapp.com";
@@ -45,9 +47,6 @@ const Products = () => {
   const [cart, setCart] = useState([]);
 
   const addProduct = (product) => {
-
-
-
     
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
@@ -117,6 +116,8 @@ const Products = () => {
 
   return (
     <div>
+      <Sidebar></Sidebar>
+    <Container>
       {loading ? <Loading /> : <ShowProducts />}
       <Cart
         cart={cart}
@@ -124,6 +125,7 @@ const Products = () => {
         deleteProduct={deleteProduct}
         setCart={setCart}
       />
+    </Container>
     </div>
   );
 };

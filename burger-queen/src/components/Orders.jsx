@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {getAllOrders, editProduct} from '../services/orders'
 import {Link} from 'react-router-dom'
-import { Button, ContainerProduts, OrderDiv } from "../style-components/components";
+import { Button, ContainerProduts, OrderDiv, Container} from "../style-components/components";
+import Sidebar from './Navegador'
 
 const Orders = () => {
   const url='https://bq-api-2022.herokuapp.com/orders'
 
   const token = localStorage.getItem("token");
+  const decodeToken = localStorage.getItem("role");
   const options = {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -62,6 +64,8 @@ const Orders = () => {
 
   return (
     <div>
+      <Sidebar value={`${decodeToken}`}></Sidebar>
+    <Container>
       <div className="buttons d-flex justify-content-center mb-2">
             <Button onClick={() => allProducts() }>Todas</Button>
             <Button onClick={() => filterProductsByType('pending') }>Pendientes</Button>
@@ -89,7 +93,8 @@ const Orders = () => {
           </OrderDiv>
         ))}
       </ContainerProduts>
-      </div>
+    </Container>
+    </div>
   )
 }
 

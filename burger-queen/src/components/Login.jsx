@@ -33,7 +33,7 @@ console.log(state);
         const decode = jwtDecode(token);
         localStorage.setItem("token", token);
         localStorage.setItem("idUser", decode.uid);
-
+        localStorage.setItem("role", decode.roles.name);
         console.log(decode);
         window.location.href="/admi"
       });
