@@ -31,11 +31,14 @@ console.log(state);
       .then((response) => {
         const token = response.data.token;
         const decode = jwtDecode(token);
+        const rol=(decode.roles.admin===true?"admin":decode.roles.name==="mesera"?"mesera":"cocinera")
+        console.log(rol)
+        localStorage.setItem('rol',rol)
         localStorage.setItem("token", token);
         localStorage.setItem("idUser", decode.uid);
 
         console.log(decode);
-        window.location.href="/admi"
+        // window.location.href="/admi"
       });
   };
 
