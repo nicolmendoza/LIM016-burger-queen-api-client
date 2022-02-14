@@ -12,7 +12,7 @@ import Orders from "./components/Orders.jsx";
 import Products from "./components/Products.jsx";
 // import ProductsPrueba from "./components/ProductsOrders/ProductsPrueba.jsx"
 import GetOrders from "./components/GetOrders.jsx";
-import Sidebar from "./components/Navegador.jsx";
+import Settings from "./components/Settings.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -24,10 +24,11 @@ function App() {
         <Route path={"/getOrders"} element={<GetOrders />}></Route>
         <Route path={"/admi"} element={<Admi />}></Route>
         <Route path={"/edit/:id"} element={<EditUser />}></Route>
-        <Route path={"/products/orders"} element={<ProductsOrders />}></Route>
+        <Route path={"/newOrder"} element={<ProductsOrders />}></Route>
         <Route path={"/editProduct/:id"} element={<EditProduct />}></Route>
         <Route path={"/orders"} element={<Orders />}></Route>
         <Route path={"/products"} element={<Products />}></Route>
+        <Route path={"/settings"} element={<Settings />}></Route>
       </Routes>
     </BrowserRouter>
   );

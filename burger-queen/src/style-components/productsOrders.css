@@ -1,0 +1,38 @@
+.productsDiv {
+  margin: 10px;
+  border: 5px solid white;
+  border-radius: 10px;
+  width: 40%;
+  margin-left: 10px;
+  color: white;
+}
+.containerProductsOrders {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  color: white;
+}
+.containerProdutsDiv{
+  color: white;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(2,1fr);
+  margin: 20px;
+}
+.productsDiv{
+
+}
+.imgDiv{
+  width: 100%;
+}
+.inputSearch{
+  border-radius: 50px;
+  /* width: 30%; */
+}
+.inputDiv{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-left: 50px;
+  background: yellowgreen;
+}

@@ -9,7 +9,7 @@ const Orders = () => {
   const url='https://bq-api-2022.herokuapp.com/orders'
 
   const token = localStorage.getItem("token");
-  const decodeToken = localStorage.getItem("role");
+  const roleUser = localStorage.getItem("role");
   const options = {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -64,7 +64,7 @@ const Orders = () => {
 
   return (
     <div>
-      <Sidebar value={`${decodeToken}`}></Sidebar>
+      <Sidebar value={`${roleUser}`}></Sidebar>
     <Container>
       <div className="buttons d-flex justify-content-center mb-2">
             <Button onClick={() => allProducts() }>Todas</Button>

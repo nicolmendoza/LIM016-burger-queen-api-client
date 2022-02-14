@@ -4,7 +4,7 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 const Sidebar = (role) => {
     const user={
-        newOrders: '/products/orders',
+        newOrders: '/newOrder',
         orders:'/orders',
         products:'/products',
         users:'/admi',
@@ -47,7 +47,7 @@ const Sidebar = (role) => {
                 {
                     role.value ==='mesera' ? '' :
                 <li>
-                <a href={user.products}>
+                <a href={user.chef}>
                     <i className='bx bxs-bell'></i>
                     <span className="links_name">Ordenes Chef</span>
                 </a>

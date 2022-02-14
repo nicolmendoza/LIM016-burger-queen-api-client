@@ -1,7 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
+import { Button } from "../style-components/components";
+import "../style-components/cart.css";
+const Cart = ({
+  cart,
+  setCart,
+  addProduct,
+  deleteProduct,
+  totalFinal,
+  setTotalFinal,
+}) => {
   const token = localStorage.getItem("token");
   const header = {
     headers: {
@@ -9,7 +18,6 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
   const [state, setState] = useState({ name: "" });
   const userId = localStorage.getItem("idUser");
 
@@ -41,9 +49,25 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
     });
   };
 
+  const productoPrecio = (a, b) => {
+    const result = a * b;
+    // setTotalFinal([...totalFinal, result]);
+    // console.log(totalFinal);
+    return result;
+  };
+
+  const totalPagar = () => {
+    const array = cart.map((x) => x.price * x.qty);
+    let suma = 0;
+    for (let i = 0; i < array.length; i++) {
+      suma += array[i];
+    }
+    return suma;
+  };
+
   return (
-    <div>
-      <h1>----------CARRITO DE COMPRAS--------</h1>
+    <div className="productsDiv">
+      <h1>Carrito de Compras</h1>
       <input
         placeholder="Nombre del cliente"
         onChange={onChangeInput}
@@ -54,18 +78,22 @@ const Cart = ({ cart, setCart, addProduct, deleteProduct }) => {
         ? "no hay productos en la lista"
         : cart.map((x) => (
             <>
-              <div>{x.name}</div>
-              <div>{x.qty}</div>
-              <input type="number" value={x.qty}></input>
               <div>
-                {x.qty}x{x.price}
+                <div>{x.name}</div>
+                <div>{x.qty}</div>
+                <img style={{ width: 100, height: 100 }} src={x.image}></img>
+                <div>Total : ${productoPrecio(x.qty, x.price, x._id)}</div>
+                <div>
+                  {x.qty}x{x.price}
+                </div>
+                <Button onClick={() => addProduct(x)}>+</Button>
+                <Button onClick={() => deleteProduct(x)}>-</Button>
+                <br></br>
               </div>
-              <button onClick={() => addProduct(x)}>ADD</button>
-              <button onClick={() => deleteProduct(x)}>DELETE</button>
-              <br></br>
-              <button onClick={() => postNewOrder()}>ENVIAR</button>
             </>
           ))}
+      <h4>Total a Pagar :${totalPagar()}</h4>
+      <Button onClick={() => postNewOrder()}>ENVIAR</Button>
     </div>
   );
 };

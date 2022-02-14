@@ -25,18 +25,23 @@ const Login = () => {
       email: state.email,
       password: state.password,
     };
-console.log(state);
-    axios
-      .post("https://bq-api-2022.herokuapp.com/auth", values)
+    console.log(state);
+    axios.post("https://bq-api-2022.herokuapp.com/auth", values)
       .then((response) => {
         const token = response.data.token;
         const decode = jwtDecode(token);
+        const rol=(decode.roles.admin===true?"admin":decode.roles.name==="mesera"?"mesera":"cocinera")
+        console.log(rol)
+        localStorage.setItem('rol',rol)
         localStorage.setItem("token", token);
         localStorage.setItem("idUser", decode.uid);
         localStorage.setItem("role", decode.roles.name);
         console.log(decode);
-        window.location.href="/admi"
-      });
+        console.log(decode.roles.name)
+        if(decode.roles.name === 'mesera') return  window.location.href="/newOrder";
+        if(decode.roles.name === 'cocinera') return  window.location.href="/getOrders";
+        return window.location.href="/admi";
+      })
   };
 
   const onChangeInput = (e) => {
