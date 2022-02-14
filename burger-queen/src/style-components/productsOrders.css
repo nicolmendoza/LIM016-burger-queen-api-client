@@ -1,6 +1,9 @@
 .productsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 10px;
-  border: 5px solid white;
+  border: 2px solid white;
   border-radius: 10px;
   width: 40%;
   margin-left: 10px;
@@ -12,27 +15,109 @@
   width: 100%;
   color: white;
 }
-.containerProdutsDiv{
+
+.containerProductsOrders h5,h6,h1 ,h3,h4{
   color: white;
+}
+
+
+.inputClient{
+  display: flex;
+  flex-direction: row;
+}
+
+.containerProductsOrders input {
+  border-radius: 20px;
+}
+
+.containerProdutsDiv {
   display: grid;
   text-align: center;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin: 20px;
+  color: white;
 }
-.productsDiv{
+.containerProdutsDiv h5 {
+  
+  color: white;
+}
 
+.containerProduts{
+  
+  margin-bottom: 50px;
 }
-.imgDiv{
+.imgDiv {
   width: 100%;
 }
-.inputSearch{
+.inputSearch {
   border-radius: 50px;
   /* width: 30%; */
 }
-.inputDiv{
+.inputDiv {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
   width: 100%;
   padding-left: 50px;
-  background: yellowgreen;
+  height: 50px;
+  
+}
+.inputDiv input {
+background: white;
+margin: none;
+}
+.inputDiv h5 {
+  color: white;
+  }
+
+.btnProductsDiv {
+  width: 800px;
+}
+.btnDiv{
+  display: flex;
+  color: aliceblue;
+  justify-content: center;
+  
+}
+.btnDiv button{
+  color: white;
+  width: 150px;
+}
+
+/* 
+@media (min-width: 1170px){
+  .productsDiv {
+    width: 40px;
+  }
+} */
+.productCart{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnQty{
+  display: flex;
+  flex-direction: row;
+}
+.btnQty button{
+ width: 50px;
+ height: 50px;
+}
+.btnQty h4{
+  margin: 10px;
+ }
+
+@media (min-width: 760px){
+  .btnProductsDiv {
+    width: 600px;
+    margin: 30px;
+    
+  }
+  .productsDiv {
+    width: 600px;
+  }
 }

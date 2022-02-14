@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const url='https://bq-api-2022.herokuapp.com/products'
+const url2='https://bq-api-2022.herokuapp.com/users'
 const token = localStorage.getItem("token");
 
 const header = {
@@ -36,6 +37,10 @@ export const editProduct = async (id,credentials, config) => {
 }
 
 export const deleteProduct = async (id, config) => {
+    return await axios.delete(`${url}/${id}`, config)
+};
+
+export const deleteUser = async (id, config) => {
     return await axios.delete(`${url}/${id}`, config)
 };
 

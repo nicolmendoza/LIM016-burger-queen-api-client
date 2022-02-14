@@ -51,8 +51,6 @@ const Cart = ({
 
   const productoPrecio = (a, b) => {
     const result = a * b;
-    // setTotalFinal([...totalFinal, result]);
-    // console.log(totalFinal);
     return result;
   };
 
@@ -67,31 +65,39 @@ const Cart = ({
 
   return (
     <div className="productsDiv">
-      <h1>Carrito de Compras</h1>
+      <h3>Carrito de Compras</h3>
+      <div className="inputClient">
+      <h5>Cliente:</h5>
       <input
         placeholder="Nombre del cliente"
         onChange={onChangeInput}
         name="name"
         value={state.name}
       ></input>
+      </div>
+      <h4>Productos :</h4>
       {cart.length === 0
-        ? "no hay productos en la lista"
+        ? "No hay productos en la lista"
         : cart.map((x) => (
             <>
-              <div>
-                <div>{x.name}</div>
-                <div>{x.qty}</div>
+            <h6>{x.name}</h6>
+              <div className="productCart">
+                
+                
+                {/* <h6>Cantidad:{x.qty}</h6> */}
                 <img style={{ width: 100, height: 100 }} src={x.image}></img>
-                <div>Total : ${productoPrecio(x.qty, x.price, x._id)}</div>
-                <div>
-                  {x.qty}x{x.price}
-                </div>
-                <Button onClick={() => addProduct(x)}>+</Button>
+
+                <div className="btnQty">
+                <Button onClick={() => addProduct(x)}>+</Button><h4>{x.qty}</h4>
                 <Button onClick={() => deleteProduct(x)}>-</Button>
+                </div>
+                <h6>Total : ${productoPrecio(x.qty, x.price, x._id)}</h6>
+
                 <br></br>
               </div>
             </>
           ))}
+          <h4>-------------------------</h4>
       <h4>Total a Pagar :${totalPagar()}</h4>
       <Button onClick={() => postNewOrder()}>ENVIAR</Button>
     </div>

@@ -18,7 +18,6 @@ function App() {
       <Routes>
         <Route path={"/"} element={<Inicio />}></Route>
         {/* <Route exact path={"/prueba"} element={<ProductsPrueba />}></Route> */}
-
         <Route path={"/login"} element={<Login />}></Route>
         <Route path={"/getOrders"} element={<GetOrders />}></Route>
         <Route path={"/admi"} element={<Admi />}></Route>

@@ -44,7 +44,7 @@ const Products = () => {
   };
 
   const Loading = () => {
-    return <div>Loading ...</div>;
+    return <div className="btnProductsDiv">Loading ...</div>;
   };
 
   const [cart, setCart] = useState([]);
@@ -53,10 +53,10 @@ const Products = () => {
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
       return setCart(
-        cart.map((x) => (x._id === product._id ? { ...x, qty: x.qty + 1 ,total:product.price*product.qty} : x))
+        cart.map((x) => (x._id === product._id ? { ...x, qty: x.qty + 1 } : x))
       );
     } else {
-      return setCart([...cart, { ...product, qty: 1, total:product.price*product.qty }]);
+      return setCart([...cart, { ...product, qty: 1 }]);
     }
   };
 
@@ -66,7 +66,7 @@ const Products = () => {
     } else {
       setCart(
         cart.map((x) =>
-          x._id === product._id ? { ...product, qty: x.qty - 1 , total:product.price*product.qty} : x
+          x._id === product._id ? { ...product, qty: x.qty - 1 } : x
         )
       );
     }
@@ -82,8 +82,8 @@ const Products = () => {
 
   const ShowProducts = () => {
     return (
-      <div>
-        <div>
+      <div className="btnProductsDiv">
+        <div className="btnDiv">
           <Button onClick={() => allProducts()}>ALL</Button>
           <Button onClick={() => filterProductsByType("Desayuno")}>
             Desayuno
@@ -103,7 +103,7 @@ const Products = () => {
                 <h5>{x.name}</h5>
                 <p>Precio: ${x.price}</p>
                 <div className="imgDiv">
-                <img style={{width: 100, height: 100}}src={x.image}></img>
+                  <img style={{ width: 100, height: 100 }} src={x.image}></img>
                 </div>
                 <Button onClick={() => addProduct(x)}>Add</Button>
               </div>
@@ -119,8 +119,13 @@ const Products = () => {
       <div className="containerProductsOrders">
         <div>
           <div className="inputDiv">
-          <h5>Busca un producto :</h5>
-          <input type="text" onChange={buscador} className="inputSearch" name="texto"></input>
+            <h5>Busca un producto :</h5>
+            <input
+              type="text"
+              onChange={buscador}
+              className="inputSearch"
+              name="texto"
+            ></input>
           </div>
           {loading ? <Loading /> : <ShowProducts />}
         </div>
@@ -138,3 +143,6 @@ const Products = () => {
 };
 
 export default Products;
+
+5 ABRILLLLLLLKLLLLÑL`PL
++PSÑ`
