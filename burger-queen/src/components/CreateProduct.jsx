@@ -19,6 +19,7 @@ const style = {
   };
 
 const CreateProduct = ({getProducts}) => {
+    const url='https://bq-api-2022.herokuapp.com/products'
     const token = localStorage.getItem("token");
     const [open, setOpen] = React.useState(false);
     let options = {
@@ -51,13 +52,11 @@ const CreateProduct = ({getProducts}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         handleClose()
-        
         const res = await createProduct(newProduct, options)
         console.log(res)
-        setNewProduct(initial)
-        getProducts()
-
+        getProducts(url)
     }
+    
     return (
     <div>
         <Button onClick={handleOpen}>CREATE PRODUCT</Button>

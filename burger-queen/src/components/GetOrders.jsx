@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Sidebar from './Navegador'
 const GetOrders = () => {
   const [state, setState] = useState([]);
+  const roleUser = localStorage.getItem("role");
   const [filter, setFilter] = useState([]);
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
@@ -49,6 +51,7 @@ const GetOrders = () => {
   const FilterOrders = () => {
     return (
       <>
+       
         <div className="buttons d-flex justify-content-center mb-2">
           <button
             className="btn btn-outline-dark"
@@ -69,6 +72,7 @@ const GetOrders = () => {
 
   return (
     <>
+    <Sidebar value={`${roleUser}`}></Sidebar>
       <FilterOrders></FilterOrders>
       <div className="row">
         {filter.map((x) => (

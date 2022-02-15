@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cart from "./Cart";
-import { Button } from "../style-components/components";
+import {Container, Button} from '../style-components/components.js'
+import Sidebar from "./Navegador"
 import "../style-components/productsOrders.css";
 
 const Products = () => {
   const url = "https://bq-api-2022.herokuapp.com";
+  const roleUser = localStorage.getItem("role");
   const token = localStorage.getItem("token");
   const header = {
     headers: {
@@ -116,6 +118,8 @@ const Products = () => {
 
   return (
     <>
+    <Sidebar value={`${roleUser}`}></Sidebar>
+    <Container>
       <div className="containerProductsOrders">
         <div>
           <div className="inputDiv">
@@ -137,12 +141,10 @@ const Products = () => {
           totalFinal={totalFinal}
           setTotalFinal={setTotalFinal}
         />
-      </div>
+        </div>
+      </Container>
     </>
   );
 };
 
 export default Products;
-
-5 ABRILLLLLLLKLLLLÑL`PL
-+PSÑ`

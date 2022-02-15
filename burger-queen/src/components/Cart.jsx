@@ -67,29 +67,28 @@ const Cart = ({
     <div className="productsDiv">
       <h3>Carrito de Compras</h3>
       <div className="inputClient">
-      <h5>Cliente:</h5>
-      <input
-        placeholder="Nombre del cliente"
-        onChange={onChangeInput}
-        name="name"
-        value={state.name}
-      ></input>
+        <h5>Cliente:</h5>
+        <input
+          placeholder="Nombre del cliente"
+          onChange={onChangeInput}
+          name="name"
+          value={state.name}
+        ></input>
       </div>
       <h4>Productos :</h4>
       {cart.length === 0
         ? "No hay productos en la lista"
         : cart.map((x) => (
             <>
-            <h6>{x.name}</h6>
+              <h6>{x.name}</h6>
               <div className="productCart">
-                
-                
                 {/* <h6>Cantidad:{x.qty}</h6> */}
                 <img style={{ width: 100, height: 100 }} src={x.image}></img>
 
                 <div className="btnQty">
-                <Button onClick={() => addProduct(x)}>+</Button><h4>{x.qty}</h4>
-                <Button onClick={() => deleteProduct(x)}>-</Button>
+                  <Button onClick={() => addProduct(x)}>+</Button>
+                  <h4>{x.qty}</h4>
+                  <Button onClick={() => deleteProduct(x)}>-</Button>
                 </div>
                 <h6>Total : ${productoPrecio(x.qty, x.price, x._id)}</h6>
 
@@ -97,7 +96,7 @@ const Cart = ({
               </div>
             </>
           ))}
-          <h4>-------------------------</h4>
+      <h4>-------------------------</h4>
       <h4>Total a Pagar :${totalPagar()}</h4>
       <Button onClick={() => postNewOrder()}>ENVIAR</Button>
     </div>

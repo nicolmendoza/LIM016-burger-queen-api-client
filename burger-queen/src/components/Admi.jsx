@@ -9,6 +9,8 @@ const Admi = () => {
   const url = 'https://bq-api-2022.herokuapp.com/users';
   const token = localStorage.getItem("token");
 
+  const [newUrl, setUrl] = useState(url);
+
   const header = {
     headers: { 
     Authorization: `Bearer ${token}`,
@@ -33,12 +35,12 @@ const Admi = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(true)
-      getUsers(url);
+      getUsers(newUrl);
     }, 2000);
   }, []);
 
 
-  const getUsers = (url) => getAllProducts(url)
+  const getUsers = (newUrl) => getAllProducts(newUrl)
     .then((response) =>{
       const link = response.headers.link
       const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
@@ -62,14 +64,16 @@ const Admi = () => {
     console.log(e.target.value)
     let pageNumber = e.target.value
     getUsers(pageNumber)
+    setUrl(pageNumber)
   }
 
-  const deleteUser = async (id) => {
-    
-    const res = await deleteProduct(id)
-    console.log(res)
-    getUsers()
-  }
+  const deleteUser = (id) => {
+    console.log(newUrl)
+    axios
+      .delete(`${url}/${id}`, header)
+      .then((response) => console.log(response))
+      .then(() => getUsers(newUrl));
+  };
 
   // const deleteUser = (id) => {
   //   axios

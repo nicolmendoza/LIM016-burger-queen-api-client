@@ -20,6 +20,7 @@ const style = {
 
 
 const CreateUser = ({getUsers}) => {
+  const url = 'https://bq-api-2022.herokuapp.com/users';
   const token = localStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -77,7 +78,7 @@ handleClose()
        password: "",
        roles: "",
    }))
-   getUsers()
+   getUsers(url)
   };
   return (
     <div>

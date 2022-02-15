@@ -4,14 +4,18 @@ const url='https://bq-api-2022.herokuapp.com/products'
 const url2='https://bq-api-2022.herokuapp.com/users'
 const token = localStorage.getItem("token");
 
+const limit='?limit=6'
+
 const header = {
     headers: { 
     Authorization: `Bearer ${token}`,
 }}
   
-export const getAllProducts = (url) => {
-    const request = axios.get(url, header)
-    return request.then(response => response)
+export const getAllProducts = async (url) => {
+    console.log(url)
+    const request = axios.get(`${url}${limit}`, header)
+    const response = await request;
+    return response;
 }
 
 export const createProduct = async (credentials, config) => {
@@ -36,8 +40,11 @@ export const editProduct = async (id,credentials, config) => {
     return data
 }
 
-export const deleteProduct = async (id, config) => {
-    return await axios.delete(`${url}/${id}`, config)
+export const deleteProduct = async (url, id, config) => {
+    console.log(`${url}/${id}`)
+    const deleteProd =  await axios.delete(`${url}/${id}`, config)
+    console.log(deleteProd)
+    return deleteProd
 };
 
 export const deleteUser = async (id, config) => {
