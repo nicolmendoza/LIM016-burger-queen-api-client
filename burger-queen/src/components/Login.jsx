@@ -1,55 +1,44 @@
 import React, { useState } from "react";
-import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { singIn } from "../services/users";
 import {NavLink} from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
-import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import ComponentInput from '../utils/input'
+import {Form, Icon, IconEyeClose, IconEye, Lock} from '../style-components/elementos/Form'
 import '../style-components/login.css';
-import {Button} from '../style-components/components'
+import {Button, ButtonModal, ContentModal} from '../style-components/components'
+import Modal from "../utils/modal";
 
 const Login = () => {
   const [inputType, setInputType] = useState('password');
+  const bodyModal = {
+    title: '',
+    body: "Intentelo nuevamente"
+  }
+  const [loading, setLoading] = useState(false)
+  const [correo, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [modal, setModal] = useState(bodyModal);
+  const [stateModal, setStateModal] = useState(false)
 
-  const initial = {
-    email: "",
-    password: "",
-  };
+  const expReg = {
+    password: /^.{4,12}$/, // 4 a 12 digitos.
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  }
 
-  const [state, setState] = useState(initial);
-
-  const onSubmitForm = (e) => {
+  const onSubmitForm = async (e) => {
+    setLoading(true)
     e.preventDefault();
     const values = {
-      email: state.email,
-      password: state.password,
+      email: correo,
+      password: password,
     };
-    console.log(state);
-    axios.post("https://bq-api-2022.herokuapp.com/auth", values)
-      .then((response) => {
-        const token = response.data.token;
-        const decode = jwtDecode(token);
-        const rol=(decode.roles.admin===true?"admin":decode.roles.name==="mesera"?"mesera":"cocinera")
-        console.log(rol)
-        // localStorage.setItem('rol',rol)
-        localStorage.setItem("token", token);
-        localStorage.setItem("idUser", decode.uid);
-        localStorage.setItem("role", rol);
-        console.log(decode);
-        console.log(decode.roles.name)
-        if(decode.roles.name === 'mesera') return  window.location.href="/newOrder";
-        if(decode.roles.name === 'cocinera') return  window.location.href="/getOrders";
-        return window.location.href="/settings";
-      })
+
+    await singIn(values,setModal, setStateModal)
+
+      setLoading(false)
+      setEmail('')
+      setPassword('')
   };
 
-  const onChangeInput = (e) => {
-    setState((old) => ({
-      ...old,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   return (
     <div className="login-full-container">
@@ -57,39 +46,49 @@ const Login = () => {
           <NavLink to="/" aria-label="navlogo" className="navlogo">Burguer Queen</NavLink>
       </nav>
       <div className="loginContainer">
-        <div className="loginContainer-form">
+      {loading ? "Cargando..." : ""}
         <p className="tittle-login">Login</p>
-        <form className="login-form" onSubmit={onSubmitForm}>
-          <div className="form-section">
-          <EmailOutlinedIcon aria-label="iconOpen" className="login-eye-icon" />
-            <input
-              type="email"
-              name="email"
-              className="input-form"
-              placeholder="name@example.com"
-              onChange={onChangeInput}
+        <Form action="" onSubmit={onSubmitForm}>
+          <ComponentInput
+            icon={<Icon />}
+            type="text"
+            label="Email"
+            placeholder="usuario@example.com"
+            name="email"
+            error="El correo debe cumplir con el siguiente formato usuario@example.com"
+            expReg = {expReg.correo}
+            estado={correo}
+            changeState={setEmail}
+          />
+          <ComponentInput
+            icon={<Lock/>}
+            type={inputType}
+            label="Password"
+            placeholder="******************"
+            name="password"
+            error="La contraseña debe de tener entre 4 y 16 digitos"
+            expReg = {expReg.password}
+            estado={password}
+            changeState={setPassword}
+            eye={inputType === 'password'
+            ? <IconEye onClick={() => setInputType('text')}/>
+            : <IconEyeClose onClick={() => setInputType('password')} />}
             />
-          </div>
-          <div className="form-section">
-            <LockOutlinedIcon aria-label="iconOpen" className="login-eye-icon" />
-            <input
-              type={inputType}
-              name="password"
-              placeholder="***************"
-              className="input-form"
-              onChange={onChangeInput}
-              rows="3"
-            ></input>
-            {inputType === 'password'
-                ? <VisibilityOffRoundedIcon onClick={() => setInputType('text')} aria-label="iconOpen" className="login-eye-icon" />
-                : <RemoveRedEyeRoundedIcon onClick={() => setInputType('password')} aria-label="iconClose" className="login-eye-icon" />}
-          </div>
           <div className="container-btn">
             <Button type="submit" className="btn-login"> Iniciar </Button>
           </div>
-        </form>
-        </div>
+        </Form>
       </div>
+      <Modal
+        state = {stateModal}
+        changeState = {setStateModal}
+      >
+        <ContentModal>
+          <p>{modal.title}</p>
+          <p>{modal.body}</p>
+          <ButtonModal onClick={() => setStateModal(false)}> Aceptar </ButtonModal>
+        </ContentModal>
+      </Modal>
     </div>
   );
 };
