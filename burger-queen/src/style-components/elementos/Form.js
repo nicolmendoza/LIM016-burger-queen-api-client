@@ -5,7 +5,7 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const colors = {
-    background: "#000000ad",
+    background: "#000000c7",
     border: "#fff",
     error: "#bb2929",
     success: "#1ed12d",
@@ -22,8 +22,11 @@ export const Form = styled.form`
     border-radius: 14px;
     border: 1px solid ${colors.border};
     box-shadow: -1px -1px 20px 1px ${colors.shadow} ;
-    padding: 3%;
+    padding: 10px 2%;
     width: 350px
+`
+export const DivInput = styled.div`
+    margin-bottom: 15px
 `
 export const Label = styled.label`
     color:${colors.letter};
@@ -34,7 +37,7 @@ export const Label = styled.label`
 
 export const GroupInput = styled.div`
     position: relative;
-    z-index:90
+    z-index:3
 `
 
 export const Input = styled.input`
@@ -67,7 +70,7 @@ export const LeyendaError = styled.p`
 ` 
 export const Icon = styled(EmailOutlinedIcon)`
     color:white;
-    font-size: 18px;
+    font-size: 18px !important;
     position:absolute;
     left: 4px;
     z-index:100;
@@ -75,26 +78,26 @@ export const Icon = styled(EmailOutlinedIcon)`
 `
 
 export const IconEye = styled(VisibilityOffRoundedIcon)`
-    color:white;
-    font-size: 18px;
-    position:absolute;
+    color: white;
+    font-size: 25px !important;
+    position: absolute;
     right: 10px;
-    z-index:100;
-    bottom: 20px
+    z-index: 100;
+    bottom: 18px;
 `
 
 export const IconEyeClose = styled(RemoveRedEyeRoundedIcon)`
-    color:white;
-    font-size: 18px;
-    position:absolute;
+    color: white;
+    font-size: 25px !important;
+    position: absolute;
     right: 10px;
-    z-index:100;
-    bottom: 20px
+    z-index: 100;
+    bottom: 18px;
 `
 
 export const Lock = styled(LockOutlinedIcon)`
     color:white;
-    font-size: 18px;
+    font-size: 16px !important;
     position:absolute;
     left: 4px;
     z-index:100;

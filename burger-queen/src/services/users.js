@@ -1,0 +1,34 @@
+import axios from 'axios'
+import jwtDecode from "jwt-decode";
+
+
+export const singIn = async (data, setModal, setStateModal) => {
+    try{
+        const response = await axios.post("https://bq-api-2022.herokuapp.com/auth", data)
+        
+        if(response.err) return console.log('mensaje de error')
+
+        const token = response.data.token;
+        const decode = jwtDecode(token);
+        const rol=(decode.roles.admin===true?"admin":decode.roles.name==="mesera"?"mesera":"cocinera")
+        
+        localStorage.setItem("token", token);
+        localStorage.setItem("idUser", decode.uid);
+        localStorage.setItem("role", rol);
+
+        if(decode.roles.name === 'mesera') return  window.location.href="/newOrder";
+        if(decode.roles.name === 'cocinera') return  window.location.href="/getOrders";
+        return window.location.href="/settings";
+
+    } catch (err) {
+        setStateModal(true)
+        const response = err.response.data
+
+        const message = response.message
+
+        if(message === 'No ingresaste correo o contraseña') return setModal({ title: message, body: 'Inténtelo nuevamente' });
+        if(message === 'El usuario no existe') return setModal({ title: message, body: 'Inténtelo nuevamente' });
+        if(message === 'La contraseña es incorrecta, intente de nuevo') return setModal({ title: 'Contraseña incorrecta.', body: 'Inténtelo nuevamente' });
+        if(response) return setModal({body:"Ocurrio un error en el sistema"})
+    }
+}

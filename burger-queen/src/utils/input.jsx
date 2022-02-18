@@ -1,6 +1,6 @@
 import React, {useState}from "react";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import {Label, Input, GroupInput, LeyendaError, Icon} from '../style-components/elementos/Form'
+import {Label, Input, GroupInput, LeyendaError, DivInput} from '../style-components/elementos/Form'
 
 const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, estado, changeState, eye }) => {
   
@@ -25,7 +25,7 @@ const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, est
 
 
   return (
-        <div className="form-section">
+        <DivInput>
             <Label htmlFor={name}>{label}</Label>
             <GroupInput>
               {icon}
@@ -43,7 +43,7 @@ const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, est
               {eye}
             </GroupInput>
             <LeyendaError valid={valid}>{error}</LeyendaError>
-          </div>
+          </DivInput>
     )
 }
 

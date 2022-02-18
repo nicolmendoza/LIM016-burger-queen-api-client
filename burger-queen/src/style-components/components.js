@@ -39,3 +39,44 @@ width: calc(100% - 78px);
 transition: all 0.5s ease;
 z-index: 2;
 `
+
+export const ButtonModal = style.button`
+  display: block;
+  padding: 8px 23px;
+  border-radius: 100px;
+  color: #fff;
+  border: 1px solid;
+  background-image:  linear-gradient(#2DFFB3,#012417);;
+  cursor: pointer;
+  font-weight: 500;
+  -webkit-transition: .3s ease all;
+  transition: .3s ease all;
+  outline:none;
+
+  &:hover {
+    background: none;
+    color:#03a788c7;
+    border: 1px solid #03a788c7;
+    outline:none
+  }
+`
+
+export const ContentModal = style.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	h1 {
+		font-size: 42px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	p {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+	img {
+		width: 100%;
+		vertical-align: top;
+		border-radius: 3px;
+	}
+`;
