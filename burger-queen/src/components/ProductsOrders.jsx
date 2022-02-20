@@ -120,6 +120,7 @@ const Products = () => {
     <>
     <Sidebar value={`${roleUser}`}></Sidebar>
     <Container>
+    {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
       <div className="containerProductsOrders">
         <div>
           <div className="inputDiv">
@@ -141,7 +142,7 @@ const Products = () => {
           totalFinal={totalFinal}
           setTotalFinal={setTotalFinal}
         />
-        </div>
+        </div>}
       </Container>
     </>
   );

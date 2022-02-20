@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {getAllProducts, deleteProduct} from '../services/products'
 import CreateProduct from "./CreateProduct";
-import { Button, ContainerData} from "../style-components/components";
+import { Button, ContainerElements, DivElement} from "../style-components/components";
 import DivData from '../utils/Container-Data'
 
 const Products = () => {
@@ -22,6 +22,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(initialLink);
+  const [stateModal, setStateModal] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
@@ -61,13 +62,14 @@ const Products = () => {
 
   return (
     <div>
-      <CreateProduct getProducts={getProducts}></CreateProduct>
       <h1>Productos</h1>
-      {loading ? "Cargando..." : ""}
-      <div className="container ">
         <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
         <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
-        <ContainerData>
+        {loading ? "Cargando..." : <ContainerElements>
+          <DivElement>
+            <CreateProduct getProducts={getProducts}/>
+            <p>Add new product</p>
+          </DivElement>
           {products.map((product) => (
             <DivData key={product._id} data={product}>
                 <div>
@@ -79,8 +81,7 @@ const Products = () => {
                 <button onClick={() => {handleDelete(product._id)}}>Eliminar</button>
             </DivData>
           ))}
-        </ContainerData>
-      </div>
+        </ContainerElements>}
     </div>
     );
 };

@@ -81,7 +81,7 @@ export const ContentModal = style.div`
 	}
 `;
 
-export const ContainerData = style.div`
+export const ContainerElements = style.div`
   display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-column-gap: 20px;
@@ -89,5 +89,15 @@ export const ContainerData = style.div`
   padding: 20px;
   height: calc(100vh - 168px);
   content-visibility: auto;
-  overflow-x: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+`
+
+export const DivElement = style.div`
+    border:1px dashed white;
+    border-radius: 5px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:center
 `

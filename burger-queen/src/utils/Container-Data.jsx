@@ -17,6 +17,7 @@ const ContainerData = styled.div`
     align-items: center;
     text-align:center;
     padding: 10px 0px;
+    border-radius:5px;
 
     img{
         width:100px;

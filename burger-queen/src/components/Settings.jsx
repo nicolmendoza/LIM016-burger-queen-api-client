@@ -23,7 +23,8 @@ const Settings = () => {
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
       <Container>
-        <p>Settings</p>
+        <h1>Settings</h1>
+        {roleUser !== 'admin'? "No tiene acceso para esta ruta" :
         <ContainerSetting>
           <Menu width="250">
             <Button2 
@@ -44,7 +45,7 @@ const Settings = () => {
           <Menu width="container">
             {value === "users" ? <Admi /> : <Products />}
           </Menu>
-        </ContainerSetting>        
+        </ContainerSetting> }        
       </Container>
     </div>
   );

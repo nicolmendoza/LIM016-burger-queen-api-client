@@ -4,7 +4,7 @@ const url='https://bq-api-2022.herokuapp.com/products'
 const url2='https://bq-api-2022.herokuapp.com/users'
 const token = localStorage.getItem("token");
 
-const limit='?limit=6'
+const limit='?limit=100'
 
 const header = {
     headers: { 

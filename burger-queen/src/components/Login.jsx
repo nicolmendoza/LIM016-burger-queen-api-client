@@ -32,7 +32,7 @@ const Login = () => {
       password: password,
     };
 
-    await singIn(values,setModal, setStateModal)
+    await singIn(values, setModal, setStateModal)
 
       setLoading(false)
       setEmail('')

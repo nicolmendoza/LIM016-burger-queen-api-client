@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
-import { Button, ContainerData} from "../style-components/components";
+import { Button, ContainerElements, DivElement} from "../style-components/components";
 import {getAllProducts, deleteProduct} from '../services/products'
 import DivData from '../utils/Container-Data'
 
@@ -87,13 +87,15 @@ const Admi = () => {
 
   return (
     <div>
-      <CreateUser getUsers={getUsers}></CreateUser>
-      <div className="container ">
-      {loading ? "Cargando..." : ""}
-        <h5>Admi</h5>
+        <h1>USUARIOS</h1>
         <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
         <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
-        <ContainerData>
+        {loading ? "Cargando..." :
+        <ContainerElements>
+          <DivElement>
+            <CreateUser getUsers={getUsers}></CreateUser>
+            <p>Add new user</p>
+          </DivElement>
         {state.users.map((user) => (
           <DivData key={user._id} data={user}>
             <div>
@@ -105,7 +107,7 @@ const Admi = () => {
             <button onClick={() => deleteUser(user._id)}>Eliminar</button>
           </DivData>
         ))}
-        </ContainerData>
+        </ContainerElements>}
         {/* <table className="table table-hover">
           <tbody>
             {state.users.map((user) => (
@@ -128,7 +130,7 @@ const Admi = () => {
             ))}
           </tbody>
         </table> */}
-      </div>
+      
     </div>
   );
 };
