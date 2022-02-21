@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./inicio.css"
-
+import images from "./imagenes"
 
 const Inicio = () => {
     useEffect(() => {
@@ -15,8 +15,7 @@ const Inicio = () => {
     <main>
         <header className="header">
 
-        <div id="menu-btn" className="fas fa-bars icons"></div>
-        <div id="search-btn" className="fas fa-search icons"></div>
+        <div id="search-btn" className="fas fa-burger icons"></div>
 
         <nav className="navbar">
             <a href="#home">home</a>
@@ -28,20 +27,15 @@ const Inicio = () => {
             <a href="#blogs">blogs</a>
         </nav>
 
-        <a href=' ' className="fas fa-shopping-cart icons"></a>
-        <a href="#home" className="logo"><img src="../../img/logo.png" alt=""/></a>
-
-        <form action="" className="search-form">
-            <input type="search" name="" placeholder="search here..." id="search-box"/>
-            <label htmlFor="search-box" className="fas fa-search icons"></label>
-        </form>
+        <a href='/login' className="fas fa-user icons"> </a>
+        <a href="#home" className="logo"><img src={images.logo} alt=""/></a>
 
         </header>
 
         <section className="home" id="home">
 
         <div className="content">
-            <img data-aos="fade-up" data-aos-delay="150" src="../img/burger-baner.png" alt="imagen"/>
+            <img data-aos="fade-up" data-aos-delay="150" src={images.banner} alt="imagen"/>
             <h3 data-aos="fade-up" data-aos-delay="300">So meaty you'll go crazy</h3>
             <p data-aos="fade-up" data-aos-delay="450">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores at fuga aliquam ipsa recusandae repellat laudantium pariatur amet culpa cum.</p>
             <a data-aos="fade-up" data-aos-delay="600" href="#menu" className="btn">our menu</a>
@@ -74,14 +68,14 @@ const Inicio = () => {
         <section className="menu" id="menu">
 
         <div className="heading">
-            <img src="./img/title-img.png" alt=""/>
+            <img src={images.titleImg} alt=""/>
             <h3>our menu</h3>
         </div>
 
         <div className="box-container">
 
         <div className="box" data-aos="fade-up" data-aos-delay="150">
-            <img src="./img/product-1.png" alt=""/>
+            <img src={images.product1} alt=""/>
             <div className="content">
                 <div className="stars">
                     <i className="fas fa-star"></i>
@@ -97,7 +91,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="300">
-            <img src="./img/product-2.png" alt=""/>
+            <img src={images.product2}  alt=""/>
             <div className="content">
                 <div className="stars">
                     <i className="fas fa-star"></i>
@@ -113,7 +107,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="450">
-            <img src="./img/product-3.png" alt=""/>
+            <img src={images.product3}  alt=""/>
             <div className="content">
                 <div className="stars">
                     <i className="fas fa-star"></i>
@@ -129,7 +123,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="600">
-            <img src="./img/product-4.png" alt=""/>
+            <img src={images.product4}  alt=""/>
             <div className="content">
                 <div className="stars">
                     <i className="fas fa-star"></i>
@@ -145,7 +139,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="750">
-            <img src="./img/product-5.png" alt=""/>
+            <img src={images.product5}  alt=""/>
             <div className="content">
                 <div className="stars">
                     <i className="fas fa-star"></i>
@@ -161,7 +155,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="900">
-            <img src="images/product-6.png" alt=""/>
+            <img src={images.product6} alt=""/>
             <div className="content">
                 <div className="stars">
                     <i className="fas fa-star"></i>
@@ -183,7 +177,7 @@ const Inicio = () => {
         <section className="about" id="about">
 
         <div className="image" data-aos="fade-right" data-aos-delay="150">
-            <img src="./img/about-img.png" alt=""/>
+            <img src={images.about}  alt=""/>
         </div>
 
         <div className="content" data-aos="fade-left" data-aos-delay="300">
@@ -205,14 +199,14 @@ const Inicio = () => {
         <section className="reviews" id="reviews">
 
         <div className="heading">
-            <img src="./img/title-img.png" alt=""/>
+            <img src={images.titleImg}  alt=""/>
             <h3>testimonial</h3>
         </div>
 
         <div className="box-container">
 
         <div className="box" data-aos="fade-up" data-aos-delay="150">
-            <img src="./img/pic-1.png" alt=""/>
+            <img src={images.pic1}  alt=""/>
             <h3>john deo</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis qui accusamus autem! Veniam exercitationem adipisci in excepturi labore magni voluptatibus?</p>
             <div className="stars">
@@ -225,7 +219,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="300">
-            <img src="./img/pic-2.png" alt=""/>
+            <img src={images.pic2} alt=""/>
             <h3>john deo</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis qui accusamus autem! Veniam exercitationem adipisci in excepturi labore magni voluptatibus?</p>
             <div className="stars">
@@ -238,7 +232,7 @@ const Inicio = () => {
         </div>
 
         <div className="box" data-aos="fade-up" data-aos-delay="450">
-            <img src="./img/pic-3.png" alt=""/>
+            <img src={images.pic3} alt=""/>
             <h3>john deo</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis qui accusamus autem! Veniam exercitationem adipisci in excepturi labore magni voluptatibus?</p>
             <div className="stars">
@@ -258,7 +252,7 @@ const Inicio = () => {
     <section className="contact" id="contact">
 
     <div className="heading">
-        <img src="./img/title-img.png" alt=""/>
+        <img src={images.titleImg}  alt=""/>
         <h3>contact us</h3>
     </div>
 
@@ -309,7 +303,7 @@ const Inicio = () => {
     <section className="blogs" id="blogs">
 
     <div className="heading">
-        <img src="./img/title-img.png" alt=""/>
+        <img src={images.titleImg} alt=""/>
         <h3>daily posts</h3>
     </div>
 
@@ -317,7 +311,7 @@ const Inicio = () => {
 
     <div className="box" data-aos="fade-up" data-aos-delay="150">
         <div className="image">
-            <img src="./img/blog-1.jpg" alt=""/>
+            <img src={images.blog1} alt=""/>
             <div className="icons">
                 <a href=' '> <i className="fas fa-calendar"></i> 21st may, 2022 </a>
                 <a href=' '> <i className="fas fa-user"></i> by admin </a>
@@ -332,7 +326,7 @@ const Inicio = () => {
 
     <div className="box" data-aos="fade-up" data-aos-delay="300">
         <div className="image">
-            <img src="./img/blog-2.jpg" alt=""/>
+            <img src={images.blog2} alt=""/>
             <div className="icons">
                 <a href=' '> <i className="fas fa-calendar"></i> 21st may, 2022 </a>
                 <a href=' '> <i className="fas fa-user"></i> by admin </a>
@@ -347,7 +341,7 @@ const Inicio = () => {
 
     <div className="box" data-aos="fade-up" data-aos-delay="450">
         <div className="image">
-            <img src="/img/blog-3.jpg" alt=""/>
+            <img src={images.blog3} alt=""/>
             <div className="icons">
                 <a href=' '> <i className="fas fa-calendar"></i> 21st may, 2022 </a>
                 <a href=' '> <i className="fas fa-user"></i> by admin </a>
@@ -375,7 +369,7 @@ const Inicio = () => {
         <a href="#blogs" className="btn">blogs</a>
     </div>
 
-    <p className="credit"> created by <span>mr. web designer</span> | all rights reserved! </p>
+    {/* <p className="credit"> created by <span>mr. web designer</span> | all rights reserved! </p> */}
 
     </section>
 
