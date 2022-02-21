@@ -80,3 +80,24 @@ export const ContentModal = style.div`
 		border-radius: 3px;
 	}
 `;
+
+export const ContainerElements = style.div`
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 168px);
+  content-visibility: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+`
+
+export const DivElement = style.div`
+    border:1px dashed white;
+    border-radius: 5px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:center
+`

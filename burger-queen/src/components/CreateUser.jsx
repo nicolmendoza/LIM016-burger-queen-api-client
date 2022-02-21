@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const style = {
   position: 'absolute',
@@ -28,7 +29,8 @@ const CreateUser = ({getUsers}) => {
   const initial = {
     email: "",
     password: "",
-    roles: "",
+    image:"",
+    roles: ""
   };
 
   const [state, setState] = useState(initial);
@@ -53,6 +55,7 @@ const CreateUser = ({getUsers}) => {
   };
 
   const onChangeInput = (e) => {
+    console.log(e.target.value)
     setState((old) => ({
       ...old,
       [e.target.name]: e.target.value,
@@ -82,10 +85,7 @@ handleClose()
   };
   return (
     <div>
-      <h5>Create USERs</h5>
-
-      <div>
-      <Button onClick={handleOpen}>CREATE USERS</Button>
+      <AddCircleOutlineIcon onClick={handleOpen}/>
       <Modal
         open={open}
         onClose={handleClose} 
@@ -93,14 +93,6 @@ handleClose()
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            Ingrese los datos
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Email:</Typography><input></input>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Contraseña:</Typography><input></input><br></br>
-            <Button onClick={handleClose} >Guardar</Button> */}
       <form className="container" onSubmit={onSubmitForm}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1" className="form-label mt-4">
@@ -128,6 +120,20 @@ handleClose()
             className="form-control"
             id="exampleInputPassword1"
             placeholder="Password"
+            onChange={onChangeInput}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputImage1" className="form-label mt-4">
+            Imagen
+          </label>
+          <input
+            type="text"
+            name="image"
+            value={state.image}
+            className="form-control"
+            id="exampleInputImage1"
+            placeholder="Imagen"
             onChange={onChangeInput}
           />
         </div>
@@ -179,7 +185,6 @@ handleClose()
       </form>
         </Box>
       </Modal>
-    </div>
     </div>
   );
 };

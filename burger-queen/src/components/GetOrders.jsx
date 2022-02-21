@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button, ContainerProduts, OrderDiv, Container} from "../style-components/components";
 import Sidebar from './Navegador'
+
 const GetOrders = () => {
   const [state, setState] = useState([]);
+  const [loading, setLoading] = useState(false)
+
   const roleUser = localStorage.getItem("role");
   const [filter, setFilter] = useState([]);
   const url = "https://bq-api-2022.herokuapp.com";
@@ -16,6 +20,7 @@ const GetOrders = () => {
   };
   useEffect(() => {
     getOrders();
+    setLoading(true)
   }, []);
 
   const getOrders = () => {
@@ -23,6 +28,7 @@ const GetOrders = () => {
       console.log(response.data);
       setState(response.data);
       setFilter(response.data.filter((x) => x.status === "pending"));
+      setLoading(false)
     });
   };
 
@@ -73,10 +79,14 @@ const GetOrders = () => {
   return (
     <>
     <Sidebar value={`${roleUser}`}></Sidebar>
+    <Container>
+    {roleUser === 'mesera'? "No tiene acceso para esta ruta" :
+      <>
       <FilterOrders></FilterOrders>
-      <div className="row">
+      {loading ? "Cargando..." : 
+      <ContainerProduts>
         {filter.map((x) => (
-          <div key={x._id} className="col-6 col-md-4">
+          <OrderDiv key={x._id} className="col-6 col-md-4">
             <p>Cliente : {x.client}</p>
             <p>Status:{x.status}</p>
             {x.products.map((y) => (
@@ -94,9 +104,11 @@ const GetOrders = () => {
             ) : (
               "Para Entregar"
             )}
-          </div>
+          </OrderDiv>
         ))}
-      </div>
+      </ContainerProduts>}
+      </>}
+      </Container>
     </>
   );
 };

@@ -66,15 +66,16 @@ const Orders = () => {
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
     <Container>
+    {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
+      <>
       <div className="buttons d-flex justify-content-center mb-2">
             <Button onClick={() => allProducts() }>Todas</Button>
             <Button onClick={() => filterProductsByType('pending') }>Pendientes</Button>
             <Button onClick={() => filterProductsByType('delivering') }>Listos</Button>
             <Button onClick={() => filterProductsByType('delivered') }>Entregados</Button>
             <Button onClick={() => filterProductsByType('canceled') }>Cancelados</Button>
-          </div>
-      <h1>Todas las ordenes</h1>
-      {loading ? "Cargando..." : ""}
+      </div>
+      {loading ? "Cargando..." : 
       <ContainerProduts>
         {filter.map((order) => (
           <OrderDiv key={order._id}>
@@ -92,7 +93,8 @@ const Orders = () => {
             <ButtonStatus isLoggedIn={order}/>
           </OrderDiv>
         ))}
-      </ContainerProduts>
+      </ContainerProduts>}
+      </>}
     </Container>
     </div>
   )
