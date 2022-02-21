@@ -5,7 +5,6 @@
     margin: 0;
     min-height: 100vh;
     width: 100%;
-    font-family: 'Great Vibes', cursive;
   }
 
 .navContainer{
@@ -25,11 +24,13 @@
 .loginContainer {
     position: absolute;
     display: flex;
-    top:10%;
+    top: 10%;
     height: 90vh;
     width: 100%;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    /* margin: auto; */
 }
 
 .loginContainer-form{

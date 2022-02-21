@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@testing-library/react": "^12.1.2"
+  },
+  "dependencies": {
+    "aos": "^2.3.4"
   }
 }

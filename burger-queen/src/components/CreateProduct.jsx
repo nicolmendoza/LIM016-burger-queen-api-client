@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {createProduct} from '../services/products'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const style = {
     position: 'absolute',
@@ -59,7 +60,7 @@ const CreateProduct = ({getProducts}) => {
     
     return (
     <div>
-        <Button onClick={handleOpen}>CREATE PRODUCT</Button>
+        <AddCircleOutlineIcon onClick={handleOpen}/>
         <Modal
             open={open}
             onClose={handleClose} 

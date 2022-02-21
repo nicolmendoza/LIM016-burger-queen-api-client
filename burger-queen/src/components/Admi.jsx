@@ -2,14 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
-import { Button } from "../style-components/components";
+import { Button, ContainerElements, DivElement} from "../style-components/components";
 import {getAllProducts, deleteProduct} from '../services/products'
+import DivData from '../utils/Container-Data'
 
 const Admi = () => {
   const url = 'https://bq-api-2022.herokuapp.com/users';
   const token = localStorage.getItem("token");
 
   const [newUrl, setUrl] = useState(url);
+  const roleUser = localStorage.getItem("role");
 
   const header = {
     headers: { 
@@ -85,23 +87,28 @@ const Admi = () => {
 
   return (
     <div>
-      <CreateUser getUsers={getUsers}></CreateUser>
-      <div className="container ">
-      {loading ? "Cargando..." : ""}
-        <h5>Admi</h5>
+        <h1>USUARIOS</h1>
         <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
         <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Rol</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Correo</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Eliminar</th>
-            </tr>
-          </thead>
-
+        {loading ? "Cargando..." :
+        <ContainerElements>
+          <DivElement>
+            <CreateUser getUsers={getUsers}></CreateUser>
+            <p>Add new user</p>
+          </DivElement>
+        {state.users.map((user) => (
+          <DivData key={user._id} data={user}>
+            <div>
+                <p>{user.nameUser}</p>
+                <p>{user.email}</p>
+                <p>{user.roles.name}</p>
+            </div>
+            <button onClick={() =>{window.location.href = `/edit/${user._id}`}}>Editar</button>
+            <button onClick={() => deleteUser(user._id)}>Eliminar</button>
+          </DivData>
+        ))}
+        </ContainerElements>}
+        {/* <table className="table table-hover">
           <tbody>
             {state.users.map((user) => (
               <tr className="table-active" key={user._id}>
@@ -123,8 +130,8 @@ const Admi = () => {
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+        </table> */}
+      
     </div>
   );
 };
