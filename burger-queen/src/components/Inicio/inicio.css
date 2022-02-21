@@ -8,7 +8,6 @@
   text-decoration: none;
   outline: none;
   border: none;
-  text-transform: capitalize;
   -webkit-transition: all .2s linear;
   transition: all .2s linear;
 }
@@ -16,7 +15,6 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
-  scroll-padding-top: 8rem;
   overflow-x: hidden;
 }
 
@@ -52,7 +50,7 @@ section {
 .heading h3 {
   font-size: 3rem;
   text-transform: uppercase;
-  color: #fff;
+  color: rgb(255, 255, 255);
   margin-top: 1rem;
 }
 
@@ -61,7 +59,7 @@ section {
   margin-top: 1rem;
   cursor: pointer;
   color: #fff;
-  border: 0.2rem solid rgba(255, 255, 255, 0.3);
+  border: 0.2rem solid rgb(145 125 37);
   background: no-repeat;
   font-size: 1.7rem;
   padding: 1rem 3rem;
@@ -125,8 +123,8 @@ section {
 
 .header .logo {
   position: absolute;
-  top: 3rem;
-  left: 48.5%;
+  top: 2.5rem;
+  left: 49%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
@@ -173,32 +171,40 @@ section {
 }
 
 .home {
-  margin-top: 7rem;
-  background: url(../../img/home-bg.png) no-repeat;
-  background-size: cover;
-  background-position: center;
+      /* margin-top: 8rem; */
+    background: url(http://localhost:3000/static/media/fondo-content.da77ad710f32a994b426.gif) no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding-top: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .home .content {
-  max-width: 70rem;
+  display: flex;
+  align-items: center;
+  max-width: 72rem;
   text-align: center;
-  margin: 0 auto;
+  /* margin: 4% auto; */
+  flex-direction: column;
 }
 
 .home .content img {
-  width: 100%;
+  width: 50%;
 }
 
 .home .content h3 {
-  font-size: 4rem;
+  font-size: 5rem;
   text-transform: uppercase;
-  color: #fff;
+  color: #E4CB56;
 }
 
 .home .content p {
   font-size: 1.7rem;
   line-height: 2;
-  color: #aaa;
+  color: rgb(255, 255, 255);
   padding: 2rem 0;
 }
 
@@ -402,12 +408,12 @@ section {
   gap: 3rem;
 }
 
-.contact .row .map {
+/* .contact .row .map {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 40rem;
           flex: 1 1 40rem;
   width: 100%;
-}
+} */
 
 .contact .row .form {
   -webkit-box-flex: 1;
@@ -649,4 +655,3 @@ section {
     font-size: 50%;
   }
 }
-/*# sourceMappingURL=style.css.map */
