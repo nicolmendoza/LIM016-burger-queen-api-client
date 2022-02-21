@@ -94,7 +94,8 @@ const Admi = () => {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Tipo</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Nombre</th>
               <th scope="col">Correo</th>
               <th scope="col">Editar</th>
               <th scope="col">Eliminar</th>
@@ -111,6 +112,7 @@ const Admi = () => {
                     ? "mesera"
                     : "cocinera"}
                 </th>
+                <td>{user.nameUser}</td>
                 <td>{user.email}</td>
                 <td>
                   <Link to={"/edit/" + user._id}>Editar</Link>
