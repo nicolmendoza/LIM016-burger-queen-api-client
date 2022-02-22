@@ -15,6 +15,8 @@ import product3 from '../../img/product-3.png'
 import product4 from '../../img/product-4.png'
 import product5 from '../../img/product-5.png';
 import product6 from '../../img/product-6.png';
+import coffe from '../../img/coffe.png'
+import cappuccino from '../../img/cappuccino.png'
 
 const imagenes = {
     titleImg,
@@ -33,7 +35,9 @@ const imagenes = {
     product3,
     product4,
     product5,
-    product6
+    product6,
+    coffe,
+    cappuccino
 }
 
 export default imagenes

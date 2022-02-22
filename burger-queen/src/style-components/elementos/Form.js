@@ -4,13 +4,16 @@ import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-const colors = {
-    background: "#000000c7",
+
+export const colors = {
+    background: "rgba(0, 0, 0, 0.87)",
     border: "#fff",
     error: "#bb2929",
     success: "#1ed12d",
     shadow: "rgb(255 255 255 / 43%)",
-    letter:"white"
+    letter:"white",
+    principal: 'rgba(229, 161, 6, 0.8)',
+    parrafo: 'white',
 }
 
 export const Form = styled.form`
@@ -19,17 +22,17 @@ export const Form = styled.form`
     justify-content:center;
     background-color: ${colors.background};
     height: 60%;
-    border-radius: 14px;
+    border-radius: 1rem;
     border: 1px solid ${colors.border};
     box-shadow: -1px -1px 20px 1px ${colors.shadow} ;
-    padding: 10px 2%;
-    width: 350px
+    padding: 0.625rem 2%;
+    width: 30rem
 `
 export const DivInput = styled.div`
     margin-bottom: 15px
 `
 export const Label = styled.label`
-    color:${colors.letter};
+    color:${colors.principal};
     font-weight:500;
     min-height:40px;
     cursor:pointer
