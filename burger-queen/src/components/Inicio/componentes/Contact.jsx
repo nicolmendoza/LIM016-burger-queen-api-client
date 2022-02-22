@@ -6,7 +6,7 @@ const Contact = () => {
 
     <div className="heading">
         <img src={images.titleImg}  alt=""/>
-        <h3>contact us</h3>
+        <h3>Contáctanos</h3>
     </div>
 
     <div className="row">
@@ -19,22 +19,22 @@ const Contact = () => {
 
             <div className="icons" data-aos="fade-up" data-aos-delay="150">
                 <i className="fas fa-map"></i>
-                <h3>address :</h3>
-                <p>mumbai, india - 400104</p>
+                <h3>Dirección :</h3>
+                <p>Malecón de la Reserva 1035 - Miraflores</p>
             </div>
 
             <div className="icons" data-aos="fade-up" data-aos-delay="300">
                 <i className="fas fa-envelope"></i>
-                <h3>email :</h3>
-                <p>shaikhanas@gmail.com</p>
-                <p>anasbhai@gmail.com</p>
+                <h3>Email :</h3>
+                <p>ventas@burger-queen.com</p>
+                <p>administración@burger-queen.com</p>
             </div>
 
             <div className="icons" data-aos="fade-up" data-aos-delay="450">
                 <i className="fas fa-phone"></i>
-                <h3>phone :</h3>
-                <p>+123-456-7890</p>
-                <p>+111-222-3333</p>
+                <h3>Delivery :</h3>
+                <p>(01) 712-4563</p>
+                <p class="fa-brands fa-whatsapp">  992 344 939</p>
             </div>
             
         </div>

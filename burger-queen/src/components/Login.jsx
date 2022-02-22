@@ -6,6 +6,8 @@ import {Form, Icon, IconEyeClose, IconEye, Lock} from '../style-components/eleme
 import '../style-components/login.css';
 import {Button, ButtonModal, ContentModal} from '../style-components/components'
 import Modal from "../utils/modal";
+import logo from '../img/Burger House.png'
+import banner from '../img/burger-baner.png'
 
 const Login = () => {
   const [inputType, setInputType] = useState('password');
@@ -43,11 +45,13 @@ const Login = () => {
   return (
     <div className="login-full-container">
       <nav className="navContainer">
-          <NavLink to="/" aria-label="navlogo" className="navlogo">Burguer Queen</NavLink>
+        <a href="/" className="logo"><img src={logo} alt=""/></a>
+          {/* <NavLink to="/" aria-label="navlogo" className="navlogo">Burguer Queen</NavLink> */}
       </nav>
+      
       <div className="loginContainer">
-      {loading ? "Cargando..." : ""}
-        <p className="tittle-login">Login</p>
+      {/* {loading ? "Cargando..." : ""} */}
+
         <Form action="" onSubmit={onSubmitForm}>
           <ComponentInput
             icon={<Icon />}
