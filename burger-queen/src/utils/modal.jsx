@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CloseIcon from '@mui/icons-material/Close';
+import {colors} from '../style-components/elementos/Form.js'
 
 const Modal = ({children, state, changeState}) => {
     return (
@@ -22,8 +23,8 @@ const Overlay = styled.div`
     position: fixed;
     top:0;
     left:0;
-    background: rgb(247 242 242 / 50%);
-    padding: 40px; 
+    background: ${colors.background};
+    padding: 3rem; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,21 +32,21 @@ const Overlay = styled.div`
 `
 
 const ContenedorModal = styled.div`
-    width: 400px;
-    min-height: 100px;
+    width: 25rem;
+    min-height: 6rem;
     background: #fff;
     position: relative;
-    border-radius: 5px;
+    border-radius: 0.3rem;
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
     z-index: 100;
-    padding: 14px 0px;
+    padding: 1rem 0;
 `
 
 const BotonCerrar = styled(CloseIcon)`
     position: absolute;
-    top:20px;
-    right: 20px;
-    color:#03a788c7;
+    top:0.5rem;
+    right: 0.5rem;
+    color:${colors.principal};
     width:30px;
     height: 30px;
     border: none;
@@ -55,7 +56,7 @@ const BotonCerrar = styled(CloseIcon)`
     border-radius: 50%;
 
     &:hover{
-        background: linear-gradient(#2DFFB3,#012417);;
+        background: ${colors.principal};;
         color:white
     }
 `
