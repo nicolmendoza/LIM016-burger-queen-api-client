@@ -12,23 +12,23 @@
   transition: all .2s linear;
 }
 
-html {
-  font-size: 62.5%;
+body {
+  font-size:100%;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-html::-webkit-scrollbar {
-  width: 1rem;
+body::-webkit-scrollbar {
+  width:0.625rem;
 }
 
-html::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background: #000;
 }
 
-html::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background: #eacf4f;
-  border-radius: 5rem;
+  border-radius: 3.125rem;
 }
 
 body {
@@ -39,30 +39,30 @@ body {
 }
 
 section {
-  padding: 3rem 9%;
+  padding: 1.875rem 9%;
 }
 
 .heading {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.875rem;
 }
 
 .heading h3 {
-  font-size: 3rem;
+  font-size: 1.875rem;
   text-transform: uppercase;
   color: rgb(255, 255, 255);
-  margin-top: 1rem;
+  margin-top:0.625rem;
 }
 
 .btn {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top:0.625rem;
   cursor: pointer;
   color: #fff;
-  border: 0.2rem solid rgb(145 125 37);
+  border: 0.125rem solid rgb(145 125 37);
   background: no-repeat;
-  font-size: 1.7rem;
-  padding: 1rem 3rem;
+  font-size: 1.06rem;
+  padding:0.625rem 1.875rem;
 }
 
 .btn:hover {
@@ -77,7 +77,7 @@ section {
   right: 0;
   z-index: 1000;
   background: #000;
-  padding: 3rem 9%;
+  padding: 1.875rem 9%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -87,11 +87,11 @@ section {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  gap: 1rem;
+  gap:0.625rem;
 }
 
 .header .icons {
-  font-size: 2.5rem;
+  font-size: 1.56rem;
   cursor: pointer;
   color: #fff;
 }
@@ -106,37 +106,37 @@ section {
 
 .header .navbar a {
   color: #fff;
-  font-size: 2rem;
-  margin: 0 2rem;
+  font-size: 1.25rem;
+  margin: 0 1.25rem;
 }
 
 .header .navbar a:hover {
   text-decoration: underline;
-  text-underline-offset: 1rem;
+  text-underline-offset:0.625rem;
   color: #eacf4f;
 }
 
 .header .navbar .space {
   display: inline-block;
-  width: 16rem;
+  width: 10rem;
 }
 
 .header .logo {
   position: absolute;
-  top: 2.5rem;
+  top: 1.562rem;
   left: 49%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
 
 .header .logo img {
-  width: 15rem;
+  width: 9.375rem;
 }
 
 .header .search-form {
-  height: 7rem;
-  padding: 0 2rem;
-  border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
+  height: 4.375rem;
+  padding: 0 1.25rem;
+  border-top: 0.125rem solid rgba(255, 255, 255, 0.3);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -161,7 +161,7 @@ section {
   width: 100%;
   background: none;
   text-transform: none;
-  font-size: 1.6rem;
+  font-size: 1rem;
   color: #fff;
 }
 
@@ -171,7 +171,7 @@ section {
 }
 
 .home {
-      /* margin-top: 8rem; */
+      /* margin-top: 5rem; */
     background: url(http://localhost:3000/static/media/fondo-content.da77ad710f32a994b426.gif) no-repeat;
     background-size: cover;
     background-position: center;
@@ -185,7 +185,7 @@ section {
 .home .content {
   display: flex;
   align-items: center;
-  max-width: 72rem;
+  max-width: 45rem;
   text-align: center;
   /* margin: 4% auto; */
   flex-direction: column;
@@ -196,51 +196,51 @@ section {
 }
 
 .home .content h3 {
-  font-size: 5rem;
+  font-size: 3.125rem;
   text-transform: uppercase;
   color: #E4CB56;
 }
 
 .home .content p {
-  font-size: 1.7rem;
+  font-size: 1.062rem;
   line-height: 2;
   color: rgb(255, 255, 255);
-  padding: 2rem 0;
+  padding: 1.25rem 0;
 }
 
 .service {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(31rem, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
-  gap: 2rem;
+  -ms-grid-columns: (minmax(19.375rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(19.375rem, 1fr));
+  gap: 1.25rem;
 }
 
 .service .box {
   text-align: center;
-  padding: 2rem;
+  padding: 1.25rem;
 }
 
 .service .box i {
-  height: 7rem;
-  width: 7rem;
-  line-height: 7rem;
-  font-size: 2.5rem;
+  height: 4.375rem;
+  width: 4.375rem;
+  line-height: 4.375rem;
+  font-size: 1.562rem;
   color: #000;
   background: #eacf4f;
-  margin-bottom: 1rem;
+  margin-bottom:0.625rem;
   border-radius: 50%;
 }
 
 .service .box h3 {
-  padding: 1rem 0;
-  font-size: 2rem;
+  padding:0.625rem 0;
+  font-size: 1.25rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .service .box p {
-  font-size: 1.5rem;
+  font-size: 0.937rem;
   line-height: 2;
   color: #aaa;
 }
@@ -248,9 +248,9 @@ section {
 .menu .box-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(31rem, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
-  gap: 2rem;
+  -ms-grid-columns: (minmax(19.375rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(19.375rem, 1fr));
+  gap: 1.25rem;
 }
 
 .menu .box-container .box {
@@ -263,30 +263,30 @@ section {
 }
 
 .menu .box-container .box img {
-  height: 25rem;
+  height:15.625rem;
 }
 
 .menu .box-container .box .content {
-  padding: 1rem 0;
+  padding:0.625rem 0;
 }
 
 .menu .box-container .box .content .stars {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .menu .box-container .box .content .stars i {
-  font-size: 1.7rem;
+  font-size: 1.062rem;
   color: #eacf4f;
 }
 
 .menu .box-container .box .content h3 {
-  font-size: 2rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .menu .box-container .box .content .price {
-  font-size: 2rem;
+  font-size: 1.25rem;
   line-height: 2;
   color: #aaa;
 }
@@ -300,13 +300,13 @@ section {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  gap: 3rem;
+  gap: 1.875rem;
 }
 
 .about .image {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 40rem;
-          flex: 1 1 40rem;
+      -ms-flex:  1 1 25rem;
+          flex:  1 1 25rem;
 }
 
 .about .image img {
@@ -315,21 +315,21 @@ section {
 
 .about .content {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 40rem;
-          flex: 1 1 40rem;
+      -ms-flex:  1 1 25rem;
+          flex:  1 1 25rem;
 }
 
 .about .content .title {
-  font-size: 2.5rem;
+  font-size: 1.562rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .about .content p {
-  font-size: 1.5rem;
+  font-size: 0.937rem;
   line-height: 2;
   color: #aaa;
-  padding: 2rem 0;
+  padding: 1.25rem 0;
 }
 
 .about .content .icons {
@@ -338,64 +338,64 @@ section {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+  gap: 0.937rem;
+  margin-bottom: 1.25rem;
+  margin-top:0.625rem;
 }
 
 .about .content .icons h3 {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 16rem;
-          flex: 1 1 16rem;
-  font-size: 1.5rem;
+      -ms-flex:  1 1 10rem;
+          flex:  1 1 10rem;
+  font-size: 0.937rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .about .content .icons h3 i {
-  padding-right: .5rem;
+  padding-right: .31rem;
   color: #eacf4f;
 }
 
 .reviews .box-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(31rem, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
-  gap: 2rem;
+  -ms-grid-columns: (minmax(19.375rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(19.375rem, 1fr));
+  gap: 1.25rem;
 }
 
 .reviews .box-container .box {
   text-align: center;
-  padding: 2rem;
+  padding: 1.25rem;
 }
 
 .reviews .box-container .box img {
-  height: 10rem;
-  width: 10rem;
+  height: 6.25rem;
+  width: 6.25rem;
   border-radius: 50%;
-  margin-bottom: 1rem;
+  margin-bottom:0.625rem;
 }
 
 .reviews .box-container .box h3 {
-  font-size: 2rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .reviews .box-container .box p {
-  font-size: 1.4rem;
+  font-size: 1.076rem;
   line-height: 2;
   color: #aaa;
-  padding: 1rem 0;
+  padding:0.625rem 0;
 }
 
 .reviews .box-container .box .stars {
-  padding-top: .5rem;
+  padding-top: .31rem;
 }
 
 .reviews .box-container .box .stars i {
-  font-size: 1.7rem;
+  font-size: 1.062rem;
   color: #eacf4f;
 }
 
@@ -405,20 +405,20 @@ section {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  gap: 3rem;
+  gap: 1.875rem;
 }
 
 /* .contact .row .map {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 40rem;
-          flex: 1 1 40rem;
+      -ms-flex:  1 1 25rem;
+          flex:  1 1 25rem;
   width: 100%;
 } */
 
 .contact .row .form {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 40rem;
-          flex: 1 1 40rem;
+  -webkit-box-flex: 0.625;
+      -ms-flex:  1 1 25rem;
+          flex:  1 1 25rem;
 }
 
 .contact .row .form .icons-container {
@@ -427,37 +427,37 @@ section {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.25rem;
+  margin-bottom: 1.875rem;
 }
 
 .contact .row .form .icons-container .icons {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 17rem;
-          flex: 1 1 17rem;
+      -ms-flex:  1 1 1.06rem;
+          flex:  1 1 1.06rem;
   text-align: center;
 }
 
 .contact .row .form .icons-container .icons i {
-  height: 6rem;
-  width: 6rem;
-  line-height: 6rem;
+  height: 3.75rem;
+  width: 3.75rem;
+  line-height: 3.75rem;
   border-radius: 50%;
   background: #eacf4f;
   color: #000;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin-bottom:0.625rem;
 }
 
 .contact .row .form .icons-container .icons h3 {
-  padding: 1rem 0;
-  font-size: 2rem;
+  padding:0.625rem 0;
+  font-size: 1.25rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .contact .row .form .icons-container .icons p {
-  font-size: 1.5rem;
+  font-size: 0.937rem;
   line-height: 2;
   color: #aaa;
 }
@@ -467,14 +467,14 @@ section {
 }
 
 .contact .row .form form .box {
-  padding: 1.2rem 1.4rem;
-  font-size: 1.6rem;
+  padding: 0.75rem 1.076rem;
+  font-size: 1rem;
   color: #fff;
   background: none;
-  border: 0.2rem solid rgba(255, 255, 255, 0.3);
+  border: 0.125rem solid rgba(255, 255, 255, 0.3);
   text-transform: none;
   width: 100%;
-  margin: .7rem 0;
+  margin: .437rem 0;
 }
 
 .contact .row .form form .box:focus {
@@ -482,16 +482,16 @@ section {
 }
 
 .contact .row .form form textarea {
-  height: 15rem;
+  height: 9.375rem;
   resize: none;
 }
 
 .blogs .box-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(31rem, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
-  gap: 2rem;
+  -ms-grid-columns: (minmax(19.375rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(19.375rem, 1fr));
+  gap: 1.25rem;
 }
 
 .blogs .box-container .box {
@@ -509,7 +509,7 @@ section {
 }
 
 .blogs .box-container .box .image {
-  height: 25rem;
+  height:15.625rem;
   overflow: hidden;
   position: relative;
 }
@@ -524,7 +524,7 @@ section {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 2rem;
+  padding: 1.25rem;
   background: #000;
   position: absolute;
   bottom: 0;
@@ -536,12 +536,12 @@ section {
 }
 
 .blogs .box-container .box .image .icons a {
-  font-size: 1.5rem;
+  font-size: 0.937rem;
   color: #fff;
 }
 
 .blogs .box-container .box .image .icons a i {
-  padding-right: .5rem;
+  padding-right: .312rem;
   color: #eacf4f;
 }
 
@@ -558,20 +558,20 @@ section {
 
 .blogs .box-container .box .content {
   text-align: center;
-  padding: 2rem;
+  padding: 1.25rem;
 }
 
 .blogs .box-container .box .content h3 {
-  font-size: 2rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   color: #fff;
 }
 
 .blogs .box-container .box .content p {
-  font-size: 1.5rem;
+  font-size: 0.937rem;
   line-height: 2;
   color: #aaa;
-  padding: 1.5rem 0;
+  padding: 0.93rem 0;
 }
 
 .footer {
@@ -581,14 +581,14 @@ section {
 }
 
 .footer .links a {
-  margin: 1rem;
+  margin:0.625rem;
 }
 
 .footer .credit {
-  font-size: 2rem;
+  font-size: 1.25rem;
   line-height: 2;
   color: #aaa;
-  padding-top: 2rem;
+  padding-top: 1.25rem;
 }
 
 .footer .credit span {
@@ -597,10 +597,10 @@ section {
 
 @media (max-width: 1200px) {
   .header {
-    padding: 3rem;
+    padding: 1.875rem;
   }
   section {
-    padding: 3rem 2rem;
+    padding: 1.875rem 1.25rem;
   }
 }
 
@@ -612,12 +612,12 @@ section {
     -webkit-box-pack: end;
         -ms-flex-pack: end;
             justify-content: flex-end;
-    gap: 2rem;
+    gap: 1.25rem;
   }
   .header .logo {
     -webkit-transform: translateX(0);
             transform: translateX(0);
-    left: 3rem;
+    left: 1.875rem;
   }
   .header #menu-btn {
     display: inline-block;
@@ -637,7 +637,7 @@ section {
   }
   .header .navbar a {
     display: block;
-    margin: 3rem 2rem;
+    margin: 1.875rem 1.25rem;
   }
   .header .navbar .space {
     display: none;
@@ -646,7 +646,7 @@ section {
 
 @media (max-width: 768px) {
   .home .content h3 {
-    font-size: 2.5rem;
+    font-size: 1.562rem;
   }
 }
 
