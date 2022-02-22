@@ -134,14 +134,14 @@ const Admi = () => {
                 <p>{user.email}</p>
                 <p>{user.roles.name}</p>
               </div>
-              <Button
+              <button
                 onClick={() => {
                   window.location.href = `/edit/${user._id}`;
                 }}
               >
                 Editar
-              </Button>
-              <Button onClick={() => deleteUser(user._id)}>Eliminar</Button>
+              </button>
+              <button onClick={() => deleteUser(user._id)}>Eliminar</button>
             </DivData>
           ))}
         </ContainerElements>

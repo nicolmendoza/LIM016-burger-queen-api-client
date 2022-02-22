@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Sidebar from "./Navegador";
 import {
   Button,
   ContainerProduts,
   OrderDiv,
   Container,
 } from "../style-components/components";
+import "../style-components/editUser.css";
 
 const EditUser = () => {
+  const roleUser = localStorage.getItem("role");
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
   const id = window.location.pathname.slice(6);
@@ -16,6 +19,7 @@ const EditUser = () => {
     password: "",
     nameUser: "",
     roles: "",
+    image: "",
   };
   let config = {
     headers: {
@@ -29,7 +33,9 @@ const EditUser = () => {
     axios.get(`${url}/users/${id}`, config).then((response) =>
       setState(() => ({
         email: response.data.email,
-        password: response.data.password,
+
+        image: response.data.image,
+        nameUser: response.data.nameUser,
       }))
     );
   }, []);
@@ -77,84 +83,96 @@ const EditUser = () => {
     console.log(res);
   };
   return (
-    <div>
-      <form onSubmit={onSubmitForm}>
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            name="nameUser"
-            value={state.nameUser}
-            placeholder="Enter email"
-            onChange={onChangeInput}
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={state.email}
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            onChange={onChangeInput}
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={state.password}
-            placeholder="Password"
-            onChange={onChangeInput}
-          />
-        </div>
-        <fieldset onChange={options} value={state.roles}>
-          <legend className="mt-4">Roles</legend>
-          <div className="form-check">
-            <label>
-              <input
-                type="radio"
-                name="optionsRadios"
-                id="optionsRadios1"
-                value="admin"
-              />
-              Admin
-            </label>
+    <>
+      <Sidebar value={`${roleUser}`}></Sidebar>
+      <div className="divImage">
+        <img src={state.image} style={{ width: 300, height: 300 }}  />
+      </div>
+
+      <div className="divEditUser">
+        <form onSubmit={onSubmitForm}>
+          <div>
+            <label>Name:  </label>
+            <input
+              type="text"
+              name="nameUser"
+              value={state.nameUser}
+              placeholder="Enter email"
+              onChange={onChangeInput}
+              className="inputText"
+            />
           </div>
-          <div className="form-check">
-            <label>
-              <input
-                type="radio"
-                name="optionsRadios"
-                id="optionsRadios2"
-                value="mesera"
-              />
-              Meserx
-            </label>
+          <div>
+            <label>Image:  </label>
+            <input
+              type="text"
+              name="image"
+              value={state.image}
+              placeholder="Image"
+              onChange={onChangeInput}
+              className="inputText"
+            />
           </div>
-          <div className="form-check disabled">
-            <label>
-              <input
-                type="radio"
-                name="optionsRadios"
-                id="optionsRadios3"
-                value="cocinera"
-                disabled=""
-              />
-              Cocinerx
-            </label>
+          <div>
+            <label>Email:  </label>
+            <input
+              type="email"
+              name="email"
+              value={state.email}
+              className="inputText"
+              placeholder="Enter email"
+              onChange={onChangeInput}
+            />
           </div>
-        </fieldset>
-        <div>
-          <Button type="submit" className="btn btn-primary">
-            Guardar
-          </Button>
-        </div>
-      </form>
-    </div>
+          <div>
+            <label>Password:  </label>
+            <input
+              type="password"
+              name="password"
+              value={state.password}
+              placeholder="Password"
+              onChange={onChangeInput}
+              className="inputText"
+            />
+          </div>
+          <fieldset onChange={options} value={state.roles}>
+            <h2>Roles</h2>
+            <div>
+              <label>
+                <input type="radio" name="optionsRadios" value="admin" />
+                Admin
+              </label>
+            </div>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="optionsRadios"
+                  id="optionsRadios2"
+                  value="mesera"
+                />
+                Meserx
+              </label>
+            </div>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="optionsRadios"
+                  id="optionsRadios3"
+                  value="cocinera"
+                  disabled=""
+                />
+                Cocinerx
+              </label>
+            </div>
+          </fieldset>
+          <div className="divButton">
+            <button type="submit">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

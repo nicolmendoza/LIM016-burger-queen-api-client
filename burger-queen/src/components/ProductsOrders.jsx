@@ -124,12 +124,13 @@ const Products = () => {
       <div className="containerProductsOrders">
         <div>
           <div className="inputDiv">
-            <h5>Busca un producto :</h5>
+            <h3>Busca un producto :   </h3>
             <input
               type="text"
               onChange={buscador}
               className="inputSearch"
               name="texto"
+              placeholder="Search.."
             ></input>
           </div>
           {loading ? <Loading /> : <ShowProducts />}

@@ -1,28 +1,44 @@
-import React from "react";
-const prueba = () => {
-  const links = {
-    present: "http",
-    next: "http",
-    prev: "http",
-    extra: "http",
-  };
-  const next = links.next;
-  const prev = links.prev;
+// const [cart, setCart] = userState([]);
 
-  const getLink = (link) => {
-    axios.get(link).then((x) => {
-        // guardas los users en el setState
-        //vuelves a invocar a getUsers() para renderizarlos
-    });
-    return next;
-  };
+// const addProduct = (product) => {
+//   const exits = cart.find((x) => x._id === product._id);
+//   if (exits) {
+//     setCart(
+//       cart.map((x) => (x._id === product._id ? { ...x, qty: x.qty + 1 } : x))
+//     );
+//   } else {
+//     return setCart([...cart, { ...product, qty: 1 }]);
+//   }
+// };
 
-  return (
-    <div>
-      <button onClick={() => getLink(prev)}>PREV</button>
-      <button onClick={() => getLink(next)}>NEXT</button>
-    </div>
-  );
-};
+// const deleteProduct = (product) => {
+//   if (product.qty === 1) {
+//     return setCart(cart.filter((x) => x._id !== product._id));
+//   } else {
+//     return setCart(
+//       cart.map((x) => (x._id === product._id ? { ...x, qty: x.qty - 1 } : x))
+//     );
+//   }
+// };
 
-export default prueba;
+// const myObj = {};
+// const myStr = 'myProperty';
+// const myArray = [1, 3];
+
+
+// const addArrayProperty=(myObj, myStr, myArray)=>{
+// myObj[myStr]=myArray
+// return myObj
+// }
+
+// addArrayProperty(myObj, myStr, myArray);
+// console.log(myObj.myProperty); // => [1, 3]
+
+
+
+
+const objectPropertiesCounter=(obj)=>{
+return Object.keys(obj).length
+}
+const output = objectPropertiesCounter({ 'name': 'John', 'lastname': 'Doe' });
+console.log(output); // => 2
