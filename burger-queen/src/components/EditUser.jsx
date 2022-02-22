@@ -1,5 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import {
+  Button,
+  ContainerProduts,
+  OrderDiv,
+  Container,
+} from "../style-components/components";
 
 const EditUser = () => {
   const url = "https://bq-api-2022.herokuapp.com";
@@ -8,6 +14,7 @@ const EditUser = () => {
   const initial = {
     email: "",
     password: "",
+    nameUser: "",
     roles: "",
   };
   let config = {
@@ -66,87 +73,88 @@ const EditUser = () => {
     };
     const res = await axios.put(`${url}/users/${id}`, state, options);
 
-    
-    window.location.href = "/admi";
+    window.location.href = "/settings";
     console.log(res);
   };
   return (
-    <form className="container" onSubmit={onSubmitForm}>
-      <div className="form-group">
-        <label htmlFor="exampleInputEmail1" className="form-label mt-4">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          value={state.email}
-          className="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          onChange={onChangeInput}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1" className="form-label mt-4">
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          value={state.password}
-          className="form-control"
-          id="exampleInputPassword1"
-          placeholder="Password"
-          onChange={onChangeInput}
-        />
-      </div>
-      <fieldset className="form-group" onChange={options} value={state.roles}>
-        <legend className="mt-4">Roles</legend>
-        <div className="form-check">
-          <label className="form-check-label">
-            <input
-              type="radio"
-              className="form-check-input"
-              name="optionsRadios"
-              id="optionsRadios1"
-              value="admin"
-            />
-            Admin
-          </label>
+    <div>
+      <form onSubmit={onSubmitForm}>
+        <div>
+          <label>Name</label>
+          <input
+            type="text"
+            name="nameUser"
+            value={state.nameUser}
+            placeholder="Enter email"
+            onChange={onChangeInput}
+          />
         </div>
-        <div className="form-check">
-          <label className="form-check-label">
-            <input
-              type="radio"
-              className="form-check-input"
-              name="optionsRadios"
-              id="optionsRadios2"
-              value="mesera"
-            />
-            Meserx
-          </label>
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={state.email}
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            onChange={onChangeInput}
+          />
         </div>
-        <div className="form-check disabled">
-          <label className="form-check-label">
-            <input
-              type="radio"
-              className="form-check-input"
-              name="optionsRadios"
-              id="optionsRadios3"
-              value="cocinera"
-              disabled=""
-            />
-            Cocinerx
-          </label>
+        <div>
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={state.password}
+            placeholder="Password"
+            onChange={onChangeInput}
+          />
         </div>
-      </fieldset>
-      <div className="form-group">
-        <button type="submit" className="btn btn-primary">
-          Guardar
-        </button>
-      </div>
-    </form>
+        <fieldset onChange={options} value={state.roles}>
+          <legend className="mt-4">Roles</legend>
+          <div className="form-check">
+            <label>
+              <input
+                type="radio"
+                name="optionsRadios"
+                id="optionsRadios1"
+                value="admin"
+              />
+              Admin
+            </label>
+          </div>
+          <div className="form-check">
+            <label>
+              <input
+                type="radio"
+                name="optionsRadios"
+                id="optionsRadios2"
+                value="mesera"
+              />
+              Meserx
+            </label>
+          </div>
+          <div className="form-check disabled">
+            <label>
+              <input
+                type="radio"
+                name="optionsRadios"
+                id="optionsRadios3"
+                value="cocinera"
+                disabled=""
+              />
+              Cocinerx
+            </label>
+          </div>
+        </fieldset>
+        <div>
+          <Button type="submit" className="btn btn-primary">
+            Guardar
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

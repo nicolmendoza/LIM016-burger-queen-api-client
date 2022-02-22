@@ -12,14 +12,15 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: 600,
+  height: 500,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
+  color:"black",
+  p: 10,
 };
 
-const CreateUser = ({ getUsers }) => {
+const CreateUser = ({ getUsersSave }) => {
   const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
@@ -65,7 +66,6 @@ const CreateUser = ({ getUsers }) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     handleClose();
-    console.log(state)
     const url = "https://bq-api-2022.herokuapp.com";
 
     let options = {
@@ -74,6 +74,7 @@ const CreateUser = ({ getUsers }) => {
         Authorization: `Bearer ${token}`,
       },
     };
+ 
     const res = await axios.post(`${url}/users`, state, options);
 
     console.log(res.data);
@@ -81,12 +82,13 @@ const CreateUser = ({ getUsers }) => {
       email: "",
       password: "",
       roles: "",
+      nameUser:""
     });
-    getUsers(url);
+    getUsersSave();
   };
   return (
     <div>
-      <AddCircleOutlineIcon onClick={handleOpen}/>
+      <AddCircleOutlineIcon  onClick={handleOpen}/>
       <Modal
         open={open}
         onClose={handleClose} 
@@ -95,6 +97,20 @@ const CreateUser = ({ getUsers }) => {
       >
         <Box sx={style}>
       <form className="container" onSubmit={onSubmitForm}>
+      <div className="form-group">
+          <label htmlFor="exampleInputImage1" className="form-label mt-4">
+            Name
+          </label>
+          <input
+            type="text"
+            name="nameUser"
+            value={state.nameUser}
+            className="form-control"
+            id="exampleInputImage1"
+            placeholder="Name"
+            onChange={onChangeInput}
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1" className="form-label mt-4">
             Email

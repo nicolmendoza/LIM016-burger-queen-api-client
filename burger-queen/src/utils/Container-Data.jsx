@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from 'styled-components'
 
 const DivData = ({data, children}) => {
@@ -16,12 +16,12 @@ const ContainerData = styled.div`
     flex-direction:column;
     align-items: center;
     text-align:center;
-    padding: 10px 0px;
-    border-radius:5px;
+    padding: 10px 10px;
+    border-radius:20px;
 
     img{
-        width:100px;
-        height:100px;
+        width:150px;
+        height:150px;
     }
 `
 export default DivData
