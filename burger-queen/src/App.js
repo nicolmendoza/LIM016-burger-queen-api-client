@@ -11,6 +11,7 @@ import Products from "./components/Products.jsx";
 import GetOrders from "./components/GetOrders.jsx";
 import Settings from "./components/Settings.jsx";
 import Error404 from "./components/Error404.jsx";
+import Profile from "./components/Profile.jsx"
 function App() {
   const token = localStorage.getItem('token')
   console.log(!token)
@@ -27,6 +28,9 @@ function App() {
         <Route exact path={"/orders"}  element= { !token ?  <Navigate to="/login" /> : <Orders /> } />
         {/* <Route path={"/products"} element={<Products />}></Route> */}
         <Route exact path={"/settings"} element= { !token ?  <Navigate to="/login" /> : <Settings /> } />
+        <Route exact path={"/profile"} element={!token ? <Navigate to="/login" /> : <Profile />}
+        />
+
         <Route path="*" element = {<Error404 />} />
       </Routes>
     </BrowserRouter>

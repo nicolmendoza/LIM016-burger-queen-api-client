@@ -27,7 +27,7 @@ Button {
 .img {
   margin: auto;
 }
-button {
+/* button {
   background: none;
   border: 1px solid #b2b2b2;
   font-weight: bold;
@@ -44,7 +44,7 @@ button {
 button:hover {
   border: 1px solid black;
   
-}
+} */
 
 .divButton{
     display: flex;

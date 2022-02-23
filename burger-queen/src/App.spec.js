@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Inicio from './components/Inicio/Inicio';
 
 beforeEach(() => {
   window.localStorage = {
@@ -13,7 +13,7 @@ beforeEach(() => {
 
 test('renders title', () => {
 
-  render(<App />);
-  const titleElem = screen.getByText(/burger queen/i);
+  render(<Inicio />);
+  const titleElem = screen.getByText(/Bienvenidos a Burger House/i);
   expect(titleElem).toBeInTheDocument();
 });

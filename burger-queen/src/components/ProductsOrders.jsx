@@ -100,8 +100,7 @@ const Products = () => {
 
         <div className="containerProdutsDiv">
           {filter2.map((x) => (
-            <>
-              <div className="containerProduts">
+              <div className="containerProduts"  key={x._id}>
                 <h5>{x.name}</h5>
                 <p>Precio: ${x.price}</p>
                 <div className="imgDiv">
@@ -109,7 +108,6 @@ const Products = () => {
                 </div>
                 <Button onClick={() => addProduct(x)}>Add</Button>
               </div>
-            </>
           ))}
         </div>
       </div>

@@ -10,12 +10,13 @@ export const Button = style.button`
     width: 7em;
     background: linear-gradient(#FFFFFF,#313131);
     -webkit-background-clip: text;
-    color:  ${colors.parrafo};
+    color: ${props => props.color || colors.parrafo};;
 
     &:hover {
       background:  ${colors.principal};
       color:black;
 }
+
 `
 
 export const ContainerProduts = style.div`
@@ -24,7 +25,9 @@ export const ContainerProduts = style.div`
   color:white;
 `
 
-export const OrderDiv = style.div`
+export const OrderDiv = style.div.attrs(props => ({
+  id: props.key
+}))`
 background: #6be86b40;
 margin: 7%;
 border-radius: 9px;

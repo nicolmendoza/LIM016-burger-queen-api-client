@@ -85,6 +85,7 @@ const EditUser = () => {
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
+      <Container>
       <div className="divImage">
         <img src={state.image} style={{ width: 300, height: 300 }}  />
       </div>
@@ -172,6 +173,7 @@ const EditUser = () => {
           </div>
         </form>
       </div>
+      </Container>
     </>
   );
 };

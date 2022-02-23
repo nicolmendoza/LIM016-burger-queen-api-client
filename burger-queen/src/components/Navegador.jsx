@@ -10,8 +10,8 @@ const Sidebar = (role) => {
     products: "/products",
     users: "/admi",
     chef: "/getOrders",
-    settings: "./settings",
-    profile: "./profile",
+    settings: "/settings",
+    profile: "/profile",
   };
   console.log(role);
 

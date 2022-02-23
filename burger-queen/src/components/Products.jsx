@@ -25,10 +25,8 @@ const Products = () => {
   const [stateModal, setStateModal] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
       setLoading(true)
       getProducts(url)
-    }, 2000);
   }, []);
 
   const getProducts = (url) => getAllProducts(url)
@@ -77,8 +75,8 @@ const Products = () => {
                 <p>{product.name}</p>
                 <p>s/. {product.price}</p>
                 </div>
-                <button onClick={() =>{window.location.href = `/editProduct/${product._id}`}}>Editar</button>
-                <button onClick={() => {handleDelete(product._id)}}>Eliminar</button>
+                <Button color="black" onClick={() =>{window.location.href = `/editProduct/${product._id}`}}>Editar</Button>
+                <Button color="black" onClick={() => {handleDelete(product._id)}}>Eliminar</Button>
             </DivData>
           ))}
         </ContainerElements>}
