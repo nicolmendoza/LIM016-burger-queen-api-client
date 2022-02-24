@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Cart from "./Cart";
-import {Container, Button} from '../style-components/components.js'
-import Sidebar from "./Navegador"
-import "../style-components/productsOrders.css";
+import Cart from "./components/Cart";
+import { Button, ContainerElements, DivElement, Container} from "../../style-components/components";
+import DivData from '../../utils/Container-Data'
+import Sidebar from "../Navegador"
+import {getAllProducts} from '../../services/products'
+import {ContainerMenu} from './components/style.js'
+import "../../style-components/productsOrders.css";
 
 const Products = () => {
-  const url = "https://bq-api-2022.herokuapp.com";
+  const url = "https://bq-api-2022.herokuapp.com/products";
   const roleUser = localStorage.getItem("role");
   const token = localStorage.getItem("token");
   const header = {
@@ -15,38 +18,27 @@ const Products = () => {
       Authorization: `Bearer ${token}`,
     },
   };
+
   const [totalFinal, setTotalFinal] = useState([]);
   const [products, setProducts] = useState([]);
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState(products);
   const [loading, setLoading] = useState(false);
-  const [filter2, setFilter2] = useState([]);
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`https://bq-api-2022.herokuapp.com/products`, header)
-      .then((response) => {
-        console.log(response);
+  const [filter2, setFilter2] = useState(products);
 
-        setProducts(response.data);
-        setFilter(response.data);
-        setFilter2(response.data);
-        setLoading(false);
-      })
-      .catch((error) => console.log(error));
+  useEffect(() => {
+    allProducts()
   }, []);
 
-  const allProducts = () => {
-    setFilter(products);
-    setFilter2(products);
+  const allProducts = async() => {
+    const response = await getAllProducts(url, header, setLoading)
+    console.log(response)
+    setProducts(response.data)
+    setFilter2(response.data)
   };
 
   const filterProductsByType = (type) => {
     setFilter(products.filter((x) => x.type === type));
     setFilter2(products.filter((x) => x.type === type));
-  };
-
-  const Loading = () => {
-    return <div className="btnProductsDiv">Loading ...</div>;
   };
 
   const [cart, setCart] = useState([]);
@@ -86,9 +78,12 @@ const Products = () => {
     return (
       <div className="btnProductsDiv">
         <div className="btnDiv">
-          <Button onClick={() => allProducts()}>ALL</Button>
+          <Button onClick={() => setFilter2(products)}>ALL</Button>
           <Button onClick={() => filterProductsByType("Desayuno")}>
             Desayuno
+          </Button>
+          <Button onClick={() => filterProductsByType("Hamburguesas")}>
+            Hamburguesas
           </Button>
           <Button onClick={() => filterProductsByType("Acompañamientos")}>
             Complementos
@@ -98,18 +93,18 @@ const Products = () => {
           </Button>
         </div>
 
-        <div className="containerProdutsDiv">
+        <ContainerElements height="6">
           {filter2.map((x) => (
-              <div className="containerProduts"  key={x._id}>
-                <h5>{x.name}</h5>
-                <p>Precio: ${x.price}</p>
-                <div className="imgDiv">
-                  <img style={{ width: 100, height: 100 }} src={x.image}></img>
+              <DivData data={x}>
+                <div>
+                <p>{x.type}</p>
+                <p>{x.name}</p>
+                <p>Precio: S/{x.price}</p>
                 </div>
-                <Button onClick={() => addProduct(x)}>Add</Button>
-              </div>
+                <Button color="black" onClick={() => addProduct(x)}>Add</Button>
+              </DivData>
           ))}
-        </div>
+        </ContainerElements>
       </div>
     );
   };
@@ -117,10 +112,10 @@ const Products = () => {
   return (
     <>
     <Sidebar value={`${roleUser}`}></Sidebar>
-    <Container>
     {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
+    <Container>  
       <div className="containerProductsOrders">
-        <div>
+        <ContainerMenu>
           <div className="inputDiv">
             <h3>Busca un producto :   </h3>
             <input
@@ -131,8 +126,8 @@ const Products = () => {
               placeholder="Search.."
             ></input>
           </div>
-          {loading ? <Loading /> : <ShowProducts />}
-        </div>
+          {loading ? "loading..." : <ShowProducts />}
+        </ContainerMenu>
         <Cart
           cart={cart}
           addProduct={addProduct}
@@ -141,8 +136,8 @@ const Products = () => {
           totalFinal={totalFinal}
           setTotalFinal={setTotalFinal}
         />
-        </div>}
-      </Container>
+        </div>
+      </Container>}
     </>
   );
 };

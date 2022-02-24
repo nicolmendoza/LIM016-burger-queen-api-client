@@ -25,11 +25,10 @@ const Products = () => {
   const [stateModal, setStateModal] = useState(false)
 
   useEffect(() => {
-      setLoading(true)
       getProducts(url)
   }, []);
 
-  const getProducts = (url) => getAllProducts(url)
+  const getProducts = (url) => getAllProducts(url, options, setLoading)
         .then((products) => {
           const link = products.headers.link
           const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)

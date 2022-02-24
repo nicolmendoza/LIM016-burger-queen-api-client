@@ -88,13 +88,32 @@ export const ContentModal = style.div`
 export const ContainerElements = style.div`
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-  padding: 20px;
-  height: calc(100vh - 168px);
+  grid-column-gap: 1.25rem;
+  grid-row-gap: 5rem;
+  padding-top:4.5rem;
+  padding: 4.5rem 1.25rem 1rem;
+  height: calc(100vh - ${props => props.height || 10}rem);
   content-visibility: auto;
   overflow-y: scroll;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  @media (max-width: 760px){
+    grid-template-columns: repeat(2,1fr);}
+  
+    &::-webkit-scrollbar {
+      width:0.3rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #000;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #eacf4f;
+      border-radius: 3.125rem;
+    }
+
 `
 
 export const DivElement = style.div`

@@ -37,12 +37,11 @@ const Admi = () => {
   const [state, setSate] = useState(initial);
 
   useEffect(() => {
-      setLoading(true);
       getUsers(newUrl);
   }, []);
 
   const getUsers = (newUrl) =>
-    getAllProducts(newUrl).then((response) => {
+    getAllProducts(newUrl, header, setLoading).then((response) => {
       const link = response.headers.link;
       console.log(link);
       const arrayLink = link.match(
@@ -59,7 +58,6 @@ const Admi = () => {
         ...old,
         users: response.data,
       }));
-      setLoading(false);
     });
 
   const getUsersSave = () =>

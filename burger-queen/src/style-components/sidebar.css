@@ -7,7 +7,7 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: #11101D;
+  background: #111111;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -52,7 +52,7 @@
   text-align: right;
 }
 .sidebar i{
-  color: #fff;
+  color: rgba(229, 161, 6, 0.8);
   height: 60px;
   min-width: 50px;
   font-size: 28px;
@@ -121,7 +121,7 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #11101D;
+  background: #111111;
 }
 .sidebar li a:hover{
   background: #FFF;
@@ -143,7 +143,7 @@
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i{
   transition: all 0.5s ease;
-  color: #11101D;
+  color: #111111;
 }
 .sidebar li i{
   height: 50px;
@@ -167,7 +167,7 @@
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background: #1d1b31;
+  background: #0e0d0d;
   width: 100%;
   height: 60px;
   line-height: 60px;

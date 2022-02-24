@@ -22,10 +22,8 @@ const Orders = () => {
   const [filter, setFilter] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
       setLoading(true)
       getOrders()
-    }, 2000);
   }, []);
 
   const getOrders = () => getAllOrders(url, options)

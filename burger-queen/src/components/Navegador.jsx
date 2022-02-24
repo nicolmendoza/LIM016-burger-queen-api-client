@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../style-components/sidebar.css";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Settings from "./Settings";
+import colors from '../style-components/elementos/colors.js'
 
 const Sidebar = (role) => {
   const user = {
@@ -13,7 +14,7 @@ const Sidebar = (role) => {
     settings: "/settings",
     profile: "/profile",
   };
-  console.log(role);
+  // console.log(role);
 
   const logOut = () => {
     localStorage.clear();
