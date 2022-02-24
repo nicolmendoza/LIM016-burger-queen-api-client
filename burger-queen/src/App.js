@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate  } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 import Login from "./components/Login.jsx";
 import Admi from "./components/Admi.jsx";
@@ -11,23 +11,55 @@ import Products from "./components/Products.jsx";
 import GetOrders from "./components/GetOrders.jsx";
 import Settings from "./components/Settings.jsx";
 import Error404 from "./components/Error404.jsx";
+import Profile from "./components/Profile.jsx";
 function App() {
-  const token = localStorage.getItem('token')
-  console.log(!token)
+  const token = localStorage.getItem("token");
+  console.log(!token);
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path={"/"} element={<Inicio />}></Route>
         <Route exact path={"/login"} element={<Login />}></Route>
-        <Route exact path={"/getOrders"} element = { !token ?  <Navigate to="/login" /> : <GetOrders /> } />
+        <Route
+          exact
+          path={"/getOrders"}
+          element={!token ? <Navigate to="/login" /> : <GetOrders />}
+        />
         {/* <Route path={"/admi"} element={<Admi />}></Route> */}
-        <Route exact path={"/edit/:id"} element= { !token ?  <Navigate to="/login" /> : <EditUser /> } />
-        <Route exact path={"/newOrder"} element= { !token ?  <Navigate to="/login" /> : <ProductsOrders /> } />
-        <Route exact path={"/editProduct/:id"} element= { !token ?  <Navigate to="/login" /> : <EditProduct /> } />
-        <Route exact path={"/orders"}  element= { !token ?  <Navigate to="/login" /> : <Orders /> } />
+
+        <Route
+          exact
+          path={"/newOrder"}
+          element={!token ? <Navigate to="/login" /> : <ProductsOrders />}
+        />
+
+        <Route
+          exact
+          path={"/orders"}
+          element={!token ? <Navigate to="/login" /> : <Orders />}
+        />
         {/* <Route path={"/products"} element={<Products />}></Route> */}
-        <Route exact path={"/settings"} element= { !token ?  <Navigate to="/login" /> : <Settings /> } />
-        <Route path="*" element = {<Error404 />} />
+        <Route
+          exact
+          path={"/settings"}
+          element={!token ? <Navigate to="/login" /> : <Settings />}
+        />
+        <Route
+          exact
+          path={"/profile"}
+          element={!token ? <Navigate to="/login" /> : <Profile />}
+        />
+                <Route
+          exact
+          path={"/edit/:id"}
+          element={!token ? <Navigate to="/login" /> : <EditUser />}
+        />
+        <Route
+          exact
+          path={"/editProduct/:id"}
+          element={!token ? <Navigate to="/login" /> : <EditProduct />}
+        />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,123 +1,121 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {editProduct, getOneProduct} from '../services/products'
+import { editProduct, getOneProduct } from "../services/products";
+import "../style-components/editUser.css";
+import Sidebar from "./Navegador";
 
 const EditProduct = () => {
-    console.log( window.location)
-    const token = localStorage.getItem("token");
-    const id = window.location.pathname.slice(13);
-    console.log(id)
+  const roleUser = localStorage.getItem("role");
+  console.log(window.location);
+  const token = localStorage.getItem("token");
+  const id = window.location.pathname.slice(13);
+  console.log(id);
 
-    let options = {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          Authorization: `Bearer ${token}`,
-        },
-    };
+  let options = {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-    const initial = {
-        name: "",
-        price: "",
-        image: "",
-        type:''
-    };
+  const initial = {
+    name: "",
+    price: "",
+    image: "",
+    type: "",
+  };
 
-    const [product, setProduct] = useState(initial);
+  const [product, setProduct] = useState(initial);
 
-    useEffect((e) => {
-        getProduct()
-    }, []);
+  useEffect((e) => {
+    getProduct();
+  }, []);
 
-    const getProduct = () => {
-        getOneProduct(id, options)
-        .then((data) => {
-            console.log(data)
-            setProduct(data)
-        })
-        
-    }
+  const getProduct = () => {
+    getOneProduct(id, options).then((data) => {
+      console.log(data);
+      setProduct(data);
+    });
+  };
 
-    const onChangeInput = (e) => {
-        setProduct((old) => ({
-          ...old,
-          [e.target.name]: e.target.value,
-        }));
-    };
+  const onChangeInput = (e) => {
+    setProduct((old) => ({
+      ...old,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        const res = await editProduct(id, product, options)
-        console.log(res)
-        window.location.href = "/products";
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    return(
-        <form className="container" onSubmit={handleSubmit}>
-            <div className="form-group">
-            <label htmlFor="exampleInputName" className="form-label mt-4">
-                Nombre
-            </label>
+    const res = await editProduct(id, product, options);
+    console.log(res);
+    window.location.pathname = "/settings";
+  };
+
+  return (
+    <>
+      <Sidebar value={`${roleUser}`}></Sidebar>
+      <div className="divImage">
+        <img src={product.image} style={{ width: 200, height: 200 }} />
+      </div>
+      <div className="divEditUser">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Nombre</label>
             <input
-                type="text"
-                name="name"
-                className="form-control"
-                id="exampleInputName"
-                value={product.name}
-                aria-describedby="emailHelp"
-                placeholder="Enter Name"
-                onChange={onChangeInput}
+              type="text"
+              name="name"
+              id="exampleInputName"
+              value={product.name}
+              placeholder="Enter Name"
+              onChange={onChangeInput}
+              className="inputText"
             />
-            </div>
-            <div className="form-group">
-            <label htmlFor="exampleInputPrice" className="form-label mt-4">
-                Precio
-            </label>
+          </div>
+          <div>
+            <label>Precio</label>
             <input
-                type="number"
-                name="price"
-                className="form-control"
-                id="exampleInputPrice"
-                value={product.price}
-                placeholder="Enter price"
-                onChange={onChangeInput}
+              type="number"
+              name="price"
+              id="exampleInputPrice"
+              value={product.price}
+              placeholder="Enter price"
+              onChange={onChangeInput}
+              className="inputText"
             />
-            </div>
-            <div className="form-group">
-            <label htmlFor="exampleInputImage" className="form-label mt-4">
-                Imagen
-            </label>
+          </div>
+          <div>
+            <label>Imagen</label>
             <input
-                type="text"
-                name="image"
-                className="form-control"
-                id="exampleInputImage"
-                value={product.image}
-                placeholder="Choose an image"
-                onChange={onChangeInput}
+              type="text"
+              name="image"
+              id="exampleInputImage"
+              value={product.image}
+              placeholder="Choose an image"
+              onChange={onChangeInput}
+              className="inputText"
             />
-            </div>
-            <div className="form-group">
-            <label htmlFor="exampleInputType" className="form-label mt-4">
-                Tipo
-            </label>
+          </div>
+          <div>
+            <label>Tipo</label>
             <input
-                type="text"
-                name="type"
-                className="form-control"
-                id="exampleInputType"
-                value={product.type}
-                placeholder="Enter a type"
-                onChange={onChangeInput}
+              type="text"
+              name="type"
+              id="exampleInputType"
+              value={product.type}
+              placeholder="Enter a type"
+              onChange={onChangeInput}
+              className="inputText"
             />
-            </div>
-            <div className="form-group">
-            <button type="submit" className="btn btn-primary" >
-                Guardar
-            </button>
-            </div>
-            </form>
-    )
-}
+          </div>
+          <div className="divButton">
+            <button>Guardar</button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+};
 
 export default EditProduct;

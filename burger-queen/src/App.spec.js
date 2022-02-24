@@ -14,6 +14,6 @@ beforeEach(() => {
 test('renders title', () => {
 
   render(<App />);
-  const titleElem = screen.getByText(/burger queen/i);
+  const titleElem = screen.getByText(/burger house/i);
   expect(titleElem).toBeInTheDocument();
 });
