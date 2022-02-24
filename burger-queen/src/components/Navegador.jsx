@@ -21,6 +21,8 @@ const Sidebar = (role) => {
     window.location.href = "/";
   };
 
+
+
   return (
     <div className="sidebar">
       <div className="logo-details">

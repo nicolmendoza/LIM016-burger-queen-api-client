@@ -1,12 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
-import {
-  Button,
-  ContainerProduts,
-  OrderDiv,
-  Container,
-} from "../style-components/components";
+
 import "../style-components/editUser.css";
 
 const EditUser = () => {
@@ -14,6 +9,7 @@ const EditUser = () => {
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
   const id = window.location.pathname.slice(6);
+
   const initial = {
     email: "",
     password: "",
@@ -54,6 +50,7 @@ const EditUser = () => {
         ...old,
         roles: {
           name: e.target.value,
+          admin:false
         },
       }));
     }
@@ -77,9 +74,21 @@ const EditUser = () => {
         Authorization: `Bearer ${token}`,
       },
     };
+    console.log(state);
     const res = await axios.put(`${url}/users/${id}`, state, options);
 
-    window.location.href = "/settings";
+
+    // localStorage.setItem("role", rol);
+    const dataRoles=res.data.roles
+    const rol=(dataRoles.admin===true?"admin":dataRoles.name==="mesera"?"mesera":"cocinera")
+    console.log(rol)
+     localStorage.setItem("role", rol);
+    if (localStorage.getItem("role") == "admin") {
+      return (window.location.href = "/settings");
+    } else {
+      return (window.location.href = "/profile");
+    }
+
     console.log(res);
   };
   return (
@@ -87,13 +96,13 @@ const EditUser = () => {
       <Sidebar value={`${roleUser}`}></Sidebar>
       <Container>
       <div className="divImage">
-        <img src={state.image} style={{ width: 300, height: 300 }}  />
+        <img src={state.image} style={{ width: 180, height: 180 }} />
       </div>
 
       <div className="divEditUser">
         <form onSubmit={onSubmitForm}>
           <div>
-            <label>Name:  </label>
+            <label>Name: </label>
             <input
               type="text"
               name="nameUser"
@@ -104,7 +113,7 @@ const EditUser = () => {
             />
           </div>
           <div>
-            <label>Image:  </label>
+            <label>Image: </label>
             <input
               type="text"
               name="image"
@@ -115,7 +124,7 @@ const EditUser = () => {
             />
           </div>
           <div>
-            <label>Email:  </label>
+            <label>Email: </label>
             <input
               type="email"
               name="email"
@@ -126,7 +135,7 @@ const EditUser = () => {
             />
           </div>
           <div>
-            <label>Password:  </label>
+            <label>Password: </label>
             <input
               type="password"
               name="password"
@@ -134,40 +143,48 @@ const EditUser = () => {
               placeholder="Password"
               onChange={onChangeInput}
               className="inputText"
-            />
+            /><br></br>
+            <h8>*** Si deseas cambiar de contraseña , escribe tu nueva contarseña,
+        de lo contrario permanece tu contraseña actual .{" "}</h8>
           </div>
-          <fieldset onChange={options} value={state.roles}>
-            <h2>Roles</h2>
-            <div>
-              <label>
-                <input type="radio" name="optionsRadios" value="admin" />
-                Admin
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="optionsRadios"
-                  id="optionsRadios2"
-                  value="mesera"
-                />
-                Meserx
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="optionsRadios"
-                  id="optionsRadios3"
-                  value="cocinera"
-                  disabled=""
-                />
-                Cocinerx
-              </label>
-            </div>
-          </fieldset>
+
+          {localStorage.getItem("role") !== "admin" ? (
+            ""
+          ) : (
+            <fieldset onChange={options} value={state.roles}>
+              <h2>Roles</h2>
+              <div>
+                <label>
+                  <input type="radio" name="optionsRadios" value="admin" />
+                  Admin
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="optionsRadios"
+                    id="optionsRadios2"
+                    value="mesera"
+                  />
+                  Meserx
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="optionsRadios"
+                    id="optionsRadios3"
+                    value="cocinera"
+                    disabled=""
+                  />
+                  Cocinerx
+                </label>
+              </div>
+            </fieldset>
+          )}
+
           <div className="divButton">
             <button type="submit">Guardar</button>
           </div>
