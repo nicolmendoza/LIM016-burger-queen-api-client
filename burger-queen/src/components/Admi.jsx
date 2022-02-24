@@ -37,14 +37,11 @@ const Admi = () => {
   const [state, setSate] = useState(initial);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
       getUsers(newUrl);
-    }, 2000);
   }, []);
 
   const getUsers = (newUrl) =>
-    getAllProducts(newUrl).then((response) => {
+    getAllProducts(newUrl, header, setLoading).then((response) => {
       const link = response.headers.link;
       console.log(link);
       const arrayLink = link.match(
@@ -61,7 +58,6 @@ const Admi = () => {
         ...old,
         users: response.data,
       }));
-      setLoading(false);
     });
 
   const getUsersSave = () =>
@@ -118,9 +114,8 @@ const Admi = () => {
         {" "}
         Next{" "}
       </Button>
-      {loading ? (
-        "Cargando..."
-      ) : (
+      {loading ? 
+        "Cargando..." : 
         <ContainerElements>
           <DivElement>
             <CreateUser getUsersSave={getUsersSave}></CreateUser>
@@ -134,18 +129,18 @@ const Admi = () => {
                 <p>{user.email}</p>
                 <p>{user.roles.name}</p>
               </div>
-              <button
+              <Button color="black"
                 onClick={() => {
                   window.location.href = `/edit/${user._id}`;
                 }}
               >
                 Editar
-              </button>
-              <button onClick={() => deleteUser(user._id)}>Eliminar</button>
+              </Button>
+              <Button color="black" onClick={() => deleteUser(user._id)}>Eliminar</Button>
             </DivData>
           ))}
         </ContainerElements>
-      )}
+      }
     </div>
   );
 };

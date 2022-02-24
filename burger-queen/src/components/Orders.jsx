@@ -22,14 +22,13 @@ const Orders = () => {
   const [filter, setFilter] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
       setLoading(true)
       getOrders()
-    }, 2000);
   }, []);
 
   const getOrders = () => getAllOrders(url, options)
         .then((order) => {
+          console.log(order)
             setOrders(order)
             setFilter(order);
             setLoading(false)
@@ -77,21 +76,23 @@ const Orders = () => {
       </div>
       {loading ? "Cargando..." : 
       <ContainerProduts>
-        {filter.map((order) => (
-          <OrderDiv key={order._id}>
-            <p>{order.status}</p>
+        {filter.map((x) => (
+          <React.Fragment key={x._id}>
+          <OrderDiv>
+            <p>{x.status}</p>
             <div>
-              <p>{order.client}</p>
-              <p>{order.userId}</p>
+              <p>{x.client}</p>
+              <p>{x.userId}</p>
             </div>
-            {order.products.map((product) => (
-              <div>
+            {x.products.map((product) => (
+              <div key={product._id}>
                 <div>{product.product.name}</div>
                 <p>{product.qty}</p>
               </div>
             ))}
-            <ButtonStatus isLoggedIn={order}/>
+            <ButtonStatus isLoggedIn={x}/>
           </OrderDiv>
+          </React.Fragment>
         ))}
       </ContainerProduts>}
       </>}

@@ -25,13 +25,10 @@ const Products = () => {
   const [stateModal, setStateModal] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true)
       getProducts(url)
-    }, 2000);
   }, []);
 
-  const getProducts = (url) => getAllProducts(url)
+  const getProducts = (url) => getAllProducts(url, options, setLoading)
         .then((products) => {
           const link = products.headers.link
           const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
@@ -77,8 +74,8 @@ const Products = () => {
                 <p>{product.name}</p>
                 <p>s/. {product.price}</p>
                 </div>
-                <button onClick={() =>{window.location.href = `/editProduct/${product._id}`}}>Editar</button>
-                <button onClick={() => {handleDelete(product._id)}}>Eliminar</button>
+                <Button color="black" onClick={() =>{window.location.href = `/editProduct/${product._id}`}}>Editar</Button>
+                <Button color="black" onClick={() => {handleDelete(product._id)}}>Eliminar</Button>
             </DivData>
           ))}
         </ContainerElements>}

@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Button } from "../style-components/components";
-import "../style-components/cart.css";
+import { Button } from "../../../style-components/components";
+import "../../../style-components/cart.css";
+import {ContainerCart} from './style.js'
+
 const Cart = ({
   cart,
   setCart,
@@ -18,51 +20,46 @@ const Cart = ({
       Authorization: `Bearer ${token}`,
     },
   };
-  const [state, setState] = useState({ name: "" });
+  const [client, setClient] = useState({ name: "" });
   const userId = localStorage.getItem("idUser");
 
   const postNewOrder = () => {
-    console.log(cart);
-    //  setCart([...cart, { ...product, qty: 1 }]);
-    console.log(cart);
+    // console.log(cart);
+    // //  setCart([...cart, { ...product, qty: 1 }]);
+    // console.log(cart);
     const array = cart.map((x) => ({
       productId: x._id,
       qty: x.qty,
       comment: x.comment,
     }));
 
-    console.log(array);
+    // console.log(array);
     const newOrder = {
-      client: state.name,
+      client: client.name,
       userId: userId,
       products: array,
       // comment: state.comment,
     };
 
-    console.log(newOrder);
     axios
       .post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
       .then((response) => {
         console.log(response.data);
-        setState({ name: "" });
+        setClient({ name: "" });
         setCart([]);
       });
   };
 
   const onChangeInput = (e) => {
-    setState({
-      ...state,
+    setClient({
+      ...client,
       [e.target.name]: e.target.value,
     });
-    console.log(state);
 
     const findComment = (ID) => {
-      const arrayid = Object.keys(state).filter((y) => y == ID);
+      const arrayid = Object.keys(client).filter((y) => y === ID);
       const id = arrayid[0];
-      console.log(id);
-      console.log(state[id]);
-      console.log(cart);
-      return state[id];
+      return client[id];
     };
 
     setCart(
@@ -90,7 +87,7 @@ const Cart = ({
   };
 
   return (
-    <div className="productsDiv">
+    <ContainerCart>
       <h3>Carrito de Compras</h3>
       <div className="inputClient">
         <h3>Cliente:</h3>
@@ -98,7 +95,7 @@ const Cart = ({
           placeholder="Nombre del cliente"
           onChange={onChangeInput}
           name="name"
-          value={state.name}
+          value={client.name}
         ></input>
       </div>
       <h4>Productos :</h4>
@@ -132,7 +129,7 @@ const Cart = ({
       <h4>-------------------------</h4>
       <h4>Total a Pagar :${totalPagar()}</h4>
       <Button onClick={() => postNewOrder()}>ENVIAR</Button>
-    </div>
+    </ContainerCart>
   );
 };
 

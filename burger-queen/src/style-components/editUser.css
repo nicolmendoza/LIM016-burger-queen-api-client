@@ -28,6 +28,7 @@
 .img {
   margin: auto;
 }
+/* button {
 
 button {
   background: none;
@@ -45,7 +46,9 @@ button {
 
 button:hover {
   border: 1px solid black;
-}
+  
+} */
+
 
 .divButton {
   display: flex;

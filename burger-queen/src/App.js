@@ -3,7 +3,7 @@ import React from "react";
 import Login from "./components/Login.jsx";
 import Admi from "./components/Admi.jsx";
 import EditUser from "./components/EditUser.jsx";
-import ProductsOrders from "./components/ProductsOrders.jsx";
+import ProductsOrders from "./components/New Order/NewOrder.jsx";
 import EditProduct from "./components/EditProduct.jsx";
 import Inicio from "./components/Inicio/Inicio.jsx";
 import Orders from "./components/Orders.jsx";

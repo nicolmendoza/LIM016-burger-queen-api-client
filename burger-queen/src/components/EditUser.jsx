@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
+import {Container} from '../style-components/components'
 
 import "../style-components/editUser.css";
 
@@ -94,6 +95,7 @@ const EditUser = () => {
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
+      <Container>
       <div className="divImage">
         <img src={state.image} style={{ width: 180, height: 180 }} />
       </div>
@@ -189,6 +191,7 @@ const EditUser = () => {
           </div>
         </form>
       </div>
+      </Container>
     </>
   );
 };
