@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
+import {Container} from '../style-components/components'
 
 import "../style-components/editUser.css";
 

@@ -39,13 +39,6 @@ function App() {
           element={!token ? <Navigate to="/login" /> : <Orders />}
         />
         {/* <Route path={"/products"} element={<Products />}></Route> */}
-<<<<<<< HEAD
-        <Route exact path={"/settings"} element= { !token ?  <Navigate to="/login" /> : <Settings /> } />
-        <Route exact path={"/profile"} element={!token ? <Navigate to="/login" /> : <Profile />}
-        />
-
-        <Route path="*" element = {<Error404 />} />
-=======
         <Route
           exact
           path={"/settings"}
@@ -67,7 +60,6 @@ function App() {
           element={!token ? <Navigate to="/login" /> : <EditProduct />}
         />
         <Route path="*" element={<Error404 />} />
->>>>>>> 361d2e72acdd73e7d6d81fbd3adef7b84cadef9a
       </Routes>
     </BrowserRouter>
   );
