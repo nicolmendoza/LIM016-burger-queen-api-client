@@ -80,7 +80,7 @@ const Sidebar = (role) => {
 
         <li>
           <a href={user.profile}>
-            <i className="bx bx-cog"></i>
+            <i className="bx bx-user-circle"></i>
             <span className="links_name">Profile</span>
           </a>
           <span className="tooltip">Profile</span>

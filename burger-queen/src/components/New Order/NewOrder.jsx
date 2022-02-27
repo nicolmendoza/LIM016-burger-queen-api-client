@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cart from "./components/Cart";
 import { Button, ContainerElements, DivElement, Container} from "../../style-components/components";
 import DivData from '../../utils/Container-Data'
 import Sidebar from "../Navegador"
+import UserInfo from './components/User'
 import {getAllProducts} from '../../services/products'
 import {ContainerMenu} from './components/style.js'
 import "../../style-components/productsOrders.css";
@@ -49,9 +49,9 @@ const Products = () => {
       return setCart(
         cart.map((x) => (x._id === product._id ? { ...x, qty: x.qty + 1 } : x))
       );
-    } else {
+    } 
       return setCart([...cart, { ...product, qty: 1 }]);
-    }
+    
   };
 
   const deleteProduct = (product) => {
@@ -115,19 +115,23 @@ const Products = () => {
     {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
     <Container>  
       <div className="containerProductsOrders">
+      {loading ? "loading..." : 
         <ContainerMenu>
-          <div className="inputDiv">
-            <h3>Busca un producto :   </h3>
-            <input
-              type="text"
-              onChange={buscador}
-              className="inputSearch"
-              name="texto"
-              placeholder="Search.."
-            ></input>
+          <div>
+            <UserInfo/>
+            <div className="inputDiv">
+              <h3>Busca un producto :   </h3>
+              <input
+                type="text"
+                onChange={buscador}
+                className="inputSearch"
+                name="texto"
+                placeholder="Search.."
+              ></input>
+            </div>
           </div>
-          {loading ? "loading..." : <ShowProducts />}
-        </ContainerMenu>
+          <ShowProducts/>
+        </ContainerMenu>}
         <Cart
           cart={cart}
           addProduct={addProduct}

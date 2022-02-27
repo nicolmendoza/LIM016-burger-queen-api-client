@@ -32,3 +32,13 @@ export const singIn = async (data, setModal, setStateModal) => {
         if(response) return setModal({body:"Ocurrio un error en el sistema"})
     }
 }
+
+export const userInfo = async (url, id, header) =>{
+    try{
+        console.log(`${url}/users/${id}`)
+        const getUser = await axios.get(`${url}/users/${id}`, header)
+        return getUser.data
+    } catch(e){
+        console.error(e)
+    }
+}
