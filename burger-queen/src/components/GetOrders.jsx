@@ -90,9 +90,9 @@ const GetOrders = () => {
     var days = parseInt(mss / (1000 * 60 * 60 * 24));
     var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = (mss % (1000 * 60)) / 1000;
+    var seconds = Math.round((mss % (1000 * 60)) / 1000) ;
     return (
-      "Tiempo de espera" + days + ":" + hours + ":" + minutes + ":" + seconds
+      "Tiempo de espera" + "       "+ days + ":" + hours + ":" + minutes + ":" + seconds 
     );
   };
   return (
@@ -108,29 +108,30 @@ const GetOrders = () => {
               "Cargando..."
             ) : (
               <ContainerProduts>
-                {filter.map((x) => (
+                { filter.length==0?"No hay pedidos en esta sección":  filter.map((x) => (
                   <OrderDiv key={x._id} className="col-6 col-md-4">
-                    <p>Cliente : {x.client}</p>
-                    <p>Status:{x.status}</p>
+                   <b> <p>Cliente : {x.client}</p></b>
+                    <p><b>Status</b>:{x.status}</p>
+                    <p><b>Products:</b> </p>
                     {x.products.map((y) => (
                       <div>
-                        Products:
+                
                         <p>
-                          {y.product.name} Cantidad:{y.qty}
+                          {" * "}{y.product.name}  Q:{y.qty}
                         </p>
                       </div>
                     ))}
 
                     {x.status === "pending"
-                      ? "hi"
+                      ? ""
                       : time(x.dateEntry, x.updatedAt)}
                     <br></br>
                     {x.status === "pending" ? (
                       <div>
-                        <button onClick={() => orderLista(x._id)}>Listo</button>
+                        <Button onClick={() => orderLista(x._id)}>Listo</Button>
                       </div>
                     ) : (
-                      "Para Entregar"
+                      <Button>"Para Entregar"</Button>
                     )}
                   </OrderDiv>
                 ))}

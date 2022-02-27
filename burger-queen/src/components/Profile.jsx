@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
+
+import {Button} from  "../style-components/components.js"
 const Profile = () => {
   const roleUser = localStorage.getItem("role");
   const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("idUser");
+
 
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
@@ -73,7 +76,8 @@ const Profile = () => {
             <p>{user.rol}</p>
           </div>
           <div className="divButton">
-            <button onClick={functionEdit}>Editar</button>
+
+            <Button   color="black"   onClick={functionEdit}>Editar</Button>
           </div>
         </div>
       </>

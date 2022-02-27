@@ -4,6 +4,8 @@ import Sidebar from "./Navegador";
 import {Container} from '../style-components/components'
 
 import "../style-components/editUser.css";
+import {Button} from  "../style-components/components.js"
+
 
 const EditUser = () => {
   const roleUser = localStorage.getItem("role");
@@ -187,7 +189,7 @@ const EditUser = () => {
           )}
 
           <div className="divButton">
-            <button type="submit">Guardar</button>
+            <Button type="submit">Guardar</Button>
           </div>
         </form>
       </div>
