@@ -1,10 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Button } from "../../../style-components/components";
+import {
+  Button,
+  ButtonModal,
+  ContentModal,
+} from "../../../style-components/components";
 import "../../../style-components/cart.css";
 import {ContainerCart, ButtonCart, Item, ListOrden, ButtonClear} from './style.js'
 import Input from './input.jsx'
+import Modal from "../../../utils/modal";
+
 
 const Cart = ({
   cart,
@@ -25,6 +31,12 @@ const Cart = ({
   const [client, setClient] = useState({ name: "" });
   const userId = localStorage.getItem("idUser");
 
+  const bodyModal = {
+    title: "Orden Creada",
+    body: "",
+  };
+  const [modal, setModal] = useState(bodyModal);
+  const [stateModal, setStateModal] = useState(false);
   const postNewOrder = () => {
     console.log(cart);
     // //  setCart([...cart, { ...product, qty: 1 }]);
@@ -50,6 +62,8 @@ const Cart = ({
         setClient({ name: "" });
         setCart([]);
       });
+
+    setStateModal(true);
   };
 
   const onChangeInput = (e) => {
@@ -89,6 +103,7 @@ const Cart = ({
   };
 
   return (
+  <>
     <ContainerCart>
       <div className='header-cart'>
         <h>Ordenes</h>
@@ -143,6 +158,17 @@ const Cart = ({
         <ButtonCart padding="12px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
       </div>
     </ContainerCart>
+      <Modal state={stateModal} changeState={setStateModal}>
+        <ContentModal>
+          <p>{modal.title}</p>
+          <p>{modal.body}</p>
+          <ButtonModal onClick={() => setStateModal(false)}>
+            {" "}
+            Aceptar{" "}
+          </ButtonModal>
+        </ContentModal>
+      </Modal>
+    </>
   );
 };
 

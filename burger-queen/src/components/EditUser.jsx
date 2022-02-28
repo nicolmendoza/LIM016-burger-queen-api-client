@@ -2,14 +2,25 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import {Container} from '../style-components/components'
-
+import {Button, ButtonModal, ContentModal} from '../style-components/components'
+import Modal from "../utils/modal";
 import "../style-components/editUser.css";
+
+
 
 const EditUser = () => {
   const roleUser = localStorage.getItem("role");
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
   const id = window.location.pathname.slice(6);
+
+const bodyModal = {
+  title: '',
+  body: "Usuario Actualizado"
+}
+
+  const [modal, setModal] = useState(bodyModal);
+  const [stateModal, setStateModal] = useState(false)
 
   const initial = {
     email: "",
@@ -82,14 +93,20 @@ const EditUser = () => {
     const dataRoles=res.data.roles
     const rol=(dataRoles.admin===true?"admin":dataRoles.name==="mesera"?"mesera":"cocinera")
     console.log(rol)
-     localStorage.setItem("role", rol);
-     localStorage.setItem("nameUser", res.data.nameUser)
+
     if (localStorage.getItem("role") == "admin") {
+      const idUser=localStorage.getItem('idUser')
+      if(idUser==id){
+        localStorage.setItem("role", rol);
+      }
+      setStateModal(true)
       return (window.location.href = "/settings");
     } else {
+      localStorage.setItem("role", rol);
+      setStateModal(true)
       return (window.location.href = "/profile");
     }
-
+   
     console.log(res);
   };
   return (
@@ -145,8 +162,8 @@ const EditUser = () => {
               onChange={onChangeInput}
               className="inputText"
             /><br></br>
-            <h8>*** Si deseas cambiar de contraseña , escribe tu nueva contarseña,
-        de lo contrario permanece tu contraseña actual .{" "}</h8>
+            <h5>*** Si deseas cambiar de contraseña , escribe tu nueva contarseña,
+        de lo contrario permanece tu contraseña actual .{" "}</h5>
           </div>
 
           {localStorage.getItem("role") !== "admin" ? (
@@ -187,11 +204,21 @@ const EditUser = () => {
           )}
 
           <div className="divButton">
-            <button type="submit">Guardar</button>
+            <Button type="submit">Guardar</Button>
           </div>
         </form>
       </div>
       </Container>
+      <Modal
+        state = {stateModal}
+        changeState = {setStateModal}
+      >
+        <ContentModal>
+          <p>{modal.title}</p>
+          <p>{modal.body}</p>
+          <ButtonModal onClick={() => setStateModal(false)}> Aceptar </ButtonModal>
+        </ContentModal>
+      </Modal>
     </>
   );
 };
