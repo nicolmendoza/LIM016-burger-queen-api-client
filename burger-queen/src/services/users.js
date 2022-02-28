@@ -15,6 +15,7 @@ export const singIn = async (data, setModal, setStateModal) => {
         localStorage.setItem("token", token);
         localStorage.setItem("idUser", decode.uid);
         localStorage.setItem("role", rol);
+        localStorage.setItem("nameUser", decode.nameUser)
 
         if(decode.roles.name === 'mesera') return  window.location.href="/newOrder";
         if(decode.roles.name === 'cocinera') return  window.location.href="/getOrders";

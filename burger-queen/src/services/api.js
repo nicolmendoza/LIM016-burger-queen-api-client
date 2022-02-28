@@ -13,12 +13,13 @@ const roleUser = localStorage.getItem("role");
 
 const id = localStorage.getItem("idUser");
 
-
+const nameUser = localStorage.getItem("nameUser")
 const apiData = {
   url,
   header,
   roleUser,
-  id
+  id,
+  nameUser
 }
 
 export default apiData

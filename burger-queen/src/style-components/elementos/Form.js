@@ -35,7 +35,11 @@ export const Label = styled.label`
     color:${colors.principal};
     font-weight:500;
     min-height:40px;
-    cursor:pointer
+    cursor:pointer;
+
+    ${props => props.display === 'none' && css `
+        display:none !important;
+    `}
 `
 
 export const GroupInput = styled.div`
@@ -49,7 +53,7 @@ export const Input = styled.input`
     margin: 3% 0px;
     border-radius: 3px;
     line-height: 45px;
-    background: none;
+    background: ${props => props.color || 'none'};
     padding: 0px 30px 0px 29px;
     border: 2px solid transparent;
     border-bottom: 1px solid ${colors.border};

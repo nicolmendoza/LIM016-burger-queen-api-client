@@ -30,7 +30,6 @@ const EditUser = () => {
     axios.get(`${url}/users/${id}`, config).then((response) =>
       setState(() => ({
         email: response.data.email,
-
         image: response.data.image,
         nameUser: response.data.nameUser,
       }))
@@ -84,6 +83,7 @@ const EditUser = () => {
     const rol=(dataRoles.admin===true?"admin":dataRoles.name==="mesera"?"mesera":"cocinera")
     console.log(rol)
      localStorage.setItem("role", rol);
+     localStorage.setItem("nameUser", res.data.nameUser)
     if (localStorage.getItem("role") == "admin") {
       return (window.location.href = "/settings");
     } else {

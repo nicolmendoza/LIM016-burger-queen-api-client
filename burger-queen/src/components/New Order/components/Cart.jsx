@@ -3,7 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Button } from "../../../style-components/components";
 import "../../../style-components/cart.css";
-import {ContainerCart} from './style.js'
+import {ContainerCart, ButtonCart, Item, ListOrden} from './style.js'
+import Input from './input.jsx'
 
 const Cart = ({
   cart,
@@ -24,7 +25,7 @@ const Cart = ({
   const userId = localStorage.getItem("idUser");
 
   const postNewOrder = () => {
-    // console.log(cart);
+    console.log(cart);
     // //  setCart([...cart, { ...product, qty: 1 }]);
     // console.log(cart);
     const array = cart.map((x) => ({
@@ -86,28 +87,66 @@ const Cart = ({
     return suma;
   };
 
+  const changeQty = (e) => {
+    console.log(parseInt(e.target.value))
+    setCart(
+      cart.map((x) => {
+        return { ...x, qty: parseInt(e.target.value) };
+      })
+    )
+  }
+  const deleteItem = (e) => {
+    const id=e.target.id
+    console.log(id.parentNode)
+  }
+
   return (
     <ContainerCart>
-      <h3>Carrito de Compras</h3>
-      <div className="inputClient">
-        <h3>Cliente:</h3>
-        <input
-          placeholder="Nombre del cliente"
-          onChange={onChangeInput}
-          name="name"
-          value={client.name}
-        ></input>
+      <div className='header-cart'>
+        <h>Ordenes</h>
+        <div className="inputClient">
+          <h>Cliente:</h>
+          <input
+            placeholder="Nombre del cliente"
+            onChange={onChangeInput}
+            name="name"
+            value={client.name}
+          />
+        </div>
+        <div className="cart-button">
+          <ButtonCart padding='0.5rem 0.7rem'> Local </ButtonCart>
+          <ButtonCart padding='0.5rem 0.7rem'> P. llevar </ButtonCart>
+        </div>
+        <div className='header-list'>
+          <p>Item</p>
+          <p>Qty</p>
+          <p>Price</p>
+        </div>
       </div>
-      <h4>Productos :</h4>
-      {cart.length === 0
+      <ListOrden>
+        {cart.length === 0
         ? "No hay productos en la lista"
         : cart.map((x) => (
-            <>
-              <h6>{x.name}</h6>
-              <div className="productCart">
-                {/* <h6>Cantidad:{x.qty}</h6> */}
-                <img style={{ width: 50, height: 50 }} src={x.image}></img>
-
+          <React.Fragment key={`id-${x._id}`}>
+          <Item className={`id-${x._id}`}>
+            <img src={x.image} style={{ width: 50, height: 50 }} alt={x.name} />
+            <div>
+              <p>{x.name}</p>
+              <p>s/{x.price}</p>
+            </div>
+            <input className='Qty' type='text' onChange={changeQty} placeholder='0'/>
+            <p>s/{productoPrecio(x.qty, x.price, x._id)}</p>
+            <input
+                placeholder="Añade un extra"
+                onChange={onChangeInput}
+                name={x._id}
+                className='comment'
+            />
+            <button className="fa-regular fa-trash-can" id={`id-${x._id}`} onClick={deleteItem}/>
+          </Item>
+                {/* <div className="productCart">
+                 <h6>Cantidad:{x.qty}</h6>
+                 <img style={{ width: 50, height: 50 }} src={x.image}></img>
                 <div className="btnQty">
                   <Button onClick={() => addProduct(x)}>+</Button>
                   <h4>{x.qty}</h4>
@@ -123,12 +162,15 @@ const Cart = ({
                 <h6>Total : ${productoPrecio(x.qty, x.price, x._id)}</h6>
 
                 <br></br>
-              </div>
-            </>
+              </div> */}
+          </React.Fragment>
           ))}
-      <h4>-------------------------</h4>
-      <h4>Total a Pagar :${totalPagar()}</h4>
-      <Button onClick={() => postNewOrder()}>ENVIAR</Button>
+      </ListOrden>
+      <div className='footer-Cart'>
+        <h4>Total a Pagar :${totalPagar()}</h4>
+        <ButtonCart padding="14px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
+      </div>
+      
     </ContainerCart>
   );
 };
