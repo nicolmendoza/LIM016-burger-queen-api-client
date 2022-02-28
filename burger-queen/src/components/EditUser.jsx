@@ -41,7 +41,6 @@ const bodyModal = {
     axios.get(`${url}/users/${id}`, config).then((response) =>
       setState(() => ({
         email: response.data.email,
-
         image: response.data.image,
         nameUser: response.data.nameUser,
       }))
@@ -94,7 +93,6 @@ const bodyModal = {
     const dataRoles=res.data.roles
     const rol=(dataRoles.admin===true?"admin":dataRoles.name==="mesera"?"mesera":"cocinera")
     console.log(rol)
-
 
     if (localStorage.getItem("role") == "admin") {
       const idUser=localStorage.getItem('idUser')

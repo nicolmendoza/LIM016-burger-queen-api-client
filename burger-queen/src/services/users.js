@@ -15,6 +15,7 @@ export const singIn = async (data, setModal, setStateModal) => {
         localStorage.setItem("token", token);
         localStorage.setItem("idUser", decode.uid);
         localStorage.setItem("role", rol);
+        localStorage.setItem("nameUser", decode.nameUser)
 
         if(decode.roles.name === 'mesera') return  window.location.href="/newOrder";
         if(decode.roles.name === 'cocinera') return  window.location.href="/getOrders";
@@ -30,5 +31,15 @@ export const singIn = async (data, setModal, setStateModal) => {
         if(message === 'El usuario no existe') return setModal({ title: message, body: 'Inténtelo nuevamente' });
         if(message === 'La contraseña es incorrecta, intente de nuevo') return setModal({ title: 'Contraseña incorrecta.', body: 'Inténtelo nuevamente' });
         if(response) return setModal({body:"Ocurrio un error en el sistema"})
+    }
+}
+
+export const userInfo = async (url, id, header) =>{
+    try{
+        console.log(`${url}/users/${id}`)
+        const getUser = await axios.get(`${url}/users/${id}`, header)
+        return getUser.data
+    } catch(e){
+        console.error(e)
     }
 }

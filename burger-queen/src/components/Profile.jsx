@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
-
 import {Button} from  "../style-components/components.js"
+
 const Profile = () => {
   const roleUser = localStorage.getItem("role");
   const url = "https://bq-api-2022.herokuapp.com/users";
@@ -76,8 +76,8 @@ const Profile = () => {
             <p>{user.rol}</p>
           </div>
           <div className="divButton">
+            <Button color="black" onClick={functionEdit}>Editar</Button>
 
-            <Button   color="black"   onClick={functionEdit}>Editar</Button>
           </div>
         </div>
       </>

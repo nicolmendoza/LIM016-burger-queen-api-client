@@ -1,11 +1,12 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cart from "./components/Cart";
 import { Button, ContainerElements, DivElement, Container} from "../../style-components/components";
 import DivData from '../../utils/Container-Data'
 import Sidebar from "../Navegador"
+import UserInfo from './components/User'
 import {getAllProducts} from '../../services/products'
-import {ContainerMenu} from './components/style.js'
+import {ContainerMenu, Icon, ButtonMenu} from './components/style.js'
+import Input from './components/input.jsx'
 import "../../style-components/productsOrders.css";
 
 const Products = () => {
@@ -34,6 +35,7 @@ const Products = () => {
     console.log(response)
     setProducts(response.data)
     setFilter2(response.data)
+    setFilter(response.data)
   };
 
   const filterProductsByType = (type) => {
@@ -44,56 +46,64 @@ const Products = () => {
   const [cart, setCart] = useState([]);
 
   const addProduct = (product) => {
+    console.log(product)
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
       return setCart(
         cart.map((x) => (x._id === product._id ? { ...x, qty: x.qty + 1 } : x))
       );
-    } else {
+    } 
       return setCart([...cart, { ...product, qty: 1 }]);
-    }
+    
   };
 
   const deleteProduct = (product) => {
-    if (product.qty === 1) {
-      return setCart(cart.filter((x) => x._id !== product._id));
-    } else {
-      setCart(
-        cart.map((x) =>
-          x._id === product._id ? { ...product, qty: x.qty - 1 } : x
-        )
-      );
-    }
+    return setCart(cart.filter((x) => x._id !== product._id));
+    // if (product.qty === 1) {
+    //   return setCart(cart.filter((x) => x._id !== product._id));
+    // } 
+    // else {
+    //   setCart(
+    //     cart.map((x) =>
+    //       x._id === product._id ? { ...product, qty: x.qty - 1 } : x
+    //     )
+    //   );
+    // }
   };
 
-  const buscador = (e) => {
-    const arrayInicial = filter;
-    const array = arrayInicial.filter((x) =>
-      x.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setFilter2(array);
+  const changeQty = (product, e) => {
+    console.log(product)
+    console.log(e.target)
+    const exits = cart.find((x) => x._id === product._id);
+    if (exits) {
+      return setCart(
+        cart.map((x) => (x._id === product._id ? { ...x, qty: parseInt(e.target.value) } : x))
+      );
+    } 
+      return setCart([...cart, { ...product, qty: 1 }]);
+    
   };
 
   const ShowProducts = () => {
     return (
       <div className="btnProductsDiv">
-        <div className="btnDiv">
-          <Button onClick={() => setFilter2(products)}>ALL</Button>
-          <Button onClick={() => filterProductsByType("Desayuno")}>
+        <div className="container-btnMenu">
+          <ButtonMenu onClick={() =>{setFilter2(products); setFilter(products)} }>ALL</ButtonMenu>
+          <ButtonMenu onClick={() => filterProductsByType("Desayuno")}>
             Desayuno
-          </Button>
-          <Button onClick={() => filterProductsByType("Hamburguesas")}>
+          </ButtonMenu>
+          <ButtonMenu onClick={() => filterProductsByType("Hamburguesas")}>
             Hamburguesas
-          </Button>
-          <Button onClick={() => filterProductsByType("Acompañamientos")}>
+          </ButtonMenu>
+          <ButtonMenu onClick={() => filterProductsByType("Acompañamientos")}>
             Complementos
-          </Button>
-          <Button onClick={() => filterProductsByType("Bebidas")}>
+          </ButtonMenu>
+          <ButtonMenu onClick={() => filterProductsByType("Bebidas")}>
             Bebidas
-          </Button>
+          </ButtonMenu>
         </div>
-
-        <ContainerElements height="6">
+        
+        <ContainerElements height="9">
           {filter2.map((x) => (
               <DivData data={x}>
                 <div>
@@ -115,19 +125,24 @@ const Products = () => {
     {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
     <Container>  
       <div className="containerProductsOrders">
+      {loading ? "loading..." : 
         <ContainerMenu>
-          <div className="inputDiv">
-            <h3>Busca un producto :   </h3>
-            <input
-              type="text"
-              onChange={buscador}
-              className="inputSearch"
-              name="texto"
-              placeholder="Search.."
-            ></input>
+          <div className="header-newOrder">
+            <UserInfo/>
+              <Input
+                icon = {<Icon/>}
+                label="none"
+                type="text"
+                className="inputSearch"
+                name="texto"
+                placeholder="Buscar hamburguesas, bebidas, ..."
+                estado={filter}
+                changeState={setFilter2}
+                color="#ffffff61"
+              ></Input>
           </div>
-          {loading ? "loading..." : <ShowProducts />}
-        </ContainerMenu>
+          <ShowProducts/>
+        </ContainerMenu>}
         <Cart
           cart={cart}
           addProduct={addProduct}
@@ -135,6 +150,7 @@ const Products = () => {
           setCart={setCart}
           totalFinal={totalFinal}
           setTotalFinal={setTotalFinal}
+          changeQty={changeQty}
         />
         </div>
       </Container>}

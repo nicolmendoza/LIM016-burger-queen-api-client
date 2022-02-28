@@ -8,7 +8,8 @@ const colors = {
     letter:"white",
     principal: 'rgba(229, 161, 6, 0.8)',
     parrafo: 'white',
-    container:'#111111'
+    container:'#111111',
+    inputWhite:'#ffffff61'
 }
 
 // const fonts = {

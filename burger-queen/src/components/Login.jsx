@@ -90,6 +90,7 @@ const Login = () => {
         <ContentModal>
           <p>{modal.title}</p>
           <p>{modal.body}</p>
+          <p>"hola"</p>
           <ButtonModal onClick={() => setStateModal(false)}> Aceptar </ButtonModal>
         </ContentModal>
       </Modal>

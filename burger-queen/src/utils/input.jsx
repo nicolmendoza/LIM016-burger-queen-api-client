@@ -2,12 +2,13 @@ import React, {useState}from "react";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import {Label, Input, GroupInput, LeyendaError, DivInput} from '../style-components/elementos/Form'
 
-const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, estado, changeState, eye }) => {
+const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, estado, changeState, eye, color }) => {
   
   const [valid, setValid] = useState('');
 
   const  onChange = (e) =>{
     changeState(e.target.value)
+
   }
 
   const validation = () => {
@@ -26,7 +27,7 @@ const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, est
 
   return (
         <DivInput>
-            <Label htmlFor={name}>{label}</Label>
+            <Label htmlFor={name} display={label}>{label}</Label>
             <GroupInput>
               {icon}
               <Input
@@ -39,6 +40,7 @@ const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, est
                 onKeyUp = {validation}
                 onBlur = {validation}
                 valid={valid}
+                color={color}
               />
               {eye}
             </GroupInput>

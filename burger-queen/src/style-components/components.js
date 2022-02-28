@@ -91,7 +91,7 @@ export const ContainerElements = style.div`
   grid-column-gap: 1.25rem;
   grid-row-gap: 5rem;
   padding-top:4.5rem;
-  padding: 4.5rem 1.25rem 1rem;
+  padding: 4.5rem 1rem 1rem 0rem;
   height: calc(100vh - ${props => props.height || 10}rem);
   content-visibility: auto;
   overflow-y: scroll;

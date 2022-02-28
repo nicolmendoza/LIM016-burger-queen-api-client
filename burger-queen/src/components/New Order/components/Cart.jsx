@@ -7,9 +7,10 @@ import {
   ContentModal,
 } from "../../../style-components/components";
 import "../../../style-components/cart.css";
-import { ContainerCart } from "./style.js";
-
+import {ContainerCart, ButtonCart, Item, ListOrden, ButtonClear} from './style.js'
+import Input from './input.jsx'
 import Modal from "../../../utils/modal";
+
 
 const Cart = ({
   cart,
@@ -18,6 +19,7 @@ const Cart = ({
   deleteProduct,
   totalFinal,
   setTotalFinal,
+  changeQty
 }) => {
   const token = localStorage.getItem("token");
   const header = {
@@ -36,7 +38,7 @@ const Cart = ({
   const [modal, setModal] = useState(bodyModal);
   const [stateModal, setStateModal] = useState(false);
   const postNewOrder = () => {
-    // console.log(cart);
+    console.log(cart);
     // //  setCart([...cart, { ...product, qty: 1 }]);
     // console.log(cart);
     const array = cart.map((x) => ({
@@ -101,50 +103,61 @@ const Cart = ({
   };
 
   return (
-    <>
-      <ContainerCart>
-        <h3>Carrito de Compras</h3>
+  <>
+    <ContainerCart>
+      <div className='header-cart'>
+        <h>Ordenes</h>
         <div className="inputClient">
-          <h3>Cliente:</h3>
+          <h>Cliente:</h>
           <input
             placeholder="Nombre del cliente"
             onChange={onChangeInput}
             name="name"
             value={client.name}
-          ></input>
+          />
         </div>
-        <h4>Productos :</h4>
+        <div className="cart-button">
+          <ButtonClear padding='0.5rem 0.7rem'> Local </ButtonClear>
+          <ButtonClear padding='0.5rem 0.7rem'> P. llevar </ButtonClear>
+        </div>
+        <div className='header-list'>
+          <p>Item</p>
+          <p>Qty</p>
+          <p>Price</p>
+        </div>
+      </div>
+      <ListOrden>
         {cart.length === 0
-          ? "No hay productos en la lista"
-          : cart.map((x) => (
-              <>
-                <h6>{x.name}</h6>
-                <div className="productCart">
-                  {/* <h6>Cantidad:{x.qty}</h6> */}
-                  <img style={{ width: 50, height: 50 }} src={x.image}></img>
-
-                  <div className="btnQty">
-                    <Button onClick={() => addProduct(x)}>+</Button>
-                    <h4>{x.qty}</h4>
-                    <Button onClick={() => deleteProduct(x)}>-</Button>
-                    <div className="comment">
-                      <input
-                        placeholder="Añade un extra"
-                        onChange={onChangeInput}
-                        name={x._id}
-                      ></input>
-                    </div>
-                  </div>
-                  <h6>Total : ${productoPrecio(x.qty, x.price, x._id)}</h6>
-
-                  <br></br>
-                </div>
-              </>
-            ))}
-        <h4>-------------------------</h4>
-        <h4>Total a Pagar :${totalPagar()}</h4>
-        <Button onClick={() => postNewOrder()}>ENVIAR</Button>
-      </ContainerCart>
+        ? "No hay productos en la lista"
+        : cart.map((x) => (
+          <React.Fragment key={`id-${x._id}`}>
+          <Item className={`id-${x._id}`}>
+            <img src={x.image} style={{ width: 50, height: 50 }} alt={x.name} />
+            <div>
+              <p>{x.name}</p>
+              <p>s/{x.price}</p>
+            </div>
+            <input className='Qty' type='number' onChange={(e)=>changeQty(x, e)} value={isNaN(x.qty)? '':x.qty} placeholder='0'/>
+            <p className='totalPrice'>s/{productoPrecio(x.qty, x.price, x._id)}</p>
+            <input
+                placeholder="Añade un extra"
+                onChange={onChangeInput}
+                name={x._id}
+                className='comment'
+            />
+            <ButtonClear className="fa-regular fa-trash-can" onClick={() => deleteProduct(x)}/>
+          </Item>
+          </React.Fragment>
+          ))}
+      </ListOrden>
+      <div className='footer-Cart'>
+        <div className='totalPrice'>
+          <p>Total:</p>
+          <p>s/. {totalPagar()}</p>
+        </div>
+        <ButtonCart padding="12px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
+      </div>
+    </ContainerCart>
       <Modal state={stateModal} changeState={setStateModal}>
         <ContentModal>
           <p>{modal.title}</p>
