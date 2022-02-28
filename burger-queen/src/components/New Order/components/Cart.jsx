@@ -132,25 +132,6 @@ const Cart = ({
             />
             <ButtonClear className="fa-regular fa-trash-can" onClick={() => deleteProduct(x)}/>
           </Item>
-                {/* <div className="productCart">
-                 <h6>Cantidad:{x.qty}</h6>
-                 <img style={{ width: 50, height: 50 }} src={x.image}></img>
-                <div className="btnQty">
-                  <Button onClick={() => addProduct(x)}>+</Button>
-                  <h4>{x.qty}</h4>
-                  <Button onClick={() => deleteProduct(x)}>-</Button>
-                  <div className="comment">
-                    <input
-                      placeholder="Añade un extra"
-                      onChange={onChangeInput}
-                      name={x._id}
-                    ></input>
-                  </div>
-                </div>
-                <h6>Total : ${productoPrecio(x.qty, x.price, x._id)}</h6>
-
-                <br></br>
-              </div> */}
           </React.Fragment>
           ))}
       </ListOrden>
@@ -161,7 +142,6 @@ const Cart = ({
         </div>
         <ButtonCart padding="12px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
       </div>
-      
     </ContainerCart>
   );
 };
