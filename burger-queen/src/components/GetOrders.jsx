@@ -30,6 +30,7 @@ const GetOrders = () => {
 
   const getOrders = () => {
     axios.get(`${url}/orders?limit=100`, header).then((response) => {
+      console.log(response.data)
       setState(response.data);
       setFilter(response.data.filter((x) => x.status === "pending"));
       setLoading(false);
@@ -119,12 +120,13 @@ const GetOrders = () => {
                         <p>
                           {" * "}{y.product.name}  Q:{y.qty}
                         </p>
+                        {(y.comment!==undefined)?<p>Comentarios: {y.comment}</p>:""}
                       </div>
                     ))}
 
-                    {x.status === "pending"
+                    <h3>{x.status === "pending"
                       ? ""
-                      : time(x.dateEntry, x.updatedAt)}
+                      :time(x.dateEntry, x.updatedAt)}</h3>
                     <br></br>
                     {x.status === "pending" ? (
                       <div>
