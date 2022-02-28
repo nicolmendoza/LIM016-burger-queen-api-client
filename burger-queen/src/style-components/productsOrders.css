@@ -59,6 +59,20 @@
   grid-column: 1 / 4;
 }
 
+/*footer cart*/
+.footer-Cart{
+  margin-top: 0.5rem;
+  border-top: 0.06rem solid #ffffff1c;
+  padding-top: 1rem;
+  display: grid;
+  grid-row-gap: 1rem;
+}
+
+.totalPrice{
+  display:flex;
+  justify-content:space-between
+}
+
 .containerProductsOrders {
   display: flex;
   flex-direction: row;
@@ -84,6 +98,10 @@
   background: none;
   border-bottom: 1px dotted #ffffff54;
   width: 100%;
+}
+
+.inputClient input:focus{
+  background: white
 }
 
 /* .containerProductsOrders input {

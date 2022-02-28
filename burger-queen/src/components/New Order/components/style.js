@@ -53,11 +53,34 @@ const ButtonMenu = styled.button`
 
 const ButtonCart = styled.button`
     color: ${colors.parrafo};
-    background-image: linear-gradient(180deg, #F5B204 0%, #241A01 100%);;
+    background-image: linear-gradient(180deg, #F5B204 0%, #241A01 100%);
     border-radius: 8px;
     padding: ${props => props.padding || '12px'};
     font-size:0.8rem;
+    border:1px solid ${colors.principal};
+    width:100%;
 
+    &:hover{
+        border:1px solid ${colors.principal};
+        color: ${colors.principal};
+        background:none
+    }
+    
+`
+
+const ButtonClear = styled.button`
+    color: ${colors.principal};
+    border-radius: 8px;
+    padding: ${props => props.padding || '12px'};
+    font-size:0.8rem;
+    border:1px solid #151515;
+    background:none;
+
+    &:hover{
+        border:1px solid transparent;
+        color: ${colors.parrafo};
+        background:linear-gradient(180deg, #F5B204 0%, #241A01 100%)
+    }
 `
 
 const Item = styled.div`
@@ -65,11 +88,18 @@ const Item = styled.div`
     grid-template-columns: 1fr 3fr 1fr 1fr;
     grid-row-gap: 0.5rem;
     grid-column-gap: 0.5rem;
+    align-items:center;
+    
 
     .Qty{
         width:100%;
+        height:100%;
+        text-align:center;
+        padding: 0.5rem 0;
     }
-
+    .totalPrice{
+        text-align:center
+    }
     input{
         border-radius:0.5rem;
         background:rgba(245, 246, 248, 0.22);
@@ -80,13 +110,13 @@ const Item = styled.div`
 `
 const ListOrden = styled.div`
     max-height: calc(100vh - 14rem);
-    /* background: bisque; */
     content-visibility: auto;
     overflow-y: scroll;
     overflow-x: hidden;
     display: grid;
     grid-row-gap: 1rem;
-    margin-top:1rem;
+    margin-top: 1rem;
+    padding-bottom: 0.5rem;
 
     &::-webkit-scrollbar {display: none;}
       
@@ -99,4 +129,4 @@ const ListOrden = styled.div`
         border-radius: 3.125rem;
     }
 `
-export {ContainerMenu, ContainerCart, Icon, ButtonMenu, ButtonCart, Item, ListOrden}
+export {ContainerMenu, ContainerCart, Icon, ButtonMenu, ButtonCart, Item, ListOrden, ButtonClear}

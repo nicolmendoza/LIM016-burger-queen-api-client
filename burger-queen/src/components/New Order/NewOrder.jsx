@@ -58,15 +58,30 @@ const Products = () => {
   };
 
   const deleteProduct = (product) => {
-    if (product.qty === 1) {
-      return setCart(cart.filter((x) => x._id !== product._id));
-    } else {
-      setCart(
-        cart.map((x) =>
-          x._id === product._id ? { ...product, qty: x.qty - 1 } : x
-        )
+    return setCart(cart.filter((x) => x._id !== product._id));
+    // if (product.qty === 1) {
+    //   return setCart(cart.filter((x) => x._id !== product._id));
+    // } 
+    // else {
+    //   setCart(
+    //     cart.map((x) =>
+    //       x._id === product._id ? { ...product, qty: x.qty - 1 } : x
+    //     )
+    //   );
+    // }
+  };
+
+  const changeQty = (product, e) => {
+    console.log(product)
+    console.log(e.target)
+    const exits = cart.find((x) => x._id === product._id);
+    if (exits) {
+      return setCart(
+        cart.map((x) => (x._id === product._id ? { ...x, qty: parseInt(e.target.value) } : x))
       );
-    }
+    } 
+      return setCart([...cart, { ...product, qty: 1 }]);
+    
   };
 
   const ShowProducts = () => {
@@ -135,6 +150,7 @@ const Products = () => {
           setCart={setCart}
           totalFinal={totalFinal}
           setTotalFinal={setTotalFinal}
+          changeQty={changeQty}
         />
         </div>
       </Container>}

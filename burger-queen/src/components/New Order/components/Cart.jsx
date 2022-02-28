@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Button } from "../../../style-components/components";
 import "../../../style-components/cart.css";
-import {ContainerCart, ButtonCart, Item, ListOrden} from './style.js'
+import {ContainerCart, ButtonCart, Item, ListOrden, ButtonClear} from './style.js'
 import Input from './input.jsx'
 
 const Cart = ({
@@ -13,6 +13,7 @@ const Cart = ({
   deleteProduct,
   totalFinal,
   setTotalFinal,
+  changeQty
 }) => {
   const token = localStorage.getItem("token");
   const header = {
@@ -87,19 +88,6 @@ const Cart = ({
     return suma;
   };
 
-  const changeQty = (e) => {
-    console.log(parseInt(e.target.value))
-    setCart(
-      cart.map((x) => {
-        return { ...x, qty: parseInt(e.target.value) };
-      })
-    )
-  }
-  const deleteItem = (e) => {
-    const id=e.target.id
-    console.log(id.parentNode)
-  }
-
   return (
     <ContainerCart>
       <div className='header-cart'>
@@ -114,8 +102,8 @@ const Cart = ({
           />
         </div>
         <div className="cart-button">
-          <ButtonCart padding='0.5rem 0.7rem'> Local </ButtonCart>
-          <ButtonCart padding='0.5rem 0.7rem'> P. llevar </ButtonCart>
+          <ButtonClear padding='0.5rem 0.7rem'> Local </ButtonClear>
+          <ButtonClear padding='0.5rem 0.7rem'> P. llevar </ButtonClear>
         </div>
         <div className='header-list'>
           <p>Item</p>
@@ -134,15 +122,15 @@ const Cart = ({
               <p>{x.name}</p>
               <p>s/{x.price}</p>
             </div>
-            <input className='Qty' type='text' onChange={changeQty} placeholder='0'/>
-            <p>s/{productoPrecio(x.qty, x.price, x._id)}</p>
+            <input className='Qty' type='number' onChange={(e)=>changeQty(x, e)} value={isNaN(x.qty)? '':x.qty} placeholder='0'/>
+            <p className='totalPrice'>s/{productoPrecio(x.qty, x.price, x._id)}</p>
             <input
                 placeholder="Añade un extra"
                 onChange={onChangeInput}
                 name={x._id}
                 className='comment'
             />
-            <button className="fa-regular fa-trash-can" id={`id-${x._id}`} onClick={deleteItem}/>
+            <ButtonClear className="fa-regular fa-trash-can" onClick={() => deleteProduct(x)}/>
           </Item>
                 {/* <div className="productCart">
                  <h6>Cantidad:{x.qty}</h6>
@@ -167,8 +155,11 @@ const Cart = ({
           ))}
       </ListOrden>
       <div className='footer-Cart'>
-        <h4>Total a Pagar :${totalPagar()}</h4>
-        <ButtonCart padding="14px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
+        <div className='totalPrice'>
+          <p>Total:</p>
+          <p>s/. {totalPagar()}</p>
+        </div>
+        <ButtonCart padding="12px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
       </div>
       
     </ContainerCart>
