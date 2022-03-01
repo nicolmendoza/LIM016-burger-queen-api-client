@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { Button } from "../style-components/components";
-import Admi from "../components/Admi";
-import Products from "../components/Products";
+import colors from '../style-components/elementos/colors'
 
 const Button2 = ({icon, title, description, value, changeState}) => {
 
@@ -35,7 +33,7 @@ const ContentButton = styled.div`
     padding-left: 7px;
 
     h1{
-        background: linear-gradient(#2DFFB3,#012417);
+        background: ${colors.gradient};
         -webkit-background-clip: text;
         color: transparent; 
         font-size:18px;

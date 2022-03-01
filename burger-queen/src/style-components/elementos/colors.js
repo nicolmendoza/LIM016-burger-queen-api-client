@@ -9,7 +9,8 @@ const colors = {
     principal: 'rgba(229, 161, 6, 0.8)',
     parrafo: 'white',
     container:'#111111',
-    inputWhite:'#ffffff61'
+    inputWhite:'#ffffff61',
+    gradient:'linear-gradient(180deg, #F5B204 0%, #241A01 100%)'
 }
 
 // const fonts = {

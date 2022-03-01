@@ -1,4 +1,4 @@
-import style from 'styled-components';
+import style, {css} from 'styled-components';
 import {colors} from './elementos/Form.js'
 
 export const Button = style.button`
@@ -25,16 +25,15 @@ export const ContainerProduts = style.div`
   color:white;
 `
 
-export const OrderDiv = style.div.attrs(props => ({
-  id: props.key
-}))`
-background: #6be86b40;
+export const OrderDiv = style.div`
+background: ${props => props.background || '#6be86b40'};
 margin: 7%;
 border-radius: 9px;
 padding: 6%;
 `
 
 export const Container = style.div`
+background-image:url(${props => props.background || '../img/back.jpg'});
 position: relative;
 min-height: 100vh;
 top: 0;
@@ -42,6 +41,7 @@ left: 78px;
 width: calc(100% - 78px);
 transition: all 0.5s ease;
 z-index: 2;
+background-size: cover;
 `
 
 export const ButtonModal = style.button`
@@ -91,7 +91,7 @@ export const ContainerElements = style.div`
   grid-column-gap: 1.25rem;
   grid-row-gap: 5rem;
   padding-top:4.5rem;
-  padding: 4.5rem 1rem 1rem 0rem;
+  padding: 4.5rem 1rem 1rem 1rem;
   height: calc(100vh - ${props => props.height || 10}rem);
   content-visibility: auto;
   overflow-y: scroll;
@@ -123,4 +123,38 @@ export const DivElement = style.div`
     flex-direction:column;
     align-items: center;
     justify-content:center
+`
+
+export const Button3 = style.button`
+  color: ${props => props.color || colors.principal};
+  border-radius: 8px;
+  padding: ${props => props.padding || '12px'};
+  font-size:0.8rem;
+  border:1px solid ${colors.principal};
+  background:none;
+
+  &:hover{
+      border:1px solid transparent;
+      color: ${colors.parrafo};
+      background:linear-gradient(180deg, #F5B204 0%, #241A01 100%)
+  }
+`
+
+export const ButtonMenu = style.button`
+    color:${colors.parrafo};
+    background: none;
+    padding: 0.6rem 0;
+    border: 1.5px solid transparent;
+    cursor:pointer;
+
+    ${props => props.valid === 'false' && css `
+    border-bottom: 1.5px solid ${colors.principal} !important;
+    color: ${colors.principal} !important
+    `}
+
+    &:hover{
+        border-bottom: 1.5px solid ${colors.principal};
+        color: ${colors.principal}
+    }
+    
 `

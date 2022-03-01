@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
 import { Link } from "react-router-dom";
 import {
-  Button,
+  Button3,
   ContainerElements,
   DivElement,
+  ButtonMenu
 } from "../style-components/components";
 import { getAllProducts, deleteProduct } from "../services/products";
 import DivData from "../utils/Container-Data";
@@ -96,7 +97,8 @@ const Admi = () => {
   return (
     <div>
       <h1>USUARIOS</h1>
-      <Button
+      <div className='btn-next-prev'>
+      <ButtonMenu
         type="submit"
         className="btn-login"
         value={page.prev}
@@ -104,8 +106,8 @@ const Admi = () => {
       >
         {" "}
         Prev{" "}
-      </Button>
-      <Button
+      </ButtonMenu>
+      <ButtonMenu
         type="submit"
         className="btn-login"
         value={page.next}
@@ -113,7 +115,8 @@ const Admi = () => {
       >
         {" "}
         Next{" "}
-      </Button>
+      </ButtonMenu>
+      </div>
       {loading ? 
         "Cargando..." : 
         <ContainerElements>
@@ -129,14 +132,16 @@ const Admi = () => {
                 <p>{user.email}</p>
                 <p>{user.roles.name}</p>
               </div>
-              <Button color="black"
+              <div className="btn-container">
+              <Button3 color="black" padding="0.2rem 0.5rem"
                 onClick={() => {
                   window.location.href = `/edit/${user._id}`;
                 }}
               >
                 Editar
-              </Button>
-              <Button color="black" onClick={() => deleteUser(user._id)}>Eliminar</Button>
+              </Button3>
+              <Button3 color="black" padding="0.2rem 0.5rem" onClick={() => deleteUser(user._id)}>Eliminar</Button3>
+              </div>
             </DivData>
           ))}
         </ContainerElements>

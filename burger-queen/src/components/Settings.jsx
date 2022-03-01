@@ -8,6 +8,7 @@ import Button2 from '../utils/menuSettings'
 import styled, {css} from 'styled-components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import colors from '../style-components/elementos/colors'
 
 const Settings = () => {
   const roleUser = localStorage.getItem("role");
@@ -58,7 +59,7 @@ const ContainerSetting = styled.div`
 `
 const Menu = styled.div`    
     height:100%;
-    background: #11101D;
+    background: ${colors.container};
     margin: auto 0px auto 10px;
     padding: 20px 0px;
     border-radius: 10px;
