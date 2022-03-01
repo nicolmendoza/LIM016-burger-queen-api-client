@@ -96,6 +96,12 @@ const GetOrders = () => {
       "Tiempo de espera" + "       "+ days + ":" + hours + ":" + minutes + ":" + seconds 
     );
   };
+
+  const handleBackground = (status) => {
+    if(status==='pending') return 'rgba(7, 120, 45, 0.35)'
+    if(status==='delivering') return 'rgba(112, 114, 22, 0.27)'
+  }
+
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
@@ -109,8 +115,8 @@ const GetOrders = () => {
               "Cargando..."
             ) : (
               <ContainerProduts>
-                { filter.length==0?"No hay pedidos en esta sección":  filter.map((x) => (
-                  <OrderDiv key={x._id} className="col-6 col-md-4">
+                { filter.length===0?"No hay pedidos en esta sección":  filter.map((x) => (
+                  <OrderDiv background={handleBackground(x.status)} key={x._id} className="col-6 col-md-4">
                    <b> <p>Cliente : {x.client}</p></b>
                     <p><b>Status</b>:{x.status}</p>
                     <p><b>Products:</b> </p>

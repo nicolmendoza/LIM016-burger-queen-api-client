@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
-import { Button } from "../style-components/components.js";
+import { Button, Container } from "../style-components/components.js";
 
 const Profile = () => {
   const roleUser = localStorage.getItem("role");
@@ -77,11 +77,11 @@ const Profile = () => {
 
   const InfoProfile = () => {
     return (
-      <>
+      <Container>
         <div className="titleDiv">
           <h1>Mi Perfil</h1>
         </div>
-
+        
         <div className="divImage">
           <img src={user.image} style={{ width: 200, height: 200 }} />
         </div>
@@ -110,7 +110,7 @@ const Profile = () => {
             </Button>
           </div>
         </div>
-      </>
+      </Container>
     );
   };
 

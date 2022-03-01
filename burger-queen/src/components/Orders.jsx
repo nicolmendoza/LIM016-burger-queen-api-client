@@ -7,8 +7,10 @@ import {
   ContainerProduts,
   OrderDiv,
   Container,
+  ButtonModal
 } from "../style-components/components";
 import Sidebar from "./Navegador";
+import { color } from "@mui/system";
 
 const Orders = () => {
   const url = "https://bq-api-2022.herokuapp.com/orders";
@@ -66,6 +68,12 @@ const Orders = () => {
     getOrders();
   };
 
+  const handleBackground = (status) => {
+    if(status==='pending') return 'rgba(7, 120, 45, 0.35)'
+    if(status==='canceled') return 'rgba(114, 22, 22, 0.35)'
+    if(status==='delivering') return 'rgba(112, 114, 22, 0.27)'
+    if(status==='delivered') return 'rgba(22, 108, 114, 0.27)'
+  }
   const allProducts = () => {
     setFilter(orders);
   };
@@ -77,7 +85,7 @@ const Orders = () => {
   return (
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container>
+      <Container background='../img/back.jpg'>
         {roleUser === "cocinera" ? (
           "No tiene acceso para esta ruta"
         ) : (
@@ -103,7 +111,7 @@ const Orders = () => {
               <ContainerProduts>
                 {filter.map((x) => (
                     <React.Fragment key={x._id}>
-                    <OrderDiv>
+                    <OrderDiv background={handleBackground(x.status)}>
                       <p style={{ textTransform: "uppercase" }}>{x.status}</p>
                       <div>{x.client ? <p>Cliente : {x.client}</p> : ""}</div>
                       <b><p>Productos : </p></b>

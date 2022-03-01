@@ -192,6 +192,13 @@ margin: none;
   margin: 10px;
  }
 
+.btn-next-prev{
+  display: flex;
+  justify-content: end;
+  padding: 0 1rem;
+  grid-gap: 1rem;
+}
+
 @media (min-width: 760px){
 
   .productsDiv {

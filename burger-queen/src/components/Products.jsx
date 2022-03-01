@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {getAllProducts, deleteProduct} from '../services/products'
 import CreateProduct from "./CreateProduct";
-import { Button, ContainerElements, DivElement} from "../style-components/components";
+import { Button3, ContainerElements, DivElement, ButtonMenu} from "../style-components/components";
 import DivData from '../utils/Container-Data'
 
 const Products = () => {
@@ -60,8 +60,10 @@ const Products = () => {
   return (
     <div>
       <h1>Productos</h1>
-        <Button type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </Button>
-        <Button type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </Button>
+        <div className='btn-next-prev'>
+        <ButtonMenu type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </ButtonMenu>
+        <ButtonMenu type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </ButtonMenu>
+        </div>
         {loading ? "Cargando..." : <ContainerElements>
           <DivElement>
             <CreateProduct getProducts={getProducts}/>
@@ -74,8 +76,10 @@ const Products = () => {
                 <p>{product.name}</p>
                 <p>s/. {product.price}</p>
                 </div>
-                <Button color="black" onClick={() =>{window.location.href = `/editProduct/${product._id}`}}>Editar</Button>
-                <Button color="black" onClick={() => {handleDelete(product._id)}}>Eliminar</Button>
+                <div className='btn-container'>
+                <Button3 color="black" padding="0.2rem 0.5rem" onClick={() =>{window.location.href = `/editProduct/${product._id}`}}>Editar</Button3>
+                <Button3 color="black" padding="0.2rem 0.5rem" onClick={() => {handleDelete(product._id)}}>Eliminar</Button3>
+                </div>
             </DivData>
           ))}
         </ContainerElements>}

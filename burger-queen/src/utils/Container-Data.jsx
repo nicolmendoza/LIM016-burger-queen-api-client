@@ -26,5 +26,12 @@ const ContainerData = styled.div`
         height:8.5rem;
         margin-top:-4rem
     }
+    .btn-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1rem;
+        padding: 0.5rem 2rem;
+        width:100%
+    }
 `
 export default DivData
