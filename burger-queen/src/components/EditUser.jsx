@@ -113,6 +113,7 @@ const bodyModal = {
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
       <Container>
+        <h2>Editar Perfil</h2>
       <div className="divImage">
         <img src={state.image} style={{ width: 180, height: 180 }} />
       </div>
@@ -120,7 +121,7 @@ const bodyModal = {
       <div className="divEditUser">
         <form onSubmit={onSubmitForm}>
           <div>
-            <label>Name: </label>
+            <label>Nombre: </label>
             <input
               type="text"
               name="nameUser"
@@ -131,7 +132,7 @@ const bodyModal = {
             />
           </div>
           <div>
-            <label>Image: </label>
+            <label>Imagen: </label>
             <input
               type="text"
               name="image"
@@ -142,7 +143,7 @@ const bodyModal = {
             />
           </div>
           <div>
-            <label>Email: </label>
+            <label>Correo: </label>
             <input
               type="email"
               name="email"
@@ -153,7 +154,7 @@ const bodyModal = {
             />
           </div>
           <div>
-            <label>Password: </label>
+            <label>Contraseña: </label>
             <input
               type="password"
               name="password"
@@ -170,7 +171,7 @@ const bodyModal = {
             ""
           ) : (
             <fieldset onChange={options} value={state.roles}>
-              <h2>Roles</h2>
+              <h3>Roles</h3>
               <div>
                 <label>
                   <input type="radio" name="optionsRadios" value="admin" />

@@ -7,11 +7,8 @@ test("renders content", () => {
   render(<GetOrders></GetOrders>);
 
 const mockHandler=jest.fn()
-
   const button = screen.getByText("LISTO");
-
   fireEvent.click(button);
-
   expect(mockHandler).toHaveBeenCalledTimes(1)
   
 });
