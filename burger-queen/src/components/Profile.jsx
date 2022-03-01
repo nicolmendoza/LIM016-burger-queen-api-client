@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
-import {Button} from  "../style-components/components.js"
+import { Button } from "../style-components/components.js";
 
 const Profile = () => {
   const roleUser = localStorage.getItem("role");
@@ -10,6 +10,31 @@ const Profile = () => {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("idUser");
 
+  const actions = [
+    {
+      role: "admin",
+      action:
+        "Administrar productos, usuarios y ordenes. Generar ordenes , ver sus estados y poder cambiarlas . ",
+    },
+    {
+      role: "mesera",
+      action:
+        "Puedes generar ordenes, cambiarlas de estado, y editar tu información. ",
+    },
+    {
+      role: "cocinera",
+      action:
+        "Puedes cambiar de estado las ordenes  y editar tu informacion personal ",
+    },
+  ];
+
+  const funciones = () => {
+    const role = localStorage.getItem("role");
+    const actionUser = actions.find((x) => x.role == role);
+    return actionUser.action;
+  };
+
+  funciones();
 
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
@@ -54,14 +79,14 @@ const Profile = () => {
     return (
       <>
         <div className="titleDiv">
-          <h1>My Profile</h1>
+          <h1>Mi Perfil</h1>
         </div>
 
         <div className="divImage">
           <img src={user.image} style={{ width: 200, height: 200 }} />
         </div>
         <div className="divEditUser">
-          <h2>Info User: </h2>
+          <h2>Información personal: </h2>
 
           <div className="divInfoUser">
             <label>Name: </label>
@@ -75,9 +100,14 @@ const Profile = () => {
             <label>Roles: </label>
             <p>{user.rol}</p>
           </div>
+          <div className="divInfoUser">
+            <label>Funciones: </label>
+            <p>{funciones()}</p>
+          </div>
           <div className="divButton">
-            <Button color="black" onClick={functionEdit}>Editar</Button>
-
+            <Button color="black" onClick={functionEdit}>
+              Editar
+            </Button>
           </div>
         </div>
       </>

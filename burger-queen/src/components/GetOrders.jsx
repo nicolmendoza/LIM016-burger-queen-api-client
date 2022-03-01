@@ -118,15 +118,15 @@ const GetOrders = () => {
                       <div>
                 
                         <p>
-                          {" * "}{y.product.name}  Q:{y.qty}
+                          {" * "}{y.product.name}<br></br>  Qty:{y.qty}
                         </p>
-                        {(y.comment!==undefined)?<p>Comentarios: {y.comment}</p>:""}
+                        {(y.comment!==undefined)?<p><b>Extra:</b> {y.comment}</p>:""}
                       </div>
                     ))}
 
-                    <h3>{x.status === "pending"
+                    <h4><i>{x.status === "pending"
                       ? ""
-                      :time(x.dateEntry, x.updatedAt)}</h3>
+                      :time(x.dateEntry, x.updatedAt)}</i></h4>
                     <br></br>
                     {x.status === "pending" ? (
                       <div>

@@ -1,7 +1,8 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import Login from "../components/Login";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, userEvent, waitFor } from "@testing-library/react";
+import {onSubmitForm} from '../components/Login'
 
 // import axios from 'axios'
 
@@ -65,8 +66,9 @@ test("should be login user", async () => {
 
   fireEvent.click(button);
 
-  expect(mockOnSubmit).toHaveBeenCalled();
-});
+  expect(typeof mockOnSubmit).toBe('function')
 
 //find-------> elementos asincronos
 //query--------->consulta de elmentos que pueden o no estar
+})
+
