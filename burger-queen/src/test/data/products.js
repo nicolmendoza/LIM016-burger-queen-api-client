@@ -3,25 +3,25 @@ const products = [
         name:'cafe',
         price:11,
         image:'imagen',
-        type:'desayuno'
+        type:'Desayuno'
       },
       {
         name:'hamburguesa2',
         price:11,
         image:'imagen2',
-        type:'hamburgesas'
+        type:'Hamburgesas'
       },
       {
         name:'gaseosa',
         price:11,
         image:'imagen',
-        type:'bebidades'
+        type:'Bebidas'
       },
       {
         name:'papas',
         price:11,
         image:'imagen',
-        type:'acompañamientos'
+        type:'Acompañamientos'
       }
 ]
 

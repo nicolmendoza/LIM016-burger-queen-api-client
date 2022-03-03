@@ -5,6 +5,7 @@ const orders = {
       client: "rosa",
       products: [
         {
+
           qty: 1,
           comment: "xx",
           product: {
@@ -13,12 +14,16 @@ const orders = {
             image: "imagen",
             type: "desayuno",
           },
-        },
-      ],
-      status: "pending",
-      date: "2021",
-    },
-  ],
-};
+
+        }],
+        status: "pending",
+        date: "2021",
+      },
+    
+]
+}
+
+  
 
 export default orders;
+

@@ -37,10 +37,9 @@ const Cart = ({
   };
   const [modal, setModal] = useState(bodyModal);
   const [stateModal, setStateModal] = useState(false);
-  const postNewOrder = () => {
-    console.log(cart);
-    // //  setCart([...cart, { ...product, qty: 1 }]);
-    // console.log(cart);
+
+  const postNewOrder = async() => {
+
     const array = cart.map((x) => ({
       productId: x._id,
       qty: x.qty,
@@ -54,16 +53,17 @@ const Cart = ({
       products: array,
       // comment: state.comment,
     };
-
-    axios
-      .post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
-      .then((response) => {
-        console.log(response.data);
-        setClient({ name: "" });
-        setCart([]);
-      });
-
-    setStateModal(true);
+    try{
+      await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
+      setClient({ name: "" });
+      setCart([]);
+      setStateModal(true);
+    } catch(err){
+      console.error(err?.response?.data)
+      setModal({title:'Error'})
+      setStateModal(true);
+    }
+    
   };
 
   const onChangeInput = (e) => {
@@ -158,7 +158,7 @@ const Cart = ({
         <ButtonCart padding="12px" onClick={() => postNewOrder()}>Generar Orden </ButtonCart>
       </div>
     </ContainerCart>
-      <Modal state={stateModal} changeState={setStateModal}>
+      <Modal data-testid='modal' state={stateModal} changeState={setStateModal}>
         <ContentModal>
           <p>{modal.title}</p>
           <p>{modal.body}</p>

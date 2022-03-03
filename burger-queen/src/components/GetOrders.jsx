@@ -124,7 +124,7 @@ const GetOrders = () => {
         ) : (
           <>
             <FilterOrders></FilterOrders>
-            {loading ? (
+            {loading ? 
               "Cargando..."
             ) : (
               <ContainerProduts data-testid="listOrders">
@@ -183,7 +183,7 @@ const GetOrders = () => {
                       </OrderDiv>
                     ))}
               </ContainerProduts>
-            )}
+            }
           </>
         )}
       </Container>
