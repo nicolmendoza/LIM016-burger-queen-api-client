@@ -12,8 +12,8 @@ const UserInfo = () => {
 
     return (
         <ContainerUser>
-            <p1>{apiData.nameUser}</p1>
-            <p2>{dateExact}</p2>
+            <p className='user'>{apiData.nameUser}</p>
+            <p className='fecha'>{dateExact}</p>
         </ContainerUser>
     )
 }
@@ -23,12 +23,12 @@ const ContainerUser = styled.div`
     display: flex;
     flex-direction: column;
 
-    p1{
+    .user{
         font-size:1.9rem;
         font-weight: 500
     }
 
-    p2{
+    .fecha{
         font-weight: lighter;
     }
 `

@@ -28,19 +28,27 @@ beforeEach(() => {
 //   document.body.appendChild(container);
 // });
 
-describe("render", () => {
+describe("New Order", () => {
   test("show filter", async () => {
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: data }));
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    // act(() => {
+    //     ReactDom.render(<Products />, container)
+    //   });
+    const { getByTestId, asFragment } = render(<Products />);
 
-    const { getByTestId, asFragment } = render(<Products />)
-
-    // userEvent.click(screen.getByText(/desayuno/i))
-    // eslint-disable-next-line testing-library/prefer-screen-queries
     const listNode = await screen.findByTestId("list");
-    console.log(listNode.children);
-    expect(listNode.children).toHaveLength(4)
 
+    expect(listNode.children).toHaveLength(4);
+    expect(screen.getByText(/cafe/i)).toBeInTheDocument();
+
+    const buttonDesayuno = await screen.findByRole("button", {
+      name: /desayuno/i,
+    });
+    userEvent.click(buttonDesayuno);
+    console.log(listNode);
     // eslint-disable-next-line testing-library/no-debugging-utils
-    // screen.debug();
+    // screen.debug()
+    //  expect(await screen.findByText(/cafe/i)).toBeInTheDocument();
   });
 });
