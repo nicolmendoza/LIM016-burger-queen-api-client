@@ -23,7 +23,7 @@ const Products = () => {
   const [totalFinal, setTotalFinal] = useState([]);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState(products);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [filter2, setFilter2] = useState(products);
 
   useEffect(() => {
@@ -32,10 +32,11 @@ const Products = () => {
 
   const allProducts = async() => {
     try {
-      const response = await getAllProducts(url, header, setLoading)
+      const response = await getAllProducts(url, header)
           setProducts(response.data)
           setFilter2(response.data)
           setFilter(response.data)
+          setLoading(false)
     } catch (e) {
       console.error(e)
     }
@@ -105,9 +106,9 @@ const Products = () => {
           </ButtonMenu>
         </div>
         
-        <ContainerElements height="9">
+        <ContainerElements height="9" data-testid="list">
           {filter2.map((x) => (
-              <DivData data={x}>
+              <DivData data={x} id={x._id}>
                 <div>
                 <p>{x.type}</p>
                 <p>{x.name}</p>

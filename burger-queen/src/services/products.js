@@ -11,11 +11,11 @@ const header = {
     Authorization: `Bearer ${token}`,
 }}
   
-export const getAllProducts = async (url, header, setLoading) => {
-    setLoading(true)
+export const getAllProducts = async (url, header) => {
+
     try{
         const request = await axios.get(`${url}${limit}`, header)
-        setLoading(false)
+
         return request;
     } catch (e) {
 
