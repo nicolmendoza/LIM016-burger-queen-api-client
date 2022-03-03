@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import CloseIcon from '@mui/icons-material/Close';
 import {colors} from '../style-components/elementos/Form.js'
 
-const Modal = ({children, state, changeState}) => {
+const Modal = ({children, state, changeState, ...rest}) => {
     return (
         <>
             {state && 
             <Overlay>
-                <ContenedorModal>
+                <ContenedorModal {...rest}>
                     <BotonCerrar onClick={() => changeState(false)}> x </BotonCerrar>
                     {children}
                 </ContenedorModal>

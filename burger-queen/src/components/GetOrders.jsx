@@ -111,10 +111,10 @@ const GetOrders = () => {
         ) : (
           <>
             <FilterOrders></FilterOrders>
-            {loading ? (
+            {loading ? 
               "Cargando..."
-            ) : (
-              <ContainerProduts>
+            : 
+              <ContainerProduts data-testid='list'>
                 { filter.length===0?"No hay pedidos en esta sección":  filter.map((x) => (
                   <OrderDiv background={handleBackground(x.status)} key={x._id} className="col-6 col-md-4">
                    <b> <p>Cliente : {x.client}</p></b>
@@ -144,7 +144,7 @@ const GetOrders = () => {
                   </OrderDiv>
                 ))}
               </ContainerProduts>
-            )}
+            }
           </>
         )}
       </Container>
