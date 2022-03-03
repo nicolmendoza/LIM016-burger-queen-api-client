@@ -31,11 +31,15 @@ const Products = () => {
   }, []);
 
   const allProducts = async() => {
-    const response = await getAllProducts(url, header, setLoading)
-    console.log(response)
-    setProducts(response.data)
-    setFilter2(response.data)
-    setFilter(response.data)
+    try {
+      const response = await getAllProducts(url, header, setLoading)
+          setProducts(response.data)
+          setFilter2(response.data)
+          setFilter(response.data)
+    } catch (e) {
+      console.error(e)
+    }
+    
   };
 
   const filterProductsByType = (type) => {
@@ -72,8 +76,6 @@ const Products = () => {
   };
 
   const changeQty = (product, e) => {
-    console.log(product)
-    console.log(e.target)
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
       return setCart(
