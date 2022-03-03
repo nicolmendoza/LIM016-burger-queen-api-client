@@ -1,7 +1,11 @@
-const data = [
+const orders = {
+  dataVacia: [],
+  dataPending: [
     {
-        client: "rosa",
-        products: [{
+      client: "rosa",
+      products: [
+        {
+
           qty: 1,
           comment: "xx",
           product: {
@@ -10,11 +14,16 @@ const data = [
             image: "imagen",
             type: "desayuno",
           },
+
         }],
         status: "pending",
         date: "2021",
       },
     
 ]
+}
 
-export default data
+  
+
+export default orders;
+

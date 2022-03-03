@@ -1,8 +1,16 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import Login from "../components/Login";
-import { render, screen, fireEvent, userEvent, waitFor } from "@testing-library/react";
-import {onSubmitForm} from '../components/Login'
+import { act } from 'react-dom/test-utils';
+import Modal from "../utils/modal";
+import {
+  render,
+  screen,
+  fireEvent,
+  userEvent,
+  waitFor,
+} from "@testing-library/react";
+import { onSubmitForm } from "../components/Login";
 
 // import axios from 'axios'
 
@@ -10,12 +18,17 @@ import {onSubmitForm} from '../components/Login'
 
 // console.log(axios)
 
+jest.mock('axios');
+
+
+localStorage.setItem('role',"admin")
 beforeEach(() => {
-  // eslint-disable-next-line testing-library/no-render-in-setup
-  render(<Login />);
+
 });
 
 test("Should contain texts", () => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
+  render(<Login />);
   // eslint-disable-next-line testing-library/no-debugging-utils
   screen.debug();
   const inicio = screen.getByRole("button", { name: /Iniciar/i });
@@ -27,6 +40,8 @@ test("Should contain texts", () => {
 });
 
 test("should view a help", async () => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
+  render(<Login />);
   // eslint-disable-next-line testing-library/await-async-query
   const inputPassword = await screen.findByPlaceholderText(
     "******************"
@@ -49,26 +64,47 @@ test("should view a help", async () => {
 });
 
 test("should be login user", async () => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
+  render(<Login />);
   const mockOnSubmit = jest.fn();
   const inputPassword = await screen.findByPlaceholderText(
     "******************"
   );
 
   const inputEmail = await screen.findByPlaceholderText("usuario@example.com");
-
   const button = screen.getByRole("button", { name: /Iniciar/i });
-
-  fireEvent.change(inputPassword, {
-    target: { value: /"usuario@example.com"/i },
-  });
-
-  fireEvent.change(inputEmail, { target: { value: /"contraseña"/i } });
-
+  fireEvent.change(inputPassword, { target: { value: /"usuario@example.com"/i }});
+  fireEvent.change(inputEmail, { target: { value: /"contraseña"/i }});
   fireEvent.click(button);
 
-  expect(typeof mockOnSubmit).toBe('function')
+  expect(typeof mockOnSubmit).toBe("function");
 
-//find-------> elementos asincronos
-//query--------->consulta de elmentos que pueden o no estar
-})
+  
+  //find-------> elementos asincronos
+  //query--------->consulta de elmentos que pueden o no estar
+});
 
+describe('App', () => {
+
+  test('axios post info user', async () => {
+    const res = 
+      { token: '1234'}
+    ;
+  //   axios.post.mockImplementationOnce(() =>
+  //     Promise.resolve({ data: res })
+  //   );
+
+  //    // eslint-disable-next-line testing-library/no-render-in-setup
+  // render(<Login />);
+  //   act(() => {
+      
+  // const setStateModa=()=>true
+  // ReactDOM.render(<Modal />, container);
+  //   });
+    await userEvent.click(screen.getByRole('button'));
+
+    // const items = await screen.findAllByRole('listitem');
+
+    // expect(items).toHaveLength(2);
+  });
+});

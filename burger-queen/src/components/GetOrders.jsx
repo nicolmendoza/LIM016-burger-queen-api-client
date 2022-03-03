@@ -10,7 +10,7 @@ import Sidebar from "./Navegador";
 
 const GetOrders = () => {
   const [state, setState] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const roleUser = localStorage.getItem("role");
   const [filter, setFilter] = useState([]);
@@ -25,16 +25,22 @@ const GetOrders = () => {
   };
   useEffect(() => {
     getOrders();
-    setLoading(true);
+    // setLoading(true);
   }, []);
 
-  const getOrders = () => {
-    axios.get(`${url}/orders?limit=100`, header).then((response) => {
-      console.log(response.data)
-      setState(response.data);
-      setFilter(response.data.filter((x) => x.status === "pending"));
-      setLoading(false);
-    });
+  const getOrders = async () => {
+    try{
+          const response = await axios.get(`${url}/orders?limit=100`, header);
+    console.log(response.data);
+    setState(response.data);
+    setFilter(response.data.filter((x) => x.status === "pending"));
+    setLoading(false);
+    console.log(loading)
+    }
+    catch(error){
+      console.log(error.data)
+    }
+
   };
 
   const orderLista = (x) => {
@@ -52,7 +58,6 @@ const GetOrders = () => {
         getOrders();
         console.log(response);
       });
-   
   };
 
   const filterFunction = (type) => {
@@ -91,16 +96,24 @@ const GetOrders = () => {
     var days = parseInt(mss / (1000 * 60 * 60 * 24));
     var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.round((mss % (1000 * 60)) / 1000) ;
+    var seconds = Math.round((mss % (1000 * 60)) / 1000);
     return (
-      "Tiempo de espera" + "       "+ days + ":" + hours + ":" + minutes + ":" + seconds 
+      "Tiempo de espera" +
+      "       " +
+      days +
+      ":" +
+      hours +
+      ":" +
+      minutes +
+      ":" +
+      seconds
     );
   };
 
   const handleBackground = (status) => {
-    if(status==='pending') return 'rgba(7, 120, 45, 0.35)'
-    if(status==='delivering') return 'rgba(112, 114, 22, 0.27)'
-  }
+    if (status === "pending") return "rgba(7, 120, 45, 0.35)";
+    if (status === "delivering") return "rgba(112, 114, 22, 0.27)";
+  };
 
   return (
     <>
@@ -113,36 +126,62 @@ const GetOrders = () => {
             <FilterOrders></FilterOrders>
             {loading ? 
               "Cargando..."
-            : 
-              <ContainerProduts data-testid='list'>
-                { filter.length===0?"No hay pedidos en esta sección":  filter.map((x) => (
-                  <OrderDiv background={handleBackground(x.status)} key={x._id} className="col-6 col-md-4">
-                   <b> <p>Cliente : {x.client}</p></b>
-                    <p><b>Status</b>:{x.status}</p>
-                    <p><b>Products:</b> </p>
-                    {x.products.map((y) => (
-                      <div>
-                
+            ) : (
+              <ContainerProduts data-testid="listOrders">
+                {filter.length === 0
+                  ? "No hay pedidos en esta sección"
+                  : filter.map((x) => (
+                      <OrderDiv
+                        background={handleBackground(x.status)}
+                        key={x._id}
+                        className="col-6 col-md-4"
+                      >
+                        <b>
+                          {" "}
+                          <p>Cliente : {x.client}</p>
+                        </b>
                         <p>
-                          {" * "}{y.product.name}<br></br>  Qty:{y.qty}
+                          <b>Status</b>:{x.status}
                         </p>
-                        {(y.comment!==undefined)?<p><b>Extra:</b> {y.comment}</p>:""}
-                      </div>
-                    ))}
+                        <p>
+                          <b>Products:</b>{" "}
+                        </p>
+                        {x.products.map((y) => (
+                          <div>
+                            <p>
+                              {" * "}
+                              {y.product.name}
+                              <br></br> Qty:{y.qty}
+                            </p>
+                            {y.comment !== undefined ? (
+                              <p>
+                                <b>Extra:</b> {y.comment}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        ))}
 
-                    <h4><i>{x.status === "pending"
-                      ? ""
-                      :time(x.dateEntry, x.updatedAt)}</i></h4>
-                    <br></br>
-                    {x.status === "pending" ? (
-                      <div>
-                        <Button onClick={() => orderLista(x._id)}>Listo</Button>
-                      </div>
-                    ) : (
-                      <Button>"Para Entregar"</Button>
-                    )}
-                  </OrderDiv>
-                ))}
+                        <h4>
+                          <i>
+                            {x.status === "pending"
+                              ? ""
+                              : time(x.dateEntry, x.updatedAt)}
+                          </i>
+                        </h4>
+                        <br></br>
+                        {x.status === "pending" ? (
+                          <div>
+                            <Button onClick={() => orderLista(x._id)}>
+                              Listo
+                            </Button>
+                          </div>
+                        ) : (
+                          <Button>"Para Entregar"</Button>
+                        )}
+                      </OrderDiv>
+                    ))}
               </ContainerProduts>
             }
           </>
