@@ -7,7 +7,7 @@ import {
   ContainerProduts,
   OrderDiv,
   Container,
-  ButtonModal
+  ButtonModal,
 } from "../style-components/components";
 import Sidebar from "./Navegador";
 import { color } from "@mui/system";
@@ -33,13 +33,16 @@ const Orders = () => {
     getOrders();
   }, []);
 
-  const getOrders = () =>
-    getAllOrders(url, options).then((order) => {
-      console.log(order);
-      setOrders(order);
-      setFilter(order);
+  const getOrders = async () => {
+    try {
+      const res = await axios.get(`${url}/orders?limit=100`, token);
+      setOrders(res.data);
+      setFilter(res.data);
       setLoading(false);
-    });
+    } catch (err) {
+      console.log(err.data);
+    }
+  };
 
   function ButtonStatus(order) {
     const isLoggedIn = order.isLoggedIn;
@@ -69,11 +72,11 @@ const Orders = () => {
   };
 
   const handleBackground = (status) => {
-    if(status==='pending') return 'rgba(7, 120, 45, 0.35)'
-    if(status==='canceled') return 'rgba(114, 22, 22, 0.35)'
-    if(status==='delivering') return 'rgba(112, 114, 22, 0.27)'
-    if(status==='delivered') return 'rgba(22, 108, 114, 0.27)'
-  }
+    if (status === "pending") return "rgba(7, 120, 45, 0.35)";
+    if (status === "canceled") return "rgba(114, 22, 22, 0.35)";
+    if (status === "delivering") return "rgba(112, 114, 22, 0.27)";
+    if (status === "delivered") return "rgba(22, 108, 114, 0.27)";
+  };
   const allProducts = () => {
     setFilter(orders);
   };
@@ -85,7 +88,7 @@ const Orders = () => {
   return (
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container background='../img/back.jpg'>
+      <Container background="../img/back.jpg">
         {roleUser === "cocinera" ? (
           "No tiene acceso para esta ruta"
         ) : (
@@ -108,19 +111,25 @@ const Orders = () => {
             {loading ? (
               "Cargando..."
             ) : (
-              <ContainerProduts>
+              <ContainerProduts data-testid="listOrders">
                 {filter.map((x) => (
-                    <React.Fragment key={x._id}>
+                  <React.Fragment key={x._id}>
                     <OrderDiv background={handleBackground(x.status)}>
                       <p style={{ textTransform: "uppercase" }}>{x.status}</p>
                       <div>{x.client ? <p>Cliente : {x.client}</p> : ""}</div>
-                      <b><p>Productos : </p></b>
+                      <b>
+                        <p>Productos : </p>
+                      </b>
                       {x.products.map((product) => (
                         <div key={product._id}>
                           <p>{product.product.name}</p>
-                
+
                           <p> Qty : {product.qty}</p>
-                      {product.comment?<p>Extra :{product.comment} </p>:""}
+                          {product.comment ? (
+                            <p>Extra :{product.comment} </p>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       ))}
                       <ButtonStatus isLoggedIn={x} />

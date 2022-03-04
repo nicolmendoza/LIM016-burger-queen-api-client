@@ -126,7 +126,7 @@ const GetOrders = () => {
             <FilterOrders></FilterOrders>
             {loading ? 
               "Cargando..."
-            ) : (
+           : (
               <ContainerProduts data-testid="listOrders">
                 {filter.length === 0
                   ? "No hay pedidos en esta sección"
@@ -183,7 +183,7 @@ const GetOrders = () => {
                       </OrderDiv>
                     ))}
               </ContainerProduts>
-            }
+           )}
           </>
         )}
       </Container>

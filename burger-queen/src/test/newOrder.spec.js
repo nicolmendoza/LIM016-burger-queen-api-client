@@ -8,6 +8,7 @@ import userEvent from "@testing-library/user-event";
 import data from "./data/products.js";
 import { act } from "react-dom/test-utils";
 import ReactDom from "react-dom";
+import Cart from '../components/New Order/components/Cart'
 
 jest.mock("axios");
 
@@ -90,7 +91,7 @@ describe.only('Cart', () => {
 //   document.body.appendChild(container);
 // });
 
-describe("New Order", () => {
+describe("New Order2", () => {
   test("show filter", async () => {
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: data }));
     // eslint-disable-next-line testing-library/no-unnecessary-act
