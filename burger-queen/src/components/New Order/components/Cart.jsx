@@ -15,7 +15,6 @@ import Modal from "../../../utils/modal";
 const Cart = ({
   cart,
   setCart,
-  addProduct,
   deleteProduct,
   totalFinal,
   setTotalFinal,
@@ -57,9 +56,9 @@ const Cart = ({
       await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
       setClient({ name: "" });
       setCart([]);
+      setModal({...modal, body:`Cliente: ${newOrder.client}`})
       setStateModal(true);
     } catch(err){
-      console.error(err?.response?.data)
       setModal({title:'Error'})
       setStateModal(true);
     }
@@ -84,8 +83,8 @@ const Cart = ({
       })
     );
 
-    // );
-    console.log(cart);
+    // // );
+    // console.log(cart);
   };
 
   const productoPrecio = (a, b) => {
@@ -104,7 +103,7 @@ const Cart = ({
 
   return (
   <>
-    <ContainerCart>
+    <ContainerCart data-testid='containerCart'>
       <div className='header-cart'>
         <h>Ordenes</h>
         <div className="inputClient">
@@ -130,8 +129,7 @@ const Cart = ({
         {cart.length === 0
         ? "No hay productos en la lista"
         : cart.map((x) => (
-          <React.Fragment key={`id-${x._id}`}>
-          <Item className={`id-${x._id}`}>
+          <Item id={`id-${x._id}`} data-testid={`id-${x._id}`}>
             <img src={x.image} style={{ width: 50, height: 50 }} alt={x.name} />
             <div>
               <p>{x.name}</p>
@@ -145,9 +143,8 @@ const Cart = ({
                 name={x._id}
                 className='comment'
             />
-            <ButtonClear className="fa-regular fa-trash-can" onClick={() => deleteProduct(x)}/>
+            <ButtonClear className="fa-regular fa-trash-can" onClick={() => deleteProduct(x)} data-testid={`delete-${x.name}`} />
           </Item>
-          </React.Fragment>
           ))}
       </ListOrden>
       <div className='footer-Cart'>
