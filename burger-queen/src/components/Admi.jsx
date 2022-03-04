@@ -86,13 +86,7 @@ const Admi = () => {
       .then(() => getUsers(newUrl));
   };
 
-  // const deleteUser = (id) => {
-  //   axios
-  //     .delete(`${url}/users/${id}`, header)
-  //     .then((response) => console.log(response))
-  //     .then(() => getUsers())
-  //     .catch((e) => console.log(e));
-  // };
+
 
   return (
     <div>

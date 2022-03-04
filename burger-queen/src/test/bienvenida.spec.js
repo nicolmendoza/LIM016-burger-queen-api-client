@@ -13,7 +13,6 @@ test("Should contain texts", () => {
   screen.debug();
 
   const button = screen.getByRole("button", { name: /Iniciar sesión/i });
-  
   const inicio = screen.getByRole("button", { name: /Iniciar/i });
   fireEvent.click(button);
   expect(button).toBeInTheDocument();
