@@ -38,7 +38,7 @@ const Products = () => {
           setFilter(response.data)
           setLoading(false)
     } catch (e) {
-      console.error(e)
+      console.error(e.response.data)
     }
     
   };
@@ -51,7 +51,7 @@ const Products = () => {
   const [cart, setCart] = useState([]);
 
   const addProduct = (product) => {
-    console.log(product)
+
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
       return setCart(
@@ -59,10 +59,10 @@ const Products = () => {
       );
     } 
       return setCart([...cart, { ...product, qty: 1 }]);
-    
   };
 
   const deleteProduct = (product) => {
+    console.log('eliminado')
     return setCart(cart.filter((x) => x._id !== product._id));
     // if (product.qty === 1) {
     //   return setCart(cart.filter((x) => x._id !== product._id));
@@ -114,7 +114,7 @@ const Products = () => {
                 <p>{x.name}</p>
                 <p>Precio: S/{x.price}</p>
                 </div>
-                <Button color="black" onClick={() => addProduct(x)}>Add</Button>
+                <Button color="black" onClick={() => addProduct(x)}  data-testid={x.name}>Add</Button>
               </DivData>
           ))}
         </ContainerElements>
