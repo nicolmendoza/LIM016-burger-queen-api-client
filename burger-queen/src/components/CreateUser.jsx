@@ -65,7 +65,7 @@ const CreateUser = ({ getUsersSave }) => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    handleClose();
+
     const url = "https://bq-api-2022.herokuapp.com";
 
     let options = {
@@ -85,6 +85,7 @@ const CreateUser = ({ getUsersSave }) => {
       nameUser:""
     });
     getUsersSave();
+    handleClose();
   };
   return (
     <div>

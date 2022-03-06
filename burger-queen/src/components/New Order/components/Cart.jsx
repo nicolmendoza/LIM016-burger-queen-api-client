@@ -53,10 +53,11 @@ const Cart = ({
       // comment: state.comment,
     };
     try{
-      await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
+      const res=await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
+      console.log(res) 
       setClient({ name: "" });
       setCart([]);
-      setModal({...modal, body:`Cliente: ${newOrder.client}`})
+      setModal({...modal, body:`Cliente: ${res.data.client}`})
       setStateModal(true);
     } catch(err){
       setModal({title:'Error'})

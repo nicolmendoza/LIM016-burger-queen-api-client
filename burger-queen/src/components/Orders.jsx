@@ -35,7 +35,7 @@ const Orders = () => {
 
   const getOrders = async () => {
     try {
-      const res = await axios.get(`${url}/orders?limit=100`, token);
+      const res = await axios.get(`${url}?limit=100`, options);
       setOrders(res.data);
       setFilter(res.data);
       setLoading(false);

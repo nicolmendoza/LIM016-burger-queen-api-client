@@ -1,59 +1,65 @@
-import axios from 'axios'
+import axios from "axios";
 
-const url='https://bq-api-2022.herokuapp.com/products'
-const url2='https://bq-api-2022.herokuapp.com/users'
+const url = "https://bq-api-2022.herokuapp.com/products";
+const url2 = "https://bq-api-2022.herokuapp.com/users";
 const token = localStorage.getItem("token");
 
-const limit='?limit=50'
+const limit = "?limit=50";
 
 const header = {
-    headers: { 
+  headers: {
     Authorization: `Bearer ${token}`,
-}}
-  
+  },
+};
+
 export const getAllProducts = async (url, header) => {
+  try {
+    const request = await axios.get(`${url}${limit}`, header);
 
-    try{
-        const request = await axios.get(`${url}${limit}`, header)
-
-        return request;
-    } catch (e) {
-
-    }
-    
-}
+    return request;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const createProduct = async (credentials, config) => {
-    const {name, price, image, type} = credentials
-    const data = await axios.post(url, {name, price:Number(price), image, type}, config)
-    return data
-}
+  const { name, price, image, type } = credentials;
+  const data = await axios.post(
+    url,
+    { name, price: Number(price), image, type },
+    config
+  );
+  return data;
+};
 
 export const getOneProduct = (id, config) => {
-    const data = axios.get(`${url}/${id}`, config)
-    .then((res) => res.data)
-    console.log(data)
-    return data
-    // console.log(`${url}/${id}`)
-    // console.log(request.then(response => response.data))
-    // return  request.then(response => response.data)
-}
+  const data = axios.get(`${url}/${id}`, config).then((res) => res.data);
+  console.log(data);
+  return data;
+  // console.log(`${url}/${id}`)
+  // console.log(request.then(response => response.data))
+  // return  request.then(response => response.data)
+};
 
-export const editProduct = async (id,credentials, config) => {
-    const {name, price, image, type} = credentials
-    const data = await axios.put(`${url}/${id}`, {name, price:Number(price), image, type}, config)
-    return data
-}
+export const editProduct = async (id, credentials, config) => {
+  const { name, price, image, type } = credentials;
+  const data = await axios.put(
+    `${url}/${id}`,
+    { name, price: Number(price), image, type },
+    config
+  );
+  return data;
+};
 
 export const deleteProduct = async (url, id, config) => {
-    console.log(`${url}/${id}`)
-    const deleteProd =  await axios.delete(`${url}/${id}`, config)
-    console.log(deleteProd)
-    return deleteProd
+  console.log(`${url}/${id}`);
+  const deleteProd = await axios.delete(`${url}/${id}`, config);
+  console.log(deleteProd);
+  return deleteProd;
 };
 
 export const deleteUser = async (id, config) => {
-    return await axios.delete(`${url}/${id}`, config)
+  return await axios.delete(`${url}/${id}`, config);
 };
 
-// export default {getAllProducts, } 
+// export default {getAllProducts, }

@@ -30,7 +30,11 @@ describe('New Order', () => {
         
         const { getByTestId, asFragment } = render(<Products />)
         const listNode = await screen.findByTestId('list');;
+        // eslint-disable-next-line testing-library/no-node-access
         expect(listNode.children).toHaveLength(4)
+            // eslint-disable-next-line testing-library/no-debugging-utils
+    screen.debug()
+        
     });
     test('Show product cafe with filter Desayuno',  async () => {
 
@@ -38,6 +42,7 @@ describe('New Order', () => {
         await screen.findByTestId('list');
         userEvent.click(screen.getByRole("button", {name: /desayuno/i,}))
         const list = await screen.findByTestId('list')
+                // eslint-disable-next-line testing-library/no-node-access
         expect(list.children).toHaveLength(1)  
         expect(screen.getByText('cafe')).toBeInTheDocument()
     });
@@ -47,6 +52,7 @@ describe('New Order', () => {
         await screen.findByTestId('list');
         userEvent.click(screen.getByRole("button", {name: /Hamburguesas/i,}))
         const list = await screen.findByTestId('list')
+                // eslint-disable-next-line testing-library/no-node-access
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('hamburguesa2')).toBeInTheDocument()
     });
@@ -56,7 +62,7 @@ describe('New Order', () => {
         await screen.findByTestId('list');
         userEvent.click(screen.getByRole("button", {name: /Complementos/i,}))
         const list = await screen.findByTestId('list')
-        
+                // eslint-disable-next-line testing-library/no-node-access
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('papas')).toBeInTheDocument()
     });
@@ -66,7 +72,7 @@ describe('New Order', () => {
         await screen.findByTestId('list');
         userEvent.click(screen.getByRole("button", {name: /Bebidas/i,}))
         const list = await screen.findByTestId('list')
-
+        // eslint-disable-next-line testing-library/no-node-access
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('gaseosa')).toBeInTheDocument()
     });
@@ -79,6 +85,7 @@ describe('New Order', () => {
 
         userEvent.click(screen.getByRole("button", {name: /All/i,}))
         const all = await screen.findByTestId('list')
+                // eslint-disable-next-line testing-library/no-node-access
         expect(all.children).toHaveLength(4)
         expect(screen.getByText('gaseosa')).toBeInTheDocument()
     });
@@ -205,7 +212,6 @@ describe('Cart', () => {
     
         await screen.findByTestId('modal')
         const msj = screen.getByText( /Orden Creada/)
-        screen.debug() 
 
         expect(msj).toBeInTheDocument()
         expect(screen.getByText( /Cliente: Rosa/)).toBeInTheDocument()  

@@ -3,6 +3,7 @@ import {getAllProducts, deleteProduct} from '../services/products'
 import CreateProduct from "./CreateProduct";
 import { Button3, ContainerElements, DivElement, ButtonMenu} from "../style-components/components";
 import DivData from '../utils/Container-Data'
+import axios from "axios";
 
 const Products = () => {
   const firstUrl='https://bq-api-2022.herokuapp.com/products'
@@ -28,20 +29,31 @@ const Products = () => {
       getProducts(url)
   }, []);
 
-  const getProducts = (url) => getAllProducts(url, options, setLoading)
-        .then((products) => {
-          const link = products.headers.link
-          const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
-          setPage((old) => ({
-            ...old,
-            first:arrayLink[0],
-            prev: arrayLink[1],
-            next: arrayLink[2],
-            last: arrayLink[3]
-          }))
-          setProducts(products.data)
-          setLoading(false)
-  })
+  const getProducts = (url) => getAllProducts(url, options)
+
+
+  const getAllProducts = async (url, header) => {
+    try {
+      const products = await axios.get(`${url}?limit${100}`, header);
+      const link = products.headers.link
+      console.log(link)
+      const arrayLink = link.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi)
+      setPage((old) => ({
+        ...old,
+        first:arrayLink[0],
+        prev: arrayLink[1],
+        next: arrayLink[2],
+        last: arrayLink[3]
+      }))
+      setProducts(products.data)
+      setLoading(false)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
 
   const handlePagination = (e) => {
     console.log(e.target.value)
@@ -51,11 +63,10 @@ const Products = () => {
   }
   
   const handleDelete = async (id) => {
-    
-    const res = await deleteProduct(firstUrl, id, options)
+    const res = await axios.delete(`${url}/${id}`, options);
     console.log(res)
-    getProducts(url)
-}
+   return getProducts(url)  
+    };
 
   return (
     <div>
@@ -64,13 +75,13 @@ const Products = () => {
         <ButtonMenu type="submit" className="btn-login" value={page.prev} onClick={handlePagination}> Prev </ButtonMenu>
         <ButtonMenu type="submit" className="btn-login"  value={page.next} onClick={handlePagination}> Next </ButtonMenu>
         </div>
-        {loading ? "Cargando..." : <ContainerElements>
+        {loading ? "Cargando..." : <ContainerElements data-testid="listProducts">
           <DivElement>
             <CreateProduct getProducts={getProducts}/>
             <p>Add new product</p>
           </DivElement>
           {products.map((product) => (
-            <DivData key={product._id} data={product}>
+            <DivData key={`${product._id}-"ID"`} data={product}>
                 <div>
                 <p>{product.type}</p>
                 <p>{product.name}</p>

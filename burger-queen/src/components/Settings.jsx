@@ -33,7 +33,8 @@ const Settings = () => {
               title="Usuarios" 
               description="Crear, modificar y eliminar usuarios"
               value="users"
-              changeState={setValue} 
+              changeState={setValue}
+              
               />
             <Button2 
               icon={<FastfoodIcon/>} 
@@ -43,8 +44,8 @@ const Settings = () => {
               changeState={setValue} 
               />
           </Menu>
-          <Menu width="container">
-            {value === "users" ? <Admi /> : <Products />}
+          <Menu width="container" >
+            {value === "users" ? <Admi  /> : <Products />}
           </Menu>
         </ContainerSetting> }        
       </Container>
