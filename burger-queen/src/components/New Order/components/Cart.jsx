@@ -45,7 +45,6 @@ const Cart = ({
       comment: x.comment,
     }));
 
-    // console.log(array);
     const newOrder = {
       client: client.name,
       userId: userId,
@@ -53,10 +52,11 @@ const Cart = ({
       // comment: state.comment,
     };
     try{
-      await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
+      const response = await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
+      console.log(response.data)
       setClient({ name: "" });
       setCart([]);
-      setModal({...modal, body:`Cliente: ${newOrder.client}`})
+      setModal({...modal, body:`Cliente: ${response.data.client}`})
       setStateModal(true);
     } catch(err){
       setModal({title:'Error'})
