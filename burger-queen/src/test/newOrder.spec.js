@@ -6,8 +6,13 @@ import { render, cleanup, waitForElement, screen, fireEvent } from '@testing-lib
 import userEvent from '@testing-library/user-event';
 import data from './data/products.js'
 import Cart from '../components/New Order/components/Cart'
+import input from '../components/New Order/components/input'
 
-jest.mock("axios");
+jest.mock("axios", () => ({
+    ...jest.requireActual('axios'),
+    post: jest.fn(),
+    get:jest.fn(),
+}) );
 
 beforeEach(() => {
   // eslint-disable-next-line testing-library/no-render-in-setup
@@ -24,38 +29,39 @@ beforeEach(() => {
 describe('New Order', () => {
     beforeEach(() => {
         axios.get.mockImplementationOnce(() =>
-            Promise.resolve({data: data}))
+            Promise.resolve({data: data})) 
     })
     test('show 4 products in screen', async () => {
         
         const { getByTestId, asFragment } = render(<Products />)
-        const listNode = await screen.findByTestId('list');;
+        const listNode = await screen.findByTestId('listOrders');
+        console.log(listNode); 
         expect(listNode.children).toHaveLength(4)
     });
     test('Show product cafe with filter Desayuno',  async () => {
 
         render(<Products />)
-        await screen.findByTestId('list');
+        await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /desayuno/i,}))
-        const list = await screen.findByTestId('list')
+        const list = await screen.findByTestId('listOrders')
         expect(list.children).toHaveLength(1)  
         expect(screen.getByText('cafe')).toBeInTheDocument()
     });
 
     test('Show product hamburguesa with filter Hamburguesa',  async () => {
         render(<Products />)
-        await screen.findByTestId('list');
+        await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /Hamburguesas/i,}))
-        const list = await screen.findByTestId('list')
+        const list = await screen.findByTestId('listOrders')
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('hamburguesa2')).toBeInTheDocument()
     });
 
     test('Show product papas with filter Complementos',  async () => {
         render(<Products />)
-        await screen.findByTestId('list');
+        await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /Complementos/i,}))
-        const list = await screen.findByTestId('list')
+        const list = await screen.findByTestId('listOrders')
         
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('papas')).toBeInTheDocument()
@@ -63,9 +69,9 @@ describe('New Order', () => {
 
     test('Show product gaseosa with filter Bebidas',  async () => {
         render(<Products />)
-        await screen.findByTestId('list');
+        await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /Bebidas/i,}))
-        const list = await screen.findByTestId('list')
+        const list = await screen.findByTestId('listOrders')
 
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('gaseosa')).toBeInTheDocument()
@@ -73,19 +79,19 @@ describe('New Order', () => {
 
     test('Show all products with filter All',  async () => {
         render(<Products />)
-        await screen.findByTestId('list');
+        await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /Bebidas/i,}))
-        const list = await screen.findByTestId('list')
+        const list = await screen.findByTestId('listOrders')
 
         userEvent.click(screen.getByRole("button", {name: /All/i,}))
-        const all = await screen.findByTestId('list')
+        const all = await screen.findByTestId('listOrders')
         expect(all.children).toHaveLength(4)
         expect(screen.getByText('gaseosa')).toBeInTheDocument()
     });
 
     test('Add product in cart',  async () => {
         render(<Products />)
-        await screen.findByTestId('list');
+        await screen.findByTestId('listOrders');
         userEvent.click(screen.getByTestId('papas'))
 
         const item = screen.getByTestId('id-4') 
@@ -96,6 +102,10 @@ describe('New Order', () => {
 })
 
 describe('Cart', () => {
+    beforeEach(() => {
+        axios.get.mockImplementationOnce(() =>
+            Promise.resolve({data: data})) 
+    })
     test('envia una orden', async   () =>{
         const arrOrden = [{
                 qty: 1,
@@ -166,80 +176,130 @@ describe('Cart', () => {
     })
 
     test('Envia una orden con nombre del cliente y un comentario', async () =>{ //aun falta
-        const arrOrden = [{
+        let arrOrden = [{
             qty: 1,
             name: "cafe",
             price: 11,
             image: "imagen",
-            type: "desayuno"
-        }]
-    
-        render(<Cart cart={arrOrden} setCart={() => {}} />)
+            type: "desayuno",
+            _id:'1'
+        }] 
+
+        render(<Cart cart={arrOrden} setCart={() => {}} changeQty={() => {}} />)
+
         const name = await screen.findByPlaceholderText("Nombre del cliente");
         const comment = await screen.findByPlaceholderText("Añade un extra");
+        // const qty = await screen.findByPlaceholderText("0");
 
+        // const changeQty1 = (changeQty) => Promise.resolve([{
+        //     qty: changeQty,
+        //     name: "cafe",
+        //     price: 11,
+        //     image: "imagen",
+        //     type: "desayuno",
+        //     _id:1
+        // }])
 
+        // fireEvent.change(qty, changeQty1('4'))
         fireEvent.change(name, { target: { value: "Rosa"} });
-        fireEvent.change(comment, { target: { value: "Sin lechuga" } })
+        fireEvent.change(comment, { target: { value: "Sin lechuga" } }) 
 
+        expect(screen.getByDisplayValue( 'Rosa')).toBeInTheDocument()  
 
-        const orden = [{
+        const orden = {
+            userId:'12345',
             client: "Rosa",
             products: [{
-            qty: 10,
+            qty: 1,
             comment: "Sin lechuga",
             product: {
+            _id:'1',
             name: "cafe",
             price: 11,
             image: "imagen",
-            type: "desayuno",
-          },
-        }]
-        }] 
-        axios.post.mockImplementationOnce(() => Promise.resolve({data: orden})
-        )
+            type: "desayuno"}
+            }],
+            status:'pending'
+        } 
+
+        axios.post.mockImplementationOnce(() => Promise.resolve({ data: orden })) 
 
         const elem = screen.getByRole("button", {name: /Generar Orden/i,})
 
         userEvent.click(elem)
     
-        await screen.findByTestId('modal')
+        await screen.findByTestId('modal') 
         const msj = screen.getByText( /Orden Creada/)
-        screen.debug() 
-
+         
         expect(msj).toBeInTheDocument()
         expect(screen.getByText( /Cliente: Rosa/)).toBeInTheDocument()  
     })
     
     test('Elimina un item del cart', async () =>{ //aun falta
-        const arrOrden = [{
-            qty: 1,
-            _id:1,
-            name: "cafe",
-            price: 11,
-            image: "imagen",
-            type: "desayuno"
-        },
-        {
-            qty: 1,
-            _id:2,
-            name: "hamburguesa",
-            price: 11,
-            image: "imagen",
-            type: "hamburguesa"
-        }]
-        console.log(arrOrden[0])
-        render(<Cart cart={arrOrden} setCart={() => {}} deleteProduct={() => {}}/>)
-        const name = await screen.findByPlaceholderText("Nombre del cliente");
+        render(<Products />)
+        await screen.findByTestId('listOrders');
+        userEvent.click(screen.getByTestId('papas'))
+        userEvent.click(screen.getByTestId('cafe'))
 
-        fireEvent.change(name, { target: { value: "Rosa"} });
+        expect(screen.getByTestId('id-4')).toHaveTextContent('papas')
+        expect(screen.getByTestId('id-1')).toHaveTextContent('cafe')
 
         const button = await screen.findByTestId('delete-cafe') 
 
-        userEvent.click(button) 
+        userEvent.click(button)
+
+        expect(screen.queryByTestId('id-1')).toBeNull()
+    })
+    test('Cambiar cantidad del producto en carrito', async () =>{ //aun falta
+        render(<Products />)
+        await screen.findByTestId('listOrders');
+        userEvent.click(screen.getByTestId('papas'))
+
+        expect(screen.getByTestId('id-4')).toHaveTextContent('papas')
+
+        const qty = await screen.findByPlaceholderText("0");
+
+        expect(qty).toHaveDisplayValue('1')
+
+        fireEvent.change(qty, { target: { value: "4"} })
+
+        expect(qty).toHaveDisplayValue('4')
+    })
+    test('Aumenta en 2 unidades al dar click en Add', async () =>{ //aun falta
+        render(<Products />)
+        await screen.findByTestId('listOrders');
+        userEvent.click(screen.getByTestId('papas'))
+
+        expect(screen.getByTestId('id-4')).toHaveTextContent('papas')
+
+        const qty = await screen.findByPlaceholderText("0");
+
+        expect(qty).toHaveDisplayValue('1')
+
+        userEvent.click(screen.getByTestId('papas'))
+
+        expect(qty).toHaveDisplayValue('2')
     })
 })
 
+describe('input', () => {
+    beforeEach(() => {
+        axios.get.mockImplementationOnce(() =>
+            Promise.resolve({data: data})) 
+    })
+    test('El buscador filtra con ham a hamburguesa', async () => {
+        render(<Products />)
+        await screen.findByTestId('listOrders')
+
+        const search = await screen.findByPlaceholderText("Buscar hamburguesas, bebidas, ...")
+
+        fireEvent.change(search, { target: { value: "h"} })
+
+        expect(screen.getByTestId('listOrders').children).toHaveLength(1) 
+        expect(screen.getByTestId('listOrders')).toHaveTextContent('Hamburguesas') 
+        screen.debug()
+    })
+})
 
 // describe("New Order2", () => {
 //   test("show filter", async () => {
@@ -266,3 +326,13 @@ describe('Cart', () => {
 //   });
 // });
 
+// act(() => {
+//     result.current.onChangeInput(event1) 
+// })
+// act(() => {
+//     result.current.onChangeInput(event2)
+// })
+// act(() => {
+//     const event = {preventDefault: jest.fn()}
+//     result.current.changeQty(event, event3)
+// })
