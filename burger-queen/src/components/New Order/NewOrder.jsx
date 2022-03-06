@@ -83,8 +83,7 @@ const Products = () => {
         cart.map((x) => (x._id === product._id ? { ...x, qty: parseInt(e.target.value) } : x))
       );
     } 
-      return setCart([...cart, { ...product, qty: 1 }]);
-    
+      // return setCart([...cart, { ...product, qty: 1 }]);
   };
 
   const ShowProducts = () => {
