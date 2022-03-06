@@ -18,7 +18,7 @@ beforeEach(() => {
   // eslint-disable-next-line testing-library/no-render-in-setup
   window.localStorage = {
     get: (key) => {
-      if (key === "role") {
+      if (key === "role") { 
         return "admin";
       }
     },
@@ -29,17 +29,16 @@ beforeEach(() => {
 describe('New Order', () => {
     beforeEach(() => {
         axios.get.mockImplementationOnce(() =>
-            Promise.resolve({data: data})) 
+            Promise.resolve({data: data.dataAll})) 
     })
     test('show 4 products in screen', async () => {
         
-        const { getByTestId, asFragment } = render(<Products />)
+        render(<Products />)
         const listNode = await screen.findByTestId('listOrders');
         console.log(listNode); 
         expect(listNode.children).toHaveLength(4)
             // eslint-disable-next-line testing-library/no-debugging-utils
     screen.debug()
-        
     });
     test('Show product cafe with filter Desayuno',  async () => {
 
@@ -107,7 +106,7 @@ describe('New Order', () => {
 describe('Cart', () => {
     beforeEach(() => {
         axios.get.mockImplementationOnce(() =>
-            Promise.resolve({data: data})) 
+            Promise.resolve({data: data.dataAll})) 
     })
     test('envia una orden', async   () =>{
         const arrOrden = [{
@@ -283,12 +282,13 @@ describe('Cart', () => {
 
         expect(qty).toHaveDisplayValue('2')
     })
+
 })
 
 describe('input', () => {
     beforeEach(() => {
         axios.get.mockImplementationOnce(() =>
-            Promise.resolve({data: data})) 
+            Promise.resolve({data: data.dataAll})) 
     })
     test('El buscador filtra con ham a hamburguesa', async () => {
         render(<Products />)

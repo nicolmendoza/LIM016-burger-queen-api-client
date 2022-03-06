@@ -84,6 +84,7 @@ const Login = () => {
         </Form>
       </div>
       <Modal
+        data-testid='modal' 
         state = {stateModal}
         changeState = {setStateModal}
       >
