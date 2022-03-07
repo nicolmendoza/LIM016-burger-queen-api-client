@@ -18,18 +18,40 @@ const Modal = ({children, state, changeState, ...rest}) => {
 }
 
 const Overlay = styled.div`
-    width: 100vw;
-    height: 100vh;
+
+
     position: fixed;
-    top:0;
-    left:0;
-    background: ${colors.background};
-    padding: 3rem; 
+    // display: -webkit-box;
+    // display: -webkit-flex;
+    // display: -ms-flexbox;
     display: flex;
+    // -webkit-align-items: center;
+    -webkit-box-align: center;
+    // -ms-flex-align: center;
     align-items: center;
+    // -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    // -webkit-justify-content: center;
     justify-content: center;
-    z-index:4
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+    z-index: 4;
 `
+    // width: 100vw;
+    // height: 100vh;
+    // position: fixed;
+    // top:-10rem;
+    // left:-10rem;
+    // background: ${colors.principal};
+    // padding: 3rem; 
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // z-index:4
 
 const ContenedorModal = styled.div`
     width: 25rem;

@@ -5,18 +5,24 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {createProduct} from '../services/products'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { display } from "@mui/system";
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    height:500,
+    width: 300,
+    height:300,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 3,
+    typography: {
+
+        fontFamily: 'Raleway, Arial',
+        fontSize: 30,
+      },
   };
 
 const CreateProduct = ({getProducts}) => {
@@ -51,11 +57,17 @@ const CreateProduct = ({getProducts}) => {
     
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        try{
+     e.preventDefault();
         handleClose()
         const res = await createProduct(newProduct, options)
         console.log(res)
-        getProducts(url)
+        getProducts(url)  
+        }
+        catch(e){
+            console.log(e)
+        }
+
     }
     
     return (

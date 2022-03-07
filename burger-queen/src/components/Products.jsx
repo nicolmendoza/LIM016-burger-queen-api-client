@@ -63,7 +63,7 @@ const Products = () => {
   }
   
   const handleDelete = async (id) => {
-    const res = await axios.delete(`${url}/${id}`, options);
+    const res = await axios.delete(`${firstUrl}/${id}`, options);
     console.log(res)
    return getProducts(url)  
     };
