@@ -19,6 +19,16 @@ jest.mock("axios", () => ({
   get:jest.fn(),
 }) );
 
+beforeEach(() => {
+  // eslint-disable-next-line testing-library/no-render-in-setup
+  window.localStorage = {
+    get: (key) => {
+      if (key === "role") { 
+        return "admin";
+      }
+    },
+  };
+});
 describe('Login', () => {
   test('Inicia sesión enviando email y password', async() => {
 
@@ -158,51 +168,43 @@ describe('Login', () => {
     expect(screen.queryByTestId('RemoveRedEyeRoundedIcon') ).toBeNull()
     expect(screen.getByTestId('VisibilityOffRoundedIcon') ).toBeInTheDocument() 
   })
+  test("Should contain texts", () => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
+  render(<Login />);
+  const inicio = screen.getByRole("button", { name: /Iniciar/i });
+  const password = screen.getByLabelText(/Password/i);
+  const email = screen.getByLabelText(/email/i);
+  expect(inicio).toBeInTheDocument();
+  expect(password).toBeInTheDocument();
+  expect(email).toBeInTheDocument();
+});
+
+  test("should view a help", async () => {
+      // eslint-disable-next-line testing-library/no-render-in-setup
+    render(<Login />);
+    // eslint-disable-next-line testing-library/await-async-query
+    const inputPassword = await screen.findByPlaceholderText(
+      "******************"
+    );
+
+    const inputEmail = await screen.findByPlaceholderText("usuario@example.com");
+
+    fireEvent.change(inputPassword, { target: { value: /"hi"/i } });
+    const spanText = await screen.findByText(
+      /La contraseña debe de tener entre 4 y 16 digitos/i
+    );
+
+    fireEvent.change(inputEmail, { target: { value: /"hi"/i } });
+    const spanText2 = await screen.findByText(
+      /El correo debe cumplir con el siguiente formato usuario@example.com/i
+    );
+
+    expect(spanText2).toBeInTheDocument();
+    expect(spanText).toBeInTheDocument();
+  });
 })
 
-// localStorage.setItem('role',"admin")
-// beforeEach(() => {
-
-// });
-
-// test("Should contain texts", () => {
-//     // eslint-disable-next-line testing-library/no-render-in-setup
-//   render(<Login />);
-//   // eslint-disable-next-line testing-library/no-debugging-utils
-//   screen.debug();
-//   const inicio = screen.getByRole("button", { name: /Iniciar/i });
-//   const password = screen.getByLabelText(/Password/i);
-//   const email = screen.getByLabelText(/email/i);
-//   expect(inicio).toBeInTheDocument();
-//   expect(password).toBeInTheDocument();
-//   expect(email).toBeInTheDocument();
-// });
-
-// test("should view a help", async () => {
-//     // eslint-disable-next-line testing-library/no-render-in-setup
-//   render(<Login />);
-//   // eslint-disable-next-line testing-library/await-async-query
-//   const inputPassword = await screen.findByPlaceholderText(
-//     "******************"
-//   );
-
-//   const inputEmail = await screen.findByPlaceholderText("usuario@example.com");
-
-//   fireEvent.change(inputPassword, { target: { value: /"hi"/i } });
-//   const spanText = await screen.findByText(
-//     /La contraseña debe de tener entre 4 y 16 digitos/i
-//   );
-
-//   fireEvent.change(inputEmail, { target: { value: /"hi"/i } });
-//   const spanText2 = await screen.findByText(
-//     /El correo debe cumplir con el siguiente formato usuario@example.com/i
-//   );
-
-//   expect(spanText2).toBeInTheDocument();
-//   expect(spanText).toBeInTheDocument();
-// });
-
-// test("should be login user", async () => {
+//   test.only("should be login user", async () => {
 //     // eslint-disable-next-line testing-library/no-render-in-setup
 //   render(<Login />);
 //   const mockOnSubmit = jest.fn();
@@ -222,6 +224,14 @@ describe('Login', () => {
 //   //find-------> elementos asincronos
 //   //query--------->consulta de elmentos que pueden o no estar
 // });
+
+
+// localStorage.setItem('role',"admin")
+// beforeEach(() => {
+
+// });
+
+
 
 // describe('App', () => {
 
