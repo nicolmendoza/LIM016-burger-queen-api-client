@@ -26,7 +26,7 @@ import {
 //   p: 10,
 // };
 
-const CreateUser = ({ getUsersSave }) => {
+const CreateUser = ({ getUsersSave}) => {
   const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
   // const [open, setOpen] = React.useState(false);
@@ -47,7 +47,7 @@ const CreateUser = ({ getUsersSave }) => {
 
   const [state, setState] = useState(initial);
   const [modal, setModal] = useState(bodyModal);
-  const [stateModal, setStateModal] = useState(false);
+  //const [stateModal, setStateModal] = useState(false);
   const options = (e) => {
     // console.log(e.target.value);
     if (e.target.value === "admin") {
@@ -97,132 +97,10 @@ const CreateUser = ({ getUsersSave }) => {
       nameUser: "",
     });
     getUsersSave();
-    setStateModal(false)
   };
 
-  const onClick = () => {
-    console.log("hi");
-    setStateModal(true);
-  };
   return (
-    <>
-      <div>
-        <AddCircleOutlineIcon onClick={() => onClick()} />
-        {/* <Modal
-        open={open}
-        onClose={handleClose} 
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-      <form className="container" onSubmit={onSubmitForm}>
-      <div className="form-group">
-          <label htmlFor="exampleInputImage1" className="form-label mt-4">
-            Name
-          </label>
-          <input
-            type="text"
-            name="nameUser"
-            value={state.nameUser}
-            className="form-control"
-            id="exampleInputImage1"
-            placeholder="Name"
-            onChange={onChangeInput}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1" className="form-label mt-4">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={state.email}
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            onChange={onChangeInput}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1" className="form-label mt-4">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={state.password}
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            onChange={onChangeInput}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputImage1" className="form-label mt-4">
-            Imagen
-          </label>
-          <input
-            type="text"
-            name="image"
-            value={state.image}
-            className="form-control"
-            id="exampleInputImage1"
-            placeholder="Imagen"
-            onChange={onChangeInput}
-          />
-        </div>
-        <fieldset className="form-group" onChange={options} value={state.roles} >
-          <legend className="mt-4">Roles</legend>
-          <div className="form-check">
-            <label className="form-check-label">
-              <input
-                type="radio"
-                className="form-check-input"
-                name="optionsRadios"
-                id="optionsRadios1"
-                value="admin"
-              />
-              Admin
-            </label>
-          </div>
-          <div className="form-check">
-            <label className="form-check-label">
-              <input
-                type="radio"
-                className="form-check-input"
-                name="optionsRadios"
-                id="optionsRadios2"
-                value="mesera"
-              />
-              Meserx
-            </label>
-          </div>
-          <div className="form-check disabled">
-            <label className="form-check-label">
-              <input
-                type="radio"
-                className="form-check-input"
-                name="optionsRadios"
-                id="optionsRadios3"
-                value="cocinera"
-                disabled=""
-              />
-              Cocinerx
-            </label>
-          </div>
-        </fieldset>
-        <div className="form-group">
-          <button type="submit" className="btn btn-primary">
-            Guardar
-          </button>
-        </div>
-      </form>
-        </Box>
-      </Modal> */}
 
-        <Modal state={stateModal} changeState={setStateModal}>
           <ContentModal>
             <form className="container" onSubmit={onSubmitForm}>
               <div className="form-group">
@@ -337,9 +215,6 @@ const CreateUser = ({ getUsersSave }) => {
             </form>
 
           </ContentModal>
-        </Modal>
-      </div>
-    </>
   );
 };
 
