@@ -6,10 +6,11 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import Login from "../components/Login";
 
+
 beforeEach(() => {
   // eslint-disable-next-line testing-library/no-render-in-setup
   window.localStorage = {
-    get: (key) => {
+    get: (key) =>  {
       if (key === "role") {
         return "admin";
       }
@@ -22,24 +23,29 @@ beforeEach(() => {
 
 test('full app rendering', () => {
   const history = createMemoryHistory()
-  render(
-    <Router history={history}>
-      <App />
-    </Router>,
-  )
-})
-
-test("routes login", () => {
-  const history = createMemoryHistory();
-  const route = "/login";
+    const route = "/login";
   history.push(route);
   render(
-    <Router history={history}>
+    <Router location={history}>
       <Login />
     </Router>
   );
-  // expect(screen.getByLabelText(/Iniciar/i)).toBeInTheDocument();
 
-  // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
-});
+  screen.debug()
+})
+
+// test("routes login", () => {
+//   const history = createMemoryHistory();
+//   const route = "/login";
+//   history.push(route);
+//   screen.
+//   render(
+//     <Router history={history}>
+//       <Login />
+//     </Router>
+//   );
+//   // expect(screen.getByLabelText(/Iniciar/i)).toBeInTheDocument();
+
+//   // eslint-disable-next-line testing-library/no-debugging-utils
+//   screen.debug();
+// });

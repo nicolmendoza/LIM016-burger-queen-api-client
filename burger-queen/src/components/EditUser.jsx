@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react"
+import { useParams } from "react-router-dom";
 import Sidebar from "./Navegador";
 import {Container} from '../style-components/components'
 import {Button, ButtonModal, ContentModal} from '../style-components/components'
@@ -9,10 +10,12 @@ import "../style-components/editUser.css";
 
 
 const EditUser = () => {
+  const { id } = useParams();
+  console.log(id)
   const roleUser = localStorage.getItem("role");
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
-  const id = window.location.pathname.slice(6);
+  // const id = window.location.pathname.slice(6);
 
 const bodyModal = {
   title: '',
