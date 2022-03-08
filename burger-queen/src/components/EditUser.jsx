@@ -10,12 +10,12 @@ import "../style-components/editUser.css";
 
 
 const EditUser = () => {
-  const { id } = useParams();
-  console.log(id)
+  // const { id } = useParams();
+  // console.log(id)
   const roleUser = localStorage.getItem("role");
   const url = "https://bq-api-2022.herokuapp.com";
   const token = localStorage.getItem("token");
-  // const id = window.location.pathname.slice(6);
+  const id = window.location.pathname.slice(6);
 
 const bodyModal = {
   title: '',
@@ -48,12 +48,13 @@ const bodyModal = {
     try{
       const response = await axios.get(`${url}/users/${id}`, config)
 
-      setState(() => ({
+      setState({
+        ...state,
         email: response.data.email,
         image: response.data.image,
         nameUser: response.data.nameUser,
         })
-      )
+      
     } catch (err){
       console.err(err.message)
     }

@@ -107,8 +107,18 @@ const products = {
       price: 11,
       image: "imagen",
       type: "Desayuno",
-    }
-  ]
+    },
+  
+ 
+  ],
+  productEdit:
+  {
+    _id: 1,
+    name: "cafe",
+    price: 11,
+    image: "imagen",
+    type: "Desayuno",
+  },
 };
 
 export default products;
