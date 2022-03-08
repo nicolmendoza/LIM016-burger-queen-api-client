@@ -14,7 +14,6 @@ import Error404 from "./components/Error404.jsx";
 import Profile from "./components/Profile.jsx";
 function App() {
   const token = localStorage.getItem("token");
-  console.log(!token);
   return (
     <BrowserRouter>
       <Routes>
