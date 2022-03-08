@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import App from "../App";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
+import { Router, BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../components/Login";
 
 
@@ -23,7 +23,17 @@ beforeEach(() => {
 
 test('full app rendering', () => {
   const history = createMemoryHistory()
-    const route = "/login";
+  render(
+    <Router location={history}>
+      <App />
+    </Router>,
+  )
+})
+
+test.only("routes login", () => {
+  const history = createMemoryHistory();
+  const route = "/login";
+  screen.debug()
   history.push(route);
   render(
     <Router location={history}>
@@ -31,21 +41,8 @@ test('full app rendering', () => {
     </Router>
   );
 
+
   screen.debug()
 })
 
-// test("routes login", () => {
-//   const history = createMemoryHistory();
-//   const route = "/login";
-//   history.push(route);
-//   screen.
-//   render(
-//     <Router history={history}>
-//       <Login />
-//     </Router>
-//   );
-//   // expect(screen.getByLabelText(/Iniciar/i)).toBeInTheDocument();
 
-//   // eslint-disable-next-line testing-library/no-debugging-utils
-//   screen.debug();
-// });

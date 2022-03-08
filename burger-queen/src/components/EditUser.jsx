@@ -80,17 +80,9 @@ const bodyModal = {
   const onSubmitForm = async (e) => {
     e.preventDefault();
 
-    const url = "https://bq-api-2022.herokuapp.com";
-
-    let options = {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        Authorization: `Bearer ${token}`,
-      },
-    };
     console.log(state);
     const res = await axios.put(`${url}/users/${id}`, state, options);
-
+    console.log(res)
 
     // localStorage.setItem("role", rol);
     const dataRoles=res.data.roles
@@ -109,8 +101,6 @@ const bodyModal = {
       setStateModal(true)
       return (window.location.href = "/profile");
     }
-   
-    console.log(res);
   };
   return (
     <>

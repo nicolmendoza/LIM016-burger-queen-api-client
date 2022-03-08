@@ -10,6 +10,9 @@ import {
 } from "../style-components/components";
 import { getAllProducts, deleteProduct } from "../services/products";
 import DivData from "../utils/Container-Data";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import Modal from "../utils/modal";
+
 
 const Admi = () => {
   const url = "https://bq-api-2022.herokuapp.com/users";
@@ -36,6 +39,7 @@ const Admi = () => {
   const [page, setPage] = useState(initialLink);
   const [loading, setLoading] = useState(false);
   const [state, setSate] = useState(initial);
+  const [stateModal, setStateModal] = useState(false);
 
   useEffect(() => {
     getUsers(newUrl);
@@ -68,8 +72,11 @@ const Admi = () => {
     }
   };
 
-  const getUsersSave = () =>
-  getAllProducts(newUrl, header);
+  const getUsersSave = () =>{
+    getAllProducts(newUrl, header);
+    setStateModal(false);
+  }
+  
 
     
 
@@ -86,7 +93,13 @@ const Admi = () => {
     getUsers(newUrl);
   };
 
+  const onClick = () => {
+    console.log("hi");
+    setStateModal(true);
+  };
+
   return (
+    <>
     <div>
       <h1>USUARIOS</h1>
       <div className="btn-next-prev">
@@ -114,7 +127,7 @@ const Admi = () => {
       ) : (
         <ContainerElements data-testid="list">
           <DivElement>
-            <CreateUser getUsersSave={getUsersSave}></CreateUser>
+            <AddCircleOutlineIcon onClick={() => onClick()} />
             <p>Add new user</p>
           </DivElement>
 
@@ -148,6 +161,10 @@ const Admi = () => {
         </ContainerElements>
       )}
     </div>
+    <Modal state={stateModal} changeState={setStateModal}>
+    <CreateUser getUsersSave={getUsersSave}></CreateUser>
+    </Modal> 
+    </>
   );
 };
 

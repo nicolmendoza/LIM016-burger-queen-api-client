@@ -69,6 +69,8 @@ test("Delete user", async () => {
   screen.debug();
 });
 
+
+
 test("Click button prev user", async () => {
   localStorage.setItem("role", "admin");
   axios.get.mockImplementationOnce(() =>
@@ -110,7 +112,7 @@ test("Click button next user", async () => {
   screen.debug();
 });
 
-test("Show data products", async () => {
+test("Delete Products", async () => {
   localStorage.setItem("role", "admin");
 
   axios.get.mockImplementationOnce(() =>
@@ -236,4 +238,99 @@ it("Not permission", async () => {
 
   const page404 = screen.getByText(/no tiene acceso para esta ruta/i);
   expect(page404).toBeInTheDocument();
+});
+
+it("create user", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+  const listNode = await screen.findByTestId("list");
+  console.log(listNode);
+
+  const icon = await screen.findByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+
+  axios.post.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataNewUser,
+    })
+  );
+
+  axios.get.mockImplementationOnce(() =>
+  Promise.resolve({
+    data: data.dataAllAndNewUser,
+    headers: {
+      link: data.dataLink,
+    },
+  })
+);
+
+  const buttonGuardar=screen.getByText('Guardar')
+  fireEvent.click(buttonGuardar)
+  await screen.findByTestId("list");
+
+  expect(screen.getByText('lesly@burgerqueen.com')).toBeInTheDocument()
+  screen.debug();
+
+});
+
+it("create product", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+
+  const products = screen.getByText(/Crear, modificar y eliminar productos/i);
+
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: dataProducts.dataAll,
+      headers: {
+        link: dataProducts.link,
+      },
+    })
+  );
+  fireEvent.click(products);
+
+  await screen.findByTestId("listProducts");
+
+  const buttonAddProduct = await screen.findByTestId("AddCircleOutlineIcon");
+
+  axios.post.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: dataProducts.newProduct,
+    })
+  );
+
+  fireEvent.click(buttonAddProduct);
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: dataProducts.dataAllAddNewProduct,
+      headers: {
+        link: dataProducts.link,
+      },
+    })
+  ); 
+
+  const buttonGuardar = screen.getByRole("button", { name: "Guardar" });
+  fireEvent.click(buttonGuardar);
+
+  // AddCircleOutlineIcon
+  await screen.findByTestId("listProducts");
+  expect(screen.getByText('huevos')).toBeInTheDocument()
+
+  screen.debug();
 });

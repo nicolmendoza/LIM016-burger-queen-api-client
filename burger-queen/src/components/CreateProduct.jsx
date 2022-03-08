@@ -1,34 +1,22 @@
 import React, { useState } from "react";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {createProduct} from '../services/products'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { display } from "@mui/system";
+import {
+  Button,
+  ButtonModal,
+  ContentModal,
+} from "../style-components/components";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300,
-    height:300,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 3,
-    typography: {
-
-        fontFamily: 'Raleway, Arial',
-        fontSize: 30,
-      },
-  };
 
 const CreateProduct = ({getProducts}) => {
+    const [stateModal, setStateModal] = useState(false);
+    // const [state, setState] = useState(initial);
     const url='https://bq-api-2022.herokuapp.com/products'
     const token = localStorage.getItem("token");
-    const [open, setOpen] = React.useState(false);
     let options = {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -36,8 +24,6 @@ const CreateProduct = ({getProducts}) => {
         },
     };
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     const initial = {
         name: "",
@@ -59,9 +45,9 @@ const CreateProduct = ({getProducts}) => {
     const handleSubmit = async (e) => {
         try{
      e.preventDefault();
-        handleClose()
         const res = await createProduct(newProduct, options)
         console.log(res)
+        setStateModal(false)
         getProducts(url)  
         }
         catch(e){
@@ -71,15 +57,8 @@ const CreateProduct = ({getProducts}) => {
     }
     
     return (
-    <div>
-        <AddCircleOutlineIcon onClick={handleOpen}/>
-        <Modal
-            open={open}
-            onClose={handleClose} 
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-        <Box sx={style}>
+        <>
+        <ContentModal>
             <form className="container" onSubmit={handleSubmit}>
             <div className="form-group">
             <label htmlFor="exampleInputName" className="form-label mt-4">
@@ -140,9 +119,8 @@ const CreateProduct = ({getProducts}) => {
             </button>
             </div>
             </form>
-        </Box>
-      </Modal>
-    </div>
+            </ContentModal>
+</>
 
     )
 }
