@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { editProduct, getOneProduct } from "../services/products";
 import "../style-components/editUser.css";
 import Sidebar from "./Navegador";
+import {Container} from '../style-components/components'
+import {Button, ButtonModal, ContentModal} from '../style-components/components'
+import Modal from "../utils/modal";
 
 const EditProduct = () => {
   const roleUser = localStorage.getItem("role");
@@ -18,6 +21,14 @@ const EditProduct = () => {
     },
   };
 
+  const bodyModal = {
+    title: 'Exito',
+    body: "Producto Actualizado"
+  }
+  
+  const [modal, setModal] = useState(bodyModal);
+  const [stateModal, setStateModal] = useState(false)
+  
   const initial = {
     name: "",
     price: "",
@@ -50,12 +61,18 @@ const EditProduct = () => {
 
     const res = await editProduct(id, product, options);
     console.log(res);
-    window.location.pathname = "/settings";
+    setProduct(res.data)
+    setStateModal(true)
   };
 
+  const onClick = () => {
+    setStateModal(false)
+    window.location.pathname = "/settings"
+  }
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
+      <Container>
       <div className="divImage">
         <img src={product.image} style={{ width: 200, height: 200 }} />
       </div>
@@ -114,6 +131,19 @@ const EditProduct = () => {
           </div>
         </form>
       </div>
+      </Container>
+      <Modal
+        data-testid='modal'
+        state = {stateModal}
+        changeState = {setStateModal}
+      >
+        <ContentModal>
+          <p>{modal.title}</p>
+          <p>{modal.body}</p>
+          <p>{product.name}</p>
+          <ButtonModal onClick={() => onClick()}> Aceptar </ButtonModal>
+        </ContentModal>
+      </Modal>
     </>
   );
 };
