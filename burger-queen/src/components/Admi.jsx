@@ -37,7 +37,7 @@ const Admi = () => {
     last: "",
   };
   const [page, setPage] = useState(initialLink);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [state, setSate] = useState(initial);
   const [stateModal, setStateModal] = useState(false);
 
@@ -45,14 +45,15 @@ const Admi = () => {
     getUsers(newUrl);
   }, []);
 
-  const getUsers = (newUrl) => getAllProducts(newUrl, header);
+  const getUsers = (newUrl) => getAllProducts(newUrl, header)
+  
 
   const getAllProducts = async (url, header) => {
     try {
       const res = await axios.get(`${url}?limit${100}`, header);
-      console.log(res);
+      
       const link = res.headers.link;
-      console.log(link);
+
       const arrayLink = link.match(
         /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
       );
@@ -66,6 +67,7 @@ const Admi = () => {
       setSate({...state,
         users: res.data,
       });
+      setLoading(false)
       return res;
     } catch (err) {
       console.log(err);
@@ -132,7 +134,7 @@ const Admi = () => {
           </DivElement>
 
           {state.users.map((user) => (
-            <DivData data={user}>
+            <DivData data={user} id={user._id} data-testid={user._id}>
               <div key={`${user._id}-"id"`}>
                 <h2>{user.nameUser}</h2>
                 <p>{user.email}</p>
@@ -145,6 +147,7 @@ const Admi = () => {
                   onClick={() => {
                     window.location.href = `/edit/${user._id}`;
                   }}
+                  data-testid={`edit-${user.nameUser}`}
                 >
                   Editar
                 </Button3>

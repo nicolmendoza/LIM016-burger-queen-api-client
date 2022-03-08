@@ -7,9 +7,10 @@ import { Router } from "react-router-dom";
 import EditUser from "../components/EditUser";
 import data from "./data/users";
 import dataProducts from "./data/products";
-
+import userEvent from '@testing-library/user-event';
 import axios from "axios";
 import EditProduct from "../components/EditProduct";
+
 jest.mock("axios");
 
 it("Show data initial Users", () => {
@@ -67,7 +68,7 @@ test("Delete user", async () => {
 
   expect(screen.queryByText("Luis")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });
 
 test("Click button prev user", async () => {
@@ -108,7 +109,7 @@ test("Click button next user", async () => {
   fireEvent.click(next);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(3);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });
 
 test("Delete Products", async () => {
@@ -160,7 +161,7 @@ test("Delete Products", async () => {
   // console.log(listNode)
   expect(screen.queryByText("cafe")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });
 
 test("Click button prev product", async () => {
@@ -226,7 +227,7 @@ test("Click button next product", async () => {
   const prev = screen.getByText(/next/i);
   fireEvent.click(prev);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(4);
-  screen.debug();
+  //screen.debug();
 });
 
 it("Not permission", async () => {
@@ -276,7 +277,7 @@ it("create user", async () => {
   await screen.findByTestId("list");
 
   expect(screen.getByText('lesly@burgerqueen.com')).toBeInTheDocument()
-  screen.debug();
+  //screen.debug();
 
 });
 
@@ -331,7 +332,7 @@ it("create product", async () => {
   await screen.findByTestId("listProducts");
   expect(screen.getByText('huevos')).toBeInTheDocument()
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("edit product", async () => {
@@ -372,6 +373,8 @@ it("edit product", async () => {
   const buttonsEditar=screen.getAllByRole('button',{name:/editar/i})
   fireEvent.click(buttonsEditar[0])
 
+  expect(buttonsEditar[0]).toBeValid() 
+  
   const history = createMemoryHistory();
   const route = "/editProduct/123";
   history.push(route);
@@ -381,8 +384,33 @@ it("edit product", async () => {
     </Router>
   );
 
-  screen.debug();
+  //screen.debug();
 });
+
+test("Button edit user redirect to other component", async() => {
+  Storage.prototype.getItem = jest.fn(() => 'admin');
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+  await screen.findByTestId('list')
+  const elem = await screen.findByTestId('edit-luisa')
+  userEvent.click(elem)
+  expect(elem).toBeValid()
+
+})
+
+test("To charge the page it started with Loading", async() => {
+  Storage.prototype.getItem = jest.fn(() => 'admin');
+  render(<Settings />);
+  expect(screen.getByText('Cargando...')).toBeInTheDocument()
+})
+
 
 // it.only("edit user", async () => {
 //   localStorage.setItem("role", "admin");
