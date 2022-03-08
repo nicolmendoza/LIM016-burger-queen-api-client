@@ -38,17 +38,27 @@ const bodyModal = {
   const [state, setState] = useState(initial);
 
   useEffect(() => {
-    axios.get(`${url}/users/${id}`, config).then((response) =>
+    getOneUser()
+  }, []);
+
+  const getOneUser = async() => {
+    try{
+      const response = await axios.get(`${url}/users/${id}`, config)
+
       setState(() => ({
         email: response.data.email,
         image: response.data.image,
         nameUser: response.data.nameUser,
-      }))
-    );
-  }, []);
+        })
+      )
+    } catch (err){
+      console.err(err.message)
+    }
+    
+  }
 
   const options = (e) => {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     if (e.target.value === "admin") {
       setState((old) => ({
         ...old,
@@ -68,6 +78,7 @@ const bodyModal = {
   };
 
   const onChangeInput = (e) => {
+    console.log(e.target.value)
     setState((old) => ({
       ...old,
       [e.target.name]: e.target.value,
@@ -78,7 +89,7 @@ const bodyModal = {
     e.preventDefault();
 
     console.log(state);
-    const res = await axios.put(`${url}/users/${id}`, state, options);
+    const res = await axios.put(`${url}/users/${id}`, state, config);
     console.log(res)
 
     // localStorage.setItem("role", rol);
@@ -116,7 +127,7 @@ const bodyModal = {
               type="text"
               name="nameUser"
               value={state.nameUser}
-              placeholder="Enter email"
+              placeholder="Enter name"
               onChange={onChangeInput}
               className="inputText"
             />
@@ -149,7 +160,7 @@ const bodyModal = {
               type="password"
               name="password"
               value={state.password}
-              placeholder="Password"
+              placeholder="**************"
               onChange={onChangeInput}
               className="inputText"
             /><br></br>
@@ -165,7 +176,7 @@ const bodyModal = {
               <div>
                 <label>
                   <input type="radio" name="optionsRadios" value="admin" />
-                  Admin
+                  Administrador
                 </label>
               </div>
               <div>
@@ -201,6 +212,7 @@ const bodyModal = {
       </div>
       </Container>
       <Modal
+        data-testid='modal'
         state = {stateModal}
         changeState = {setStateModal}
       >
