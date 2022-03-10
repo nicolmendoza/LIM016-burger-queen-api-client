@@ -3,3 +3,5 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+// // Mock `window.location` with Jest spies and extend expect
+// import "jest-location-mock";

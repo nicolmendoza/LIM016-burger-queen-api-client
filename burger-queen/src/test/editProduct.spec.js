@@ -62,4 +62,10 @@ describe('EditUser', () => {
         userEvent.click(cerrar)
         expect(screen.queryByTestId('modal')).toBeNull()
       })
+      test('Button close sesion', async() => {
+        render(<EditProduct/>)
+        const out = screen.getByText('Log Out')
+        userEvent.click(out)
+        expect(out).toBeValid()
+      })
 })  

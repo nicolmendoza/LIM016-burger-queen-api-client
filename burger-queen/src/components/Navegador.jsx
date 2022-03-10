@@ -88,6 +88,7 @@ const Sidebar = (role) => {
 
         <li className="profile" onClick={logOut}>
           <i className="bx bx-log-out" id="log_out"></i>
+          <span className="tooltip">Log Out</span>
         </li>
       </ul>
     </div>

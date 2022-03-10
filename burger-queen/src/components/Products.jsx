@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts, deleteProduct } from "../services/products";
-
+import Loader from '../utils/Loader'
 import {
   Button3,
   ContainerElements,
@@ -12,6 +12,7 @@ import axios from "axios";
 import Modal from "../utils/modal";
 import CreateProduct from "./CreateProduct";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import ModalCreate from '../utils/ModalCreate'
 
 const Products = () => {
   const firstUrl = "https://bq-api-2022.herokuapp.com/products";
@@ -29,7 +30,7 @@ const Products = () => {
   };
   const [url, setUrl] = useState(firstUrl);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(initialLink);
   const [stateModal, setStateModal] = useState(false);
 
@@ -103,10 +104,10 @@ const Products = () => {
             Next{" "}
           </ButtonMenu>
         </div>
-        {loading ? (
-          "Cargando..."
-        ) : (
           <ContainerElements data-testid="listProducts">
+          {loading ? 
+          <Loader/> : 
+            <>
             <DivElement>
             <AddCircleOutlineIcon onClick={() => onClick()} />
               <p>Add new product</p>
@@ -141,12 +142,13 @@ const Products = () => {
                 </div>
               </DivData>
             ))}
+            </>}
           </ContainerElements>
-        )}
+
       </div>
-      <Modal state={stateModal} changeState={setStateModal}>
+      <ModalCreate state={stateModal} changeState={setStateModal}>
         <CreateProduct getProducts={getProducts} />
-      </Modal>
+      </ModalCreate>
     </>
   );
 };

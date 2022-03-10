@@ -1,10 +1,9 @@
 import React from "react";
 import styled from 'styled-components'
 
-const DivData = ({data, children}) => {
+const DivData = ({data, children, ...rest}) => {
     return (
-        <ContainerData>
-
+        <ContainerData {...rest}>
                 <img src={data.image} alt=''/>
             {children}
         </ContainerData>

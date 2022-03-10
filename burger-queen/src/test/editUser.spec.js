@@ -30,7 +30,7 @@ describe('EditUser', () => {
   beforeEach(() => {
     axios.get.mockImplementationOnce(() =>
         Promise.resolve({data: data.dataAll[1]})) 
-})
+}) 
     test('Change information of user Luis waiter to chef', async() => {
       
       const {getByLabelText, rerender }=render(<EditUser/>)

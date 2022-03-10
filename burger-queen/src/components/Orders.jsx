@@ -10,7 +10,7 @@ import {
   ButtonModal,
 } from "../style-components/components";
 import Sidebar from "./Navegador";
-import { color } from "@mui/system";
+import Loader from '../utils/Loader'
 
 const Orders = () => {
   const url = "https://bq-api-2022.herokuapp.com/orders";
@@ -89,9 +89,9 @@ const Orders = () => {
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
       <Container background="../img/back.jpg">
-        {roleUser === "cocinera" ? (
+        {roleUser === "cocinera" ? 
           "No tiene acceso para esta ruta"
-        ) : (
+         : 
           <>
             <div className="buttons d-flex justify-content-center mb-2">
               <Button onClick={() => allProducts()}>Todas</Button>
@@ -108,9 +108,9 @@ const Orders = () => {
                 Cancelados
               </Button>
             </div>
-            {loading ? (
-              "Cargando..."
-            ) : (
+            {loading ? 
+              <Loader/>
+             : 
               <ContainerProduts data-testid="listOrders">
                 {filter.map((x) => (
                   <React.Fragment key={x._id}>
@@ -137,9 +137,9 @@ const Orders = () => {
                   </React.Fragment>
                 ))}
               </ContainerProduts>
-            )}
+            }
           </>
-        )}
+        }
       </Container>
     </div>
   );
