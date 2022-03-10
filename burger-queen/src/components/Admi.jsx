@@ -37,15 +37,20 @@ const Admi = () => {
     last: "",
   };
   const [page, setPage] = useState(initialLink);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [state, setSate] = useState(initial);
   const [stateModal, setStateModal] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     getUsers(newUrl);
+   
   }, []);
 
-  const getUsers = (newUrl) => getAllProducts(newUrl, header);
+  const getUsers = (newUrl) => {getAllProducts(newUrl, header)
+   
+
+  };
 
   const getAllProducts = async (url, header) => {
     try {
@@ -66,6 +71,7 @@ const Admi = () => {
       setSate({...state,
         users: res.data,
       });
+      setLoading(false)
       return res;
     } catch (err) {
       console.log(err);
@@ -74,7 +80,7 @@ const Admi = () => {
 
   const getUsersSave = () =>{
     getAllProducts(newUrl, header);
-    setStateModal(false);
+ 
   }
   
 
@@ -122,9 +128,9 @@ const Admi = () => {
           Next{" "}
         </ButtonMenu>
       </div>
-      {loading ? (
+      {loading ? 
         "Cargando..."
-      ) : (
+       : (
         <ContainerElements data-testid="list">
           <DivElement>
             <AddCircleOutlineIcon onClick={() => onClick()} />

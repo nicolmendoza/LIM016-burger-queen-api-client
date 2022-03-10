@@ -34,12 +34,17 @@ const Products = () => {
   const [stateModal, setStateModal] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     getProducts(url);
+   
   }, []);
 
   const getProducts = (url) => {
     setStateModal(false)
-    getAllProducts(url, options)}
+    getAllProducts(url, options)
+   
+  
+  }
 
   const getAllProducts = async (url, header) => {
     try {
