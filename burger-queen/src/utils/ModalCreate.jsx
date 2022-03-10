@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import CloseIcon from '@mui/icons-material/Close';
 import {colors} from '../style-components/elementos/Form.js'
 
-const Modal = ({children, state, changeState, ...rest}) => {
+const ModalCreate = ({children, state, changeState, ...rest}) => {
     return (
         <>
             {state && 
             <Overlay>
-                <ContenedorModal {...rest}>
+                <Form background='rgb(255 255 255 / 53%)' {...rest}>
                     <BotonCerrar onClick={() => changeState(false)}> x </BotonCerrar>
                     {children}
-                </ContenedorModal>
+                </Form>
             </Overlay>}
         </>
     )
@@ -32,16 +32,18 @@ const Overlay = styled.div`
     z-index:4
     
 `
-const ContenedorModal = styled.div`
-    width: 25rem;
-    min-height: 6rem;
-    background: #fff;
+const Form = styled.div`
+    display:flex;
     position: relative;
-    border-radius: 0.3rem;
-    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
-    z-index: 100;
-    padding: 1rem 0;
-    color:black;
+    flex-direction:column;
+    justify-content:center;
+    background-color:${props => props.background || colors.background};
+    height: 85%;
+    border-radius: 1rem;
+    border: 1px solid ${colors.border};
+    box-shadow: -1px -1px 20px 1px ${colors.shadow} ;
+    padding: 0.625rem 2%;
+    width: 30rem
 `
 
 const BotonCerrar = styled(CloseIcon)`
@@ -63,5 +65,4 @@ const BotonCerrar = styled(CloseIcon)`
     }
 `
 
-
-export default Modal
+export default ModalCreate

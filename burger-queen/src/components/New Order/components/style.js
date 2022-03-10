@@ -89,7 +89,7 @@ const Item = styled.div`
     grid-row-gap: 0.5rem;
     grid-column-gap: 0.5rem;
     align-items:center;
-    
+    height: fit-content;
 
     .Qty{
         width:100%;
@@ -117,6 +117,7 @@ const ListOrden = styled.div`
     grid-row-gap: 1rem;
     margin-top: 1rem;
     padding-bottom: 0.5rem;
+    min-height: 50vh;
 
     &::-webkit-scrollbar {display: none;}
       

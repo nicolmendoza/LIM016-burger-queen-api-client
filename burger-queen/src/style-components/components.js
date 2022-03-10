@@ -158,3 +158,31 @@ export const ButtonMenu = style.button`
     }
     
 `
+
+export const Input = style.input`
+  width: 100%;
+  height: 45px;
+  border-radius: 3px;
+  line-height: 45px;
+  background: ${props => props.color || 'none'};
+  padding: 0px 30px 0px 29px;
+  border: 2px solid transparent;
+  border-bottom: 1px solid ${colors.border};
+  color: #d4d4d4a8;
+  transition: 0.3s ease all;
+
+  ${props => props.valid === 'false' && css `
+      border: 2px solid ${colors.error} !important;
+  `}
+`
+
+export const LeyendaError = style.p`
+    font-size: 0.8rem !important;
+    margin-bottom: 0;
+    color: ${colors.error};
+    display:none
+
+    ${props => props.valid === 'false' && css `
+        display:block
+    `}
+` 

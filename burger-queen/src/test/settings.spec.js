@@ -240,7 +240,7 @@ it("Not permission", async () => {
   expect(page404).toBeInTheDocument();
 });
 
-it("create user", async () => {
+it.only("create user", async () => {
   localStorage.setItem("role", "admin");
   axios.get.mockImplementationOnce(() =>
     Promise.resolve({

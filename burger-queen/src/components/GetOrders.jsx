@@ -7,6 +7,7 @@ import {
   Container,
 } from "../style-components/components";
 import Sidebar from "./Navegador";
+import Loader from "../utils/Loader";
 
 const GetOrders = () => {
   const [state, setState] = useState([]);
@@ -125,9 +126,8 @@ const GetOrders = () => {
           <>
             <FilterOrders></FilterOrders>
             {loading ? 
-              "Cargando..."
-           : (
-              <ContainerProduts data-testid="listOrders">
+              <Loader/>
+            :  <ContainerProduts data-testid="listOrders">
                 {filter.length === 0
                   ? "No hay pedidos en esta sección"
                   : filter.map((x) => (
@@ -183,7 +183,7 @@ const GetOrders = () => {
                       </OrderDiv>
                     ))}
               </ContainerProduts>
-           )}
+           }
           </>
         )}
       </Container>

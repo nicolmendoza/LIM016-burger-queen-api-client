@@ -12,8 +12,8 @@ import { getAllProducts, deleteProduct } from "../services/products";
 import DivData from "../utils/Container-Data";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Modal from "../utils/modal";
-
-
+import ModalCreate from '../utils/ModalCreate'
+import Loader from "../utils/Loader";
 const Admi = () => {
   const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
@@ -124,11 +124,10 @@ const Admi = () => {
           Next{" "}
         </ButtonMenu>
       </div>
-      {loading ? (
-        "Cargando..."
-      ) : (
         <ContainerElements data-testid="list">
-          <DivElement>
+        {loading ? 
+          <Loader/> : 
+          <><DivElement>
             <AddCircleOutlineIcon onClick={() => onClick()} />
             <p>Add new user</p>
           </DivElement>
@@ -161,12 +160,13 @@ const Admi = () => {
               </div>
             </DivData>
           ))}
+          </>
+          }
         </ContainerElements>
-      )}
     </div>
-    <Modal state={stateModal} changeState={setStateModal}>
+    <ModalCreate state={stateModal} changeState={setStateModal}>
     <CreateUser getUsersSave={getUsersSave}></CreateUser>
-    </Modal> 
+    </ModalCreate> 
     </>
   );
 };

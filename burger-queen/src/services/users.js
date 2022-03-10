@@ -2,7 +2,7 @@ import axios from 'axios'
 import jwtDecode from "jwt-decode";
 
 
-export const singIn = async (data, setModal, setStateModal) => {
+export const singIn = async (data, setModal, setStateModal, setLoading) => {
 
     try{
         const response = await axios.post("https://bq-api-2022.herokuapp.com/auth", data)
@@ -23,6 +23,7 @@ export const singIn = async (data, setModal, setStateModal) => {
         return window.location.href="/settings";
 
     } catch (err) {
+        setLoading(false)
         setStateModal(true)
         console.log(err)
         const response = err.response.data

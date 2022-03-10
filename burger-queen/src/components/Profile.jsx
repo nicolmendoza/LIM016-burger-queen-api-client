@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
 import { Button, Container } from "../style-components/components.js";
+import Loader from "../utils/Loader";
 
 const Profile = () => {
   const roleUser = localStorage.getItem("role");
@@ -36,7 +37,7 @@ const Profile = () => {
 
   funciones();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({
     email: "",
     rol: "",
@@ -56,6 +57,7 @@ const Profile = () => {
   };
   const getProfileInfo = () => {
     axios.get(`${url}/${id}`, header).then((response) => {
+      setLoading(false);
       setUser({
         ...user,
         email: response.data.email,
@@ -68,7 +70,7 @@ const Profile = () => {
         image: response.data.image,
         nameUser: response.data.nameUser,
       });
-      setLoading(true);
+      
     });
   };
   useEffect(() => {
@@ -77,7 +79,7 @@ const Profile = () => {
 
   const InfoProfile = () => {
     return (
-      <Container>
+        <>
         <div className="titleDiv">
           <h1>Mi Perfil</h1>
         </div>
@@ -110,15 +112,16 @@ const Profile = () => {
             </Button>
           </div>
         </div>
-      </Container>
+        </>
     );
   };
 
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
-
-      {!loading ? "Loading..." : <InfoProfile></InfoProfile>}
+      <Container>
+      {loading ? <Loader/> : <InfoProfile></InfoProfile>}
+      </Container>
     </>
   );
 };
