@@ -8,9 +8,11 @@ import {
   OrderDiv,
   Container,
   ButtonModal,
+  ButtonOrder
 } from "../style-components/components";
 import Sidebar from "./Navegador";
 import Loader from '../utils/Loader'
+import Order from "../utils/DivOrden"
 
 const Orders = () => {
   const url = "https://bq-api-2022.herokuapp.com/orders";
@@ -48,16 +50,16 @@ const Orders = () => {
     const isLoggedIn = order.isLoggedIn;
     if (isLoggedIn.status === "pending") {
       return (
-        <Button onClick={() => handleSubmit("canceled", isLoggedIn._id)}>
+        <ButtonOrder onClick={() => handleSubmit("canceled", isLoggedIn._id)}>
           Cancelar
-        </Button>
+        </ButtonOrder>
       );
     }
     if (isLoggedIn.status === "delivering") {
       return (
-        <Button onClick={() => handleSubmit("delivered", isLoggedIn._id)}>
+        <ButtonOrder onClick={() => handleSubmit("delivered", isLoggedIn._id)}>
           Entregar
-        </Button>
+        </ButtonOrder>
       );
     }
     return "";
@@ -114,8 +116,15 @@ const Orders = () => {
               <ContainerProduts data-testid="listOrders">
                 {filter.map((x) => (
                   <React.Fragment key={x._id}>
-                    <OrderDiv background={handleBackground(x.status)}>
-                      <p style={{ textTransform: "uppercase" }}>{x.status}</p>
+                    <OrderDiv background='rgb(113 113 113 / 85%)'>
+                      <Order type='para llevar' 
+                      client={x.client}
+                      status={x.status}
+                      products={x.products} 
+                      createdTime= {x.dateEntry}
+                      waitTime='45min'>
+                      </Order>
+                      {/* <p style={{ textTransform: "uppercase" }}>{x.status}</p>
                       <div>{x.client ? <p>Cliente : {x.client}</p> : ""}</div>
                       <b>
                         <p>Productos : </p>
@@ -131,8 +140,14 @@ const Orders = () => {
                             ""
                           )}
                         </div>
-                      ))}
-                      <ButtonStatus isLoggedIn={x} />
+                      ))} */}
+                      <div style={{
+                        width: '100%',
+                        marginTop: '1rem',
+                        display:'flex'
+                      }}>
+                        <ButtonStatus isLoggedIn={x} />
+                      </div>
                     </OrderDiv>
                   </React.Fragment>
                 ))}

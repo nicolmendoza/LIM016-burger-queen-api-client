@@ -19,9 +19,27 @@ export const Button = style.button`
 
 `
 
+export const ButtonOrder = style.button`
+  margin: auto;
+  width: 80%;
+  /* height: 100%; */
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  background:${colors.principal};
+  font-weight:600;
+  border: 1px solid transparent;
+  box-shadow: 1px 4px 3px 2px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background:none;
+    color: ${colors.principal};
+    border: 1px solid ${colors.principal}
+  }
+`
+
 export const ContainerProduts = style.div`
   display:grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   color:white;
 `
 
@@ -30,6 +48,8 @@ background: ${props => props.background || '#6be86b40'};
 margin: 7%;
 border-radius: 9px;
 padding: 6%;
+position:relative;
+box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.25);
 `
 
 export const Container = style.div`
