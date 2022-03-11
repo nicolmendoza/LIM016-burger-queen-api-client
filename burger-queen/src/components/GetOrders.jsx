@@ -5,9 +5,11 @@ import {
   ContainerProduts,
   OrderDiv,
   Container,
+  ButtonOrder
 } from "../style-components/components";
 import Sidebar from "./Navegador";
 import Loader from "../utils/Loader";
+import Order from '../utils/DivOrden'
 
 const GetOrders = () => {
   const [state, setState] = useState([]);
@@ -87,30 +89,30 @@ const GetOrders = () => {
     );
   };
 
-  const time = (a, b) => {
-    // console.log(  new Date(a).getTime())
-    const timeValue = new Date(b).getTime() - new Date(a).getTime();
-    return convert(timeValue);
-  };
+  // const time = (a, b) => {
+  //   // console.log(  new Date(a).getTime())
+  //   const timeValue = new Date(b).getTime() - new Date(a).getTime();
+  //   return convert(timeValue);
+  // };
 
-  const convert = (mss) => {
+  // const convert = (mss) => {
     
-    var days = parseInt(mss / (1000 * 60 * 60 * 24));
-    var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.round((mss % (1000 * 60)) / 1000);
-    return (
-      "Tiempo de espera" +
-      "       " +
-      days +
-      ":" +
-      hours +
-      ":" +
-      minutes +
-      ":" +
-      seconds
-    );
-  };
+  //   var days = parseInt(mss / (1000 * 60 * 60 * 24));
+  //   var hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //   var minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+  //   var seconds = Math.round((mss % (1000 * 60)) / 1000);
+  //   return (
+  //     "Tiempo de espera" +
+  //     "       " +
+  //     days +
+  //     ":" +
+  //     hours +
+  //     ":" +
+  //     minutes +
+  //     ":" +
+  //     seconds
+  //   );
+  // };
 
   const handleBackground = (status) => {
     if (status === "pending") return "rgba(7, 120, 45, 0.35)";
@@ -133,11 +135,19 @@ const GetOrders = () => {
                   ? "No hay pedidos en esta sección"
                   : filter.map((x) => (
                       <OrderDiv
-                        background={handleBackground(x.status)}
+                        background='rgb(113 113 113 / 85%)'
                         key={x._id}
-                        className="col-6 col-md-4"
+                        // className="col-6 col-md-4"
                       >
-                        <b>
+                        <Order
+                          type='para llevar' 
+                          client={x.client}
+                          status={x.status}
+                          products={x.products} 
+                          createdTime= {x.dateEntry}
+                          waitTime={x.updatedAt}
+                        />
+                        {/* <b>
                           {" "}
                           <p>Cliente : {x.client}</p>
                         </b>
@@ -171,15 +181,19 @@ const GetOrders = () => {
                               : time(x.dateEntry, x.updatedAt)}
                           </i>
                         </h4>
-                        <br></br>
+                        <br></br> */}
                         {x.status === "pending" ? (
-                          <div>
-                            <Button onClick={() => orderLista(x._id)}>
+                          <div style={{
+                            width: '100%',
+                            marginTop: '1rem',
+                            display:'flex'
+                          }}>
+                            <ButtonOrder onClick={() => orderLista(x._id)}>
                               Listo
-                            </Button>
+                            </ButtonOrder>
                           </div>
                         ) : (
-                          <Button>"Para Entregar"</Button>
+                          <ButtonOrder>"Para Entregar"</ButtonOrder>
                         )}
                       </OrderDiv>
                     ))}

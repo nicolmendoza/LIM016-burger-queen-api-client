@@ -122,7 +122,7 @@ const Orders = () => {
                       status={x.status}
                       products={x.products} 
                       createdTime= {x.dateEntry}
-                      waitTime='45min'>
+                      waitTime={x.updatedAt}>
                       </Order>
                       {/* <p style={{ textTransform: "uppercase" }}>{x.status}</p>
                       <div>{x.client ? <p>Cliente : {x.client}</p> : ""}</div>

@@ -24,6 +24,20 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
           
       };
 
+      const updateOrder = (createdTime, waitTime) => {
+        const timeValue = new Date(waitTime) - new Date(createdTime);
+
+        var days = parseInt(timeValue / (1000 * 60 * 60 * 24));
+        var hours = parseInt((timeValue % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = parseInt((timeValue % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.round((timeValue % (1000 * 60)) / 1000);
+
+        const time = `${hours}:${minutes}:${seconds}`
+        console.log(time)
+        return time
+          
+      }
+
       const dayCreate = (createdTime) => {
         const date = new Date(createdTime)
         const months = ["01","02","03","04","05","06","07","08","09","10","11","12"];
@@ -87,7 +101,7 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
                     </>
                 ) : status==='delivering'? <>
                 <p className='titleName'>Tiempo de espera</p>
-                <p className='time'>{waitTime}</p>
+                <p className='time'>{updateOrder(createdTime,waitTime)}</p>
                 </> : ''
             }
         </DetailOrder>
