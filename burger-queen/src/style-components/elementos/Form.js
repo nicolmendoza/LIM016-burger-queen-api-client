@@ -28,8 +28,12 @@ export const Form = styled.form`
     padding: 0.625rem 2%;
     width: 30rem
 `
+
 export const DivInput = styled.div`
-    margin-bottom: 15px
+    margin-bottom: 15px;
+    ${props => props.display === 'true' && css `
+        display:flex !important;
+    `}
 `
 export const Label = styled.label`
     color:${colors.principal};

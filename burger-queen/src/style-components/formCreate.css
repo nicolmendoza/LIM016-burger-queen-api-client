@@ -1,0 +1,22 @@
+
+.containerForm{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width: 100%;
+}
+
+.form-group{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 1rem
+}
+
+.form-label{
+    color:rgba(229, 161, 6, 0.8);
+    font-weight:500;
+    min-height:40px;
+    cursor:pointer;
+    width: 7rem;
+}
+

@@ -12,8 +12,8 @@ import { getAllProducts, deleteProduct } from "../services/products";
 import DivData from "../utils/Container-Data";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Modal from "../utils/modal";
-
-
+import ModalCreate from '../utils/ModalCreate'
+import Loader from "../utils/Loader";
 const Admi = () => {
   const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
@@ -47,17 +47,15 @@ const Admi = () => {
    
   }, []);
 
-  const getUsers = (newUrl) => {getAllProducts(newUrl, header)
-   
-
-  };
+  const getUsers = (newUrl) => getAllProducts(newUrl, header)
+  
 
   const getAllProducts = async (url, header) => {
     try {
       const res = await axios.get(`${url}?limit${100}`, header);
-      console.log(res);
+      
       const link = res.headers.link;
-      console.log(link);
+
       const arrayLink = link.match(
         /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
       );
@@ -128,17 +126,16 @@ const Admi = () => {
           Next{" "}
         </ButtonMenu>
       </div>
-      {loading ? 
-        "Cargando..."
-       : (
         <ContainerElements data-testid="list">
-          <DivElement>
+        {loading ? 
+          <Loader/> : 
+          <><DivElement>
             <AddCircleOutlineIcon onClick={() => onClick()} />
             <p>Add new user</p>
           </DivElement>
 
           {state.users.map((user) => (
-            <DivData data={user}>
+            <DivData data={user} id={user._id} data-testid={user._id}>
               <div key={`${user._id}-"id"`}>
                 <h2>{user.nameUser}</h2>
                 <p>{user.email}</p>
@@ -151,6 +148,7 @@ const Admi = () => {
                   onClick={() => {
                     window.location.href = `/edit/${user._id}`;
                   }}
+                  data-testid={`edit-${user.nameUser}`}
                 >
                   Editar
                 </Button3>
@@ -164,12 +162,13 @@ const Admi = () => {
               </div>
             </DivData>
           ))}
+          </>
+          }
         </ContainerElements>
-      )}
     </div>
-    <Modal state={stateModal} changeState={setStateModal}>
+    <ModalCreate state={stateModal} changeState={setStateModal} data-testid="modal-create">
     <CreateUser getUsersSave={getUsersSave}></CreateUser>
-    </Modal> 
+    </ModalCreate> 
     </>
   );
 };

@@ -8,6 +8,7 @@ import {getAllProducts} from '../../services/products'
 import {ContainerMenu, Icon, ButtonMenu} from './components/style.js'
 import Input from './components/input.jsx'
 import "../../style-components/productsOrders.css";
+import Loader from "../../utils/Loader";
 
 const Products = () => {
   const url = "https://bq-api-2022.herokuapp.com/products";
@@ -126,8 +127,8 @@ const Products = () => {
     <Sidebar value={`${roleUser}`}></Sidebar>
     {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
     <Container>  
-      <div className="containerProductsOrders">
-      {loading ? "loading..." : 
+       <div className="containerProductsOrders">
+       {loading ? <Loader/> : <>
         <ContainerMenu>
           <div className="header-newOrder">
             <UserInfo/>
@@ -144,7 +145,7 @@ const Products = () => {
               ></Input>
           </div>
           <ShowProducts/>
-        </ContainerMenu>}
+        </ContainerMenu>
         <Cart
           cart={cart}
           addProduct={addProduct}
@@ -154,6 +155,7 @@ const Products = () => {
           setTotalFinal={setTotalFinal}
           changeQty={changeQty}
         />
+        </>}
         </div>
       </Container>}
     </>

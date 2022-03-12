@@ -7,7 +7,7 @@ import '../style-components/login.css';
 import {Button, ButtonModal, ContentModal} from '../style-components/components'
 import Modal from "../utils/modal";
 import logo from '../img/Burger House.png'
-import banner from '../img/burger-baner.png'
+import Loader from "../utils/Loader";
 
 const Login = () => {
   const [inputType, setInputType] = useState('password');
@@ -34,9 +34,8 @@ const Login = () => {
       password: password,
     };
 
-    await singIn(values, setModal, setStateModal)
+    await singIn(values, setModal, setStateModal, setLoading)
 
-      setLoading(false)
       setEmail('')
       setPassword('')
   };
@@ -50,9 +49,9 @@ const Login = () => {
       </nav>
       
       <div className="loginContainer">
-      {/* {loading ? "Cargando..." : ""} */}
+      {loading ?<Loader/> :
 
-        <Form action="" onSubmit={onSubmitForm}>
+        <Form  action="" onSubmit={onSubmitForm}>
           <ComponentInput
             icon={<Icon />}
             type="text"
@@ -81,7 +80,7 @@ const Login = () => {
           <div className="container-btn">
             <Button type="submit" className="btn-login"> Iniciar </Button>
           </div>
-        </Form>
+        </Form >}
       </div>
       <Modal
         data-testid='modal' 

@@ -56,7 +56,7 @@ const Settings = () => {
 const ContainerSetting = styled.div`
     display:flex;
     margin: auto 0px;
-    height: 95vh;
+    height: 93vh;
 `
 const Menu = styled.div`    
     height:100%;

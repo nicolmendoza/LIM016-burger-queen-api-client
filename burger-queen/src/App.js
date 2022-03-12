@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 import Login from "./components/Login.jsx";
-import Admi from "./components/Admi.jsx";
+import Admi from "./components/Admi";
 import EditUser from "./components/EditUser.jsx";
 import ProductsOrders from "./components/New Order/NewOrder.jsx";
 import EditProduct from "./components/EditProduct.jsx";
@@ -13,7 +13,7 @@ import Settings from "./components/Settings.jsx";
 import Error404 from "./components/Error404.jsx";
 import Profile from "./components/Profile.jsx";
 function App() {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token"); 
   return (
     <BrowserRouter>
       <Routes>

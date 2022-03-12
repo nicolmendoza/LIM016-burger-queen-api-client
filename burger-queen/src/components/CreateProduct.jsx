@@ -8,7 +8,7 @@ import { display } from "@mui/system";
 import {
   Button,
   ButtonModal,
-  ContentModal,
+  ContentModal, Input, LeyendaError
 } from "../style-components/components";
 
 
@@ -59,12 +59,12 @@ const CreateProduct = ({getProducts}) => {
     return (
         <>
         <ContentModal>
-            <form className="container" onSubmit={handleSubmit}>
+            <form className="containerForm" onSubmit={handleSubmit}>
             <div className="form-group">
             <label htmlFor="exampleInputName" className="form-label mt-4">
                 Nombre
             </label>
-            <input
+            <Input
                 type="text"
                 name="name"
                 className="form-control"
@@ -78,7 +78,7 @@ const CreateProduct = ({getProducts}) => {
             <label htmlFor="exampleInputPrice" className="form-label mt-4">
                 Precio
             </label>
-            <input
+            <Input
                 type="number"
                 name="price"
                 className="form-control"
@@ -91,7 +91,7 @@ const CreateProduct = ({getProducts}) => {
             <label htmlFor="exampleInputImage" className="form-label mt-4">
                 Imagen
             </label>
-            <input
+            <Input
                 type="text"
                 name="image"
                 className="form-control"
@@ -104,7 +104,7 @@ const CreateProduct = ({getProducts}) => {
             <label htmlFor="exampleInputType" className="form-label mt-4">
                 Tipo
             </label>
-            <input
+            <Input
                 type="text"
                 name="type"
                 className="form-control"

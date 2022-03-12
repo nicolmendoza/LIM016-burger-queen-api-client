@@ -4,13 +4,11 @@ import axios from "axios";
 import {
   Button,
   ButtonModal,
-  ContentModal,
-} from "../../../style-components/components";
+  ContentModal } from "../../../style-components/components";
 import "../../../style-components/cart.css";
 import {ContainerCart, ButtonCart, Item, ListOrden, ButtonClear} from './style.js'
-import Input from './input.jsx'
 import Modal from "../../../utils/modal";
-
+import Loader from "../../../utils/Loader";
 
 const Cart = ({
   cart,
@@ -36,9 +34,10 @@ const Cart = ({
   };
   const [modal, setModal] = useState(bodyModal);
   const [stateModal, setStateModal] = useState(false);
+  const [loadCart, setLoadCart] = useState(false)
 
   const postNewOrder = async() => {
-
+    setLoadCart(true)
     const array = cart.map((x) => ({
       productId: x._id,
       qty: x.qty,
@@ -51,18 +50,27 @@ const Cart = ({
       products: array,
       // comment: state.comment,
     };
-    try{
+    if(!newOrder.client){
+      setStateModal(true)
+      setModal({title:'Error', body:'Ingrese el nombre del cliente por favor'})
+    } else{
+      try{
       const response = await axios.post("https://bq-api-2022.herokuapp.com/orders", newOrder, header)
-      console.log(response.data)
+      setLoadCart(false)
       setClient({ name: "" });
       setCart([]);
-      setModal({...modal, body:`Cliente: ${response.data.client}`})
+      setModal({title:'Orden Creada', body:`Cliente: ${response.data.client}`})
+      setStateModal(true)
+      } catch(err){
+      setLoadCart(false)
       setStateModal(true);
-    } catch(err){
-      setModal({title:'Error'})
-      setStateModal(true);
+      const response = err.response.data
+      const message = response.message
+      console.log(message)
+      if(message==='No escogio ningun producto') return setModal({title:'Error', body:'No escogio ningun producto, revise por favor'})
+      return setModal({title:'Error', body:'Intentelo de nuevo por favor'})
+      }
     }
-    
   };
 
   const onChangeInput = (e) => {
@@ -88,8 +96,10 @@ const Cart = ({
   };
 
   const productoPrecio = (a, b) => {
+    if(isNaN(a)) return 0
+    {
     const result = a * b;
-    return result;
+    return result;}
   };
 
   const totalPagar = () => {
@@ -101,6 +111,10 @@ const Cart = ({
     return suma;
   };
 
+  const onClick = () => {
+    setStateModal(false)
+    setLoadCart(false)
+  }
   return (
   <>
     <ContainerCart data-testid='containerCart'>
@@ -125,7 +139,10 @@ const Cart = ({
           <p>Price</p>
         </div>
       </div>
-      <ListOrden>
+     
+      <ListOrden>  {
+        loadCart? <Loader/>:
+        <>
         {cart.length === 0
         ? "No hay productos en la lista"
         : cart.map((x) => (
@@ -145,8 +162,9 @@ const Cart = ({
             />
             <ButtonClear className="fa-regular fa-trash-can" onClick={() => deleteProduct(x)} data-testid={`delete-${x.name}`} />
           </Item>
-          ))}
-      </ListOrden>
+          ))} </>}
+      </ListOrden> 
+
       <div className='footer-Cart'>
         <div className='totalPrice'>
           <p>Total:</p>
@@ -159,7 +177,7 @@ const Cart = ({
         <ContentModal>
           <p>{modal.title}</p>
           <p>{modal.body}</p>
-          <ButtonModal onClick={() => setStateModal(false)}>
+          <ButtonModal onClick={onClick}>
             {" "}
             Aceptar{" "}
           </ButtonModal>

@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
-
-
 import {
   Button,
   ButtonModal,
   ContentModal,
+  Input, LeyendaError
 } from "../style-components/components";
-
-
+import '../style-components/formCreate.css'
+import Loader from "../utils/Loader";
+import Modal from "../utils/modal";
 
 const CreateUser = ({ getUsersSave}) => {
   const url = "https://bq-api-2022.herokuapp.com/users";
@@ -32,6 +32,7 @@ const CreateUser = ({ getUsersSave}) => {
   const [state, setState] = useState(initial);
   const [modal, setModal] = useState(bodyModal);
   const [stateModal, setStateModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const options = (e) => {
     // console.log(e.target.value);
     if (e.target.value === "admin") {
@@ -51,8 +52,33 @@ const CreateUser = ({ getUsersSave}) => {
     }
   };
 
+  
+  const [valid, setValid] = useState('');
+  const [validEmail, setValidEmail] = useState('');
+
+  const validation= (e) => {
+    console.log(e.target.name)
+    const expReg = {
+      password: /^.{4,12}$/, // 4 a 12 digitos.
+      correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    }
+    if(e.target.name==='email'){
+      if(expReg.correo.test(state.email)) {
+        setValidEmail('true')
+      } else {
+        setValidEmail('false')
+      }
+    }
+    if(e.target.name==='password'){
+      if(expReg.password.test(state.password)) {
+        setValid('true')
+      } else {
+        setValid('false')
+      }
+    }
+      
+  }
   const onChangeInput = (e) => {
-    console.log(e.target.value);
     setState((old) => ({
       ...old,
       [e.target.name]: e.target.value,
@@ -61,7 +87,7 @@ const CreateUser = ({ getUsersSave}) => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const url = "https://bq-api-2022.herokuapp.com";
 
     let options = {
@@ -70,28 +96,49 @@ const CreateUser = ({ getUsersSave}) => {
         Authorization: `Bearer ${token}`,
       },
     };
-
-    const res = await axios.post(`${url}/users`, state, options);
-
-    console.log(res.data);
-    setState({
-      email: "",
-      password: "",
-      roles: "",
-      nameUser: "",
-    });
-    getUsersSave();
+    try{
+      const res = await axios.post(`${url}/users`, state, options);
+      setLoading(false)
+      console.log(res.data);
+      setState({
+            email: "",
+            password: "",
+            roles: "",
+            nameUser: "",
+      });
+      setStateModal(true)
+      setModal({title:'Exito', body:`Usuario creado: ${res.data.email}`})
+      getUsersSave()
+    } catch(err) {
+      setLoading(false)
+      setStateModal(true);
+      const response = err.response.data
+      const message = response.message
+      if(message==="no ingresó  email o password") return setModal({title:'Error', body:'Por favor complete todos los datos'})
+      if(message==="el formato de la conraaseña o email no es correcto") return setModal({title:'Error', body:'El formato de la contraseña o email es incorrecta'})
+      if(message==="ya existe un usuario con ese email") return setModal({title:'Error', body:'Ya existe un usuario con ese email, revise por favor'})
+      return setModal({title:'Error', body:'Intentelo de nuevo por favor'})
+    }
   };
 
-  return (
+  const onClick = () => {
+    setStateModal(false)
+    setLoading(false)
+    // getUsersSave()
+  }
 
+  return (
+          <>
+          {!stateModal? 
           <ContentModal>
-            <form className="container" onSubmit={onSubmitForm}>
+            {loading? <Loader/> :
+            <form className="containerForm" onSubmit={onSubmitForm}>
               <div className="form-group">
+                
                 <label htmlFor="exampleInputImage1" className="form-label mt-4">
                   Name
                 </label>
-                <input
+                <Input
                   type="text"
                   name="nameUser"
                   value={state.nameUser}
@@ -101,11 +148,12 @@ const CreateUser = ({ getUsersSave}) => {
                   onChange={onChangeInput}
                 />
               </div>
+              <div>
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1" className="form-label mt-4">
                   Email
                 </label>
-                <input
+                <Input
                   type="email"
                   name="email"
                   value={state.email}
@@ -114,8 +162,14 @@ const CreateUser = ({ getUsersSave}) => {
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                   onChange={onChangeInput}
+                  onKeyUp = {validation}
+                  onBlur = {validation}
                 />
+                
               </div>
+              <LeyendaError valid={validEmail}>El correo debe cumplir con el siguiente formato usuario@example.com</LeyendaError>
+              </div>
+              <div>
               <div className="form-group">
                 <label
                   htmlFor="exampleInputPassword1"
@@ -123,7 +177,7 @@ const CreateUser = ({ getUsersSave}) => {
                 >
                   Password
                 </label>
-                <input
+                <Input
                   type="password"
                   name="password"
                   value={state.password}
@@ -131,13 +185,18 @@ const CreateUser = ({ getUsersSave}) => {
                   id="exampleInputPassword1"
                   placeholder="Password"
                   onChange={onChangeInput}
+                  onKeyUp = {validation}
+                  onBlur = {validation}
                 />
+                
+              </div>
+              <LeyendaError valid={valid}>La contraseña debe de tener entre 4 y 16 digitos</LeyendaError>
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputImage1" className="form-label mt-4">
                   Imagen
                 </label>
-                <input
+                <Input
                   type="text"
                   name="image"
                   value={state.image}
@@ -146,6 +205,7 @@ const CreateUser = ({ getUsersSave}) => {
                   placeholder="Imagen"
                   onChange={onChangeInput}
                 />
+
               </div>
               <fieldset
                 className="form-group"
@@ -191,15 +251,53 @@ const CreateUser = ({ getUsersSave}) => {
                   </label>
                 </div>
               </fieldset>
-              <div className="form-group">
+              <Button type="submit" className="btn-login"> Iniciar </Button>
+              {/* <div className="form-group">
                 <button type="submit" className="btn btn-primary">
                   Guardar
                 </button>
-              </div>
-            </form>
-
+              </div> */}
+            </form>}
+          </ContentModal> :
+          <Modal data-testid='modal' state={stateModal} changeState={setStateModal}>
+          <ContentModal> 
+            <p>{modal.title}</p>
+            <p>{modal.body}</p>
+            <ButtonModal onClick={onClick}>
+              {" "}
+              Aceptar{" "}
+            </ButtonModal>
           </ContentModal>
+        </Modal>}</>
+          
   );
 };
 
+// const Input = styled.input`
+//   width: 100%;
+//   height: 45px;
+//   border-radius: 3px;
+//   line-height: 45px;
+//   background: ${props => props.color || 'none'};
+//   padding: 0px 30px 0px 29px;
+//   border: 2px solid transparent;
+//   border-bottom: 1px solid ${color.border};
+//   color: #d4d4d4a8;
+//   transition: 0.3s ease all;
+
+//   ${props => props.valid === 'false' && css `
+//       border: 2px solid ${color.error} !important;
+//   `}
+// `
+
+// const LeyendaError = styled.p`
+//     font-size: 0.8rem !important;
+//     margin-bottom: 0;
+//     color: ${color.error};
+//     display:none
+
+//     ${props => props.valid === 'false' && css `
+//         display:block
+//     `}
+// ` 
 export default CreateUser;
