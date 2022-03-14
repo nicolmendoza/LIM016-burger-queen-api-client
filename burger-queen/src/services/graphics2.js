@@ -62,7 +62,7 @@ export default function StatusChart({rankingStatus}) {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{width:'400px'}}>
       <Bar data={data}/>
     </div>
   );

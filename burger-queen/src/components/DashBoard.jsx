@@ -69,18 +69,22 @@ const DashBoard = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            dataUsers.map(x=>         
+          {dataUsers.map((x) => (
             <tr class="table-active">
-            <th scope="row">{x.client}</th>
-            <td>{x.products.map(y=><p>{y.product.name}</p>)}</td>
-            <td>{x.products.map(y=>
-              <p>{y.product.price * y.qty}</p>)}</td>
-            <td>{x.status}</td>
-          </tr>
-              )
-          }
-
+              <th scope="row">{x.client}</th>
+              <td>
+                {x.products.map((y) => (
+                  <p>{y.product.name}</p>
+                ))}
+              </td>
+              <td>
+                {x.products.map((y) => (
+                  <p>{y.product.price * y.qty}</p>
+                ))}
+              </td>
+              <td>{x.status}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
@@ -88,33 +92,26 @@ const DashBoard = () => {
 
   return (
     <div>
-      {/* <Sidebar value={`${roleUser}`}></Sidebar> */}
-
-      <div>Números de pedidos:{numPedidos}</div>
-      <div>
-        <p>Pedidos Ranking</p>
-        {ranking.map((x) => (
-          <p>
-            Producto : {x.nombre} Cantidad : {x.numero}
-          </p>
-        ))}
-      </div>
-      <div>
-        <p>Status Ranking</p>
-        {rankingStatus.map((x) => (
-          <p>
-            {x.nombre} Cantidad: {x.numero}
-          </p>
-        ))}
-        {loading ? (
-          ""
-        ) : (
-          <>
-            <BarChart ranking={ranking} />
-            <StatusChart rankingStatus={rankingStatus} />
-            <Table/>{" "}
-          </>
-        )}
+      <Sidebar value={`${roleUser}`}></Sidebar>
+      <div style={{ marginLeft: "200px" }}>
+        <div>
+          {loading ? (
+            ""
+          ) : (
+            <>
+              <div style={{ display: "flex" }}>
+                <div>
+                <div style={{ height: "50px"}}>Números de pedidos:{numPedidos}</div>
+                  <Table />{" "}
+                </div>
+                <div>
+                  <BarChart ranking={ranking} />
+                  <StatusChart rankingStatus={rankingStatus} />
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

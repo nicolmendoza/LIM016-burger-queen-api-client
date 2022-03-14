@@ -14,7 +14,7 @@ import CreateProduct from "./CreateProduct";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ModalCreate from '../utils/ModalCreate'
 
-const Products = () => {
+const Products = ({setValue}) => {
   const firstUrl = "https://bq-api-2022.herokuapp.com/products";
   const token = localStorage.getItem("token");
   const options = {
@@ -79,6 +79,7 @@ const Products = () => {
   const handleDelete = async (id) => {
     const res = await axios.delete(`${firstUrl}/${id}`, options);
     console.log(res);
+    setValue('products')
     return getProducts(url);
   };
   const onClick = () => {

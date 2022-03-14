@@ -65,23 +65,14 @@ const Products = () => {
   const deleteProduct = (product) => {
     console.log('eliminado')
     return setCart(cart.filter((x) => x._id !== product._id));
-    // if (product.qty === 1) {
-    //   return setCart(cart.filter((x) => x._id !== product._id));
-    // } 
-    // else {
-    //   setCart(
-    //     cart.map((x) =>
-    //       x._id === product._id ? { ...product, qty: x.qty - 1 } : x
-    //     )
-    //   );
-    // }
+
   };
 
   const changeQty = (product, e) => {
     const exits = cart.find((x) => x._id === product._id);
     if (exits) {
       return setCart(
-        cart.map((x) => (x._id === product._id ? { ...x, qty: parseInt(e.target.value) } : x))
+        cart.map((x) => (x._id === product._id ? { ...x, qty: parseInt(e.target.value<0?1:e.target.value) } : x))
       );
     } 
       // return setCart([...cart, { ...product, qty: 1 }]);

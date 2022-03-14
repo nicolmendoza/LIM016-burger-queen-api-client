@@ -6,6 +6,7 @@ import colors from '../style-components/elementos/colors.js'
 
 const Sidebar = (role) => {
   const user = {
+    dashboard :"/dashboard",
     newOrders: "/newOrder",
     orders: "/orders",
     products: "/products",
@@ -13,6 +14,7 @@ const Sidebar = (role) => {
     chef: "/getOrders",
     settings: "/settings",
     profile: "/profile",
+    
   };
   // console.log(role);
 
@@ -77,7 +79,17 @@ const Sidebar = (role) => {
             <span className="tooltip">Setting</span>
           </li>
         )}
-
+        {role.value !== "admin" ? (
+          ""
+        ) : (
+          <li>
+            <a href={user.dashboard}>
+              <i className="bx bx-cog"></i>
+              <span className="links_name">Dahboard</span>
+            </a>
+            <span className="tooltip">Dashboard</span>
+          </li>
+        )}
         <li>
           <a href={user.profile}>
             <i className="bx bx-user"></i>

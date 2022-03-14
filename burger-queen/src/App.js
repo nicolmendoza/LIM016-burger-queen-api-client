@@ -14,7 +14,7 @@ import Error404 from "./components/Error404.jsx";
 import Profile from "./components/Profile.jsx";
 import DashBoard from "./components/DashBoard.jsx";
 function App() {
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
   return (
     <BrowserRouter>
       <Routes>
@@ -49,7 +49,7 @@ function App() {
           path={"/profile"}
           element={!token ? <Navigate to="/login" /> : <Profile />}
         />
-                <Route
+        <Route
           exact
           path={"/edit/:id"}
           element={!token ? <Navigate to="/login" /> : <EditUser />}
@@ -58,6 +58,11 @@ function App() {
           exact
           path={"/editProduct/:id"}
           element={!token ? <Navigate to="/login" /> : <EditProduct />}
+        />
+        <Route
+          exact
+          path={"/dashboard"}
+          element={!token ? <Navigate to="/login" /> : <DashBoard />}
         />
         <Route path="*" element={<Error404 />} />
         <Route path="/dashboard" element={<DashBoard />} />

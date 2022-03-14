@@ -15,6 +15,7 @@ import Modal from "../utils/modal";
 import ModalCreate from '../utils/ModalCreate'
 import Loader from "../utils/Loader";
 const Admi = () => {
+
   const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
 
@@ -128,7 +129,7 @@ const Admi = () => {
       </div>
         <ContainerElements data-testid="list">
         {loading ? 
-          <Loader/> : 
+         <Loader/> : 
           <><DivElement>
             <AddCircleOutlineIcon onClick={() => onClick()} />
             <p>Add new user</p>
@@ -139,7 +140,7 @@ const Admi = () => {
               <div key={`${user._id}-"id"`}>
                 <h2>{user.nameUser}</h2>
                 <p>{user.email}</p>
-                <p>{user.roles.name}</p>
+                <p>{user.roles.name=="cocinera"?'Cocinerx':user.roles.name=="mesera"?'Meserx':'Admi'}</p>
               </div>
               <div className="btn-container">
                 <Button3

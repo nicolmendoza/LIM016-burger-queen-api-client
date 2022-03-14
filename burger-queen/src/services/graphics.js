@@ -92,7 +92,7 @@ export default function BarChart({ranking}) {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{width:'350px'}}>
       <Doughnut data={data}/>
     </div>
   );

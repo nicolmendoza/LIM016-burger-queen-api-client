@@ -152,7 +152,7 @@ const Cart = ({
               <p>{x.name}</p>
               <p>s/{x.price}</p>
             </div>
-            <input className='Qty' type='number' onChange={(e)=>changeQty(x, e)} value={isNaN(x.qty)? '':x.qty} placeholder='0'/>
+            <input className='Qty' type='number' min="1" pattern="^[1-9]\d*$" onChange={(e)=>changeQty(x, e)} value={isNaN(x.qty)? '':x.qty} placeholder='0'/>
             <p className='totalPrice'>s/{productoPrecio(x.qty, x.price, x._id)}</p>
             <input
                 placeholder="Añade un extra"

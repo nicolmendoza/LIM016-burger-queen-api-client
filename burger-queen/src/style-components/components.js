@@ -41,6 +41,11 @@ export const ContainerProduts = style.div`
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   color:white;
+
+  @media (max-width: 1024px){
+    grid-template-columns: repeat(3,1fr);}
+
+    }
 `
 
 export const OrderDiv = style.div`
@@ -50,6 +55,8 @@ border-radius: 9px;
 padding: 6%;
 position:relative;
 box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.25);
+
+
 `
 
 export const Container = style.div`
@@ -118,7 +125,7 @@ export const ContainerElements = style.div`
   overflow-x: hidden;
   scroll-behavior: smooth;
 
-  @media (max-width: 760px){
+  @media (max-width: 1024px){
     grid-template-columns: repeat(2,1fr);}
   
     &::-webkit-scrollbar {
@@ -133,6 +140,8 @@ export const ContainerElements = style.div`
       background: #eacf4f;
       border-radius: 3.125rem;
     }
+
+  
 
 `
 

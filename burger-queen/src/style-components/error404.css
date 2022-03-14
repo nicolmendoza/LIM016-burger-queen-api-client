@@ -1,0 +1,8 @@
+.div404{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+}

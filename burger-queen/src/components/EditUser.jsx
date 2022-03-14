@@ -190,6 +190,7 @@ const bodyModal = {
                     name="optionsRadios"
                     id="optionsRadios2"
                     value="mesera"
+                  
                   />
                   Meserx
                 </label>
