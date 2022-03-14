@@ -5,6 +5,7 @@ import LineChart from "../services/graphics";
 import BarChart from "../services/graphics";
 import StatusChart from "../services/graphics2";
 import Sidebar from "./Navegador";
+import { totalGananciasFunction } from "../services/ranking";
 
 const DashBoard = () => {
   const roleUser = localStorage.getItem("role");
@@ -14,6 +15,7 @@ const DashBoard = () => {
   const [rankingStatus, setRankingStatus] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dataUsers, setDataUsers] = useState([]);
+  const [totalGanancias, setTotalGanancias] = useState("");
   const token = localStorage.getItem("token");
 
   let config = {
@@ -28,8 +30,26 @@ const DashBoard = () => {
       "https://bq-api-2022.herokuapp.com/orders?limit=100",
       config
     );
-    setDataUsers(response.data);
-    console.log(response.data);
+    let ganancias = 0;
+
+    setTotalGanancias(
+      response.data.map(
+        (x) =>
+          x.products.map((y) => {
+            const qty = y.qty;
+            const price = y.product.price;
+            ganancias += qty * price;
+            return ganancias;
+          })[x.products.length - 1]
+      )[response.data.length - 1]
+    );
+    setDataUsers(
+      response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      )
+    );
+    // setDataUsers(response.data);
+
     const arrayArrays = response.data.map((x) =>
       x.products.map((y) => y.product.name)
     );
@@ -42,14 +62,13 @@ const DashBoard = () => {
     const resultOrder = result.sort();
 
     const ranking = functionRanking(resultOrder);
-    localStorage.setItem("ranking", ranking);
-    console.log(ranking);
     setRanking(ranking);
     setNumPedidos(response.data.length);
 
     const resultOrderStatus = response.data.map((x) => x.status).sort();
     const rankingStatus = functionRanking(resultOrderStatus);
     setRankingStatus(rankingStatus);
+
     setLoading(false);
   };
 
@@ -101,7 +120,12 @@ const DashBoard = () => {
             <>
               <div style={{ display: "flex" }}>
                 <div>
-                <div style={{ height: "50px"}}>Números de pedidos:{numPedidos}</div>
+                  <div style={{ height: "50px" }}>
+                    Números de pedidos: {numPedidos} Pedidos
+                  </div>
+                  <div style={{ height: "50px" }}>
+                    Total de Ganancias: S/. {totalGanancias}
+                  </div>
                   <Table />{" "}
                 </div>
                 <div>

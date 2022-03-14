@@ -29,3 +29,17 @@ export const functionRanking=(resultOrder)=>{
  
     return obj.sort((a, b) => b.numero - a.numero);
 }
+
+let ganancias = 0;
+export const totalGananciasFunction=(data)=>{
+  return data.map(
+    (x) =>
+      x.products.map((y) => {
+        const qty = y.qty;
+        const price = y.product.price;
+        ganancias += qty * price;
+        return ganancias;
+      })[x.products.length - 1]
+  )[data.length - 1]
+
+}
