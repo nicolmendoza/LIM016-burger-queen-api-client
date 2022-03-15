@@ -13,18 +13,45 @@ height: 200px; */
     display: flex;
     flex-direction: row;
 }
-
+.containerProfile{
+    position: relative;
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.containerProf{
+    position: relative;
+    padding-top: 2rem;
+    align-items: center;
+}
 .divInfoUser p , label{
 
     font-size: 16px;
     padding: 5px;
 }
+
+.divInfoUser label{
+    font-weight: bold;
+    
+}
 .titleDiv{
     display: flex;
     justify-content: center;
-    margin: 20px;
 
 }
 .divEditUser h2{
     padding: 5px;
+}
+
+.div-containerProfile{
+    background: #c8c8c8b8;
+    line-height: 2.3rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 55%;
+    border-radius: 0.5rem;
 }

@@ -19,7 +19,7 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
         var seconds = timeValue.getSeconds();
 
         const time = `${hours}:${minutes}:${seconds}`
-        console.log(time)
+        // console.log(time)
         return time
           
       };
@@ -43,7 +43,7 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
         const months = ["01","02","03","04","05","06","07","08","09","10","11","12"];
         const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado']
         const dateExact = `${date.getDate()}/${months[date.getMonth()]}/${date.getFullYear()}`
-        console.log(dateExact)
+        // console.log(dateExact)
         return dateExact
           
       };

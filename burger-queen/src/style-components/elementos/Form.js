@@ -20,13 +20,17 @@ export const Form = styled.form`
     display:flex;
     flex-direction:column;
     justify-content:center;
-    background-color: ${colors.background};
+    background-color:  ${props => props.background || colors.background};
     height: 60%;
     border-radius: 1rem;
     border: 1px solid ${colors.border};
     box-shadow: -1px -1px 20px 1px ${colors.shadow} ;
     padding: 0.625rem 2%;
-    width: 30rem
+    width: ${props => props.width || '30rem'};
+
+    ${props => props.padding==='true' && css `
+        padding:  2rem 4%;
+    `}
 `
 
 export const DivInput = styled.div`

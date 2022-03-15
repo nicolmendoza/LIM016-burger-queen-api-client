@@ -7,7 +7,7 @@ import { Router } from "react-router-dom";
 import EditUser from "../components/EditUser";
 import data from "./data/users";
 import dataProducts from "./data/products";
-import userEvent from '@testing-library/user-event';
+import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import EditProduct from "../components/EditProduct";
 
@@ -68,7 +68,7 @@ test("Delete user", async () => {
 
   expect(screen.queryByText("Luis")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  //screen.debug();
+  screen.debug();
 });
 
 test("Click button prev user", async () => {
@@ -109,7 +109,33 @@ test("Click button next user", async () => {
   fireEvent.click(next);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(3);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  //screen.debug();
+  screen.debug();
+});
+
+test("show loading user", async () => {
+  localStorage.setItem("role", "admin");
+  render(<Settings></Settings>);
+  // expect(screen.getByText(/Cargando/i)).toBeInTheDocument();
+  expect(await screen.findByTestId("loader")).toBeInTheDocument();
+  screen.debug();
+});
+
+test("show loading products", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings></Settings>);
+  const products = screen.getByText(/Crear, modificar y eliminar productos/i);
+
+  fireEvent.click(products);
+  expect(await screen.findByTestId("loader")).toBeInTheDocument();
+  screen.debug();
 });
 
 test("Delete Products", async () => {
@@ -161,7 +187,7 @@ test("Delete Products", async () => {
   // console.log(listNode)
   expect(screen.queryByText("cafe")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  //screen.debug();
+  screen.debug();
 });
 
 test("Click button prev product", async () => {
@@ -227,7 +253,7 @@ test("Click button next product", async () => {
   const prev = screen.getByText(/next/i);
   fireEvent.click(prev);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(4);
-  //screen.debug();
+  screen.debug();
 });
 
 it("Not permission", async () => {
@@ -251,34 +277,28 @@ it.only("create user", async () => {
     })
   );
   render(<Settings />);
-  const listNode = await screen.findByTestId("list");
-  console.log(listNode);
-
-  const icon = await screen.findByTestId("AddCircleOutlineIcon");
+  await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
   fireEvent.click(icon);
-
-  axios.post.mockImplementationOnce(() =>
+    axios.post.mockImplementationOnce(() =>
+      Promise.resolve({
+        data: data.dataNewUser,
+      })
+    );
+    axios.get.mockImplementationOnce(() =>
     Promise.resolve({
-      data: data.dataNewUser,
+      data: data.dataAllAndNewUser,
+      headers: {
+        link: data.dataLink,
+      },
     })
   );
-
-  axios.get.mockImplementationOnce(() =>
-  Promise.resolve({
-    data: data.dataAllAndNewUser,
-    headers: {
-      link: data.dataLink,
-    },
-  })
-);
-
-  const buttonGuardar=screen.getByText('Guardar')
+  const buttonGuardar = screen.getByRole("button", { name: "Iniciar" });
   fireEvent.click(buttonGuardar)
   await screen.findByTestId("list");
-
-  expect(screen.getByText('lesly@burgerqueen.com')).toBeInTheDocument()
-  //screen.debug();
-
+  // await screen.findByTestId("modal-create");
+  // expect(screen.getByText('lesly@burgerqueen.com')).toBeInTheDocument()
+  screen.debug();
 });
 
 it("create product", async () => {
@@ -330,9 +350,9 @@ it("create product", async () => {
 
   // AddCircleOutlineIcon
   await screen.findByTestId("listProducts");
-  expect(screen.getByText('huevos')).toBeInTheDocument()
+  expect(screen.getByText("huevos")).toBeInTheDocument();
 
-  //screen.debug();
+  screen.debug();
 });
 
 it("edit product", async () => {
@@ -370,11 +390,9 @@ it("edit product", async () => {
     })
   );
 
-  const buttonsEditar=screen.getAllByRole('button',{name:/editar/i})
-  fireEvent.click(buttonsEditar[0])
+  const buttonsEditar = screen.getAllByRole("button", { name: /editar/i });
+  fireEvent.click(buttonsEditar[0]);
 
-  expect(buttonsEditar[0]).toBeValid() 
-  
   const history = createMemoryHistory();
   const route = "/editProduct/123";
   history.push(route);
@@ -384,35 +402,10 @@ it("edit product", async () => {
     </Router>
   );
 
-  //screen.debug();
+  screen.debug();
 });
 
-test("Button edit user redirect to other component", async() => {
-  Storage.prototype.getItem = jest.fn(() => 'admin');
-  axios.get.mockImplementationOnce(() =>
-    Promise.resolve({
-      data: data.dataAll,
-      headers: {
-        link: data.dataLink,
-      },
-    })
-  );
-  render(<Settings />);
-  await screen.findByTestId('list')
-  const elem = await screen.findByTestId('edit-luisa')
-  userEvent.click(elem)
-  expect(elem).toBeValid()
-
-})
-
-test("To charge the page it started with Loading", async() => {
-  Storage.prototype.getItem = jest.fn(() => 'admin');
-  render(<Settings />);
-  expect(screen.getByText('Cargando...')).toBeInTheDocument()
-})
-
-
-// it.only("edit user", async () => {
+// it("edit user", async () => {
 //   localStorage.setItem("role", "admin");
 //   axios.get.mockImplementationOnce(() =>
 //     Promise.resolve({
@@ -424,7 +417,6 @@ test("To charge the page it started with Loading", async() => {
 //   );
 //   render(<Settings />);
 //   await screen.findByTestId("list");
-
 
 //   axios.get.mockImplementationOnce(() =>
 //     Promise.resolve({

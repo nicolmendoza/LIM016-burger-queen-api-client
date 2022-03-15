@@ -45,8 +45,9 @@ const Orders = () => {
   const getOrders = async () => {
     try {
       const res = await axios.get(`${url}?limit=100`, options);
-      setOrders(res.data);
-      setFilter(res.data);
+      const dataOrdenada=res.data.sort((a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
+      setOrders(dataOrdenada);
+      setFilter(dataOrdenada);
       setLoading(false);
     } catch (err) {
       console.log(err.data);
@@ -143,23 +144,6 @@ const Orders = () => {
                       createdTime= {x.dateEntry}
                       waitTime={x.updatedAt}>
                       </Order>
-                      {/* <p style={{ textTransform: "uppercase" }}>{x.status}</p>
-                      <div>{x.client ? <p>Cliente : {x.client}</p> : ""}</div>
-                      <b>
-                        <p>Productos : </p>
-                      </b>
-                      {x.products.map((product) => (
-                        <div key={product._id}>
-                          <p>{product.product.name}</p>
-
-                          <p> Qty : {product.qty}</p>
-                          {product.comment ? (
-                            <p>Extra :{product.comment} </p>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      ))} */}
                       <div style={{
                         width: '100%',
                         marginTop: '1rem',

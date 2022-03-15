@@ -42,9 +42,10 @@ const GetOrders = () => {
   const getOrders = async () => {
     try{
           const response = await axios.get(`${url}/orders?limit=100`, header);
-    console.log(response.data);
-    setState(response.data);
-    setFilter(response.data.filter((x) => x.status === "pending"));
+    const dataOrdenada=response.data.sort((a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
+
+    setState(dataOrdenada);
+    setFilter(dataOrdenada.filter((x) => x.status === "pending"));
     setLoading(false);
     console.log(loading)
     }
@@ -166,41 +167,7 @@ const GetOrders = () => {
                           createdTime= {x.dateEntry}
                           waitTime={x.updatedAt}
                         />
-                        {/* <b>
-                          {" "}
-                          <p>Cliente : {x.client}</p>
-                        </b>
-                        <p>
-                          <b>Status</b>:{x.status}
-                        </p>
-                        <p>
-                          <b>Products:</b>{" "}
-                        </p>
-                        {x.products.map((y) => (
-                          <div>
-                            <p>
-                              {" * "}
-                              {y.product.name}
-                              <br></br> Qty:{y.qty}
-                            </p>
-                            {y.comment !== undefined ? (
-                              <p>
-                                <b>Extra:</b> {y.comment}
-                              </p>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        ))}
 
-                        <h4>
-                          <i>
-                            {x.status === "pending"
-                              ? ""
-                              : time(x.dateEntry, x.updatedAt)}
-                          </i>
-                        </h4>
-                        <br></br> */}
                         {x.status === "pending" ? (
                           <div style={{
                             width: '100%',

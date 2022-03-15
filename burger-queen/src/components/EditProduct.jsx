@@ -3,9 +3,16 @@ import React, { useEffect, useState } from "react";
 import { editProduct, getOneProduct } from "../services/products";
 import "../style-components/editUser.css";
 import Sidebar from "./Navegador";
-import {Container} from '../style-components/components'
-import {Button, ButtonModal, ContentModal} from '../style-components/components'
+import { Container } from "../style-components/components";
+import {
+  Button,
+  ButtonModal,
+  ContentModal, ButtonOrder
+} from "../style-components/components";
 import Modal from "../utils/modal";
+import {Label, Input, GroupInput, LeyendaError, DivInput, Form} from '../style-components/elementos/Form' 
+import back from "../img/back.webp"
+
 
 const EditProduct = () => {
   const roleUser = localStorage.getItem("role");
@@ -22,13 +29,13 @@ const EditProduct = () => {
   };
 
   const bodyModal = {
-    title: 'Exito',
-    body: "Producto Actualizado"
-  }
-  
+    title: "Exito",
+    body: "Producto Actualizado",
+  };
+
   const [modal, setModal] = useState(bodyModal);
-  const [stateModal, setStateModal] = useState(false)
-  
+  const [stateModal, setStateModal] = useState(false);
+
   const initial = {
     name: "",
     price: "",
@@ -58,85 +65,85 @@ const EditProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    localStorage.setItem("editProduct", true);
     const res = await editProduct(id, product, options);
     console.log(res);
-    setProduct(res.data)
-    setStateModal(true)
+    setProduct(res.data);
+    setStateModal(true);
   };
 
   const onClick = () => {
-    setStateModal(false)
-    window.location.pathname = "/settings"
-  }
+    setStateModal(false);
+    window.location.pathname = "/settings";
+  };
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container>
-      <div className="divImage">
-        <img src={product.image} style={{ width: 200, height: 200 }} />
-      </div>
-      <div className="divEditUser">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nombre</label>
-            <input
-              type="text"
-              name="name"
-              id="exampleInputName"
-              value={product.name}
-              placeholder="Enter Name"
-              onChange={onChangeInput}
-              className="inputText"
-            />
-          </div>
-          <div>
-            <label>Precio</label>
-            <input
-              type="number"
-              name="price"
-              id="exampleInputPrice"
-              value={product.price}
-              placeholder="Enter price"
-              onChange={onChangeInput}
-              className="inputText"
-            />
-          </div>
-          <div>
-            <label>Imagen</label>
-            <input
-              type="text"
-              name="image"
-              id="exampleInputImage"
-              value={product.image}
-              placeholder="Choose an image"
-              onChange={onChangeInput}
-              className="inputText"
-            />
-          </div>
-          <div>
-            <label>Tipo</label>
-            <input
-              type="text"
-              name="type"
-              id="exampleInputType"
-              value={product.type}
-              placeholder="Enter a type"
-              onChange={onChangeInput}
-              className="inputText"
-            />
-          </div>
-          <div className="divButton">
-            <button>Guardar</button>
-          </div>
-        </form>
-      </div>
+      <Container  background={back}>
+        {/* <h1 style={{display:'flex', justifyContent:'center', marginTop:'30px'}}>Editar Producto</h1> */}
+        <div className='containerProfile'>
+        <div className="divImage">
+          <img src={product.image} style={{ width: 200, height: 200 }} />
+          <p>{product.name}</p>
+        </div>
+        <div className="divEditUser">
+          <Form onSubmit={handleSubmit} width='initial' padding='true'>
+            <div className="form-group">
+              <Label>Nombre</Label>
+              <Input
+                type="text"
+                name="name"
+                id="exampleInputName"
+                value={product.name}
+                placeholder="Enter Name"
+                onChange={onChangeInput}
+                className="inputText"
+              />
+            </div>
+            <div className="form-group">
+              <Label>Precio</Label>
+              <Input
+                type="number"
+                name="price"
+                id="exampleInputPrice"
+                value={product.price}
+                placeholder="Enter price"
+                onChange={onChangeInput}
+                className="inputText"
+              />
+            </div>
+            <div className="form-group">
+              <Label>Imagen</Label>
+              <Input
+                type="text"
+                name="image"
+                id="exampleInputImage"
+                value={product.image}
+                placeholder="Choose an image"
+                onChange={onChangeInput}
+                className="inputText"
+              />
+            </div>
+            <div className="form-group">
+              <Label>Tipo</Label>
+              <Input
+                type="text"
+                name="type"
+                id="exampleInputType"
+                value={product.type}
+                placeholder="Enter a type"
+                onChange={onChangeInput}
+                className="inputText"
+              />
+            </div>
+            <div className="divButton">
+              <ButtonOrder>Guardar</ButtonOrder>
+            </div>
+          </Form>
+        </div>
+        </div>
       </Container>
-      <Modal
-        data-testid='modal'
-        state = {stateModal}
-        changeState = {setStateModal}
-      >
+      <Modal data-testid="modal" state={stateModal} changeState={setStateModal}>
         <ContentModal>
           <p>{modal.title}</p>
           <p>{modal.body}</p>

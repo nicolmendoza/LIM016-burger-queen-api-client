@@ -21,7 +21,7 @@ export const Button = style.button`
 
 export const ButtonOrder = style.button`
   margin: auto;
-  width: 80%;
+  width: ${props => props.width ||'80%'};
   /* height: 100%; */
   padding: 0.5rem 0;
   border-radius: 0.5rem;
@@ -47,9 +47,6 @@ export const ContainerProduts = style.div`
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
-  @media (max-width: 760px){
-    grid-template-columns: repeat(2,1fr);}
   
     &::-webkit-scrollbar {
       width:0.3rem;
@@ -64,6 +61,11 @@ export const ContainerProduts = style.div`
       border-radius: 3.125rem;
     }
   
+
+  @media (max-width: 1024px){
+    grid-template-columns: repeat(3,1fr);}
+
+    }
 `
 
 export const OrderDiv = style.div`
@@ -73,6 +75,8 @@ border-radius: 9px;
 padding: 6%;
 position:relative;
 box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.25);
+
+
 `
 
 export const Container = style.div`
@@ -97,10 +101,11 @@ ${props => props.valid === 'true' && css `
     bottom: 0;
     left: 0;
     right: 0;
-    background-color:  ${colors.background};
+    background-color: ${colors.background};
   }
-  `}
+  `};
 
+}
 `
 
 export const ButtonModal = style.button`
@@ -157,7 +162,7 @@ export const ContainerElements = style.div`
   overflow-x: hidden;
   scroll-behavior: smooth;
 
-  @media (max-width: 760px){
+  @media (max-width: 1024px){
     grid-template-columns: repeat(2,1fr);}
   
     &::-webkit-scrollbar {
@@ -172,6 +177,8 @@ export const ContainerElements = style.div`
       background: #eacf4f;
       border-radius: 3.125rem;
     }
+
+  
 
 `
 
@@ -266,5 +273,20 @@ export const Tab = style.button`
       color: ${colors.principal}
     `}
 
+    ${props => props.responsive === 'true' && css `
+    padding: 0.62rem 3rem;
 
+    @media (max-width: 1024px){
+      padding: 0.62rem 1rem;
+      text-transform: capitalize;
+    }`}
+
+`
+
+export const Label = style.label`
+  color:rgba(229, 161, 6, 0.8);
+  font-weight:500;
+  min-height:40px;
+  cursor:pointer;
+  width: 7rem;
 `
