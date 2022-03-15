@@ -5,13 +5,21 @@ import {
   ContainerProduts,
   OrderDiv,
   Container,
-  ButtonOrder
+  GroupTab,
+  ButtonOrder,
+  Tab
 } from "../style-components/components";
 import Sidebar from "./Navegador";
 import Loader from "../utils/Loader";
-import Order from '../utils/DivOrden'
+import Order from '../utils/DivOrden';
+import back from "../img/back.webp"
+import UserInfo from './New Order/components/User'
+
 
 const GetOrders = () => {
+  const types = [['pending', 'Pendientes'], ['delivering', 'Listos']]
+  const [active, setActive] = useState(types[0][1])
+
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -65,13 +73,23 @@ const GetOrders = () => {
 
   const filterFunction = (type) => {
     console.log(type);
-    const pending = state.filter((x) => x.status === type);
+    const pending = state.filter((x) => x.status === type[0]);
     setFilter(pending);
+    setActive(type[1])
   };
   const FilterOrders = () => {
     return (
       <>
-        <div className="buttons d-flex justify-content-center mb-2">
+      <GroupTab>
+          {
+            types.map(type => (
+              <Tab 
+              key={type[1]}
+              active={active === type[1]}
+              onClick={()=>filterFunction(type)}>{type[1]}</Tab>
+            ))
+          } </GroupTab>
+        {/* <div className="buttons d-flex justify-content-center mb-2">
           <button
             className="btn btn-outline-dark"
             onClick={() => filterFunction("pending")}
@@ -84,12 +102,12 @@ const GetOrders = () => {
           >
             LISTO
           </button>
-        </div>
-      </>
+        </div>*/}
+      </> 
     );
   };
 
-  // const time = (a, b) => {
+  // / const time = (a, b) => {
   //   // console.log(  new Date(a).getTime())
   //   const timeValue = new Date(b).getTime() - new Date(a).getTime();
   //   return convert(timeValue);
@@ -122,11 +140,12 @@ const GetOrders = () => {
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container>
+      <Container background={back} valid='true'>
         {roleUser === "mesera" ? (
           "No tiene acceso para esta ruta"
         ) : (
           <>
+          <UserInfo/>
             <FilterOrders></FilterOrders>
             {loading ? 
               <Loader/>

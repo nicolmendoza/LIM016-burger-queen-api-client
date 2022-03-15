@@ -41,6 +41,29 @@ export const ContainerProduts = style.div`
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   color:white;
+  padding: 1rem 1rem 1rem 1rem;
+  height: calc(100vh - 6.5rem);
+  content-visibility: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  @media (max-width: 760px){
+    grid-template-columns: repeat(2,1fr);}
+  
+    &::-webkit-scrollbar {
+      width:0.3rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #000;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #eacf4f;
+      border-radius: 3.125rem;
+    }
+  
 `
 
 export const OrderDiv = style.div`
@@ -62,6 +85,22 @@ width: calc(100% - 78px);
 transition: all 0.5s ease;
 z-index: 2;
 background-size: cover;
+background-position: center center;
+background-size: cover;
+background-repeat: no-repeat;
+
+${props => props.valid === 'true' && css `
+  &:before {
+    content:'';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:  ${colors.background};
+  }
+  `}
+
 `
 
 export const ButtonModal = style.button`
@@ -206,3 +245,26 @@ export const LeyendaError = style.p`
         display:block
     `}
 ` 
+export const GroupTab = style.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+`
+
+export const Tab = style.button`
+    padding: 0.62rem 3.75rem;
+    cursor: pointer;
+    color: white;
+    background:none;
+    border:0;
+    outline:0;
+    text-transform: uppercase;
+
+    ${({active}) => active && `
+      border-bottom: 2px solid ${colors.principal};
+      color: ${colors.principal}
+    `}
+
+
+`

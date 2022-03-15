@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./components/Cart";
-import { Button, ContainerElements, DivElement, Container} from "../../style-components/components";
+import { Button, ContainerElements, Container} from "../../style-components/components";
 import DivData from '../../utils/Container-Data'
 import Sidebar from "../Navegador"
 import UserInfo from './components/User'
