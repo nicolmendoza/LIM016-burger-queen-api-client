@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const ContainerMenu = styled.div`
     width: 77rem;
-    background: ${colors.background};
+    /*background: ${colors.background};*/
     display: flex;
     flex-direction: column;
     /* justify-content: start; */
@@ -22,7 +22,12 @@ const ContainerCart = styled.div`
     display: flex;
     flex-direction: column;
     background:${colors.container};
-    width: 34rem
+    width: 54rem;
+    position:relative;
+
+    @media (max-width: 1024px){
+        width: 40rem;
+      } 
 `
 const Icon = styled(SearchIcon)`
     color:white;

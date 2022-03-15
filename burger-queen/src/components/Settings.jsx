@@ -9,6 +9,7 @@ import styled, { css } from "styled-components";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import colors from "../style-components/elementos/colors";
+import back from "../img/back.webp"
 
 const Settings = () => {
 

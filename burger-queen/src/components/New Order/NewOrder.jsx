@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./components/Cart";
-import { Button, ContainerElements, DivElement, Container} from "../../style-components/components";
+import { Button, ContainerElements, Container, GroupTab, Tab, ButtonOrder} from "../../style-components/components";
 import DivData from '../../utils/Container-Data'
 import Sidebar from "../Navegador"
 import UserInfo from './components/User'
@@ -9,8 +9,10 @@ import {ContainerMenu, Icon, ButtonMenu} from './components/style.js'
 import Input from './components/input.jsx'
 import "../../style-components/productsOrders.css";
 import Loader from "../../utils/Loader";
+import back from "../../img/back.webp"
 
 const Products = () => {
+
   const url = "https://bq-api-2022.herokuapp.com/products";
   const roleUser = localStorage.getItem("role");
   const token = localStorage.getItem("token");
@@ -21,11 +23,13 @@ const Products = () => {
     },
   };
 
+  const types = ['Todas', 'Desayuno', 'Hamburguesas', 'Complementos', 'Bebidas' ]
   const [totalFinal, setTotalFinal] = useState([]);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState(products);
   const [loading, setLoading] = useState(true);
   const [filter2, setFilter2] = useState(products);
+  const [active, setActive] = useState(types[0])
 
   useEffect(() => {
     allProducts()
@@ -47,6 +51,7 @@ const Products = () => {
   const filterProductsByType = (type) => {
     setFilter(products.filter((x) => x.type === type));
     setFilter2(products.filter((x) => x.type === type));
+    setActive(type)
   };
 
   const [cart, setCart] = useState([]);
@@ -80,8 +85,19 @@ const Products = () => {
 
   const ShowProducts = () => {
     return (
+      <>
+      <GroupTab>
+          {
+            types.map(type => (
+              <Tab
+              key={type}
+              active={active === type}
+              responsive='true'
+              onClick={type==='Todas'? () => {setFilter2(products); setFilter(products); setActive(type)}  : () => filterProductsByType(type)}>{type}</Tab>
+            ))
+          }</GroupTab>
       <div className="btnProductsDiv">
-        <div className="container-btnMenu">
+        {/* <div className="container-btnMenu">
           <ButtonMenu onClick={() =>{setFilter2(products); setFilter(products)} }>ALL</ButtonMenu>
           <ButtonMenu onClick={() => filterProductsByType("Desayuno")}>
             Desayuno
@@ -95,21 +111,21 @@ const Products = () => {
           <ButtonMenu onClick={() => filterProductsByType("Bebidas")}>
             Bebidas
           </ButtonMenu>
-        </div>
+        </div> */}
         
         <ContainerElements height="9" data-testid="listOrders">
           {filter2.map((x) => (
               <DivData data={x} id={x._id}>
                 <div>
-                <p>{x.type}</p>
                 <p>{x.name}</p>
                 <p>Precio: S/{x.price}</p>
                 </div>
-                <Button color="black" onClick={() => addProduct(x)}  data-testid={x.name}>Add</Button>
+                <ButtonOrder  width="50%" color="black" onClick={() => addProduct(x)}  data-testid={x.name}>Add</ButtonOrder>
               </DivData>
           ))}
         </ContainerElements>
       </div>
+      </>
     );
   };
 
@@ -117,7 +133,7 @@ const Products = () => {
     <>
     <Sidebar value={`${roleUser}`}></Sidebar>
     {roleUser === 'cocinera'? "No tiene acceso para esta ruta" :
-    <Container>  
+    <Container background={back} valid='true' >  
        <div className="containerProductsOrders">
        {loading ? <Loader/> : <>
         <ContainerMenu>

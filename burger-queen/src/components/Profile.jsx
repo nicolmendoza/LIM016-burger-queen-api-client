@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
-import { Button, Container } from "../style-components/components.js";
+import { Button, Container, ButtonOrder } from "../style-components/components.js";
 import Loader from "../utils/Loader";
+import back from "../img/back.webp"
 
 const Profile = () => {
   const roleUser = localStorage.getItem("role");
@@ -79,7 +80,7 @@ const Profile = () => {
 
   const InfoProfile = () => {
     return (
-        <>
+        <div className='containerProf'>
         <div className="titleDiv">
           <h1>Mi Perfil</h1>
         </div>
@@ -87,11 +88,11 @@ const Profile = () => {
         <div className="divImage">
           <img src={user.image} style={{ width: 200, height: 200 }} />
         </div>
-        <div className="divEditUser">
+        <div className="div-containerProfile">
           <h2>Información personal: </h2>
 
           <div className="divInfoUser">
-            <label>Name: </label>
+            <label>Nombre: </label>
             <p>{user.nameUser}</p>
           </div>
           <div className="divInfoUser">
@@ -99,7 +100,7 @@ const Profile = () => {
             <p>{user.email}</p>
           </div>
           <div className="divInfoUser">
-            <label>Roles: </label>
+            <label>Rol: </label>
             <p>{user.rol}</p>
           </div>
           <div className="divInfoUser">
@@ -107,19 +108,19 @@ const Profile = () => {
             <p>{funciones()}</p>
           </div>
           <div className="divButton">
-            <Button color="black" onClick={functionEdit}>
+            <ButtonOrder width="30%" onClick={functionEdit}>
               Editar
-            </Button>
+            </ButtonOrder>
           </div>
         </div>
-        </>
+        </div>
     );
   };
 
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container>
+      <Container background={back} valid='true'>
       {loading ? <Loader/> : <InfoProfile></InfoProfile>}
       </Container>
     </>

@@ -18,6 +18,7 @@ const Cart = ({
   setTotalFinal,
   changeQty
 }) => {
+  const types = []
   const token = localStorage.getItem("token");
   const header = {
     headers: {

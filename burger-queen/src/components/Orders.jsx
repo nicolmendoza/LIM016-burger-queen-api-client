@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getAllOrders, editProduct } from "../services/orders";
-import { Link } from "react-router-dom";
 import {
   Button,
   ContainerProduts,
   OrderDiv,
   Container,
   ButtonModal,
-  ButtonOrder
+  GroupTab,
+  ButtonOrder,
+  Tab
 } from "../style-components/components";
 import Sidebar from "./Navegador";
 import Loader from '../utils/Loader'
 import Order from "../utils/DivOrden"
+import UserInfo from './New Order/components/User'
+import back from "../img/back.webp"
 
 const Orders = () => {
   const url = "https://bq-api-2022.herokuapp.com/orders";
@@ -26,9 +29,13 @@ const Orders = () => {
     },
   };
 
+  const types = [['', 'Todas'], ['pending', 'Pendientes'], ['delivering', 'Listos'], ['delivered', 'Entregados'], ['canceled', 'Cancelados']]
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState([]);
+  const [active, setActive] = useState(types[0][1])
+
 
   useEffect(() => {
     setLoading(true);
@@ -74,29 +81,41 @@ const Orders = () => {
     getOrders();
   };
 
-  const handleBackground = (status) => {
-    if (status === "pending") return "rgba(7, 120, 45, 0.35)";
-    if (status === "canceled") return "rgba(114, 22, 22, 0.35)";
-    if (status === "delivering") return "rgba(112, 114, 22, 0.27)";
-    if (status === "delivered") return "rgba(22, 108, 114, 0.27)";
-  };
-  const allProducts = () => {
+  // const handleBackground = (status) => {
+  //   if (status === "pending") return "rgba(7, 120, 45, 0.35)";
+  //   if (status === "canceled") return "rgba(114, 22, 22, 0.35)";
+  //   if (status === "delivering") return "rgba(112, 114, 22, 0.27)";
+  //   if (status === "delivered") return "rgba(22, 108, 114, 0.27)";
+  // };
+  const allProducts = (type) => {
     setFilter(orders);
+    setActive(type[1])
   };
 
   const filterProductsByType = (type) => {
-    setFilter(orders.filter((x) => x.status === type));
+    setFilter(orders.filter((x) => x.status === type[0]));
+    setActive(type[1])
   };
 
   return (
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container background="../img/back.jpg">
+      <Container background={back} valid='true'>
         {roleUser === "cocinera" ? 
           "No tiene acceso para esta ruta"
          : 
           <>
-            <div className="buttons d-flex justify-content-center mb-2">
+          <UserInfo/>
+          <GroupTab>
+          {
+            types.map(type => (
+              <Tab 
+              key={type[1]}
+              active={active === type[1]}
+              onClick={type[1]==='Todas'? () => allProducts(type) : () => filterProductsByType(type) } >{type[1]}</Tab>
+            ))
+          }</GroupTab>
+            {/* <div className="buttons d-flex justify-content-center mb-2">
               <Button onClick={() => allProducts()}>Todas</Button>
               <Button onClick={() => filterProductsByType("pending")}>
                 Pendientes
@@ -110,7 +129,7 @@ const Orders = () => {
               <Button onClick={() => filterProductsByType("canceled")}>
                 Cancelados
               </Button>
-            </div>
+            </div> */}
             {loading ? 
               <Loader/>
              : 

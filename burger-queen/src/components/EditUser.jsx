@@ -3,10 +3,11 @@ import React, { useEffect, useState} from "react"
 import { useParams } from "react-router-dom";
 import Sidebar from "./Navegador";
 import {Container} from '../style-components/components'
-import {Button, ButtonModal, ContentModal} from '../style-components/components'
+import {Button, ButtonModal, ContentModal, ButtonOrder} from '../style-components/components'
 import Modal from "../utils/modal";
 import "../style-components/editUser.css";
-
+import back from "../img/back.webp"
+import {Label, Input, GroupInput, LeyendaError, DivInput, Form} from '../style-components/elementos/Form' 
 
 
 const EditUser = () => {
@@ -75,7 +76,7 @@ const bodyModal = {
         ...old,
         roles: {
           name: e.target.value,
-          admin:false
+          admin:false 
         },
       }));
     }
@@ -117,17 +118,18 @@ const bodyModal = {
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container>
-        <h2>Editar Perfil</h2>
+      <Container  background={back}>
+      <div className='containerProfile'>
       <div className="divImage">
         <img src={state.image} style={{ width: 180, height: 180 }} />
+        <p>{state.nameUser}</p>
       </div>
 
       <div className="divEditUser">
-        <form onSubmit={onSubmitForm}>
-          <div>
-            <label>Nombre: </label>
-            <input
+        <Form onSubmit={onSubmitForm}  width='initial' padding='true'>
+          <div className="form-group">
+            <Label>Nombre: </Label>
+            <Input
               type="text"
               name="nameUser"
               value={state.nameUser}
@@ -136,9 +138,9 @@ const bodyModal = {
               className="inputText"
             />
           </div>
-          <div>
-            <label>Imagen: </label>
-            <input
+          <div className="form-group">
+            <Label>Imagen: </Label>
+            <Input
               type="text"
               name="image"
               value={state.image}
@@ -147,9 +149,9 @@ const bodyModal = {
               className="inputText"
             />
           </div>
-          <div>
-            <label>Correo: </label>
-            <input
+          <div className="form-group">
+            <Label>Correo: </Label>
+            <Input
               type="email"
               name="email"
               value={state.email}
@@ -158,28 +160,31 @@ const bodyModal = {
               onChange={onChangeInput}
             />
           </div>
-          <div>
-            <label>Contraseña: </label>
-            <input
+          <div  className="group-psd">
+          <div className="form-group-psd">
+            <Label>Contraseña: </Label>
+            <Input
               type="password"
               name="password"
               value={state.password}
               placeholder="**************"
               onChange={onChangeInput}
               className="inputText"
-            /><br></br>
-            <h5>*** Si deseas cambiar de contraseña , escribe tu nueva contarseña,
-        de lo contrario permanece tu contraseña actual .{" "}</h5>
+            /></div>
+             <LeyendaError valid='false'>Si deseas cambiar de contraseña , escribe tu nueva contarseña,
+              de lo contrario permanece tu contraseña actual</LeyendaError>
           </div>
 
           {localStorage.getItem("role") !== "admin" ? (
             ""
           ) : (
+            <div className="group-psd">
             <fieldset onChange={options} value={state.roles}>
-              <h3>Roles</h3>
+              <Label>Roles: </Label>
+              <div className='containerRoles'>
               <div>
                 <label>
-                  <input type="radio" name="optionsRadios" value="admin" />
+                  <input type="radio" name="optionsRadios" value="admin" className='inputRadio'/>
                   Administrador
                 </label>
               </div>
@@ -190,7 +195,7 @@ const bodyModal = {
                     name="optionsRadios"
                     id="optionsRadios2"
                     value="mesera"
-                  
+                    className='inputRadio'
                   />
                   Meserx
                 </label>
@@ -203,17 +208,21 @@ const bodyModal = {
                     id="optionsRadios3"
                     value="cocinera"
                     disabled=""
+                    className='inputRadio'
                   />
                   Cocinerx
                 </label>
               </div>
+              </div>
             </fieldset>
+            </div>
           )}
 
           <div className="divButton">
-            <Button type="submit">Guardar</Button>
+            <ButtonOrder type="submit">Guardar</ButtonOrder>
           </div>
-        </form>
+        </Form>
+      </div>
       </div>
       </Container>
       <Modal

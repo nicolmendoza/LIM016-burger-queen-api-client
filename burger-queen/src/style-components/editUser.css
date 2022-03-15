@@ -3,16 +3,14 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  width: 40%;
-  background-color: rgb(98, 98, 98);
+  width: 55%;
   padding: 5px;
   padding-bottom: 2px;
-  border-radius: 30px;
-  height: 45%;
+  border-radius: 0.5rem;
 }
 
 .divEditUser div {
-  margin: 12px;
+  /* margin: 12px; */
   font-size: 15px;
 }
 
@@ -25,9 +23,17 @@ h2{
 .divImage {
   justify-content: center;
   display: flex;
-  width: 100%;
   align-items: center;
   padding: 15px;
+  margin: auto;
+  flex-direction: column;
+  color:white;
+}
+
+.divImage p{
+  background: rgba(0, 0, 0, 0.87);
+  padding:1rem;
+  font-size:1.5rem
 }
 
 .img {
@@ -67,7 +73,16 @@ button:hover {
   padding: 15px;
   font-size: 15px;
 }
-
+.containerRoles{
+  display:flex;
+  flex-direction:row;
+  margin-top: 1rem;
+  color:white;
+  justify-content:space-evenly;
+}
+.inputRadio{
+  margin-right:1rem;
+}
 @media (max-width: 1200px) {
   .divEditUser {
     width: 50%;

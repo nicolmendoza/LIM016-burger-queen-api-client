@@ -17,6 +17,7 @@ const Sidebar = (role) => {
     
   };
   // console.log(role);
+  // const [active, setActive] = useState(types[0])
 
   const logOut = () => {
     localStorage.clear();
@@ -38,7 +39,7 @@ const Sidebar = (role) => {
         {role.value === "cocinera" ? (
           ""
         ) : (
-          <li>
+          <li id='newOrden'>
             <a href={user.newOrders}>
               <i className="bx bx-restaurant"></i>
               <span className="links_name">Nueva Orden</span>
@@ -49,7 +50,7 @@ const Sidebar = (role) => {
         {role.value === "cocinera" ? (
           ""
         ) : (
-          <li>
+          <li id='orders'>
             <a href={user.orders}>
               <i className="bx bxs-dish"></i>
               <span className="links_name">Ordenes</span>
@@ -60,7 +61,7 @@ const Sidebar = (role) => {
         {role.value === "mesera" ? (
           ""
         ) : (
-          <li>
+          <li id='chef'>
             <a href={user.chef}>
               <i className="bx bxs-bell"></i>
               <span className="links_name">Ordenes Chef</span>
@@ -71,7 +72,7 @@ const Sidebar = (role) => {
         {role.value !== "admin" ? (
           ""
         ) : (
-          <li>
+          <li id='setting'>
             <a href={user.settings}>
               <i className="bx bx-cog"></i>
               <span className="links_name">Setting</span>
@@ -90,7 +91,7 @@ const Sidebar = (role) => {
             <span className="tooltip">Dashboard</span>
           </li>
         )}
-        <li>
+        <li id='profile'>
           <a href={user.profile}>
             <i className="bx bx-user"></i>
             <span className="links_name">Profile</span>

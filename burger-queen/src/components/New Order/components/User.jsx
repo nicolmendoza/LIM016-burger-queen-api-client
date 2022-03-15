@@ -22,6 +22,8 @@ const ContainerUser = styled.div`
     line-height: 1.9rem;
     display: flex;
     flex-direction: column;
+    color:white;
+    position: relative;
 
     .user{
         font-size:1.9rem;

@@ -7,9 +7,12 @@ import { Container } from "../style-components/components";
 import {
   Button,
   ButtonModal,
-  ContentModal,
+  ContentModal, ButtonOrder
 } from "../style-components/components";
 import Modal from "../utils/modal";
+import {Label, Input, GroupInput, LeyendaError, DivInput, Form} from '../style-components/elementos/Form' 
+import back from "../img/back.webp"
+
 
 const EditProduct = () => {
   const roleUser = localStorage.getItem("role");
@@ -76,16 +79,18 @@ const EditProduct = () => {
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <Container>
-        <h1 style={{display:'flex', justifyContent:'center', marginTop:'30px'}}>Editar Producto</h1>
+      <Container  background={back}>
+        {/* <h1 style={{display:'flex', justifyContent:'center', marginTop:'30px'}}>Editar Producto</h1> */}
+        <div className='containerProfile'>
         <div className="divImage">
           <img src={product.image} style={{ width: 200, height: 200 }} />
+          <p>{product.name}</p>
         </div>
         <div className="divEditUser">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Nombre</label>
-              <input
+          <Form onSubmit={handleSubmit} width='initial' padding='true'>
+            <div className="form-group">
+              <Label>Nombre</Label>
+              <Input
                 type="text"
                 name="name"
                 id="exampleInputName"
@@ -95,9 +100,9 @@ const EditProduct = () => {
                 className="inputText"
               />
             </div>
-            <div>
-              <label>Precio</label>
-              <input
+            <div className="form-group">
+              <Label>Precio</Label>
+              <Input
                 type="number"
                 name="price"
                 id="exampleInputPrice"
@@ -107,9 +112,9 @@ const EditProduct = () => {
                 className="inputText"
               />
             </div>
-            <div>
-              <label>Imagen</label>
-              <input
+            <div className="form-group">
+              <Label>Imagen</Label>
+              <Input
                 type="text"
                 name="image"
                 id="exampleInputImage"
@@ -119,9 +124,9 @@ const EditProduct = () => {
                 className="inputText"
               />
             </div>
-            <div>
-              <label>Tipo</label>
-              <input
+            <div className="form-group">
+              <Label>Tipo</Label>
+              <Input
                 type="text"
                 name="type"
                 id="exampleInputType"
@@ -132,9 +137,10 @@ const EditProduct = () => {
               />
             </div>
             <div className="divButton">
-              <Button>Guardar</Button>
+              <ButtonOrder>Guardar</ButtonOrder>
             </div>
-          </form>
+          </Form>
+        </div>
         </div>
       </Container>
       <Modal data-testid="modal" state={stateModal} changeState={setStateModal}>

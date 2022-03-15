@@ -79,7 +79,7 @@
   width: 100%;
   color: white;
   min-height: 100vh;
-  background-image: url('../img/back.jpg');
+  /* background-image: url('../img/back.webp'); */
   background-size: cover;
 }
 
