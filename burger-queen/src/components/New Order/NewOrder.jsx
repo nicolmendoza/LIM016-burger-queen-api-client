@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./components/Cart";
-import { Button, ContainerElements, Container, GroupTab, Tab} from "../../style-components/components";
+import { Button, ContainerElements, Container, GroupTab, Tab, ButtonOrder} from "../../style-components/components";
 import DivData from '../../utils/Container-Data'
 import Sidebar from "../Navegador"
 import UserInfo from './components/User'
@@ -120,7 +120,7 @@ const Products = () => {
                 <p>{x.name}</p>
                 <p>Precio: S/{x.price}</p>
                 </div>
-                <Button color="black" onClick={() => addProduct(x)}  data-testid={x.name}>Add</Button>
+                <ButtonOrder  width="50%" color="black" onClick={() => addProduct(x)}  data-testid={x.name}>Add</ButtonOrder>
               </DivData>
           ))}
         </ContainerElements>

@@ -49,7 +49,7 @@ const Products = ({setValue}) => {
 
   const getAllProducts = async (url, header) => {
     try {
-      const products = await axios.get(`${url}?limit${100}`, header);
+      const products = await axios.get(`${url}?limit=${50}`, header);
       const link = products.headers.link;
       console.log(link);
       const arrayLink = link.match(
