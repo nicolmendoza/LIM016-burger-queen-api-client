@@ -1,5 +1,8 @@
 import style, {css} from 'styled-components';
 import {colors} from './elementos/Form.js'
+import color from './elementos/colors.js'
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
 
 export const Button = style.button`
     background: none;
@@ -188,7 +191,11 @@ export const DivElement = style.div`
     display:flex;
     flex-direction:column;
     align-items: center;
-    justify-content:center
+    justify-content:center;
+
+    &:hover{
+      border:1px dashed ${colors.principal};
+    }
 `
 
 export const Button3 = style.button`
@@ -271,7 +278,7 @@ export const Tab = style.button`
     ${({active}) => active && `
       border-bottom: 2px solid ${colors.principal};
       color: ${colors.principal}
-    `}
+    `};
 
     ${props => props.responsive === 'true' && css `
     padding: 0.62rem 3rem;
@@ -289,4 +296,31 @@ export const Label = style.label`
   min-height:40px;
   cursor:pointer;
   width: 7rem;
+`
+
+export const Icon = style.i`
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+  color: rgba(229, 161, 6, 0.8);
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+
+  ${({active}) => active && `
+      background-image:${color.gradient};
+      color: black;
+    `};
+  
+
+`
+export const User = style(AccountCircleIcon)`
+  color: #755707;; 
+`
+
+export const Product = style(FastfoodIcon)`
+  color: #755707;; 
 `

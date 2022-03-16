@@ -2,10 +2,11 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 import colors from '../style-components/elementos/colors'
 
-const Button2 = ({icon, title, description, value, changeState}) => {
+const Button2 = ({icon, title, description, value, changeState, active, setActive}) => {
+    // const [active, setActive] = useState()
 
     return (
-        <ButtonGroup  onClick={() => changeState(value)} >
+        <ButtonGroup key={value} active={active === value} onClick={() => {changeState(value); setActive(value)}} >
             <div>{icon}</div>
             <ContentButton>
                 <h1>{title}</h1>
@@ -22,8 +23,19 @@ const ButtonGroup = styled.button`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    background:rgba(217, 242, 248, 0.26);
-    cursor:pointer
+    background:none;
+    cursor:pointer;
+    
+
+    ${({active}) => active && `
+      background: rgb(0 0 0 / 35%);
+      color: black;
+    `};
+
+    &:hover{
+        background: rgb(0 0 0 / 35%);
+        color: black;
+    }
 `
 
 const ContentButton = styled.div`

@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Container } from "../style-components/components";
+import { Button, Container, User, Product } from "../style-components/components";
 import Sidebar from "./Navegador";
 import Admi from "./Admi";
 import Products from "./Products";
 import Button2 from "../utils/menuSettings";
 import styled, { css } from "styled-components";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
 import colors from "../style-components/elementos/colors";
 import back from "../img/back.webp"
 
@@ -27,7 +25,7 @@ useEffect(()=>{
   const roleUser = localStorage.getItem("role");
   const [value, setValue] = useState("users");
   const [loading, setLoading] = useState(true);
-
+  const [active, setActive] = useState("users")
   // const valueButton = (e) => {
   //   console.log(e);
   //   const valueTarget = e.target.value;
@@ -51,18 +49,22 @@ useEffect(()=>{
             <ContainerSetting>
               <Menu width="250">
                 <Button2
-                  icon={<AccountCircleIcon />}
+                  icon={<User />}
                   title="Usuarios"
                   description="Crear, modificar y eliminar usuarios"
                   value="users"
                   changeState={setValue}
+                  active={active}
+                  setActive={setActive}
                 />
                 <Button2
-                  icon={<FastfoodIcon />}
+                  icon={<Product />}
                   title="Productos"
                   description="Crear, modificar y eliminar productos"
                   value="products"
                   changeState={setValue}
+                  active={active}
+                  setActive={setActive}
                 />
               </Menu>
               <Menu width="container">
