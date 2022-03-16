@@ -37,7 +37,7 @@ useEffect(()=>{
   console.log(value);
   return (
     <div>
-      {/* <Sidebar value={`${roleUser}`}></Sidebar> */}
+      <Sidebar value={`${roleUser}`}></Sidebar>
       {!loading ? (
         ""
       ) : (
