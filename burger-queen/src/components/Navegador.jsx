@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import "../style-components/sidebar.css";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Settings from "./Settings";
-import colors from '../style-components/elementos/colors.js'
+import {Icon} from '../style-components/components'
+import logo from '../img/Burger House.png'
 
 const Sidebar = (role) => {
   const user = {
@@ -17,14 +18,21 @@ const Sidebar = (role) => {
     
   };
   // console.log(role);
-  // const [active, setActive] = useState(types[0])
+  const [active, setActive] = useState('')
 
   const logOut = () => {
     localStorage.clear();
     window.location.href = "/";
   };
 
+  useEffect(() => {
+      if(window.location.pathname === '/orders') return setActive('Ordenes')
+      if(window.location.pathname === '/getOrders') return setActive('Ordenes Chef')
+      if(window.location.pathname === '/newOrder') return setActive('Nueva Orden')
+      if(window.location.pathname === '/settings') return setActive('Setting')
+      if(window.location.pathname === '/profile') return setActive('Perfil')
 
+  }, []);
 
   return (
     <div className="sidebar">
@@ -33,7 +41,8 @@ const Sidebar = (role) => {
           {" "}
         </FastfoodIcon>
         <div className="logo_name">Burger Queen</div>
-        <i className="bx bx-menu" id="btn"></i>
+        {/* <a href="#home" className="logo"><img src={logo} alt=""/></a> */}
+        <Icon className="bx bx-menu" id="btn"></Icon>
       </div>
       <ul className="nav-list">
         {role.value === "cocinera" ? (
@@ -41,7 +50,9 @@ const Sidebar = (role) => {
         ) : (
           <li id='newOrden'>
             <a href={user.newOrders}>
-              <i className="bx bx-restaurant"></i>
+              <Icon className="bx bx-restaurant"
+              key='Nueva Orden'
+              active={active === 'Nueva Orden'}></Icon>
               <span className="links_name">Nueva Orden</span>
             </a>
             <span className="tooltip">Nueva orden</span>
@@ -52,7 +63,10 @@ const Sidebar = (role) => {
         ) : (
           <li id='orders'>
             <a href={user.orders}>
-              <i className="bx bxs-dish"></i>
+              <Icon className="bx bxs-dish"
+                key='Ordenes'
+                active={active === 'Ordenes'}
+              ></Icon>
               <span className="links_name">Ordenes</span>
             </a>
             <span className="tooltip">Ordenes</span>
@@ -63,7 +77,9 @@ const Sidebar = (role) => {
         ) : (
           <li id='chef'>
             <a href={user.chef}>
-              <i className="bx bxs-bell"></i>
+              <Icon className="bx bxs-bell"
+              key='Ordenes Chef'
+              active={active === 'Ordenes Chef'}></Icon>
               <span className="links_name">Ordenes Chef</span>
             </a>
             <span className="tooltip">Ordenes Chef</span>
@@ -74,7 +90,9 @@ const Sidebar = (role) => {
         ) : (
           <li id='setting'>
             <a href={user.settings}>
-              <i className="bx bx-cog"></i>
+              <Icon className="bx bx-cog"
+              key='Setting'
+              active={active === 'Setting'}></Icon>
               <span className="links_name">Setting</span>
             </a>
             <span className="tooltip">Setting</span>
@@ -85,7 +103,9 @@ const Sidebar = (role) => {
         ) : (
           <li>
             <a href={user.dashboard}>
-              <i className="bx bx-cog"></i>
+              <Icon className="bx bx-cog"
+              key='Dashboard'
+              active={active === 'Dashboard'}></Icon>
               <span className="links_name">Dahboard</span>
             </a>
             <span className="tooltip">Dashboard</span>
@@ -93,10 +113,12 @@ const Sidebar = (role) => {
         )}
         <li id='profile'>
           <a href={user.profile}>
-            <i className="bx bx-user"></i>
-            <span className="links_name">Profile</span>
+            <Icon className="bx bx-user"
+            key='Perfil'
+            active={active === 'Perfil'}></Icon>
+            <span className="links_name">Perfil</span>
           </a>
-          <span className="tooltip">Profile</span>
+          <span className="tooltip">Perfil</span>
         </li>
 
         <li className="profile" onClick={logOut}>

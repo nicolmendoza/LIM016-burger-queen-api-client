@@ -15,6 +15,7 @@ import Profile from "./components/Profile.jsx";
 import DashBoard from "./components/DashBoard.jsx";
 function App() {
   const token = localStorage.getItem("token");
+  
   return (
     <BrowserRouter>
       <Routes>
