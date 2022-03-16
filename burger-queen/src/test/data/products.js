@@ -27,6 +27,12 @@ const products = {
       price: 11,
       image: "imagen",
       type: "Acompañamientos",
+    },    {
+      _id: 5,
+      name: "cebollas",
+      price: 10,
+      image: "imagen",
+      type: "Complementos",
     },
   ],
   dataAllDelete: [

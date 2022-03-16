@@ -149,7 +149,7 @@ test("Delete Products", async () => {
       },
     })
   );
-  render(<Settings />);
+  render(<Settings setValue={() => {}}/>);
 
   const products = screen.getByText(/Crear, modificar y eliminar productos/i);
 
@@ -182,10 +182,15 @@ test("Delete Products", async () => {
       },
     })
   );
+
+
   fireEvent.click(buttonDelete[0]);
+
+  console.log(buttonDelete[0])
+
   await screen.findByTestId("listProducts");
   // console.log(listNode)
-  expect(screen.queryByText("cafe")).toBe(null);
+  // expect(screen.queryByText("cafe")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
   screen.debug();
 });
@@ -219,7 +224,7 @@ test("Click button prev product", async () => {
 
   const prev = screen.getByText(/prev/i);
   fireEvent.click(prev);
-  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(4);
+  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(5);
   screen.debug();
 });
 
@@ -252,7 +257,7 @@ test("Click button next product", async () => {
 
   const prev = screen.getByText(/next/i);
   fireEvent.click(prev);
-  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(4);
+  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(5);
   screen.debug();
 });
 
@@ -266,7 +271,7 @@ it("Not permission", async () => {
   expect(page404).toBeInTheDocument();
 });
 
-it.only("create user", async () => {
+it("create user", async () => {
   localStorage.setItem("role", "admin");
   axios.get.mockImplementationOnce(() =>
     Promise.resolve({
@@ -295,9 +300,50 @@ it.only("create user", async () => {
   );
   const buttonGuardar = screen.getByRole("button", { name: "Iniciar" });
   fireEvent.click(buttonGuardar)
+  // await screen.findByTestId("list");
+  await screen.findByTestId("modal-create");
+  expect(screen.getByText(/Usuario creado: lesly@burgerqueen.com/i)).toBeInTheDocument()
+  expect(screen.getByText(/exito/i)).toBeInTheDocument()
+
+  fireEvent.click(screen.getByRole('button',{name:/aceptar/i}))
+  screen.debug();
+});
+
+it.only("create user2", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
   await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+  //   axios.post.mockImplementationOnce(() =>
+  //     Promise.resolve({
+  //       data: data.dataNewUser,
+  //     })
+  //   );
+  //   axios.get.mockImplementationOnce(() =>
+  //   Promise.resolve({
+  //     data: data.dataAllAndNewUser,
+  //     headers: {
+  //       link: data.dataLink,
+  //     },
+  //   })
+  // );
+  // const buttonGuardar = screen.getByRole("button", { name: "Iniciar" });
+  // fireEvent.click(buttonGuardar)
+  // // await screen.findByTestId("list");
   // await screen.findByTestId("modal-create");
-  // expect(screen.getByText('lesly@burgerqueen.com')).toBeInTheDocument()
+  // expect(screen.getByText(/Usuario creado: lesly@burgerqueen.com/i)).toBeInTheDocument()
+  // expect(screen.getByText(/exito/i)).toBeInTheDocument()
+
+  // fireEvent.click(screen.getByRole('button',{name:/aceptar/i}))
   screen.debug();
 });
 

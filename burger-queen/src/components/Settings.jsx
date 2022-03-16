@@ -39,7 +39,7 @@ useEffect(()=>{
   console.log(value);
   return (
     <div>
-      <Sidebar value={`${roleUser}`}></Sidebar>
+      {/* <Sidebar value={`${roleUser}`}></Sidebar> */}
       {!loading ? (
         ""
       ) : (
@@ -66,7 +66,7 @@ useEffect(()=>{
                 />
               </Menu>
               <Menu width="container">
-                {value === "users" ? <Admi /> : <Products />}
+                {value === "users" ? <Admi setValue={setValue}/> : <Products setValue={setValue}/>}
               </Menu>
             </ContainerSetting>
           )}

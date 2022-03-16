@@ -6,6 +6,7 @@ import BarChart from "../services/graphics";
 import StatusChart from "../services/graphics2";
 import Sidebar from "./Navegador";
 import { totalGananciasFunction } from "../services/ranking";
+import { display } from "@mui/system";
 
 const DashBoard = () => {
   const roleUser = localStorage.getItem("role");
@@ -25,60 +26,68 @@ const DashBoard = () => {
     },
   };
 
-  const getOrders = async () => {
-    const response = await axios.get(
-      "https://bq-api-2022.herokuapp.com/orders?limit=100",
-      config
-    );
-    let ganancias = 0;
-
-    setTotalGanancias(
-      response.data.map(
-        (x) =>
-          x.products.map((y) => {
-            const qty = y.qty;
-            const price = y.product.price;
-            ganancias += qty * price;
-            return ganancias;
-          })[x.products.length - 1]
-      )[response.data.length - 1]
-    );
-    setDataUsers(
-      response.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      )
-    );
-    // setDataUsers(response.data);
-
-    const arrayArrays = response.data.map((x) =>
-      x.products.map((y) => y.product.name)
-    );
-    const result = [];
-    for (let i = 0; i < arrayArrays.length; i++) {
-      for (let y = 0; y < arrayArrays[i].length; y++) {
-        result.push(arrayArrays[i][y]);
-      }
-    }
-    const resultOrder = result.sort();
-
-    const ranking = functionRanking(resultOrder);
-    setRanking(ranking);
-    setNumPedidos(response.data.length);
-
-    const resultOrderStatus = response.data.map((x) => x.status).sort();
-    const rankingStatus = functionRanking(resultOrderStatus);
-    setRankingStatus(rankingStatus);
-
-    setLoading(false);
-  };
 
   useEffect(() => {
     getOrders();
   }, []);
 
+
+  const getOrders = async () => {
+    try{
+      const response = await axios.get(
+        "https://bq-api-2022.herokuapp.com/orders?limit=100",
+        config
+      );
+      let ganancias = 0;
+  
+      setTotalGanancias(
+        response.data.map(
+          (x) =>
+            x.products.map((y) => {
+              const qty = y.qty;
+              const price = y.product.price;
+              ganancias += qty * price;
+              return ganancias;
+            })[x.products.length - 1]
+        )[response.data.length - 1]
+      );
+      setDataUsers(
+        response.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        )
+      );
+      setDataUsers(response.data);
+  
+      const arrayArrays = response.data.map((x) =>
+        x.products.map((y) => y.product.name)
+      );
+      const result = [];
+      for (let i = 0; i < arrayArrays.length; i++) {
+        for (let y = 0; y < arrayArrays[i].length; y++) {
+          result.push(arrayArrays[i][y]);
+        }
+      }
+      const resultOrder = result.sort();
+  
+      const ranking = functionRanking(resultOrder);
+      setRanking(ranking);
+      setNumPedidos(response.data.length);
+  
+      const resultOrderStatus = response.data.map((x) => x.status).sort();
+      const rankingStatus = functionRanking(resultOrderStatus);
+      setRankingStatus(rankingStatus);
+  
+      setLoading(false);
+    }catch(err){
+console.log(err)
+    }
+   
+  };
+
+
   const Table = () => {
     return (
-      <table class="table table-hover">
+      <table className="table table-hover" data-testid="table">
         <thead>
           <tr>
             <th scope="col">Cliente</th>
@@ -89,9 +98,9 @@ const DashBoard = () => {
         </thead>
         <tbody>
           {dataUsers.map((x) => (
-            <tr class="table-active">
-              <th scope="row">{x.client}</th>
-              <td>
+            <tr className="table-active" >
+              <th scope="row" key={x._id}>{x.client}</th>
+              <td >
                 {x.products.map((y) => (
                   <p>{y.product.name}</p>
                 ))}
@@ -112,7 +121,8 @@ const DashBoard = () => {
   return (
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>
-      <div style={{ marginLeft: "200px" }}>
+      aquiiiiiiiiiiiiiiiiiiiiii
+      <div style={{ marginLeft: "100px" }}>
         <div>
           {loading ? (
             ""
@@ -120,11 +130,13 @@ const DashBoard = () => {
             <>
               <div style={{ display: "flex" }}>
                 <div>
-                  <div style={{ height: "50px" }}>
+                  <div style={{display:'flex', flexDirection:'row'}}>
+                  <div style={{ width: "50%" }}>
                     Números de pedidos: {numPedidos} Pedidos
                   </div>
-                  <div style={{ height: "50px" }}>
+                  <div style={{width: "50%" }}>
                     Total de Ganancias: S/. {totalGanancias}
+                  </div>
                   </div>
                   <Table />{" "}
                 </div>
