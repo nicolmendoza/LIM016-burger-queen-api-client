@@ -3,6 +3,9 @@ import '../style-components/inicio.css';
 
 
 const Inicio = () => {
+    
+    
+    
     return (
         <div className="welcomeContainer">
             <p className="tittle">Burger Queen</p>
