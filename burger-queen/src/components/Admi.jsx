@@ -52,8 +52,10 @@ const Admi = () => {
   
 
   const getAllProducts = async (url, header) => {
+
+    
     try {
-      
+
       const res = await axios.get(`${url}?limit${100}`, header);
       
       const link = res.headers.link;
