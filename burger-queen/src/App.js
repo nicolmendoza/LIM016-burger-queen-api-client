@@ -12,7 +12,7 @@ import GetOrders from "./components/GetOrders.jsx";
 import Settings from "./components/Settings.jsx";
 import Error404 from "./components/Error404.jsx";
 import Profile from "./components/Profile.jsx";
-import DashBoard from "./components/DashBoard.jsx";
+import DashBoard from "./components/Dashboard/Dash.jsx";
 function App() {
   const token = localStorage.getItem("token");
   

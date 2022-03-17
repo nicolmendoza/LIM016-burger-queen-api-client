@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { functionRanking } from "../services/ranking";
-import LineChart from "../services/graphics";
-import BarChart from "../services/graphics";
-import StatusChart from "../services/graphics2";
-import Sidebar from "./Navegador";
-import { totalGananciasFunction } from "../services/ranking";
+import { functionRanking } from "./ranking";
+import LineChart from "./graphics";
+import BarChart from "./graphics";
+import StatusChart from "./graphics2";
+import Sidebar from "../Navegador";
+import { totalGananciasFunction } from "./ranking";
 
 const DashBoard = () => {
   const roleUser = localStorage.getItem("role");
