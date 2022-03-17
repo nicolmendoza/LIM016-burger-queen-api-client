@@ -8,7 +8,7 @@ import StatusCard from './Card'
 import { functionRanking } from "./ranking";
 import StatusChart from "./graphics2";
 import back from "../../img/back.webp"
-
+import Loader from '../../utils/Loader'
 
 const DashBoard = () => {
     const roleUser = localStorage.getItem("role");
@@ -20,7 +20,7 @@ const DashBoard = () => {
     const [dataUsers, setDataUsers] = useState([]);
     const [rankingDishes, setRankingDishes] = useState([]);
     const [rankingStatus, setRankingStatus] = useState([]);
-
+    const [loading, setLoading] = useState(true);
 
     let config = {
         headers: {
@@ -69,6 +69,7 @@ const DashBoard = () => {
         )
         topDishes(response.data)
         topStatus(response.data)
+        setLoading(false)
     } catch(err) {
         console.log(err)
     }
@@ -117,7 +118,7 @@ const DashBoard = () => {
     const salesReport = [
         {
             "icon": "bx bx-shopping-bag",
-            "count": `${totalGanancias}`,
+            "count": `S/. ${totalGanancias}.00`,
             "title": "Total Ingresos"
         },
         {
@@ -175,6 +176,7 @@ const DashBoard = () => {
         <>
         <Sidebar value={`${roleUser}`}></Sidebar>
         <Container background={back} valid='true' >
+        {loading? <Loader/>:
         <ContainerDash>
             <Column width='65%'>
                 <UserInfo/>
@@ -210,10 +212,10 @@ const DashBoard = () => {
                 </ContainerGraphic>
                 <ContainerGraphic>
                     <Title>Ranking de tipo de orden</Title>
-                    {/* <StatusChart rankingStatus={rankingStatus} /> */}
+                    <StatusChart rankingStatus={rankingStatus} />
                 </ContainerGraphic>
             </Column>
-        </ContainerDash>
+        </ContainerDash>}
         </Container>
         </>   
     )
