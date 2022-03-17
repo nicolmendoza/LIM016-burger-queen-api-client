@@ -54,7 +54,7 @@ Se realizaron los test utilizando React Testing Library.
 ***
 ## 5. PWA
 La web es una aplicación web progresiva (PWA).
-<div align=center><img src="./burger-queen/src/img/pwa.JPG" width=70%></div>
+<div align=center><img src="./burger-queen/src/img/pwa.png" width=70%></div>
 
 ***
 ## 6. Fuente 📄
