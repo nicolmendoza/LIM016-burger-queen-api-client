@@ -63,6 +63,8 @@ export default function StatusChart({rankingStatus}) {
   }, []);
 
   return (
-      <Doughnut data={data}/> 
+    <div className="App" style={{width:'250px'}}>
+    <Doughnut data={data}/>
+    </div>
   );
 }
