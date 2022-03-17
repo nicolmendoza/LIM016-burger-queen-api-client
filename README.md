@@ -18,7 +18,7 @@
 Burger House es una aplicación responsive diseñada para un pequeño restaurante de hamburguesas en crecimiento que necesita un sistema con el que puedan tomar pedidos y enviarlos a la cocina para que se preparen de manera ordenada y eficiente.
 Cuenta con un sistema de autenticación que permite tener diferentes vistas y funciones dependiendo del rol del usuario.
 
-Este proyecto es una aplicación web progresiva(PWA) que funciona sin conexión, integrada con una  REST API (creación propia) y que utiliza React como Librería, Style Component para los estilos, React Testing Library para el testing y Figma para el prototipado.
+Este proyecto es una aplicación web progresiva(PWA) que funciona sin conexión, integrada con una  REST API (creación propia), que utiliza React como Librería, Style Component para los estilos, React Testing Library para el testing y Figma para el prototipado.
 
 ### Roles y Vistas
 La aplicación y su desarrollo se hicieron basándonos en los requerimientos e historias de usuario planteadas, cada usuario dependiendo de su rol, tendrá acceso a ciertas rutas. Existen tres diferentes tipos de roles, Administradxr, cocinerx y meserx, los cuales se describen a continuación:
