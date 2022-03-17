@@ -93,7 +93,7 @@ const DashBoard = () => {
             let k = `${e.product}`;
             if(!r.has(k)) r.set(k, {...e, count: 1})
             else r.get(k).count++
-            return r;
+            return r; 
           }, new Map).values()]
 
         const totalXdishes = countProducts.map((x) => {
