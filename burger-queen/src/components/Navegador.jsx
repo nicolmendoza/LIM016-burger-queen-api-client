@@ -31,6 +31,7 @@ const Sidebar = (role) => {
       if(window.location.pathname === '/newOrder') return setActive('Nueva Orden')
       if(window.location.pathname === '/settings') return setActive('Setting')
       if(window.location.pathname === '/profile') return setActive('Perfil')
+      if(window.location.pathname === '/dashboard') return setActive('Dashboard')
 
   }, []);
 
@@ -90,7 +91,7 @@ const Sidebar = (role) => {
         ) : (
           <li id='setting'>
             <a href={user.settings}>
-              <Icon className="bx bx-cog"
+              <Icon className="bx bxs-cog"
               key='Setting'
               active={active === 'Setting'}></Icon>
               <span className="links_name">Setting</span>
@@ -103,7 +104,7 @@ const Sidebar = (role) => {
         ) : (
           <li>
             <a href={user.dashboard}>
-              <Icon className="bx bx-cog"
+              <Icon className="bx bxs-pie-chart-alt-2"
               key='Dashboard'
               active={active === 'Dashboard'}></Icon>
               <span className="links_name">Dahboard</span>
@@ -113,7 +114,7 @@ const Sidebar = (role) => {
         )}
         <li id='profile'>
           <a href={user.profile}>
-            <Icon className="bx bx-user"
+            <Icon className='bx bxs-user'
             key='Perfil'
             active={active === 'Perfil'}></Icon>
             <span className="links_name">Perfil</span>

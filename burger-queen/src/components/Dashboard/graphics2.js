@@ -4,20 +4,20 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  BarElement,
+  DoughnutController,
   Title,
   Tooltip,
   Legend,
   Filler,
   ArcElement
 } from "chart.js";
-import { Bar  } from "react-chartjs-2";
+import { Doughnut  } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  BarElement,
+  DoughnutController,
   Title,
   Tooltip,
   Legend,
@@ -27,6 +27,7 @@ ChartJS.register(
 
 
 export default function StatusChart({rankingStatus}) {
+  console.log(rankingStatus)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const data = useMemo(function () {
     const labels2=rankingStatus.map(x=>x.nombre)
@@ -62,8 +63,6 @@ export default function StatusChart({rankingStatus}) {
   }, []);
 
   return (
-    <div className="App" style={{width:'400px'}}>
-      <Bar data={data}/>
-    </div>
+      <Doughnut data={data}/> 
   );
 }
