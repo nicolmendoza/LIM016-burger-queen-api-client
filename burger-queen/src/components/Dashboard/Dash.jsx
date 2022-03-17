@@ -94,7 +94,7 @@ const DashBoard = () => {
             if(!r.has(k)) r.set(k, {...e, count: 1})
             else r.get(k).count++
             return r;
-          }, new Map).values()]
+          }, new Map()).values()]
 
         const totalXdishes = countProducts.map((x) => {
             const totalDishes={
@@ -191,7 +191,7 @@ const DashBoard = () => {
                     ))
                     }
                 </div>
-                <ContainerGraphic>
+                <ContainerGraphic  data-testid="table">
                     <Title>Reporte de Ordenes</Title>
                     <Table/>
                 </ContainerGraphic>

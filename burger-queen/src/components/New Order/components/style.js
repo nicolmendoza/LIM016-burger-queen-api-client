@@ -28,6 +28,9 @@ const ContainerCart = styled.div`
     @media (max-width: 1024px){
         width: 40rem;
       } 
+      @media (max-width: 768px){
+        width: 100rem !important;
+      } 
 `
 const Icon = styled(SearchIcon)`
     color:white;

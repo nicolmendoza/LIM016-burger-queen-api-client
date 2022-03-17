@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import "./inicio.css"
 import Navegador from "./componentes/navegador"
 import Home from './componentes/home'
-import Servicio from './componentes/servicio'
+
 import Menu from './componentes/menu'
 import AboutUs from './componentes/AboutUs'
 import Employers from './componentes/Employers'
