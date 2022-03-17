@@ -8,8 +8,8 @@ const StatusCard = props => {
                 <i className={props.icon}></i>
             </Icon>
             <div className="status-card__info">
-                <h4>{props.count}</h4>
-                <span>{props.title}</span>
+                <h4 style={{ fontSize: '1.5rem'}}>{props.count}</h4>
+                <span style={{ fontSize: '13px'}}>{props.title}</span>
             </div>
         </Card>
     )

@@ -117,7 +117,7 @@ const DashBoard = () => {
     const salesReport = [
         {
             "icon": "bx bx-shopping-bag",
-            "count": `${totalGanancias}`,
+            "count": `S/. ${totalGanancias}.00`,
             "title": "Total Ingresos"
         },
         {
