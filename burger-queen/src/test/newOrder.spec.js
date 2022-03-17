@@ -36,7 +36,7 @@ describe('New Order', () => {
         render(<Products />)
         const listNode = await screen.findByTestId('listOrders');
         console.log(listNode); 
-        expect(listNode.children).toHaveLength(4)
+        expect(listNode.children).toHaveLength(5)
             // eslint-disable-next-line testing-library/no-debugging-utils
     screen.debug()
     });
@@ -62,11 +62,11 @@ describe('New Order', () => {
     test('Show product papas with filter Complementos',  async () => {
         render(<Products />)
         await screen.findByTestId('listOrders');
-        userEvent.click(screen.getByRole("button", {name: /Complementos/i,}))
+        userEvent.click(screen.getByRole("button", {name: /Complementos/i}))
         const list = await screen.findByTestId('listOrders')
-        
+        screen.debug()
         expect(list.children).toHaveLength(1)
-        expect(screen.getByText('papas')).toBeInTheDocument()
+        expect(screen.getByText('cebollas')).toBeInTheDocument()
     });
 
     test('Show product gaseosa with filter Bebidas',  async () => {
@@ -85,9 +85,9 @@ describe('New Order', () => {
         userEvent.click(screen.getByRole("button", {name: /Bebidas/i,}))
         const list = await screen.findByTestId('listOrders')
 
-        userEvent.click(screen.getByRole("button", {name: /All/i,}))
+        userEvent.click(screen.getByRole("button", {name: /Todas/i,}))
         const all = await screen.findByTestId('listOrders')
-        expect(all.children).toHaveLength(4)
+        expect(all.children).toHaveLength(5)
         expect(screen.getByText('gaseosa')).toBeInTheDocument()
     });
 
@@ -118,7 +118,7 @@ describe('Cart', () => {
             }]
         
         const orden = [{
-            client: "",
+            client: "Luisa",
             products: [{
             qty: 1,
             comment: "",
@@ -131,12 +131,18 @@ describe('Cart', () => {
         }]
         }]
 
+        // 
         axios.post.mockImplementationOnce(() =>
             Promise.resolve({data: orden}))
 
         render(<Cart cart={arrOrden} setCart={() => {}} />)
         const elem = screen.getByRole("button", {name: /Generar Orden/i,})
 
+
+        
+        const inputName=screen.getByPlaceholderText('Nombre del cliente')
+        fireEvent.change(inputName, { target: { value: "Luisa"} });
+        screen.debug()
         userEvent.click(elem)
 
         await screen.findByTestId('modal')
@@ -156,7 +162,7 @@ describe('Cart', () => {
         await screen.findByTestId('modal')
 
         const msj = screen.getByText(/Error/)
-        expect(screen.getByText(/No hay productos en la lista/)).toBeInTheDocument()
+        expect(screen.getByText(/Ingrese el nombre del cliente por favor/)).toBeInTheDocument()
         expect(msj).toBeInTheDocument()
     })
 
@@ -299,7 +305,7 @@ describe('input', () => {
         fireEvent.change(search, { target: { value: "h"} })
 
         expect(screen.getByTestId('listOrders').children).toHaveLength(1) 
-        expect(screen.getByTestId('listOrders')).toHaveTextContent('Hamburguesas') 
+        expect(screen.getByText(/Hamburguesas/i)).toBeInTheDocument()
         screen.debug()
     })
 })

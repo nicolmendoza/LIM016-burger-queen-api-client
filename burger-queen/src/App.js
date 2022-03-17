@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import Login from "./components/Login.jsx";
 import Admi from "./components/Admi";
 import EditUser from "./components/EditUser.jsx";
@@ -14,7 +14,10 @@ import Error404 from "./components/Error404.jsx";
 import Profile from "./components/Profile.jsx";
 import DashBoard from "./components/Dashboard/Dash.jsx";
 function App() {
-  const token = localStorage.getItem("token");
+
+
+      const token = localStorage.getItem("token")
+
   
   return (
     <BrowserRouter>

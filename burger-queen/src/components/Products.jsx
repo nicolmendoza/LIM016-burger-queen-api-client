@@ -152,7 +152,7 @@ const Products = ({setValue}) => {
           </ContainerElements>
 
       </div>
-      <ModalCreate state={stateModal} changeState={setStateModal}>
+      <ModalCreate state={stateModal} changeState={setStateModal} data-testid="modal-create">
         <CreateProduct getProducts={getProducts} />
       </ModalCreate>
     </>

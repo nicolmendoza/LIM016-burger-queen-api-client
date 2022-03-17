@@ -149,7 +149,7 @@ describe('Routes with a token', () => {
     );
     // screen.debug()
     expect(history.location.pathname).toContain('/noValid')
-    expect(screen.getByText('Error 404')).toBeInTheDocument()
+    expect(screen.getByText(/página no encontrada/i)).toBeInTheDocument()
   })
 })
 // test('full app rendering', () => {

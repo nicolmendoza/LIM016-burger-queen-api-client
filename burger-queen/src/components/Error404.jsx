@@ -18,7 +18,7 @@ const Error404 = () => {
     <div className="login-full-container">
       <div className="div404">  
         <img src={image} />
-        <h1>Pagina no encontrada</h1>
+        <h1>Página no encontrada</h1>
         <Button onClick={() => regresar()}>Regresar</Button>
       </div>
     </div>

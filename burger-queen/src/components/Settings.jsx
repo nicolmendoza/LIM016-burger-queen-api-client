@@ -68,7 +68,7 @@ useEffect(()=>{
                 />
               </Menu>
               <Menu width="container">
-                {value === "users" ? <Admi /> : <Products />}
+                {value === "users" ? <Admi setValue={setValue}/> : <Products setValue={setValue}/>}
               </Menu>
             </ContainerSetting>
           )}

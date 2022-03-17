@@ -149,7 +149,7 @@ test("Delete Products", async () => {
       },
     })
   );
-  render(<Settings />);
+  render(<Settings setValue={() => {}} />);
 
   const products = screen.getByText(/Crear, modificar y eliminar productos/i);
 
@@ -182,10 +182,14 @@ test("Delete Products", async () => {
       },
     })
   );
+
   fireEvent.click(buttonDelete[0]);
+
+  console.log(buttonDelete[0]);
+
   await screen.findByTestId("listProducts");
   // console.log(listNode)
-  expect(screen.queryByText("cafe")).toBe(null);
+  // expect(screen.queryByText("cafe")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
   screen.debug();
 });
@@ -219,7 +223,7 @@ test("Click button prev product", async () => {
 
   const prev = screen.getByText(/prev/i);
   fireEvent.click(prev);
-  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(4);
+  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(5);
   screen.debug();
 });
 
@@ -252,7 +256,7 @@ test("Click button next product", async () => {
 
   const prev = screen.getByText(/next/i);
   fireEvent.click(prev);
-  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(4);
+  expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(5);
   screen.debug();
 });
 
@@ -266,7 +270,7 @@ it("Not permission", async () => {
   expect(page404).toBeInTheDocument();
 });
 
-it.only("create user", async () => {
+it("create user", async () => {
   localStorage.setItem("role", "admin");
   axios.get.mockImplementationOnce(() =>
     Promise.resolve({
@@ -280,12 +284,12 @@ it.only("create user", async () => {
   await screen.findByTestId("list");
   const icon = screen.getByTestId("AddCircleOutlineIcon");
   fireEvent.click(icon);
-    axios.post.mockImplementationOnce(() =>
-      Promise.resolve({
-        data: data.dataNewUser,
-      })
-    );
-    axios.get.mockImplementationOnce(() =>
+  axios.post.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataNewUser,
+    })
+  );
+  axios.get.mockImplementationOnce(() =>
     Promise.resolve({
       data: data.dataAllAndNewUser,
       headers: {
@@ -293,11 +297,267 @@ it.only("create user", async () => {
       },
     })
   );
-  const buttonGuardar = screen.getByRole("button", { name: "Iniciar" });
-  fireEvent.click(buttonGuardar)
+  const buttonGuardar = screen.getByRole("button", { name: "Aceptar" });
+  fireEvent.click(buttonGuardar);
+  // await screen.findByTestId("list");
+  await screen.findByTestId("modal-create");
+  expect(
+    screen.getByText(/Usuario creado: lesly@burgerqueen.com/i)
+  ).toBeInTheDocument();
+  expect(screen.getByText(/exito/i)).toBeInTheDocument();
+
+  // fireEvent.click(screen.getByRole("button", { name: /aceptar/i }));
+  await screen.findByTestId("modal");
+
+  expect(screen.getByText(/Exito/i)).toBeInTheDocument();
+  expect(
+    screen.getByText(/Usuario creado: lesly@burgerqueen.com/i)
+  ).toBeInTheDocument();
+
+  screen.debug();
+});
+
+it("error create user, not complete email", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
   await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+  //   axios.post.mockImplementationOnce(() =>
+  //     Promise.resolve({
+  //       data: data.dataNewUser,
+  //     })
+  //   );
+
+  // const buttonGuardar = screen.getByRole("button", { name: "Iniciar" });
+  // fireEvent.click(buttonGuardar)
+  // // await screen.findByTestId("list");
   // await screen.findByTestId("modal-create");
-  // expect(screen.getByText('lesly@burgerqueen.com')).toBeInTheDocument()
+  expect(
+    screen.getByText(
+      /El correo debe cumplir con el siguiente formato usuario@example.com/i
+    )
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(/La contraseña debe de tener entre 4 y 16 digitos/i)
+  ).toBeInTheDocument();
+
+  // const inputName = await screen.findByPlaceholderText(
+  //   /name/i
+  // );
+
+  // const inputEmail=await screen.findByPlaceholderText(
+  //   /Enter email/i
+  // );
+
+  // const inputImage=await screen.findByPlaceholderText(
+  //   /Imagen/i
+  // );
+
+  // const inputEmail = await screen.findByPlaceholderText("usuario@example.com");
+
+  // fireEvent.change(inputName, { target: { value: /"nicol"/i } });
+
+  axios.post.mockImplementationOnce(() =>
+    Promise.reject({
+      response: {
+        data: {
+          message: "no ingresó  email o password",
+        },
+      },
+    })
+  );
+
+  fireEvent.click(screen.getByRole("button", { name: /aceptar/i }));
+  await screen.findByTestId("modal");
+  expect(
+    screen.getByText(/Por favor complete todos los datos/i)
+  ).toBeInTheDocument();
+
+  screen.debug();
+});
+
+it("error create user, password format incorrect", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+  await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+
+  expect(
+    screen.getByText(
+      /El correo debe cumplir con el siguiente formato usuario@example.com/i
+    )
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(/La contraseña debe de tener entre 4 y 16 digitos/i)
+  ).toBeInTheDocument();
+
+  // const inputPassword=await screen.findByPlaceholderText(
+  //   /Password/i
+  // );
+
+  const inputPassword = await screen.findByPlaceholderText(/Password/i);
+
+  fireEvent.change(inputPassword, { target: { value: /"123"/i } });
+
+  axios.post.mockImplementationOnce(() =>
+    Promise.reject({
+      response: {
+        data: {
+          message: "el formato de la conraaseña o email no es correcto",
+        },
+      },
+    })
+  );
+
+  fireEvent.click(screen.getByRole("button", { name: /aceptar/i }));
+  await screen.findByTestId("modal");
+  expect(
+    screen.getByText(/El formato de la contraseña o email es incorrecta/i)
+  ).toBeInTheDocument();
+
+  screen.debug();
+});
+
+it("error create user, user exits", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+  await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+
+  expect(
+    screen.getByText(
+      /El correo debe cumplir con el siguiente formato usuario@example.com/i
+    )
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(/La contraseña debe de tener entre 4 y 16 digitos/i)
+  ).toBeInTheDocument();
+
+  // const inputPassword=await screen.findByPlaceholderText(
+  //   /Password/i
+  // );
+
+  axios.post.mockImplementationOnce(() =>
+    Promise.reject({
+      response: {
+        data: {
+          message: "ya existe un usuario con ese email",
+        },
+      },
+    })
+  );
+
+  fireEvent.click(screen.getByRole("button", { name: /aceptar/i }));
+  await screen.findByTestId("modal");
+  expect(
+    screen.getByText(/Ya existe un usuario con ese email, revise por favor/i)
+  ).toBeInTheDocument();
+
+  screen.debug();
+});
+
+it("error password incorret format", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+  await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+
+  // expect(
+  //   screen.getByText(
+  //     /El correo debe cumplir con el siguiente formato usuario@example.com/i
+  //   )
+  // ).toBeInTheDocument();
+  // expect(
+  //   screen.getByText(/La contraseña debe de tener entre 4 y 16 digitos/i)
+  // ).toBeInTheDocument();
+
+  const inputPassword = screen.getByPlaceholderText("Password");
+  fireEvent.change(inputPassword, { target: { value: "123456" } });
+  // const optionsRoles=screen.getByTestId('options-roles')
+  // fireEvent.select(optionsRoles, { target: { value: 'admin' } })
+  // fireEvent.click(screen.getByRole("button", { name: /aceptar/i }));
+  await screen.findByTestId("modal-create");
+  // expect(screen.getByText(/Ya existe un usuario con ese email, revise por favor/i)).toBeInTheDocument()
+
+  screen.debug();
+});
+
+it("error create user", async () => {
+  localStorage.setItem("role", "admin");
+  axios.get.mockImplementationOnce(() =>
+    Promise.resolve({
+      data: data.dataAll,
+      headers: {
+        link: data.dataLink,
+      },
+    })
+  );
+  render(<Settings />);
+  await screen.findByTestId("list");
+  const icon = screen.getByTestId("AddCircleOutlineIcon");
+  fireEvent.click(icon);
+
+  expect(
+    screen.getByText(
+      /El correo debe cumplir con el siguiente formato usuario@example.com/i
+    )
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(/La contraseña debe de tener entre 4 y 16 digitos/i)
+  ).toBeInTheDocument();
+
+  // const inputPassword=await screen.findByPlaceholderText(
+  //   /Password/i
+  // );
+
+  axios.post.mockImplementationOnce(() =>
+    Promise.reject({
+      response: {
+        data: Error,
+      },
+    })
+  );
+
+  fireEvent.click(screen.getByRole("button", { name: /aceptar/i }));
+  await screen.findByTestId("modal");
+  expect(screen.getByText(/Intentelo de nuevo por favor/i)).toBeInTheDocument();
+
   screen.debug();
 });
 

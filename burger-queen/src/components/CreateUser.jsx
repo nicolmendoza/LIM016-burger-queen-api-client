@@ -110,6 +110,7 @@ const CreateUser = ({ getUsersSave}) => {
       setModal({title:'Exito', body:`Usuario creado: ${res.data.email}`})
       getUsersSave()
     } catch(err) {
+console.log(err.response);
       setLoading(false)
       setStateModal(true);
       const response = err.response.data
@@ -208,6 +209,7 @@ const CreateUser = ({ getUsersSave}) => {
 
               </div>
               <fieldset
+              data-testid='options-roles'
                 className="form-group"
                 onChange={options}
                 value={state.roles}
@@ -251,7 +253,7 @@ const CreateUser = ({ getUsersSave}) => {
                   </label>
                 </div>
               </fieldset>
-              <Button type="submit" className="btn-login"> Iniciar </Button>
+              <Button type="submit" className="btn-login"> Aceptar </Button>
               {/* <div className="form-group">
                 <button type="submit" className="btn btn-primary">
                   Guardar
