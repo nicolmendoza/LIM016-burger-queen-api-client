@@ -1,6 +1,6 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import DashBoard from "../components/DashBoard";
+import DashBoard from "../components/Dashboard/DashBoard";
 import { render, screen, fireEvent } from "@testing-library/react";
 import axios from "axios";
 import orders from "./data/orders.js";
