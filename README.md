@@ -21,7 +21,7 @@
 
 ***
 <div align='center'>
-<img src="./burger-queen/public/img/logo grande.png">
+<img src="https://raw.githubusercontent.com/MerlyAnco/LIM016-burger-queen-api-client/main/burger-queen/public/img/Logo%20grande.png">
 </div>
 
 # 1. Burger House 🍔🍟🏠
