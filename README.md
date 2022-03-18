@@ -42,7 +42,12 @@ La aplicación y su desarrollo se hicieron basándonos en los requerimientos e h
 - Visualización de Perfil, donde podrá visualizar su información personal (correo,contraseña,nombre,imagen).
 
 ***
-## 2. Descripción
+## 2. Diseño de la Interfaz
+<div align=center><img src="./burger-queen/src/img/homePrototipo.JPG" width=70%></div>
+<div align=center><img src="./burger-queen/src/img/settingsPrototipo.JPG" width=70%></div>
+<div align=center><img src="./burger-queen/src/img/settingsProductoPrototipo.JPG" width=70%></div>
+<div align=center><img src="./burger-queen/src/img/newOrderPrototipo.JPG" width=70%></div>
+<div align=center><img src="./burger-queen/src/img/ordersCheftPrototipo.JPG" width=70%></div>
 
 ***
 
