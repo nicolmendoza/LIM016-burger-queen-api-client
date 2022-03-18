@@ -44,6 +44,7 @@ La aplicación y su desarrollo se hicieron basándonos en los requerimientos e h
 ***
 ## 2. Diseño de la Interfaz
 <div align=center><img src="./burger-queen/src/img/homePrototipo.JPG" width=70%></div>
+<div align=center><img src="./burger-queen/src/img/dashboardPrototipo.JPG" width=70%></div>
 <div align=center><img src="./burger-queen/src/img/settingsPrototipo.JPG" width=70%></div>
 <div align=center><img src="./burger-queen/src/img/settingsProductoPrototipo.JPG" width=70%></div>
 <div align=center><img src="./burger-queen/src/img/newOrderPrototipo.JPG" width=70%></div>
