@@ -1,3 +1,4 @@
+<div align=center><img src="./burger-queen/src/img/Burger House.png" width=100%></div>
 # Burger House (API Client)
 
 ## Índice
