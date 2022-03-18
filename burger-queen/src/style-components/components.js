@@ -69,6 +69,8 @@ export const ContainerProduts = style.div`
     grid-template-columns: repeat(3,1fr);}
 
     }
+
+
 `
 
 export const OrderDiv = style.div`
@@ -180,7 +182,10 @@ export const ContainerElements = style.div`
       background: #eacf4f;
       border-radius: 3.125rem;
     }
-
+    @media (max-width: 768px){
+      grid-template-columns: repeat(1,1fr);}
+  
+      }
   
 
 `
