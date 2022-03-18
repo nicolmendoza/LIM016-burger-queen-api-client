@@ -196,7 +196,7 @@ El diseño se realizo utilizando Figma
 
 <div align="center">
 
-|<img src="https://cdn-icons.flaticon.com/png/512/1183/premium/1183672.png?token=exp=1647579310~hmac=44ee97af6b32c54070da9dd561dcd8e9" width=100px>|<img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_js_official_icon_130509.png" width=100px>|<img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_jest_icon_130514.png" width=100px>|<img src="https://iconape.com/wp-content/png_logo_vector/netlify-logo.png" width=100px>|<img src="https://cdn.worldvectorlogo.com/logos/google-lighthouse-icon-may-2019-.svg" width=100px>|<img src="https://dfriasruiz.es/wp-content/uploads/2019/07/PWA.png" width=100px>|
+|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png" width=100px>|<img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_js_official_icon_130509.png" width=100px>|<img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_jest_icon_130514.png" width=100px>|<img src="https://iconape.com/wp-content/png_logo_vector/netlify-logo.png" width=100px>|<img src="https://cdn.worldvectorlogo.com/logos/google-lighthouse-icon-may-2019-.svg" width=100px>|<img src="https://dfriasruiz.es/wp-content/uploads/2019/07/PWA.png" width=100px>|
 |--|--|--|--|--|--|
 |React|Javascript|Jest|Netifly|Lighthouse|PWA|
 <br>
