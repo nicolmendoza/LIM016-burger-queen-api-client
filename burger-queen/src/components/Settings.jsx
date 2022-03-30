@@ -1,13 +1,13 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
-import { Button, Container, User, Product } from "../style-components/components";
+import { Container, User, Product } from "../style-components/components";
 import Sidebar from "./Navegador";
 import Admi from "./Admi";
 import Products from "./Products";
 import Button2 from "../utils/menuSettings";
 import styled, { css } from "styled-components";
 import colors from "../style-components/elementos/colors";
-import back from "../img/back.webp"
+//import back from "../img/back.webp"
 
 const Settings = () => {
 
@@ -32,9 +32,6 @@ useEffect(()=>{
   //   setValue(valueTarget);
   // };
 
-
-
-  console.log(value);
   return (
     <div>
       <Sidebar value={`${roleUser}`}></Sidebar>

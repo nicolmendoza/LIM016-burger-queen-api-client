@@ -11,8 +11,8 @@ export const singIn = async (data, setModal, setStateModal, setLoading) => {
         const decode = jwtDecode(token);
         const rol=(decode.roles.admin===true?"admin":decode.roles.name==="mesera"?"mesera":"cocinera")
         
-        console.log(token)
-        console.log(decode) 
+        // console.log(token)
+        // console.log(decode) 
         localStorage.setItem("token", token);
         localStorage.setItem("idUser", decode.uid);
         localStorage.setItem("role", rol);
@@ -25,11 +25,11 @@ export const singIn = async (data, setModal, setStateModal, setLoading) => {
     } catch (err) {
         setLoading(false)
         setStateModal(true)
-        console.log(err)
+
         const response = err.response.data
 
         const message = response.message
-        console.log(message)
+
         if(message === 'No ingresaste correo o contraseña') return setModal({ title: message, body: 'Inténtelo nuevamente' });
         if(message === 'El usuario no existe') return setModal({ title: message, body: 'Inténtelo nuevamente' });
         if(message === 'La contraseña es incorrecta, intente de nuevo') return setModal({ title: 'Contraseña incorrecta.', body: 'Inténtelo nuevamente' });
@@ -39,7 +39,7 @@ export const singIn = async (data, setModal, setStateModal, setLoading) => {
 
 export const userInfo = async (url, id, header) =>{
     try{
-        console.log(`${url}/users/${id}`)
+        //console.log(`${url}/users/${id}`)
         const getUser = await axios.get(`${url}/users/${id}`, header)
         return getUser.data
     } catch(e){

@@ -33,11 +33,11 @@ const Icon = style.div`
     border-radius: 0.4rem;
     color: #47a30e;
 `
-const Info = style.div`
-    flex-grow: 1;
-    text-align: center;
-    z-index: 1;
-    text-transform: capitalize;
-`
+// const Info = style.div`
+//     flex-grow: 1;
+//     text-align: center;
+//     z-index: 1;
+//     text-transform: capitalize;
+// `
 
 export default StatusCard

@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import {
-  Button,
   ButtonModal,
   ContentModal } from "../../../style-components/components";
 import "../../../style-components/cart.css";
@@ -18,7 +17,6 @@ const Cart = ({
   setTotalFinal,
   changeQty
 }) => {
-  const types = []
   const token = localStorage.getItem("token");
   const header = {
     headers: {
@@ -67,7 +65,7 @@ const Cart = ({
       setStateModal(true);
       const response = err.response.data
       const message = response.message
-      console.log(message)
+      
       if(message==='No escogio ningun producto') return setModal({title:'Error', body:'No escogio ningun producto, revise por favor'})
       return setModal({title:'Error', body:'Intentelo de nuevo por favor'})
       }

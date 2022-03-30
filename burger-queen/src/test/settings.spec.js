@@ -68,7 +68,7 @@ test("Delete user", async () => {
 
   expect(screen.queryByText("Luis")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });
 
 test("Click button prev user", async () => {
@@ -83,7 +83,6 @@ test("Click button prev user", async () => {
   );
   render(<Settings />);
   const listNode = await screen.findByTestId("list");
-  console.log(listNode);
 
   const prev = screen.getByText(/prev/i);
   fireEvent.click(prev);
@@ -102,14 +101,12 @@ test("Click button next user", async () => {
   );
   render(<Settings />);
   const listNode = await screen.findByTestId("list");
-  console.log(listNode);
+
 
   const next = screen.getByText(/next/i);
 
   fireEvent.click(next);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(3);
-  // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
 });
 
 test("show loading user", async () => {
@@ -117,7 +114,7 @@ test("show loading user", async () => {
   render(<Settings></Settings>);
   // expect(screen.getByText(/Cargando/i)).toBeInTheDocument();
   expect(await screen.findByTestId("loader")).toBeInTheDocument();
-  screen.debug();
+
 });
 
 test("show loading products", async () => {
@@ -135,7 +132,7 @@ test("show loading products", async () => {
 
   fireEvent.click(products);
   expect(await screen.findByTestId("loader")).toBeInTheDocument();
-  screen.debug();
+
 });
 
 test("Delete Products", async () => {
@@ -185,13 +182,11 @@ test("Delete Products", async () => {
 
   fireEvent.click(buttonDelete[0]);
 
-  console.log(buttonDelete[0]);
-
   await screen.findByTestId("listProducts");
   // console.log(listNode)
   // expect(screen.queryByText("cafe")).toBe(null);
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });
 
 test("Click button prev product", async () => {
@@ -219,12 +214,10 @@ test("Click button prev product", async () => {
   fireEvent.click(products);
 
   const listNode = await screen.findByTestId("listProducts");
-  console.log(listNode);
 
   const prev = screen.getByText(/prev/i);
   fireEvent.click(prev);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(5);
-  screen.debug();
 });
 
 test("Click button next product", async () => {
@@ -252,12 +245,10 @@ test("Click button next product", async () => {
   fireEvent.click(products);
 
   const listNode = await screen.findByTestId("listProducts");
-  console.log(listNode);
-
   const prev = screen.getByText(/next/i);
   fireEvent.click(prev);
   expect(screen.getAllByRole("button", { name: "Editar" })).toHaveLength(5);
-  screen.debug();
+
 });
 
 it("Not permission", async () => {
@@ -314,7 +305,7 @@ it("create user", async () => {
     screen.getByText(/Usuario creado: lesly@burgerqueen.com/i)
   ).toBeInTheDocument();
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("error create user, not complete email", async () => {
@@ -382,7 +373,6 @@ it("error create user, not complete email", async () => {
     screen.getByText(/Por favor complete todos los datos/i)
   ).toBeInTheDocument();
 
-  screen.debug();
 });
 
 it("error create user, password format incorrect", async () => {
@@ -433,7 +423,7 @@ it("error create user, password format incorrect", async () => {
     screen.getByText(/El formato de la contraseña o email es incorrecta/i)
   ).toBeInTheDocument();
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("error create user, user exits", async () => {
@@ -480,7 +470,7 @@ it("error create user, user exits", async () => {
     screen.getByText(/Ya existe un usuario con ese email, revise por favor/i)
   ).toBeInTheDocument();
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("error password incorret format", async () => {
@@ -515,7 +505,7 @@ it("error password incorret format", async () => {
   await screen.findByTestId("modal-create");
   // expect(screen.getByText(/Ya existe un usuario con ese email, revise por favor/i)).toBeInTheDocument()
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("error create user", async () => {
@@ -558,7 +548,7 @@ it("error create user", async () => {
   await screen.findByTestId("modal");
   expect(screen.getByText(/Intentelo de nuevo por favor/i)).toBeInTheDocument();
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("create product", async () => {
@@ -612,7 +602,7 @@ it("create product", async () => {
   await screen.findByTestId("listProducts");
   expect(screen.getByText("huevos")).toBeInTheDocument();
 
-  screen.debug();
+  //screen.debug();
 });
 
 it("edit product", async () => {
@@ -662,7 +652,7 @@ it("edit product", async () => {
     </Router>
   );
 
-  screen.debug();
+  //screen.debug();
 });
 
 // it("edit user", async () => {
@@ -699,5 +689,5 @@ it("edit product", async () => {
 //       </Router>
 //     )
 
-//   screen.debug();
+//   //screen.debug();
 // });

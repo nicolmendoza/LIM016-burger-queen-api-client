@@ -1,25 +1,24 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { editProduct, getOneProduct } from "../services/products";
 import "../style-components/editUser.css";
 import Sidebar from "./Navegador";
 import { Container } from "../style-components/components";
 import {
-  Button,
   ButtonModal,
   ContentModal, ButtonOrder
 } from "../style-components/components";
 import Modal from "../utils/modal";
-import {Label, Input, GroupInput, LeyendaError, DivInput, Form} from '../style-components/elementos/Form' 
+import {Label, Input, Form} from '../style-components/elementos/Form' 
 import back from "../img/back.webp"
 
 
 const EditProduct = () => {
   const roleUser = localStorage.getItem("role");
-  console.log(window.location);
+  //console.log(window.location);
   const token = localStorage.getItem("token");
   const id = window.location.pathname.slice(13);
-  console.log(id);
+  //console.log(id);
 
   let options = {
     headers: {
@@ -51,7 +50,7 @@ const EditProduct = () => {
 
   const getProduct = () => {
     getOneProduct(id, options).then((data) => {
-      console.log(data);
+      //console.log(data);
       setProduct(data);
     });
   };
@@ -67,7 +66,7 @@ const EditProduct = () => {
     e.preventDefault();
     localStorage.setItem("editProduct", true);
     const res = await editProduct(id, product, options);
-    console.log(res);
+    
     setProduct(res.data);
     setStateModal(true);
   };
@@ -83,7 +82,7 @@ const EditProduct = () => {
         {/* <h1 style={{display:'flex', justifyContent:'center', marginTop:'30px'}}>Editar Producto</h1> */}
         <div className='containerProfile'>
         <div className="divImage">
-          <img src={product.image} style={{ width: 200, height: 200 }} />
+          <img src={product.image} style={{ width: 200, height: 200 }} alt= {product.name} /> 
           <p>{product.name}</p>
         </div>
         <div className="divEditUser">

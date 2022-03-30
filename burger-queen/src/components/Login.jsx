@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { singIn } from "../services/users";
-import {NavLink} from 'react-router-dom';
 import ComponentInput from '../utils/input'
 import {Form, Icon, IconEyeClose, IconEye, Lock} from '../style-components/elementos/Form'
 import '../style-components/login.css';

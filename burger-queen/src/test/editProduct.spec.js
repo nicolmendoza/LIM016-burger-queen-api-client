@@ -58,7 +58,7 @@ describe("EditUser", () => {
     userEvent.click(submit);
 
     await screen.findByTestId("modal");
-    screen.debug();
+    //screen.debug();
     expect(screen.getByText(/Exito/)).toBeInTheDocument();
     expect(screen.getByTestId("modal")).toBeInTheDocument();
 

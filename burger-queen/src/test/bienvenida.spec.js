@@ -10,7 +10,7 @@ beforeEach(() => {
 
 test("Should contain texts", () => {
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 
   const button = screen.getByRole("button", { name: /Iniciar sesión/i });
   const inicio = screen.getByRole("button", { name: /Iniciar/i });

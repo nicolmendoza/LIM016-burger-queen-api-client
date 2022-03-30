@@ -26,5 +26,5 @@ test("Should contain Table and Dashboard", async () => {
   expect(screen.getByText(/Total platos vendidos/i)).toBeInTheDocument();
   expect(screen.getByText(/Total Clientes/i)).toBeInTheDocument();
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });

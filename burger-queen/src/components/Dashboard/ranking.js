@@ -15,12 +15,12 @@ export const functionRanking=(resultOrder)=>{
 
     const obj = [];
     for (let j = 0; j < unicosElementos.length; j++) {
-      console.log(
+      /*console.log(
         "el valor " +
           unicosElementos[j] +
           " se repite " +
           almacenadorDeVecesRepetidas[j]
-      );
+      );*/
       obj.push({
         nombre: unicosElementos[j],
         numero: almacenadorDeVecesRepetidas[j],

@@ -1,12 +1,11 @@
-import React, { useState as useStateMock } from "react";
+import React from "react";
 import axios from "axios";
 import "@testing-library/jest-dom/extend-expect";
 import Products from "../components/New Order/NewOrder.jsx";
-import { render, cleanup, waitForElement, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import data from './data/products.js'
 import Cart from '../components/New Order/components/Cart'
-import input from '../components/New Order/components/input'
 
 jest.mock("axios", () => ({
     ...jest.requireActual('axios'),
@@ -35,7 +34,7 @@ describe('New Order', () => {
         
         render(<Products />)
         const listNode = await screen.findByTestId('listOrders');
-        console.log(listNode); 
+
         expect(listNode.children).toHaveLength(5)
             // eslint-disable-next-line testing-library/no-debugging-utils
     screen.debug()
@@ -64,7 +63,6 @@ describe('New Order', () => {
         await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /Complementos/i}))
         const list = await screen.findByTestId('listOrders')
-        screen.debug()
         expect(list.children).toHaveLength(1)
         expect(screen.getByText('cebollas')).toBeInTheDocument()
     });
@@ -83,7 +81,7 @@ describe('New Order', () => {
         render(<Products />)
         await screen.findByTestId('listOrders');
         userEvent.click(screen.getByRole("button", {name: /Bebidas/i,}))
-        const list = await screen.findByTestId('listOrders')
+        await screen.findByTestId('listOrders')
 
         userEvent.click(screen.getByRole("button", {name: /Todas/i,}))
         const all = await screen.findByTestId('listOrders')
@@ -142,7 +140,7 @@ describe('Cart', () => {
         
         const inputName=screen.getByPlaceholderText('Nombre del cliente')
         fireEvent.change(inputName, { target: { value: "Luisa"} });
-        screen.debug()
+
         userEvent.click(elem)
 
         await screen.findByTestId('modal')
@@ -306,7 +304,6 @@ describe('input', () => {
 
         expect(screen.getByTestId('listOrders').children).toHaveLength(1) 
         expect(screen.getByText(/Hamburguesas/i)).toBeInTheDocument()
-        screen.debug()
     })
 })
 

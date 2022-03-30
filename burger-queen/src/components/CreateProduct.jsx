@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import {createProduct} from '../services/products'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { display } from "@mui/system";
 import {
-  Button,
-  ButtonModal,
-  ContentModal, Input, LeyendaError
+  ContentModal, Input
 } from "../style-components/components";
 
 
@@ -45,13 +38,13 @@ const CreateProduct = ({getProducts}) => {
     const handleSubmit = async (e) => {
         try{
      e.preventDefault();
-        const res = await createProduct(newProduct, options)
-        console.log(res)
+        await createProduct(newProduct, options)
+        
         setStateModal(false)
         getProducts(url)  
         }
         catch(e){
-            console.log(e)
+            console.log(e.response)
         }
 
     }

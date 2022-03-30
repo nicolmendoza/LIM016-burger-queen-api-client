@@ -27,12 +27,12 @@ ChartJS.register(
 
 
 export default function StatusChart({rankingStatus}) {
-  console.log(rankingStatus)
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const data = useMemo(function () {
-    const labels2=rankingStatus.map(x=>x.nombre)
-    const scores2=rankingStatus.map(x=>x.numero)
-    console.log( labels2)
+    //const labels2=rankingStatus.map(x=>x.nombre)
+    //const scores2=rankingStatus.map(x=>x.numero)
+
     return {
       datasets: [
         {

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Navegador";
 import "../style-components/profile.css";
-import { Button, Container, ButtonOrder } from "../style-components/components.js";
+import { Container, ButtonOrder } from "../style-components/components.js";
 import Loader from "../utils/Loader";
 import back from "../img/back.webp"
 
@@ -32,7 +32,7 @@ const Profile = () => {
 
   const funciones = () => {
     const role = localStorage.getItem("role");
-    const actionUser = actions.find((x) => x.role == role);
+    const actionUser = actions.find((x) => x.role === role);
     return actionUser.action;
   };
 
@@ -86,7 +86,7 @@ const Profile = () => {
         </div>
         
         <div className="divImage">
-          <img src={user.image} style={{ width: 200, height: 200 }} />
+          <img src={user.image} style={{ width: 200, height: 200 }} alt='' />
         </div>
         <div className="div-containerProfile">
           <h2>Información personal: </h2>

@@ -48,7 +48,7 @@ describe('Login', () => {
     axios.post.mockImplementationOnce(() => Promise.resolve({ data: data })) 
 
     const elem = screen.getByRole("button", {name: /Iniciar/i,})
-    console.log(elem)
+    
     userEvent.click(elem)
     // const location = await window.location.href
     expect(axios.post).toBeCalledWith( "https://bq-api-2022.herokuapp.com/auth", {"email": "admin@localhost", "password": "changeme"}) 

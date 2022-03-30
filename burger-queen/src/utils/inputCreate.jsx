@@ -1,5 +1,4 @@
 import React, {useState}from "react";
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import {Label, Input, GroupInput, LeyendaError, DivInput} from '../style-components/elementos/Form'
 
 const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, estado, changeState, eye, color }) => {
@@ -14,11 +13,11 @@ const ComponentInput = ({icon,type, label, placeholder, name, error, expReg, est
   const validation = () => {
     if (expReg) {
       if(expReg.test(estado)) {
-        console.log('true')
+        //console.log('true')
         setValid('true')
       } else {
         setValid('false')
-        console.log('false')
+        //console.log('false')
       }
     }
   }
