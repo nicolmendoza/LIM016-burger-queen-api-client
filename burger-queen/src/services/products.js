@@ -1,16 +1,15 @@
 import axios from "axios";
 
 const url = "https://bq-api-2022.herokuapp.com/products";
-const url2 = "https://bq-api-2022.herokuapp.com/users";
-const token = localStorage.getItem("token");
+
 
 const limit = "?limit=50";
 
-const header = {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-};
+// const header = {
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// };
 
 export const getAllProducts = async (url, header) => {
   try {
@@ -18,7 +17,7 @@ export const getAllProducts = async (url, header) => {
 
     return request;
   } catch (err) {
-    console.log(err);
+    console.log(err.response);
   }
 };
 
@@ -34,7 +33,7 @@ export const createProduct = async (credentials, config) => {
 
 export const getOneProduct = (id, config) => {
   const data = axios.get(`${url}/${id}`, config).then((res) => res.data);
-  console.log(data);
+  //console.log(data);
   return data;
   // console.log(`${url}/${id}`)
   // console.log(request.then(response => response.data))
@@ -52,9 +51,9 @@ export const editProduct = async (id, credentials, config) => {
 };
 
 export const deleteProduct = async (url, id, config) => {
-  console.log(`${url}/${id}`);
+  //console.log(`${url}/${id}`);
   const deleteProd = await axios.delete(`${url}/${id}`, config);
-  console.log(deleteProd);
+  //console.log(deleteProd);
   return deleteProd;
 };
 

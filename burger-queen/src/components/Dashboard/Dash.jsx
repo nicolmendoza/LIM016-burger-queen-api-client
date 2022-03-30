@@ -71,7 +71,7 @@ const DashBoard = () => {
         topStatus(response.data)
         setLoading(false)
     } catch(err) {
-        console.log(err)
+        console.log(err.response)
     }
     }
 
@@ -93,13 +93,8 @@ const DashBoard = () => {
             let k = `${e.product}`;
             if(!r.has(k)) r.set(k, {...e, count: 1})
             else r.get(k).count++
-<<<<<<< HEAD
             return r; 
           }, new Map).values()]
-=======
-            return r;
-          }, new Map()).values()]
->>>>>>> a0e20a392820b7d6718ec2c127f0778f696e9b9e
 
         const totalXdishes = countProducts.map((x) => {
             const totalDishes={
@@ -144,7 +139,17 @@ const DashBoard = () => {
         if (status === "delivering") return "rgba(112, 114, 22, 0.75)";
         if (status === "delivered") return "rgba(22, 108, 114, 0.75)";
       };
-
+    
+    const totalPagar = (products) => {
+        console.log(products)
+        const array = products.map((x) => x.product.price * x.qty);
+        let suma = 0;
+        for (let i = 0; i < array.length; i++) {
+          suma += array[i];
+        }
+        console.log(suma)
+        return suma;
+    };
 
     const Table = () => {
         return (
@@ -165,9 +170,7 @@ const DashBoard = () => {
                       {x.products[0].product.name} ...
                   </td>
                   <td className='pago'>
-                    {x.products.map((y) => (
-                      <p>S/ {y.product.price * y.qty}</p>
-                    ))}
+                      <p>S/ {totalPagar(x.products)}</p>
                   </td>
                   <td className='status'><Status className='status-p' color={handleBackground(x.status)}>{x.status}</Status></td>
                 </tr>

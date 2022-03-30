@@ -1,9 +1,7 @@
 import React, { useEffect, useState} from "react";
 import "../style-components/sidebar.css";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
-import Settings from "./Settings";
 import {Icon} from '../style-components/components'
-import logo from '../img/Burger House.png'
 
 const Sidebar = (role) => {
   const user = {

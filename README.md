@@ -226,7 +226,6 @@ Se realizaron los test utilizando React Testing Library.
 <div align=center><img src="./burger-queen/src/img/test2.JPG" width=50%></div>
 
 ***
-
 # 6. PWA 💻
 La web es una aplicación web progresiva (PWA), a continuación se 
 muestran las estadísticas del performance:

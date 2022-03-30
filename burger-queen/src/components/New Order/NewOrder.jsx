@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./components/Cart";
-import { Button, ContainerElements, Container, GroupTab, Tab, ButtonOrder} from "../../style-components/components";
+import { ContainerElements, Container, GroupTab, Tab, ButtonOrder} from "../../style-components/components";
 import DivData from '../../utils/Container-Data'
 import Sidebar from "../Navegador"
 import UserInfo from './components/User'
 import {getAllProducts} from '../../services/products'
-import {ContainerMenu, Icon, ButtonMenu} from './components/style.js'
+import {ContainerMenu, Icon} from './components/style.js'
 import Input from './components/input.jsx'
 import "../../style-components/productsOrders.css";
 import Loader from "../../utils/Loader";
@@ -68,7 +68,7 @@ const Products = () => {
   };
 
   const deleteProduct = (product) => {
-    console.log('eliminado')
+    
     return setCart(cart.filter((x) => x._id !== product._id));
 
   };

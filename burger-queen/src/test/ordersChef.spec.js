@@ -34,9 +34,9 @@ beforeEach(() => {
 
     const listNode = await screen.findByTestId("listOrders");
 
-    console.log(listNode);
+
     // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
+    //screen.debug();
     expect(
       screen.getByText(/No hay pedidos en esta sección/i)
     ).toBeInTheDocument();
@@ -55,7 +55,7 @@ beforeEach(() => {
 
     // console.log(listNode);
     // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
+    //screen.debug();
     fireEvent.click(screen.getByRole("button", { name: /pendiente/i }));
     const buttonListo = screen.getByRole("button", { name: "Listo" });
     expect(
@@ -82,15 +82,13 @@ beforeEach(() => {
 
     const listNode = await screen.findByTestId("listOrders");
 
-    console.log(listNode);
-
     fireEvent.click(screen.getByRole("button", { name: /listo/i }));
     expect(
       // eslint-disable-next-line testing-library/no-node-access
       listNode.children
     ).toHaveLength(1);
     // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
+    //screen.debug();
 
   });
 
@@ -107,7 +105,7 @@ beforeEach(() => {
 
     // console.log(listNode);
     // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
+    //screen.debug();
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
@@ -125,7 +123,7 @@ test("Not permission", async () => {
   const { getByTestId, asFragment } = render(<GetOrders />);
 
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
   expect(
     screen.getByText(/No tiene acceso para esta ruta/i)
   ).toBeInTheDocument();

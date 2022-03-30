@@ -1,10 +1,6 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import App from "../App";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
-import Login from "../components/Login";
 import Error404 from "../components/Error404";
 
 beforeEach(() => {
@@ -20,7 +16,7 @@ describe("error 404", () => {
     const Regresar = screen.getByRole("button", { name: "Regresar" });
     expect(Regresar).toBeInTheDocument();
     fireEvent.click(Regresar);
-    screen.debug();
+    //screen.debug();
   });
   test("redirect cocinera", () => {
     localStorage.setItem("token", "123");
@@ -29,7 +25,7 @@ describe("error 404", () => {
     const Regresar = screen.getByRole("button", { name: "Regresar" });
     expect(Regresar).toBeInTheDocument();
     fireEvent.click(Regresar);
-    screen.debug();
+    //screen.debug();
   });
   test("redirect mesera", () => {
     localStorage.setItem("token", "123");
@@ -38,6 +34,6 @@ describe("error 404", () => {
     const Regresar = screen.getByRole("button", { name: "Regresar" });
     expect(Regresar).toBeInTheDocument();
     fireEvent.click(Regresar);
-    screen.debug();
+    //screen.debug();
   });
 });

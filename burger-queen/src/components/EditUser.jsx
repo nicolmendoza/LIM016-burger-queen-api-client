@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState} from "react"
-import { useParams } from "react-router-dom";
 import Sidebar from "./Navegador";
 import {Container} from '../style-components/components'
-import {Button, ButtonModal, ContentModal, ButtonOrder} from '../style-components/components'
+import { ButtonModal, ContentModal, ButtonOrder} from '../style-components/components'
 import Modal from "../utils/modal";
 import "../style-components/editUser.css";
 import back from "../img/back.webp"
-import {Label, Input, GroupInput, LeyendaError, DivInput, Form} from '../style-components/elementos/Form' 
+import {Label, Input, LeyendaError, Form} from '../style-components/elementos/Form' 
 
 
 const EditUser = () => {
@@ -63,7 +62,7 @@ const bodyModal = {
   }
 
   const options = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     if (e.target.value === "admin") {
       setState((old) => ({
         ...old,
@@ -83,7 +82,7 @@ const bodyModal = {
   };
 
   const onChangeInput = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     setState((old) => ({
       ...old,
       [e.target.name]: e.target.value,
@@ -93,18 +92,18 @@ const bodyModal = {
   const onSubmitForm = async (e) => {
     e.preventDefault();
 
-    console.log(state);
+    //console.log(state);
     const res = await axios.put(`${url}/users/${id}`, state, config);
-    console.log(res)
+    //console.log(res)
 
     // localStorage.setItem("role", rol);
     const dataRoles=res.data.roles
     const rol=(dataRoles.admin===true?"admin":dataRoles.name==="mesera"?"mesera":"cocinera")
-    console.log(rol)
+    //console.log(rol)
 
     if (localStorage.getItem("role") == "admin") {
       const idUser=localStorage.getItem('idUser')
-      if(idUser==id){
+      if(idUser===id){
         localStorage.setItem("role", rol);
       }
       setStateModal(true)

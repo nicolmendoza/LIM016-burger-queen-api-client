@@ -1,5 +1,4 @@
-import React, {useState}from "react";
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import React from "react";
 import {Label, Input, GroupInput, DivInput} from '../../../style-components/elementos/Form'
 
 const ComponentInput = ({icon,type, label, placeholder, name, estado, changeState, color }) => {

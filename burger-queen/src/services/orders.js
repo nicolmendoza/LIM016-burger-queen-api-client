@@ -7,9 +7,9 @@ import axios from "axios";
 
 
 export const editProduct = async (url, id, credentials, config) => {
-  console.log(config);
-  console.log(`${url}/${id}`);
-  const { status } = credentials;
+  
+  //console.log(`${url}/${id}`);
+  //const { status } = credentials;
   const data = await axios.put(`${url}/${id}`, credentials, config);
   return data;
 };

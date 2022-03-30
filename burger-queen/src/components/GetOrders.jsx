@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  Button,
   ContainerProduts,
   OrderDiv,
   Container,
@@ -49,16 +48,16 @@ const GetOrders = () => {
     setState(dataOrdenada);
     setFilter(dataOrdenada.filter((x) => x.status === "pending"));
     setLoading(false);
-    console.log(loading)
+    //console.log(loading)
     }
     catch(error){
-      console.log(error.data)
+      console.log(error.response)
     }
 
   };
 
   const orderLista = (x) => {
-    console.log(x);
+    //console.log(x);
     axios
       .put(
         `https://bq-api-2022.herokuapp.com/orders/${x}`,
@@ -70,12 +69,12 @@ const GetOrders = () => {
       .then((response) => {
         // setLoading(true);
         getOrders();
-        console.log(response);
+        //console.log(response);
       });
   };
 
   const filterFunction = (type) => {
-    console.log(type);
+    //console.log(type);
     const pending = state.filter((x) => x.status === type[0]);
     setFilter(pending);
     setActive(type[1])
@@ -135,11 +134,6 @@ const GetOrders = () => {
   //   );
   // };
 
-  const handleBackground = (status) => {
-    if (status === "pending") return "rgba(7, 120, 45, 0.35)";
-    if (status === "delivering") return "rgba(112, 114, 22, 0.27)";
-  };
-
   return (
     <>
       <Sidebar value={`${roleUser}`}></Sidebar>
@@ -180,9 +174,7 @@ const GetOrders = () => {
                               Listo
                             </ButtonOrder>
                           </div>
-                        ) : (
-                          <ButtonOrder>"Para Entregar"</ButtonOrder>
-                        )}
+                        ) : ''}
                       </OrderDiv>
                     ))}
               </ContainerProduts>

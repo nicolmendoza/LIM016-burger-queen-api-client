@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getAllOrders, editProduct } from "../services/orders";
+import { editProduct } from "../services/orders";
 import {
-  Button,
   ContainerProduts,
   OrderDiv,
   Container,
-  ButtonModal,
   GroupTab,
   ButtonOrder,
   Tab
@@ -50,7 +48,7 @@ const Orders = () => {
       setFilter(dataOrdenada);
       setLoading(false);
     } catch (err) {
-      console.log(err.data);
+      console.log(err.response);
     }
   };
 
@@ -74,10 +72,10 @@ const Orders = () => {
   }
 
   const handleSubmit = async (value, id) => {
-    console.log(value, id);
+    //console.log(value, id);
     const newState = { status: `${value}` };
-    const res = await editProduct(url, id, newState, options);
-    console.log(res);
+    await editProduct(url, id, newState, options);
+    //console.log(res);
     getOrders();
   };
 

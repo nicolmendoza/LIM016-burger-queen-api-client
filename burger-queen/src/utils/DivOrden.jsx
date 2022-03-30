@@ -1,8 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import CloseIcon from '@mui/icons-material/Close';
-import {colors} from '../style-components/elementos/Form.js'
-import { Button } from '@mui/material';
 
 const Order = ({type, client, status, products, createdTime, waitTime}) => {
     const handleBackground = (status) => {
@@ -27,13 +24,13 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
       const updateOrder = (createdTime, waitTime) => {
         const timeValue = new Date(waitTime) - new Date(createdTime);
 
-        var days = parseInt(timeValue / (1000 * 60 * 60 * 24));
+        //var days = parseInt(timeValue / (1000 * 60 * 60 * 24));
         var hours = parseInt((timeValue % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = parseInt((timeValue % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.round((timeValue % (1000 * 60)) / 1000);
 
         const time = `${hours}:${minutes}:${seconds}`
-        console.log(time)
+        // console.log(time)
         return time
           
       }
@@ -41,7 +38,7 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
       const dayCreate = (createdTime) => {
         const date = new Date(createdTime)
         const months = ["01","02","03","04","05","06","07","08","09","10","11","12"];
-        const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado']
+        //const days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado']
         const dateExact = `${date.getDate()}/${months[date.getMonth()]}/${date.getFullYear()}`
         // console.log(dateExact)
         return dateExact
@@ -63,8 +60,8 @@ const Order = ({type, client, status, products, createdTime, waitTime}) => {
                        Item
                     </th>
                     <th>
-                        Qty
-                    </th>
+                        Cant.
+                    </th> 
                 </tr>
             </thead>
             <tbody>
@@ -156,10 +153,32 @@ const DetailOrder = styled.div`
         width:90%
     }
     .table{
-        width:100%
+        width:100%;
+        display: block;
     }
+    tbody{
+        display:block;
+        height: 13vh;
+        overflow-y: auto;
+        overflow-x: auto;
+
+    }
+
+    tbody::-webkit-scrollbar {
+        width:0.15rem;
+      }
+      
+      tbody::-webkit-scrollbar-track {
+        background: #000;
+      }
+      
+      tbody::-webkit-scrollbar-thumb {
+        background: #eacf4f;
+        border-radius: 3.125rem;
+      }
+
     .qty{
-        text-align:center;
+        text-align:end;
     }
     tr{
         height: 1.5rem;

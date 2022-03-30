@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllProducts, deleteProduct } from "../services/products";
+//import { getAllProducts, deleteProduct } from "../services/products";
 import Loader from '../utils/Loader'
 import {
   Button3,
@@ -9,7 +9,6 @@ import {
 } from "../style-components/components";
 import DivData from "../utils/Container-Data";
 import axios from "axios";
-import Modal from "../utils/modal";
 import CreateProduct from "./CreateProduct";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ModalCreate from '../utils/ModalCreate'
@@ -51,7 +50,7 @@ const Products = ({setValue}) => {
     try {
       const products = await axios.get(`${url}?limit=${50}`, header);
       const link = products.headers.link;
-      console.log(link);
+      //console.log(link);
       const arrayLink = link.match(
         /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
       );
@@ -65,12 +64,12 @@ const Products = ({setValue}) => {
       setProducts(products.data);
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
     }
   };
 
   const handlePagination = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     let pageNumber = e.target.value;
     getProducts(pageNumber);
     setUrl(pageNumber);
@@ -78,12 +77,12 @@ const Products = ({setValue}) => {
 
   const handleDelete = async (id) => {
     const res = await axios.delete(`${firstUrl}/${id}`, options);
-    console.log(res);
+    //console.log(res);
     setValue('products')
     return getProducts(url);
   };
   const onClick = () => {
-    console.log("hi");
+    //console.log("hi");
     setStateModal(true);
   };
   return (
@@ -93,7 +92,7 @@ const Products = ({setValue}) => {
         <div className="btn-next-prev">
           <ButtonMenu
             type="submit"
-            className="btn-login"
+            className="btn-prev"
             value={page.prev}
             onClick={handlePagination}
           >
@@ -102,7 +101,7 @@ const Products = ({setValue}) => {
           </ButtonMenu>
           <ButtonMenu
             type="submit"
-            className="btn-login"
+            className="btn-next"
             value={page.next}
             onClick={handlePagination}
           >

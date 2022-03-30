@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import {userInfo} from '../../../services/users.js'
+import React from "react";
 import apiData from '../../../services/api.js'
 import styled from 'styled-components'
 

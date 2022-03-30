@@ -11,7 +11,6 @@ import Loader from "../utils/Loader";
 import Modal from "../utils/modal";
 
 const CreateUser = ({ getUsersSave}) => {
-  const url = "https://bq-api-2022.herokuapp.com/users";
   const token = localStorage.getItem("token");
   // const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
@@ -57,7 +56,7 @@ const CreateUser = ({ getUsersSave}) => {
   const [validEmail, setValidEmail] = useState('');
 
   const validation= (e) => {
-    console.log(e.target.name)
+    //console.log(e.target.name)
     const expReg = {
       password: /^.{4,12}$/, // 4 a 12 digitos.
       correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -99,7 +98,7 @@ const CreateUser = ({ getUsersSave}) => {
     try{
       const res = await axios.post(`${url}/users`, state, options);
       setLoading(false)
-      console.log(res.data);
+      //console.log(res.data);
       setState({
             email: "",
             password: "",
@@ -110,7 +109,7 @@ const CreateUser = ({ getUsersSave}) => {
       setModal({title:'Exito', body:`Usuario creado: ${res.data.email}`})
       getUsersSave()
     } catch(err) {
-console.log(err.response);
+
       setLoading(false)
       setStateModal(true);
       const response = err.response.data

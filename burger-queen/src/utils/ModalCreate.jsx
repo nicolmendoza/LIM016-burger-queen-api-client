@@ -8,7 +8,7 @@ const ModalCreate = ({children, state, changeState, ...rest}) => {
         <>
             {state && 
             <Overlay>
-                <Form background='rgb(255 255 255 / 53%)' {...rest}>
+                <Form background='rgb(6 6 6 / 53%);' {...rest}>
                     <BotonCerrar onClick={() => changeState(false)}> x </BotonCerrar>
                     {children}
                 </Form>

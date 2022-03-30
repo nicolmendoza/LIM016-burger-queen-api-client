@@ -1,20 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CreateUser from "./CreateUser";
-import { Link } from "react-router-dom";
 import {
-
-
-  
   Button3,
   ContainerElements,
   DivElement,
   ButtonMenu,
 } from "../style-components/components";
-import { getAllProducts, deleteProduct } from "../services/products";
+//import { getAllProducts, deleteProduct } from "../services/products";
 import DivData from "../utils/Container-Data";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import Modal from "../utils/modal";
+//import Modal from "../utils/modal";
 import ModalCreate from '../utils/ModalCreate'
 import Loader from "../utils/Loader";
 const Admi = () => {
@@ -79,7 +75,7 @@ const Admi = () => {
       setLoading(false)
       return res;
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
     }
   };
 
@@ -92,20 +88,19 @@ const Admi = () => {
     
 
   const handlePagination = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     let pageNumber = e.target.value;
     getUsers(pageNumber);
     setUrl(pageNumber);
   };
 
   const deleteUser = async (id) => {
-    const res = await axios.delete(`${url}/${id}`, header);
-    console.log(res);
+    await axios.delete(`${url}/${id}`, header);
+    //console.log(res);
     getUsers(newUrl);
   };
 
   const onClick = () => {
-    console.log("hi");
     setStateModal(true);
   };
 
@@ -116,7 +111,7 @@ const Admi = () => {
       <div className="btn-next-prev">
         <ButtonMenu
           type="submit"
-          className="btn-login"
+          className="btn-prev"
           value={page.prev}
           onClick={handlePagination}
         >
@@ -125,7 +120,7 @@ const Admi = () => {
         </ButtonMenu>
         <ButtonMenu
           type="submit"
-          className="btn-login"
+          className="btn-next"
           value={page.next}
           onClick={handlePagination}
         >
@@ -146,7 +141,7 @@ const Admi = () => {
               <div key={`${user._id}-"id"`}>
                 <h2>{user.nameUser}</h2>
                 <p>{user.email}</p>
-                <p>{user.roles.name=="cocinera"?'Cocinerx':user.roles.name=="mesera"?'Meserx':'Admi'}</p>
+                <p>{user.roles.name==="cocinera"?'Cocinerx':user.roles.name==="mesera"?'Meserx':'Admi'}</p>
               </div>
               <div className="btn-container">
                 <Button3

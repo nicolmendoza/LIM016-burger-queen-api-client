@@ -6,9 +6,9 @@ const Error404 = () => {
   const regresar = () => {
     if (localStorage.getItem("token")) {
       const role = localStorage.getItem("role");
-      if (role == "admin") return (window.location.href = "/settings");
-      else if (role == "mesera") return (window.location.href = "/newOrder");
-      else if (role == "cocinera") return (window.location.href = "/orders");
+      if (role === "admin") return (window.location.href = "/settings");
+      else if (role === "mesera") return (window.location.href = "/newOrder");
+      else if (role === "cocinera") return (window.location.href = "/orders");
     } else {
       window.location.href = "/";
     }
@@ -17,7 +17,7 @@ const Error404 = () => {
   return (
     <div className="login-full-container">
       <div className="div404">  
-        <img src={image} />
+        <img src={image} alt= 'error'/>
         <h1>Página no encontrada</h1>
         <Button onClick={() => regresar()}>Regresar</Button>
       </div>

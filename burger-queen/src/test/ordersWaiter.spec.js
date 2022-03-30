@@ -45,7 +45,7 @@ test("filter orders all", async () => {
   ).toHaveLength(4);
 
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 });
 
 describe("filter orders pending", () => {
@@ -86,7 +86,7 @@ test("filter order delivering", async () => {
   fireEvent.click(screen.getByRole("button", { name: /listos/i }));
 
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
 
   expect(
     // eslint-disable-next-line testing-library/no-node-access
@@ -115,7 +115,7 @@ test("filter order delivered", async () => {
   const listNode = await screen.findByTestId("listOrders");
   fireEvent.click(screen.getByRole("button", { name: /entregados/i }));
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
   expect(
     // eslint-disable-next-line testing-library/no-node-access
     listNode.children
@@ -132,7 +132,7 @@ test("filter order cancelled", async () => {
   const listNode = await screen.findByTestId("listOrders");
   fireEvent.click(screen.getByRole("button", { name: /cancelados/i }));
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
   expect(
     // eslint-disable-next-line testing-library/no-node-access
     listNode.children
@@ -148,7 +148,7 @@ test("Not permission", async () => {
   const { getByTestId, asFragment } = render(<Orders />);
 
   // eslint-disable-next-line testing-library/no-debugging-utils
-  screen.debug();
+  //screen.debug();
   expect(
     screen.getByText(/No tiene acceso para esta ruta/i)
   ).toBeInTheDocument();
