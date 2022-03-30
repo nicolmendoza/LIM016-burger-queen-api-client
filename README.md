@@ -1,4 +1,4 @@
-# Burger House (API Client)
+<div align=center><img src="./burger-queen/src/img/Burger House.png" width=30%></div>
 
 
 
@@ -26,6 +26,7 @@
 
 # 1. Burger House 🍔🍟🏠
 
+
 ## 1.1. Descripción del proyecto 
 🍔🏠 ***Burger House***  es una aplicación responsive diseñada para un pequeño restaurante de hamburguesas en crecimiento que necesita un sistema con el que puedan tomar pedidos y enviarlos a la cocina para que se preparen de manera ordenada y eficiente.
 Cuenta con un sistema de autenticación que permite tener diferentes vistas y funciones dependiendo del rol del usuario.
@@ -33,6 +34,7 @@ Cuenta con un sistema de autenticación que permite tener diferentes vistas y fu
 Este proyecto es una aplicación web progresiva(PWA) que funciona sin conexión, integrada con una  REST API (creación propia), que utiliza React como Librería, Style Component para los estilos, React Testing Library para el testing y Figma para el prototipado.
 
 ## 1.2. Descripción de Roles 👩‍💼🤵🏻👨‍🍳
+
 La aplicación y su desarrollo se hicieron basándonos en los requerimientos e historias de usuario planteadas, cada usuario dependiendo de su rol, tendrá acceso a ciertas rutas. Existen tres diferentes tipos de roles, Administradxr, cocinerx y meserx, los cuales se describen a continuación:
 
 
@@ -232,6 +234,7 @@ muestran las estadísticas del performance:
 
 ***
 # 7. Fuente 📄
+
 
 Burger Queen API Client del [Repositorio de Laboratoria](https://github.com/Laboratoria/LIM016-burger-queen-api-client)
 ***
