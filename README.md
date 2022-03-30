@@ -216,7 +216,7 @@ Burger House API [Repositorio](https://github.com/MerlyAnco/LIM016-burger-queen-
 
 ***
 
-# 5. Test
+# 5. Test ✅
 
 Se realizaron los test utilizando React Testing Library.
 
@@ -224,7 +224,7 @@ Se realizaron los test utilizando React Testing Library.
 <div align=center><img src="./burger-queen/src/img/test2.JPG" width=50%></div>
 
 ***
-# 6. PWA
+# 6. PWA 💻
 La web es una aplicación web progresiva (PWA), a continuación se 
 muestran las estadísticas del performance:
 
@@ -236,7 +236,7 @@ muestran las estadísticas del performance:
 Burger Queen API Client del [Repositorio de Laboratoria](https://github.com/Laboratoria/LIM016-burger-queen-api-client)
 ***
 
-# 8. Autores
+# 8. Autores 👩‍💻👩‍💻
 
 - [Nicol Mendoza](https://github.com/nicolmendoza) <img src="https://cdn-icons-png.flaticon.com/512/2570/2570280.png" width=20px>
 - [Merly Anco](https://github.com/MerlyAnco) <img src="https://cdn-icons-png.flaticon.com/512/2570/2570280.png" width=20px>
